@@ -1,0 +1,214 @@
+// (c) Copyright 2022 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.services.v1.requests;
+
+import "google/protobuf/wrappers.proto";
+import "shared/vote_result.proto";
+
+message GetVoteResultBundlesRequest {
+  /*
+    validations: is-guid
+    description: Bund ist auf Wahlzettelresultat gespeichert.
+  */
+  string ballot_result_id = 1;
+}
+
+message GetVoteResultBundleRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Bundes.
+  */
+  string bundle_id = 1;
+}
+
+message GetVoteResultBallotRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Bundes.
+  */
+  string bundle_id = 1;
+
+  /*
+    ech-name: electronicBallotIdentification
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: typeof(int32),min-value(1),max-value(Int32.MaxValue)
+    description: Eindeutige, technische Identifikation des Wahlzettels.
+  */
+  int32 ballot_number = 2;
+}
+
+message CreateVoteResultBundleRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige Identifikation des Abstimmungsresultates.
+  */
+  string vote_result_id = 1;
+
+  /*
+    validations: is-guid
+    description: Bund ist auf Wahlzettelresultat gespeichert.
+  */
+  string ballot_result_id = 2;
+
+  /*
+    validations: typeof(int32),min-value(1),max-value(Int32.MaxValue)
+    description: Eindeutiger numerischer Wert für den Bund.
+  */
+  google.protobuf.Int32Value bundle_number = 3;
+}
+
+message DeleteVoteResultBundleRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Bundes.
+  */
+  string bundle_id = 1;
+
+  /*
+    validations: is-guid
+    description: bundle is stored on ballot result
+  */
+  string ballot_result_id = 2;
+}
+
+message RejectVoteBundleReviewRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Bundes.
+  */
+  string bundle_id = 1;
+}
+
+message SucceedVoteBundleReviewRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Bundes.
+  */
+  string bundle_id = 1;
+}
+
+message CreateVoteResultBallotRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Bundes.
+  */
+  string bundle_id = 1;
+
+  /*
+    description: Resultate der Fragen eines Stimmzettels.
+  */
+  repeated CreateUpdateVoteResultBallotQuestionAnswerRequest question_answers = 2;
+
+  /*
+    validations: allow-undefined
+    description: Resultate der Stichfragen eines Stimmzettels.
+  */
+  repeated CreateUpdateVoteResultBallotTieBreakQuestionAnswerRequest tie_break_question_answers = 3;
+}
+
+message UpdateVoteResultBallotRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Bundes.
+  */
+  string bundle_id = 1;
+
+  /*
+    ech-name: electronicBallotIdentification
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: typeof(int32),min-value(1),max-value(Int32.MaxValue)
+    description: Eindeutige, technische Identifikation des Wahlzettels.
+  */
+  int32 ballot_number = 2;
+
+  /*
+    description: Resultate der Fragen eines Stimmzettels.
+  */
+  repeated CreateUpdateVoteResultBallotQuestionAnswerRequest question_answers = 3;
+
+  /*
+    validations: allow-undefined
+    description: Resultate der Stichfragen eines Stimmzettels.
+  */
+  repeated CreateUpdateVoteResultBallotTieBreakQuestionAnswerRequest tie_break_question_answers = 4;
+}
+
+/*
+  description: Aktualisierung der Antworten auf Fragen eines Stimmzettels
+*/
+message CreateUpdateVoteResultBallotQuestionAnswerRequest {
+  /*
+    validations: typeof(int32),min-value(1),max-value(Int32.Max)
+    description: Fragennummer
+  */
+  int32 question_number = 1;
+
+  /*
+    validations: is-enum,allow-undefined
+    description: Fragennummer
+  */
+  shared.v1.BallotQuestionAnswer answer = 2;
+}
+
+/*
+  description: Aktualisierung der Antworten auf Stichfragen eines Stimmzettels
+*/
+message CreateUpdateVoteResultBallotTieBreakQuestionAnswerRequest {
+  /*
+    validations: typeof(int32),min-value(1),max-value(Int32.Max)
+    description: Fragennummer
+  */
+  int32 question_number = 1;
+
+  /*
+    validations: is-enum,allow-undefined
+    description: Fragennummer
+  */
+  shared.v1.TieBreakQuestionAnswer answer = 2;
+}
+
+message DeleteVoteResultBallotRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Bundes.
+  */
+  string bundle_id = 1;
+
+  /*
+    ech-name: electronicBallotIdentification
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: typeof(int32),min-value(1),max-value(Int32.MaxValue)
+    description: Eindeutige, technische Identifikation des Wahlzettels.
+  */
+  int32 ballot_number = 2;
+}
+
+message VoteResultBundleSubmissionFinishedRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Bundes.
+  */
+  string bundle_id = 1;
+}
+
+message VoteResultBundleCorrectionFinishedRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Bundes.
+  */
+  string bundle_id = 1;
+}
+
+message GetVoteResultBundleChangesRequest {
+  /*
+    validations: is-guid
+    description: Bund ist auf Wahlzettelresultat gespeichert.
+  */
+  string ballot_result_id = 1;
+}

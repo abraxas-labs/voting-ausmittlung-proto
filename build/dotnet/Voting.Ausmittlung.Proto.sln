@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Voting.Ausmittlung.Shared.Proto", "src\Voting.Ausmittlung.Shared.Proto\Voting.Ausmittlung.Shared.Proto.csproj", "{229330A4-8F28-438D-BCA3-246CC6D68CF9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Voting.Ausmittlung.Service.Proto", "src\Voting.Ausmittlung.Service.Proto\Voting.Ausmittlung.Service.Proto.csproj", "{5962D482-509D-4B73-8033-83EDD381ED24}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Voting.Ausmittlung.Eventing.Proto", "src\Voting.Ausmittlung.Eventing.Proto\Voting.Ausmittlung.Eventing.Proto.csproj", "{1FC620E6-9F01-4902-AA60-B454EFE0B467}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{229330A4-8F28-438D-BCA3-246CC6D68CF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{229330A4-8F28-438D-BCA3-246CC6D68CF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{229330A4-8F28-438D-BCA3-246CC6D68CF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{229330A4-8F28-438D-BCA3-246CC6D68CF9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5962D482-509D-4B73-8033-83EDD381ED24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5962D482-509D-4B73-8033-83EDD381ED24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5962D482-509D-4B73-8033-83EDD381ED24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5962D482-509D-4B73-8033-83EDD381ED24}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1FC620E6-9F01-4902-AA60-B454EFE0B467}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FC620E6-9F01-4902-AA60-B454EFE0B467}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FC620E6-9F01-4902-AA60-B454EFE0B467}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FC620E6-9F01-4902-AA60-B454EFE0B467}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

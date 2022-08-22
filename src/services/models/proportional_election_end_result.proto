@@ -1,0 +1,173 @@
+// (c) Copyright 2022 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.services.v1.models;
+
+import "google/protobuf/wrappers.proto";
+import "models/contest.proto";
+import "models/contest_counting_circle_details.proto";
+import "models/count_of_voters.proto";
+import "models/proportional_election.proto";
+import "models/proportional_election_result_sub_total.proto";
+
+message ProportionalElectionEndResult {
+  Contest contest = 1;
+  ProportionalElection proportional_election = 2;
+  AggregatedContestCountingCircleDetails domain_of_influence_details = 3;
+  int32 total_count_of_voters = 4;
+  int32 count_of_done_counting_circles = 5;
+  int32 total_count_of_counting_circles = 6;
+  bool all_counting_circles_done = 7;
+  PoliticalBusinessCountOfVoters count_of_voters = 8;
+  repeated ProportionalElectionListEndResult list_end_results = 9;
+  bool finalized = 10;
+}
+
+message ProportionalElectionListEndResult {
+  ProportionalElectionList list = 1;
+  /*
+    description: The number of mandates will be calculated by the mandate algorithm
+  */
+  int32 number_of_mandates = 2;
+  repeated ProportionalElectionCandidateEndResult candidate_end_results = 3;
+  ProportionalElectionListUnion list_union = 4;
+  ProportionalElectionListUnion sub_list_union = 5;
+  bool has_open_required_lot_decisions = 6;
+  ProportionalElectionListResultSubTotal e_voting_sub_total = 7;
+  ProportionalElectionListResultSubTotal conventional_sub_total = 8;
+  /*
+    description: count of unmodified lists that were handed in for this list
+  */
+  int32 unmodified_lists_count = 9;
+  /*
+    description: count of candidate votes gained from unmodified lists
+  */
+  int32 unmodified_list_votes_count = 10;
+  /*
+    description: count of votes gained from blank rows from unmodified lists
+  */
+  int32 unmodified_list_blank_rows_count = 11;
+  /*
+    description: count of modified lists that were handed in for this list
+  */
+  int32 modified_lists_count = 12;
+  /*
+    description: count of candidate votes gained from modified lists
+  */
+  int32 modified_list_votes_count = 13;
+  /*
+    description: count of candidate votes gained from lists assigned to another list
+  */
+  int32 list_votes_count_on_other_lists = 14;
+  /*
+    description: count of votes gained from blank rows from modified lists
+  */
+  int32 modified_list_blank_rows_count = 15;
+  /*
+    description: count of votes gained from unmodified lists and from blank rows on unmodified lists
+  */
+  int32 unmodified_list_votes_count_incl_blank_rows = 16;
+  /*
+    description: count of votes gained from modified lists and from blank rows on modified lists
+  */
+  int32 modified_list_votes_count_incl_blank_rows = 17;
+  /*
+    description: count of candidate votes gained from unmodifed and modified lists
+  */
+  int32 list_votes_count = 18;
+  /*
+    description: count of lists (modified + unmodified)
+  */
+  int32 list_count = 19;
+  /*
+    description: count of votes gained from blank rows from unmodified and modified lists
+  */
+  int32 blank_rows_count = 20;
+  /*
+    description: sum of list votes count and blank rows count
+  */
+  int32 total_vote_count = 21;
+}
+
+message ProportionalElectionCandidateEndResult {
+  ProportionalElectionCandidate candidate = 1;
+
+  /*
+    validations: typeof(int32),min-value(0),max-value(Int32.Max)
+    description: Anzahl gültiger Stimmen.
+  */
+  int32 vote_count = 2;
+
+  /*
+    validations: min-value(1),max-value(Int32.Max)
+    description: Rang nach Losentscheid
+  */
+  int32 rank = 3;
+  /*
+    description: when a lot decision is made
+  */
+  bool lot_decision = 4;
+  /*
+    description: when there are multiple candidate end results with the same vote count
+  */
+  bool lot_decision_enabled = 5;
+  /*
+    description: when a lot decision must be done, ex: rank <= number of mandates
+  */
+  bool lot_decision_required = 6;
+  ProportionalElectionCandidateEndResultState state = 7;
+  ProportionalElectionCandidateResultSubTotal e_voting_sub_total = 8;
+  ProportionalElectionCandidateResultSubTotal conventional_sub_total = 9;
+}
+
+enum ProportionalElectionCandidateEndResultState {
+  PROPORTIONAL_ELECTION_CANDIDATE_END_RESULT_STATE_UNSPECIFIED = 0;
+  PROPORTIONAL_ELECTION_CANDIDATE_END_RESULT_STATE_PENDING = 1;
+  PROPORTIONAL_ELECTION_CANDIDATE_END_RESULT_STATE_ELECTED = 2;
+  PROPORTIONAL_ELECTION_CANDIDATE_END_RESULT_STATE_NOT_ELECTED = 3;
+}
+
+message ProportionalElectionEndResultLotDecision {
+  /*
+    ech-name: candidateIdentification
+    ech-length: 50
+    ech-type: xs:token
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Kandidaten.
+  */
+  string candidate_id = 1;
+
+  /*
+    validations: min-value(1),max-value(Int32.Max)
+    description: Rang nach Losentscheid
+  */
+  int32 rank = 2;
+}
+
+message ProportionalElectionListEndResultAvailableLotDecisions {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation der Proporzwahl-Liste.
+  */
+  string proportional_election_list_id = 1;
+  repeated ProportionalElectionEndResultAvailableLotDecision lot_decisions = 2;
+}
+
+message ProportionalElectionEndResultAvailableLotDecision {
+  ProportionalElectionCandidate candidate = 1;
+  /*
+    description: rank when a lot decision is already made
+  */
+  google.protobuf.Int32Value selected_rank = 2;
+
+  /*
+    validations: typeof(int32),min-value(0),max-value(Int32.Max)
+    description: Anzahl gültiger Stimmen.
+  */
+  int32 vote_count = 3;
+  bool lot_decision_required = 4;
+  repeated int32 selectable_ranks = 5;
+  int32 original_rank = 6;
+}

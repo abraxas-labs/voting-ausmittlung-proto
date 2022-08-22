@@ -1,0 +1,20 @@
+// (c) Copyright 2022 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.events.v1;
+
+import "data/event_info.proto";
+
+message VoteEndResultFinalized {
+  data.EventInfo event_info = 1;
+  string vote_end_result_id = 2;
+  string vote_id = 3;
+}
+
+message VoteEndResultFinalizationReverted {
+  data.EventInfo event_info = 1;
+  string vote_end_result_id = 2;
+  string vote_id = 3;
+}

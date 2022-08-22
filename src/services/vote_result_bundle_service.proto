@@ -1,0 +1,27 @@
+// (c) Copyright 2022 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.services.v1;
+
+import "google/protobuf/empty.proto";
+import "models/vote_result_bundle.proto";
+import "requests/vote_result_bundle_requests.proto";
+import "responses/vote_result_bundle_responses.proto";
+
+service VoteResultBundleService {
+  rpc GetBundles(requests.GetVoteResultBundlesRequest) returns (models.VoteResultBundles);
+  rpc GetBundle(requests.GetVoteResultBundleRequest) returns (responses.GetVoteResultBundleResponse);
+  rpc GetBallot(requests.GetVoteResultBallotRequest) returns (models.VoteResultBallot);
+  rpc CreateBundle(requests.CreateVoteResultBundleRequest) returns (responses.CreateVoteResultBundleResponse);
+  rpc DeleteBundle(requests.DeleteVoteResultBundleRequest) returns (google.protobuf.Empty);
+  rpc CreateBallot(requests.CreateVoteResultBallotRequest) returns (responses.CreateVoteResultBallotResponse);
+  rpc UpdateBallot(requests.UpdateVoteResultBallotRequest) returns (google.protobuf.Empty);
+  rpc DeleteBallot(requests.DeleteVoteResultBallotRequest) returns (google.protobuf.Empty);
+  rpc BundleSubmissionFinished(requests.VoteResultBundleSubmissionFinishedRequest) returns (google.protobuf.Empty);
+  rpc BundleCorrectionFinished(requests.VoteResultBundleCorrectionFinishedRequest) returns (google.protobuf.Empty);
+  rpc RejectBundleReview(requests.RejectVoteBundleReviewRequest) returns (google.protobuf.Empty);
+  rpc SucceedBundleReview(requests.SucceedVoteBundleReviewRequest) returns (google.protobuf.Empty);
+  rpc GetBundleChanges(requests.GetVoteResultBundleChangesRequest) returns (stream models.VoteResultBundle);
+}

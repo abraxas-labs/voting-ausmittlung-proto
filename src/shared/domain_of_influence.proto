@@ -1,0 +1,20 @@
+// (c) Copyright 2022 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.shared.v1;
+
+enum DomainOfInfluenceType {
+  DOMAIN_OF_INFLUENCE_TYPE_UNSPECIFIED = 0;
+  DOMAIN_OF_INFLUENCE_TYPE_CH = 1;
+  DOMAIN_OF_INFLUENCE_TYPE_CT = 2;
+  DOMAIN_OF_INFLUENCE_TYPE_BZ = 3;
+  DOMAIN_OF_INFLUENCE_TYPE_MU = 4;
+  DOMAIN_OF_INFLUENCE_TYPE_SK = 5;
+  DOMAIN_OF_INFLUENCE_TYPE_SC = 6;
+  DOMAIN_OF_INFLUENCE_TYPE_KI = 7;
+  DOMAIN_OF_INFLUENCE_TYPE_OG = 8;
+  DOMAIN_OF_INFLUENCE_TYPE_KO = 9;
+  DOMAIN_OF_INFLUENCE_TYPE_AN = 10;
+}

@@ -1,0 +1,13 @@
+// (c) Copyright 2022 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.services.v1.models;
+
+enum SwissAbroadVotingRight {
+  SWISS_ABROAD_VOTING_RIGHT_UNSPECIFIED = 0;
+  SWISS_ABROAD_VOTING_RIGHT_SEPARATE_COUNTING_CIRCLE = 1;
+  SWISS_ABROAD_VOTING_RIGHT_ON_EVERY_COUNTING_CIRCLE = 2;
+  SWISS_ABROAD_VOTING_RIGHT_NO_RIGHTS = 3;
+}

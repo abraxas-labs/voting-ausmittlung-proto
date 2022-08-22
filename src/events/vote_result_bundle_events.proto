@@ -1,0 +1,85 @@
+// (c) Copyright 2022 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.events.v1;
+
+import "data/event_info.proto";
+import "data/vote_result_bundle_event_data.proto";
+import "data/vote_result_event_data.proto";
+
+message VoteResultBundleCreated {
+  data.EventInfo event_info = 1;
+  string bundle_id = 2;
+  string vote_result_id = 3;
+  string ballot_result_id = 4;
+  int32 bundle_number = 5;
+  data.VoteResultEntryParamsEventData result_entry_params = 6;
+}
+
+message VoteResultBundleDeleted {
+  data.EventInfo event_info = 1;
+  string bundle_id = 2;
+}
+
+message VoteResultBundleReviewSucceeded {
+  data.EventInfo event_info = 1;
+  string bundle_id = 2;
+}
+
+message VoteResultBundleReviewRejected {
+  data.EventInfo event_info = 1;
+  string bundle_id = 2;
+}
+
+message VoteResultBallotCreated {
+  data.EventInfo event_info = 1;
+  string bundle_id = 2;
+  string ballot_result_id = 3;
+  int32 ballot_number = 4;
+  repeated data.VoteResultBallotUpdatedQuestionAnswerEventData question_answers = 5;
+  repeated data.VoteResultBallotUpdatedTieBreakQuestionAnswerEventData tie_break_question_answers = 6;
+}
+
+message VoteResultBallotUpdated {
+  data.EventInfo event_info = 1;
+  string bundle_id = 2;
+  string ballot_result_id = 3;
+  int32 ballot_number = 4;
+  repeated data.VoteResultBallotUpdatedQuestionAnswerEventData question_answers = 5;
+  repeated data.VoteResultBallotUpdatedTieBreakQuestionAnswerEventData tie_break_question_answers = 6;
+}
+
+message VoteResultBallotDeleted {
+  data.EventInfo event_info = 1;
+  string bundle_id = 2;
+  string ballot_result_id = 3;
+  int32 ballot_number = 4;
+}
+
+message VoteResultBundleSubmissionFinished {
+  data.EventInfo event_info = 1;
+  string bundle_id = 2;
+  string ballot_result_id = 3;
+  repeated int32 sample_ballot_numbers = 4;
+}
+
+message VoteResultBundleCorrectionFinished {
+  data.EventInfo event_info = 1;
+  string bundle_id = 2;
+  string ballot_result_id = 3;
+  repeated int32 sample_ballot_numbers = 4;
+}
+
+message VoteResultBundleNumberEntered {
+  data.EventInfo event_info = 1;
+  string ballot_result_id = 2;
+  int32 bundle_number = 3;
+}
+
+message VoteResultBundleNumberFreed {
+  data.EventInfo event_info = 1;
+  string ballot_result_id = 2;
+  int32 bundle_number = 3;
+}

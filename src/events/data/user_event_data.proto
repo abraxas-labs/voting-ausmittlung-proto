@@ -1,0 +1,13 @@
+// (c) Copyright 2022 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.events.v1.data;
+
+message UserEventData {
+  string secure_connect_id = 1;
+  string first_name = 2;
+  string last_name = 3;
+  string full_name = 4;
+}

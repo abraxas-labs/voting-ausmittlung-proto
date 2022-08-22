@@ -1,0 +1,207 @@
+// (c) Copyright 2022 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.services.v1.models;
+
+import "google/protobuf/wrappers.proto";
+import "shared/sex.proto";
+import "shared/voter_type.proto";
+
+// Stimmberechtigte
+message CountOfVotersInformation {
+  /*
+    ech-name: countOfVotersTotal
+    ech-length:
+    ech-type:
+    description: Anzahl Stimmberechtigte Total (zwingend).
+  */
+  int32 total_count_of_voters = 1;
+  repeated CountOfVotersInformationSubTotal sub_total_info = 2;
+}
+
+// Stimmberechtigte - subtotal
+message CountOfVotersInformationSubTotal {
+  /*
+    ech-name: sex
+    ech-length:
+    ech-type: token
+    description: Geschlecht (optional) / 1 = männlich 2 = weiblich 3 = unbestimmt
+  */
+  shared.v1.SexType sex = 1;
+
+  /*
+    ech-name: voterType
+    ech-length:
+    ech-type: token
+    description: Wählertyp (optional) / 1 = Schweizer, 2 = Auslandschweizer, 3 = Ausländer
+  */
+  shared.v1.VoterType voter_type = 2;
+
+  /*
+    ech-name: countOfVoters
+    ech-length:
+    ech-type:
+    description: Anzahl Wähler (zwingend).
+  */
+  google.protobuf.Int32Value count_of_voters = 3;
+}
+
+message PoliticalBusinessNullableCountOfVoters {
+  /*
+    description: Stimmbeteiligung: total_received_ballots (Alle eingegangenen Stimmzettel) / total_count_of_voters (Anz. Stimmberechtigter)
+  */
+  double voter_participation = 1;
+
+  /*
+    ech-name: countOfReceivedBallotsTotal
+    ech-length:
+    ech-type:
+    description: Anzahl eingegangene Wahlzettel Total (zwingend). Channel E-Voting.
+    appendix: Anz. erhaltener Stimm-/Wahlzettel via eVoting
+  */
+  int32 e_voting_received_ballots = 2;
+
+  /*
+    ech-name: countOfReceivedBallotsTotal
+    ech-length:
+    ech-type:
+    description: Anzahl eingegangene Wahlzettel Total (zwingend). Channel Papier, Urne, Brief.
+    appendix: Anz. erhaltener Stimm-/Wahlzettel via konventionell
+  */
+  google.protobuf.Int32Value conventional_received_ballots = 3;
+
+   /*
+    ech-name: countOfUnaccountedInvalidBallots
+    ech-length:
+    ech-type:
+    description: Anzahl ausser Betracht fallende ungültige Wahlzettel (zwingend). Channel Papier, Urne, Brief.
+    appendix: Anz. invalider Stimm-/Wahlzettel via konventionell
+  */
+  google.protobuf.Int32Value conventional_invalid_ballots = 4;
+
+  /*
+    ech-name: countOfUnaccountedBlankBallots
+    ech-length:
+    ech-type:
+    description: Anzahl ausser Betracht fallende leere Wahlzettel (zwingend). Channel Papier, Urne, Brief.
+    appendix: Anz. leerer Stimm-/Wahlzettel via konventionell
+  */
+  google.protobuf.Int32Value conventional_blank_ballots = 5;
+
+  /*
+    ech-name: countOfAccountedBallots
+    ech-length:
+    ech-type:
+    description: Anzahl in Betracht fallende Wahlzettel (zwingend). Channel Papier, Urne, Brief.
+    appendix: Anz. in betracht fallender Stimm-/Wahlzettel via konventionell
+  */
+  google.protobuf.Int32Value conventional_accounted_ballots = 6;
+
+  /*
+    ech-name: countOfReceivedBallotsTotal
+    ech-length:
+    ech-type:
+    description: Anzahl eingegangene Wahlzettel Total (zwingend). Channel ALLE
+    appendix: Total erhaltener Stimm-/Wahlzettel
+  */
+  int32 total_received_ballots = 7;
+
+  /*
+    ech-name: countOfAccountedBallots
+    ech-length:
+    ech-type:
+    description: Anzahl in Betracht fallende Wahlzettel (zwingend). Channel ALLE
+    appendix: Total in betracht fallender Stimm-/Wahlzettel
+  */
+  int32 total_accounted_ballots = 8;
+
+  /*
+    ech-name: countOfUnaccountedBlankBallots
+    ech-length:
+    ech-type:
+    description: Anzahl ausser Betracht fallende leere Wahlzettel (zwingend). Channel ALLE.
+    appendix: Total ausser betracht fallender Stimm-/Wahlzettel
+  */
+  int32 total_unaccounted_ballots = 9;
+}
+
+message PoliticalBusinessCountOfVoters {
+  /*
+    description: Stimmbeteiligung: total_received_ballots (Alle eingegangenen Stimmzettel) / total_count_of_voters (Anz. Stimmberechtigter)
+  */
+  double voter_participation = 1;
+
+  /*
+    ech-name: countOfReceivedBallotsTotal
+    ech-length:
+    ech-type:
+    description: Anzahl eingegangene Wahlzettel Total (zwingend). Channel E-Voting.
+    appendix: Anz. erhaltener Stimm-/Wahlzettel via eVoting
+  */
+  int32 e_voting_received_ballots = 2;
+
+  /*
+    ech-name: countOfReceivedBallotsTotal
+    ech-length:
+    ech-type:
+    description: Anzahl eingegangene Wahlzettel Total (zwingend). Channel Papier, Urne, Brief.
+    appendix: Anz. erhaltener Stimm-/Wahlzettel via konventionell
+  */
+  int32 conventional_received_ballots = 3;
+
+  /*
+    ech-name: countOfUnaccountedInvalidBallots
+    ech-length:
+    ech-type:
+    description: Anzahl ausser Betracht fallende ungültige Wahlzettel (zwingend). Channel Papier, Urne, Brief.
+    appendix: Anz. invalider Stimm-/Wahlzettel via konventionell
+  */
+  int32 conventional_invalid_ballots = 4;
+
+  /*
+    ech-name: countOfUnaccountedBlankBallots
+    ech-length:
+    ech-type:
+    description: Anzahl ausser Betracht fallende leere Wahlzettel (zwingend). Channel Papier, Urne, Brief.
+    appendix: Anz. leerer Stimm-/Wahlzettel via konventionell
+  */
+  int32 conventional_blank_ballots = 5;
+
+  /*
+    ech-name: countOfAccountedBallots
+    ech-length:
+    ech-type:
+    description: Anzahl in Betracht fallende Wahlzettel (zwingend). Channel Papier, Urne, Brief.
+    appendix: Anz. in betracht fallender Stimm-/Wahlzettel via konventionell
+  */
+  int32 conventional_accounted_ballots = 6;
+
+  /*
+    ech-name: countOfReceivedBallotsTotal
+    ech-length:
+    ech-type:
+    description: Anzahl eingegangene Wahlzettel Total (zwingend). Channel ALLE
+    appendix: Total erhaltener Stimm-/Wahlzettel
+  */
+  int32 total_received_ballots = 7;
+
+  /*
+    ech-name: countOfAccountedBallots
+    ech-length:
+    ech-type:
+    description: Anzahl in Betracht fallende Wahlzettel (zwingend). Channel ALLE
+    appendix: Total in betracht fallender Stimm-/Wahlzettel
+  */
+  int32 total_accounted_ballots = 8;
+
+  /*
+    ech-name: countOfUnaccountedBlankBallots
+    ech-length:
+    ech-type:
+    description: Anzahl ausser Betracht fallende leere Wahlzettel (zwingend). Channel ALLE.
+    appendix: Total ausser betracht fallender Stimm-/Wahlzettel
+  */
+  int32 total_unaccounted_ballots = 9;
+}

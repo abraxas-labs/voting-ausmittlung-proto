@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageId>Voting.Ausmittlung.Eventing.Proto</PackageId>
+    <Title>Voting.Ausmittlung.Eventing.Proto Protofiles</Title>
+    <Description>Abraxas Voting Project with eventing protofiles for Dok.Voting.Ausmittlung</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Protobuf Include="../../../../src/events/**/*.proto" ProtoRoot="../../../../src/events" AdditionalImportDirs="../../../../src" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../Voting.Ausmittlung.Shared.Proto/Voting.Ausmittlung.Shared.Proto.csproj" />
+  </ItemGroup>
+
+</Project>

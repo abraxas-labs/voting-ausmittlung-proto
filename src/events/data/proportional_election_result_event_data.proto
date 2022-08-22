@@ -1,0 +1,22 @@
+// (c) Copyright 2022 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.events.v1.data;
+
+import "shared/ballot_number_generation.proto";
+
+
+message ProportionalElectionResultEntryParamsEventData {
+  int32 ballot_bundle_size = 1;
+  int32 ballot_bundle_sample_size = 2;
+  bool automatic_ballot_bundle_number_generation = 3;
+  shared.v1.BallotNumberGeneration ballot_number_generation = 4;
+  bool automatic_empty_vote_counting = 5;
+}
+
+message ProportionalElectionUnmodifiedListResultEventData {
+  string list_id = 1;
+  int32 vote_count = 2;
+}

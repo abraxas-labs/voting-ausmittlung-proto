@@ -1,0 +1,15 @@
+// (c) Copyright 2022 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.services.v1.models;
+
+enum BallotBundleState {
+  BALLOT_BUNDLE_STATE_UNSPECIFIED = 0;
+  BALLOT_BUNDLE_STATE_IN_PROCESS = 1;
+  BALLOT_BUNDLE_STATE_IN_CORRECTION = 2;
+  BALLOT_BUNDLE_STATE_READY_FOR_REVIEW = 3;
+  BALLOT_BUNDLE_STATE_REVIEWED = 4;
+  BALLOT_BUNDLE_STATE_DELETED = 5;
+}

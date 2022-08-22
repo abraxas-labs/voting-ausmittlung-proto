@@ -1,0 +1,29 @@
+// (c) Copyright 2022 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.services.v1.models;
+
+import "google/protobuf/wrappers.proto";
+import "models/domain_of_influence.proto";
+
+message SimplePoliticalBusiness {
+  string id = 1;
+  PoliticalBusinessType business_type = 2;
+  string title = 3;
+  bool active = 4;
+  DomainOfInfluence domain_of_influence = 5;
+  google.protobuf.Int32Value number_of_mandates = 6; // only set if the type of this business is an election
+  int32 count_of_secondary_businesses = 7;
+  string political_business_number = 8;
+  string short_description = 9;
+}
+
+enum PoliticalBusinessType {
+  POLITICAL_BUSINESS_TYPE_UNSPECIFIED = 0;
+  POLITICAL_BUSINESS_TYPE_VOTE = 1;
+  POLITICAL_BUSINESS_TYPE_MAJORITY_ELECTION = 2;
+  POLITICAL_BUSINESS_TYPE_PROPORTIONAL_ELECTION = 3;
+  POLITICAL_BUSINESS_TYPE_SECONDARY_MAJORITY_ELECTION = 4;
+}

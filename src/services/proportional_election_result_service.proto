@@ -1,0 +1,39 @@
+// (c) Copyright 2022 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.services.v1;
+
+import "google/protobuf/empty.proto";
+import "models/id_value.proto";
+import "models/proportional_election_result.proto";
+import "models/proportional_election_end_result.proto";
+import "models/validation.proto";
+import "requests/proportional_election_result_requests.proto";
+
+service ProportionalElectionResultService {
+  rpc Get(requests.GetProportionalElectionResultRequest) returns (models.ProportionalElectionResult);
+  rpc GetUnmodifiedLists(requests.GetProportionalElectionUnmodifiedListResultsRequest) returns (models.ProportionalElectionUnmodifiedListResults);
+  rpc GetListResults(requests.GetProportionalElectionListResultsRequest) returns (models.ProportionalElectionListResults);
+  rpc DefineEntry(requests.DefineProportionalElectionResultEntryRequest) returns (google.protobuf.Empty);
+  rpc EnterCountOfVoters(requests.EnterProportionalElectionCountOfVotersRequest) returns (google.protobuf.Empty);
+  rpc EnterUnmodifiedListResults(requests.EnterProportionalElectionUnmodifiedListResultsRequest) returns (google.protobuf.Empty);
+  rpc PrepareSubmissionFinished(requests.ProportionalElectionResultPrepareSubmissionFinishedRequest) returns (models.IdValue);
+  rpc SubmissionFinished(requests.ProportionalElectionResultSubmissionFinishedRequest) returns (google.protobuf.Empty);
+  rpc PrepareCorrectionFinished(requests.ProportionalElectionResultPrepareCorrectionFinishedRequest) returns (models.IdValue);
+  rpc CorrectionFinished(requests.ProportionalElectionResultCorrectionFinishedRequest) returns (google.protobuf.Empty);
+  rpc FlagForCorrection(requests.ProportionalElectionResultFlagForCorrectionRequest) returns (google.protobuf.Empty);
+  rpc AuditedTentatively(requests.ProportionalElectionResultAuditedTentativelyRequest) returns (google.protobuf.Empty);
+  rpc ResetToSubmissionFinished(requests.ProportionalElectionResultResetToSubmissionFinishedRequest) returns (google.protobuf.Empty);
+  rpc Plausibilise(requests.ProportionalElectionResultsPlausibiliseRequest) returns (google.protobuf.Empty);
+  rpc ResetToAuditedTentatively(requests.ProportionalElectionResultsResetToAuditedTentativelyRequest) returns (google.protobuf.Empty);
+  rpc GetEndResult(requests.GetProportionalElectionEndResultRequest) returns (models.ProportionalElectionEndResult);
+  rpc GetListEndResultAvailableLotDecisions(requests.GetProportionalElectionListEndResultAvailableLotDecisionsRequest) returns (models.ProportionalElectionListEndResultAvailableLotDecisions);
+  rpc UpdateListEndResultLotDecisions(requests.UpdateProportionalElectionListEndResultLotDecisionsRequest) returns (google.protobuf.Empty);
+  rpc PrepareFinalizeEndResult(requests.PrepareFinalizeProportionalElectionEndResultRequest) returns (models.IdValue);
+  rpc FinalizeEndResult(requests.FinalizeProportionalElectionEndResultRequest) returns (google.protobuf.Empty);
+  rpc RevertEndResultFinalization(requests.RevertProportionalElectionEndResultFinalizationRequest) returns (google.protobuf.Empty);
+
+  rpc ValidateEnterCountOfVoters(requests.ValidateEnterProportionalElectionCountOfVotersRequest) returns (models.ValidationOverview);
+}

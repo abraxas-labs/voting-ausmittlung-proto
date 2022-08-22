@@ -1,0 +1,72 @@
+// (c) Copyright 2022 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.services.v1.models;
+
+import "models/contact_person.proto";
+import "shared/domain_of_influence.proto";
+
+message DomainOfInfluence {
+  /*
+    ech-name: domainOfInfluenceIdentification
+    ech-length:
+    ech-type:
+    description:
+  */
+  string id = 1;
+
+  /*
+    ech-name: domainOfInfluenceName
+    ech-length: 100
+    ech-type: string
+    description: Name des Einflussbereiches.
+  */
+  string name = 2;
+
+  /*
+    ech-name: domainOfInfluenceShortname
+    ech-length: 5
+    ech-type: string
+    description: Kurzbezeichnung des Einflussbereiches.
+  */
+  string short_name = 3;
+
+  string authority_name = 4;
+  string secure_connect_id = 5;
+
+  /*
+    ech-name: domainOfInfluenceType
+    ech-length:
+    ech-type: token
+    description: Beschreibt die Stufe. Können einzelne Einflussbereiche keinem der explizit definierten Typen zugeordnet werden, so ist für diese „AN“ (andere) zu verwenden. / CH = Bund CT = Kanton BZ = Bezirk / Amt / Verwaltungskreis MU = Gemeinde SC = Schulgemeinde KI = Kirchgemeinde OG = Ortsbürgergemeinden KO = Korporationen SK = Stadtkreis AN = andere.
+  */
+  shared.v1.DomainOfInfluenceType type = 6;
+
+  /*
+    ech-name: domainOfInfluenceIdentification
+    ech-length:
+    ech-type:
+    description:
+  */
+  string parent_id = 7;
+
+  /*
+    ech-name: domainOfInfluenceIdentification
+    ech-length:
+    ech-type:
+    description:
+  */
+  repeated DomainOfInfluence children = 8;
+
+  DomainOfInfluenceCanton canton = 9;
+  ContactPerson contact_person = 10;
+}
+
+enum DomainOfInfluenceCanton {
+  DOMAIN_OF_INFLUENCE_CANTON_UNSPECIFIED = 0;
+  DOMAIN_OF_INFLUENCE_CANTON_SG = 1;
+  DOMAIN_OF_INFLUENCE_CANTON_TG = 2;
+  DOMAIN_OF_INFLUENCE_CANTON_ZH = 3;
+}

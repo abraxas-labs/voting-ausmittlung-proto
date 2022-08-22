@@ -1,0 +1,24 @@
+// (c) Copyright 2022 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.services.v1.models;
+
+message PoliticalBusinessUnions {
+  repeated PoliticalBusinessUnion unions = 1;
+}
+
+message PoliticalBusinessUnion {
+  string id = 1;
+  string contest_id = 2;
+  string description = 3;
+  string secure_connect_id = 4;
+  PoliticalBusinessUnionType type = 5;
+}
+
+enum PoliticalBusinessUnionType {
+  POLITICAL_BUSINESS_UNION_TYPE_UNSPECIFIED = 0;
+  POLITICAL_BUSINESS_UNION_TYPE_PROPORTIONAL_ELECTION = 1;
+  POLITICAL_BUSINESS_UNION_TYPE_MAJORITY_ELECTION = 2;
+}

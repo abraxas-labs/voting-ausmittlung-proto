@@ -1,0 +1,23 @@
+// (c) Copyright 2022 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.services.v1;
+
+import "google/protobuf/empty.proto";
+import "models/export.proto";
+import "requests/export_requests.proto";
+
+service ExportService {
+  rpc GetCountingCircleResultExportTemplates(requests.GetCountingCircleResultExportTemplatesRequest) returns (models.ResultExportTemplates);
+  rpc GetPoliticalBusinessResultExportTemplates(requests.GetPoliticalBusinessResultExportTemplatesRequest) returns (models.ResultExportTemplates);
+  rpc GetMultiplePoliticalBusinessesResultExportTemplates(requests.GetMultiplePoliticalBusinessesResultExportTemplatesRequest) returns (models.ResultExportTemplates);
+  rpc GetMultiplePoliticalBusinessesCountingCircleResultExportTemplates(requests.GetMultiplePoliticalBusinessesCountingCircleResultExportTemplatesRequest) returns (models.ResultExportTemplates);
+  rpc GetContestExportTemplates(requests.GetContestExportTemplatesRequest) returns (models.ResultExportTemplates);
+  rpc GetPoliticalBusinessUnionResultExportTemplates(requests.GetPoliticalBusinessUnionResultExportTemplatesRequest) returns (models.ResultExportTemplates);
+
+  rpc ListResultExportConfigurations(requests.ListResultExportConfigurationsRequest) returns (models.ResultExportConfigurations);
+  rpc UpdateResultExportConfiguration(requests.UpdateResultExportConfigurationRequest) returns (google.protobuf.Empty);
+  rpc TriggerResultExport(requests.TriggerResultExportRequest) returns (google.protobuf.Empty);
+}

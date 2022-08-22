@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageId>Voting.Ausmittlung.Shared.Proto</PackageId>
+    <Title>Voting.Ausmittlung.Shared.Proto Protofiles</Title>
+    <Description>Abraxas Voting Project with shared protofiles for Dok.Voting.Ausmittlung</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Protobuf Include="../../../../src/shared/**/*.proto" ProtoRoot="../../../../src" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,27 @@
+// (c) Copyright 2022 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.services.v1;
+
+import "google/protobuf/empty.proto";
+import "models/proportional_election_result_bundle.proto";
+import "requests/proportional_election_result_bundle_requests.proto";
+import "responses/proportional_election_result_bundle_responses.proto";
+
+service ProportionalElectionResultBundleService {
+  rpc GetBundles(requests.GetProportionalElectionResultBundlesRequest) returns (models.ProportionalElectionResultBundles);
+  rpc GetBundle(requests.GetProportionalElectionResultBundleRequest) returns (responses.GetProportionalElectionResultBundleResponse);
+  rpc GetBallot(requests.GetProportionalElectionResultBallotRequest) returns (models.ProportionalElectionResultBallot);
+  rpc CreateBundle(requests.CreateProportionalElectionResultBundleRequest) returns (responses.CreateProportionalElectionResultBundleResponse);
+  rpc DeleteBundle(requests.DeleteProportionalElectionResultBundleRequest) returns (google.protobuf.Empty);
+  rpc CreateBallot(requests.CreateProportionalElectionResultBallotRequest) returns (responses.CreateProportionalElectionResultBallotResponse);
+  rpc UpdateBallot(requests.UpdateProportionalElectionResultBallotRequest) returns (google.protobuf.Empty);
+  rpc DeleteBallot(requests.DeleteProportionalElectionResultBallotRequest) returns (google.protobuf.Empty);
+  rpc BundleSubmissionFinished(requests.ProportionalElectionResultBundleSubmissionFinishedRequest) returns (google.protobuf.Empty);
+  rpc BundleCorrectionFinished(requests.ProportionalElectionResultBundleCorrectionFinishedRequest) returns (google.protobuf.Empty);
+  rpc RejectBundleReview(requests.RejectProportionalElectionBundleReviewRequest) returns (google.protobuf.Empty);
+  rpc SucceedBundleReview(requests.SucceedProportionalElectionBundleReviewRequest) returns (google.protobuf.Empty);
+  rpc GetBundleChanges(requests.GetProportionalElectionResultBundleChangesRequest) returns (stream models.ProportionalElectionResultBundle);
+}

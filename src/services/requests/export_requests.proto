@@ -1,0 +1,198 @@
+// (c) Copyright 2022 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.services.v1.requests;
+
+import "google/protobuf/wrappers.proto";
+import "models/political_business.proto";
+
+/*
+  description: Export Templates für ein spezifisches Geschäft und Auszählungskreis anfragen.
+*/
+message GetCountingCircleResultExportTemplatesRequest {
+  /*
+    ech-name: countingCircleId
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: is-guid
+    description: Eindeutige Identifikation des Auszählungskreises. Es handelt sich dabei um die lokale Identifikation des Quellregisters.
+  */
+  string counting_circle_id = 1;
+
+  /*
+    ech-name: countingCircleId
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: is-guid
+    description: Eindeutige Identifikation des Geschäftes.
+  */
+  string political_business_id = 2;
+
+    /*
+    validations: exact-enum
+    description: Der Typ vom Geschäft.
+  */
+  models.PoliticalBusinessType political_business_type = 3;
+}
+
+/*
+  description: Export Templates für ein spezifisches Geschäft anfragen.
+*/
+message GetPoliticalBusinessResultExportTemplatesRequest {
+  /*
+    ech-name: countingCircleId
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: is-guid
+    description: Eindeutige Identifikation des Geschäftes.
+  */
+  string political_business_id = 1;
+
+  /*
+    validations: exact-enum
+    description: Der Typ vom Geschäft.
+  */
+  models.PoliticalBusinessType political_business_type = 2;
+}
+
+/*
+  description: Tempaltes für mehrere Wahlkreise und Geschäfte anfragen.
+*/
+message GetMultiplePoliticalBusinessesResultExportTemplatesRequest {
+  /*
+    ech-name: contestIdentification
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Urnengangs.
+  */
+  string contest_id = 1;
+}
+
+/*
+  description: Templates für mehrere Geschäfte und spezifischen Wahlkreis anfragen.
+*/
+message GetMultiplePoliticalBusinessesCountingCircleResultExportTemplatesRequest {
+  /*
+    ech-name: contestIdentification
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Urnengangs.
+  */
+  string contest_id = 1;
+
+  /*
+    ech-name: countingCircleId
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: is-guid
+    description: Eindeutige Identifikation des Auszählungskreises. Es handelt sich dabei um die lokale Identifikation des Quellregisters.
+  */
+  string counting_circle_id = 2;
+}
+
+/*
+  description: Templates für Urnengang anfragen.
+*/
+message GetContestExportTemplatesRequest {
+  /*
+    ech-name: contestIdentification
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Urnengangs.
+  */
+  string contest_id = 1;
+}
+
+/*
+  description: Templates für Geschäftsverbindungen anfragen.
+*/
+message GetPoliticalBusinessUnionResultExportTemplatesRequest {
+  /*
+    ech-name: contestIdentification
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: is-guid
+    description: Eindeutige, technische Identifikation der Geschäftsverbindung.
+  */
+  string political_business_union_id = 1;
+
+  /*
+    validations: exact-enum
+    description: Der Typ vom Geschäft.
+  */
+  models.PoliticalBusinessType political_business_type = 2;
+}
+
+/*
+  description: Konfigurationen für manuelle und automatisierte Exports anfragen.
+*/
+message ListResultExportConfigurationsRequest {
+  /*
+    ech-name: contestIdentification
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Urnengangs.
+  */
+  string contest_id = 1;
+}
+
+/*
+  description: Konfigurationen für manuelle und automatisierte Exports aktualisieren.
+*/
+message UpdateResultExportConfigurationRequest {
+  /*
+    ech-name: contestIdentification
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Urnengangs.
+  */
+  string contest_id = 1;
+
+  /*
+    validations: is-guid
+    description: Technische Identifikation der ausgewählten Export Konfiguration.
+  */
+  string export_configuration_id = 2;
+
+  /*
+    validations: is-guid
+    description: Technische Identifikationen mehrerer Geschäfte.
+  */
+  repeated string political_business_ids = 3;
+
+  /*
+    validations: typeof(int32),min-value(2),max-value(240),allow-undefined
+    description: Interval in Minuten für das automatische Generieren von Exports für definierte Schnittstellen. Das Interval kann zwischen 5 Minuten und 24 Stunden eingestellt werden.
+  */
+  google.protobuf.Int32Value interval_minutes = 4;
+}
+
+message TriggerResultExportRequest {
+  /*
+    ech-name: contestIdentification
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Urnengangs.
+  */
+  string contest_id = 1;
+
+  /*
+    validations: is-guid
+    description: Technische Identifikation der ausgewählten Export Konfiguration.
+  */
+  string export_configuration_id = 2;
+
+  /*
+    validations: is-guid
+    description: Ausgewählte Geschäfte für manuell- oder automatisierte Exports. Die Geschäfte werden mitgesendet, da neu hinzugefügte oder entfernte Geschäfte existieren können, welche noch nicht gespeichert wurden.
+  */
+  repeated string political_business_ids = 3;
+}

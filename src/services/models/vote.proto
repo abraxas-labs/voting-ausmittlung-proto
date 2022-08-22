@@ -1,0 +1,90 @@
+// (c) Copyright 2022 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.services.v1.models;
+
+import "models/contest.proto";
+import "models/domain_of_influence.proto";
+import "models/swiss_abroad_voting_right.proto";
+import "shared/domain_of_influence.proto";
+import "shared/vote.proto";
+
+message Vote {
+  string id = 1;
+  string political_business_number = 2;
+  string official_description = 3;
+  string short_description = 4;
+  string internal_description = 5;
+  SwissAbroadVotingRight swiss_abroad_voting_right = 6;
+  string domain_of_influence_id = 7;
+  string contest_id = 8;
+  bool active = 9;
+  string title = 10;
+  DomainOfInfluence domain_of_influence = 11;
+  VoteResultAlgorithm result_algorithm = 12;
+  Contest contest = 13;
+  
+  /*
+    validations: typeof(int32),min-value(1),max-value(100)
+    description: Prozentuale Stichprobengrösse für die Auszählung der Wahlzettel.
+  */
+  int32 ballot_bundle_sample_size_percent = 14;
+
+  /*
+    validations: is-type(bool)
+    description: 'True' für die automatische Vergabe von Bundnummern, sonst 'False' für die manuelle Vergabe.
+  */
+  bool automatic_ballot_bundle_number_generation = 15;
+
+  /*
+    validations: exact-enum
+    description: Erfassungsmethode der Ergebnisse.
+  */
+  shared.v1.VoteResultEntry result_entry = 16;
+  bool enforce_result_entry_for_counting_circles = 17;
+}
+
+message Ballot {
+  string id = 1;
+  int32 position = 2;
+  BallotType ballot_type = 3;
+  string description = 4;
+
+  /*
+    ech-name: voteIdentification
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: is-guid
+    description: Eindeutige Identifikation der Abstimmung.
+  */
+  string vote_id = 5;
+  repeated BallotQuestion ballot_questions = 6;
+  repeated TieBreakQuestion tie_break_questions = 7;
+}
+
+message BallotQuestion {
+  int32 number = 1;
+  string question = 2;
+}
+
+message TieBreakQuestion {
+  int32 number = 1;
+  string question = 2;
+  int32 question_1_number = 3;
+  int32 question_2_number = 4;
+}
+
+enum BallotType {
+  BALLOT_TYPE_UNSPECIFIED = 0;
+  BALLOT_TYPE_STANDARD_BALLOT = 1;
+  BALLOT_TYPE_VARIANTS_BALLOT = 2;
+}
+
+enum VoteResultAlgorithm {
+  VOTE_RESULT_ALGORITHM_UNSPECIFIED = 0;
+  VOTE_RESULT_ALGORITHM_POPULAR_MAJORITY = 1;
+  VOTE_RESULT_ALGORITHM_COUNTING_CIRCLE_UNANIMITY = 2;
+  VOTE_RESULT_ALGORITHM_COUNTING_CIRCLE_MAJORITY = 3;
+}

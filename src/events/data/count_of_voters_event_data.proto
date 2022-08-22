@@ -1,0 +1,38 @@
+// (c) Copyright 2022 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.events.v1.data;
+
+import "google/protobuf/wrappers.proto";
+import "shared/sex.proto";
+import "shared/voter_type.proto";
+
+
+// Stimmberechtigte
+message CountOfVotersInformationEventData {
+  int32 total_count_of_voters = 1;
+  repeated CountOfVotersInformationSubTotalEventData sub_total_info = 2;
+}
+
+// Stimmberechtigte - subtotal
+message CountOfVotersInformationSubTotalEventData {
+  shared.v1.SexType sex = 1;
+  shared.v1.VoterType voter_type = 2;
+  google.protobuf.Int32Value count_of_voters = 3;
+}
+
+message PoliticalBusinessCountOfVotersEventData {
+  // Anz. erhaltener Stimm-/Wahlzettel via konventionell
+  google.protobuf.Int32Value conventional_received_ballots = 1;
+
+  // Anz. invalider Stimm-/Wahlzettel via konventionell
+  google.protobuf.Int32Value conventional_invalid_ballots = 2;
+
+  // Anz. leerer Stimm-/Wahlzettel via konventionell
+  google.protobuf.Int32Value conventional_blank_ballots = 3;
+
+  // Anz. in betracht fallender Stimm-/Wahlzettel via konventionell
+  google.protobuf.Int32Value conventional_accounted_ballots = 4;
+}

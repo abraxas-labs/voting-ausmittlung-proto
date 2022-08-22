@@ -1,0 +1,98 @@
+// (c) Copyright 2022 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.services.v1.models;
+
+import "models/ballot_bundle.proto";
+import "models/majority_election_result.proto";
+import "models/user.proto";
+
+message MajorityElectionResultBundles {
+  MajorityElectionResult election_result = 1;
+  repeated MajorityElectionResultBundle bundles = 2;
+}
+
+message MajorityElectionResultBundle {
+  string id = 1;
+  int32 number = 2;
+  BallotBundleState state = 3;
+  int32 count_of_ballots = 4;
+  User created_by = 5;
+  User reviewed_by = 6;
+  
+  /*
+    ech-name: electronicBallotIdentification
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: typeof(int32),min-value(1),max-value(Int32.MaxValue)
+    description: Eindeutige, technische Identifikationen der zu überprüfenden Wahlzettel.
+  */
+  repeated int32 ballot_numbers_to_review = 7;
+}
+
+message MajorityElectionResultBallot {
+  int32 number = 1;
+
+  /*
+    validations: typeof(int32),min-value(0),max-value(Int32.Max)
+    description: Anzahl leere Zeilen
+  */
+  int32 empty_vote_count = 2;
+
+  /*
+    validations: typeof(int32),min-value(0),max-value(Int32.Max)
+    description: Anzahl vereinzelter Nennungen eines Kandiaten (welcher sich nicht auf der Liste befindet).
+  */
+  int32 individual_vote_count = 3;
+  repeated MajorityElectionBallotCandidate candidates = 4;
+  repeated SecondaryMajorityElectionResultBallot secondary_majority_election_ballots = 5;
+
+  /*
+    validations: typeof(int32),min-value(0),max-value(Int32.Max)
+    description: Anzahl ungültiger Abstimmungen.
+  */
+  int32 invalid_vote_count = 6;
+}
+
+message SecondaryMajorityElectionResultBallot {
+  /*
+    ech-name: electionIdentification
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: is-guid
+    description: Eindeutige, technische Identifikation der Wahl.
+  */
+  string election_id = 1;
+
+  /*
+    validations: typeof(int32),min-value(0),max-value(Int32.Max)
+    description: Anzahl leere Zeilen
+  */
+  int32 empty_vote_count = 2;
+
+  /*
+    validations: typeof(int32),min-value(0),max-value(Int32.Max)
+    description: Anzahl vereinzelter Nennungen eines Kandiaten (welcher sich nicht auf der Liste befindet).
+  */
+  int32 individual_vote_count = 3;
+  repeated MajorityElectionBallotCandidate candidates = 4;
+
+  /*
+    validations: typeof(int32),min-value(0),max-value(Int32.Max)
+    description: Anzahl ungültiger Abstimmungen.
+  */
+  int32 invalid_vote_count = 5;
+}
+
+message MajorityElectionBallotCandidate {
+  string id = 1;
+  string number = 2;
+  string political_first_name = 3;
+  string political_last_name = 4;
+  string party = 5;
+  string description = 6;
+  int32 position = 7;
+  bool selected = 8;
+}

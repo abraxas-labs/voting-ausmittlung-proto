@@ -1,0 +1,70 @@
+// (c) Copyright 2022 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.services.v1.models;
+
+import "google/protobuf/timestamp.proto";
+import "models/count_of_voters.proto";
+import "models/counting_circle.proto";
+import "models/vote.proto";
+import "models/vote_result_sub_total.proto";
+import "shared/vote.proto";
+
+message VoteResult {
+  string id = 1;
+  string counting_circle_id = 2;
+  Vote vote = 3;
+  shared.v1.VoteResultEntry entry = 4;
+  CountingCircleResultState state = 5;
+  google.protobuf.Timestamp submission_done_timestamp = 6;
+  int32 total_count_of_voters = 7;
+  repeated BallotResult results = 8;
+  VoteResultEntryParams entry_params = 9;
+  CountingCircle counting_circle = 10;
+}
+
+message BallotResult {
+  string id = 1;
+  Ballot ballot = 2;
+  PoliticalBusinessNullableCountOfVoters count_of_voters = 3;
+  repeated BallotQuestionResult question_results = 4;
+  repeated TieBreakQuestionResult tie_break_question_results = 5;
+  bool all_bundles_reviewed_or_deleted = 6;
+  int32 conventional_count_of_detailed_entered_ballots = 7;
+}
+
+message BallotQuestionResult {
+  string id = 1;
+  BallotQuestion question = 2;
+  BallotQuestionResultSubTotal e_voting_sub_total = 3;
+  BallotQuestionResultNullableSubTotal conventional_sub_total = 4;
+  int32 total_count_of_answer_yes = 5;
+  int32 total_count_of_answer_no = 6;
+  int32 total_count_of_answer_unspecified = 7;
+}
+
+message TieBreakQuestionResult {
+  string id = 1;
+  TieBreakQuestion question = 2;
+  TieBreakQuestionResultSubTotal e_voting_sub_total = 3;
+  TieBreakQuestionResultNullableSubTotal conventional_sub_total = 4;
+  int32 total_count_of_answer_q1 = 5;
+  int32 total_count_of_answer_q2 = 6;
+  int32 total_count_of_answer_unspecified = 7;
+}
+
+message VoteResultEntryParams {
+  /*
+    validations: typeof(int32),min-value(1),max-value(100)
+    description: Prozentuale Stichprobengrösse für die Auszählung der Wahlzettel.
+  */
+  int32 ballot_bundle_sample_size_percent = 1;
+
+  /*
+    validations: is-type(bool)
+    description: 'True' für die automatische Vergabe von Bundnummern, sonst 'False' für die manuelle Vergabe.
+  */
+  bool automatic_ballot_bundle_number_generation = 2;
+}

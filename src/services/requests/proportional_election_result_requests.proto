@@ -1,0 +1,333 @@
+// (c) Copyright 2022 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.services.v1.requests;
+
+import "requests/count_of_voters_requests.proto";
+import "shared/ballot_number_generation.proto";
+
+/*
+  description: Either set election_id and counting_circle_id or election_result_id.
+*/
+message GetProportionalElectionResultRequest {
+  /*
+    ech-name: electionIdentification
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: is-guid,allow-undefined
+    description: Eindeutige, technische Identifikation der Wahl.
+  */
+  string election_id = 1;
+
+  /*
+    ech-name: countingCircleId
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: is-guid,allow-undefined
+    description: Eindeutige Identifikation des Auszählungskreises. Es handelt sich dabei um die lokale Identifikation des Quellregisters.
+  */
+  string counting_circle_id = 2;
+
+  /*
+    validations: is-guid,allow-undefined
+    description: Eindeutige, technische Identifikation des Wahlergebnisses.
+  */
+  string election_result_id = 3;
+}
+
+message GetProportionalElectionUnmodifiedListResultsRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Wahlergebnisses.
+  */
+  string election_result_id = 1;
+}
+
+message GetProportionalElectionListResultsRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Wahlergebnisses.
+  */
+  string election_result_id = 1;
+}
+
+message DefineProportionalElectionResultEntryRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Wahlergebnisses.
+  */
+  string election_result_id = 1;
+
+  /*
+    description: Parameter für Wahlzettelerfassung.
+  */
+  DefineProportionalElectionResultEntryParamsRequest result_entry_params = 2;
+}
+
+message DefineProportionalElectionResultEntryParamsRequest {
+  /*
+    validations: typeof(int32),min-value(1),max-value(Int32.Max)
+    description: Bundgrösse für die Auszählung der Wahlzettel.
+  */
+  int32 ballot_bundle_size = 2;
+
+  /*
+    validations: typeof(int32),min-value(1),max-value(Int32.Max)
+    description: Stichprobengrösse für die Auszählung der Wahlzettel.
+  */
+  int32 ballot_bundle_sample_size = 3;
+
+  /*
+    validations: is-type(bool)
+    description: 'True' für die automatische Vergabe von Bundnummern, sonst 'False' für die manuelle Vergabe.
+  */
+  bool automatic_ballot_bundle_number_generation = 4;
+
+  /*
+    validations: exact-enum
+    description: Art der Vergabe von Wahlzettelnummern.
+  */
+  shared.v1.BallotNumberGeneration ballot_number_generation = 5;
+
+  /*
+    validations: is-type(bool)
+    description: 'True' für die automatische Erfassung leerer Zeilen, sonst 'False' für die manuelle Erfassung.
+  */
+  bool automatic_empty_vote_counting = 6;
+}
+
+message EnterProportionalElectionCountOfVotersRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Wahlergebnisses.
+  */
+  string election_result_id = 1;
+
+  /*
+    description: Erfasste Wählerdaten für das Geschäft.
+  */
+  EnterPoliticalBusinessCountOfVotersRequest count_of_voters = 2;
+}
+
+/*
+  description: Erfassung unveränderter Wahlzettel.
+*/
+message EnterProportionalElectionUnmodifiedListResultsRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Wahlergebnisses.
+  */
+  string election_result_id = 1;
+
+  /*
+    description: Wahlergebnis eines unveränderten Wahlzettels.
+  */
+  repeated EnterProportionalElectionUnmodifiedListResultRequest results = 2;
+}
+
+message EnterProportionalElectionUnmodifiedListResultRequest {
+  /*
+    ech-name: listIdentification
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: is-guid
+    description: Eindeutige, technische Identifikation der Liste.
+  */
+  string list_id = 1;
+
+  /*
+    validations: typeof(int32),min-value(0),max-value(Int32.Max)
+    description: Anzahl gültiger Stimmen.
+  */
+  int32 vote_count = 2;
+}
+
+message ProportionalElectionResultPrepareSubmissionFinishedRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Wahlergebnisses.
+  */  
+  string election_result_id = 1;
+}
+
+message ProportionalElectionResultSubmissionFinishedRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Wahlergebnisses.
+  */
+  string election_result_id = 1;
+
+  /*
+    validations: min-length(32), max-length(36),standard-singleline-text
+    description: Eindeutige, technische Identifikation der Zweifaktor-Transaktion (siehe: https://docs.nevis.net/apidoc/authcloud/#enroll-your-access-app)
+  */
+  string second_factor_transaction_id = 2;
+}
+
+message ProportionalElectionResultPrepareCorrectionFinishedRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Wahlergebnisses.
+  */
+  string election_result_id = 1;
+}
+
+message ProportionalElectionResultCorrectionFinishedRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Wahlergebnisses.
+  */
+  string election_result_id = 1;
+
+  /*
+    validations: max-length(500),standard-multiline-text,allow-undefined
+    description: Kommentar zur abgeschlossenen Korrektur.
+  */
+  string comment = 2;
+
+  /*
+    validations: min-length(32), max-length(36),standard-singleline-text
+    description: Eindeutige, technische Identifikation der Zweifaktor-Transaktion (siehe: https://docs.nevis.net/apidoc/authcloud/#enroll-your-access-app)
+  */
+  string second_factor_transaction_id = 3;
+}
+
+message ProportionalElectionResultFlagForCorrectionRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Wahlergebnisses.
+  */
+  string election_result_id = 1;
+
+  /*
+    validations: max-length(500),standard-multiline-text,allow-undefined
+    description: Kommentar für angeforderte Korrektur.
+  */
+  string comment = 2;
+}
+
+message ProportionalElectionResultAuditedTentativelyRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Wahlergebnisses.
+  */
+  repeated string election_result_ids = 1;
+}
+
+message ProportionalElectionResultResetToSubmissionFinishedRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Wahlergebnisses.
+  */
+  string election_result_id = 1;
+}
+
+message ProportionalElectionResultsPlausibiliseRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Wahlergebnisses.
+  */
+  repeated string election_result_ids = 1;
+}
+
+message ProportionalElectionResultsResetToAuditedTentativelyRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Wahlergebnisses.
+  */
+  repeated string election_result_ids = 1;
+}
+
+message GetProportionalElectionEndResultRequest {
+  /*
+    ech-name: electionIdentification
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: is-guid
+    description: Eindeutige, technische Identifikation der Proporzwahl.
+  */
+  string proportional_election_id = 1;
+}
+
+message GetProportionalElectionListEndResultAvailableLotDecisionsRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation der Proporzwahl-Liste.
+  */
+  string proportional_election_list_id = 1;
+}
+
+message UpdateProportionalElectionListEndResultLotDecisionsRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation der Proporzwahl-Liste.
+  */
+  string proportional_election_list_id = 1;
+
+  /*
+    description: Losentscheide fällen.
+  */
+  repeated UpdateProportionalElectionEndResultLotDecisionRequest lot_decisions = 2;
+}
+
+message UpdateProportionalElectionEndResultLotDecisionRequest {
+  /*
+    ech-name: candidateIdentification
+    ech-length: 50
+    ech-type: xs:token
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Kandidaten.
+  */
+  string candidate_id = 1;
+
+  /*
+    validations: min-value(1),max-value(Int32.Max)
+    description: Rang nach Losentscheid
+  */
+  int32 rank = 2;
+}
+
+message PrepareFinalizeProportionalElectionEndResultRequest {
+  /*
+    ech-name: electionIdentification
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: is-guid
+    description: Eindeutige, technische Identifikation der Proporzwahl.
+  */  
+  string proportional_election_id = 1;
+}
+
+message FinalizeProportionalElectionEndResultRequest {
+  /*
+    ech-name: electionIdentification
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: is-guid
+    description: Eindeutige, technische Identifikation der Proporzwahl.
+  */
+  string proportional_election_id = 1;
+
+  /*
+    validations: min-length(32), max-length(36),standard-singleline-text
+    description: Eindeutige, technische Identifikation der Zweifaktor-Transaktion (siehe: https://docs.nevis.net/apidoc/authcloud/#enroll-your-access-app)
+  */
+  string second_factor_transaction_id = 2;
+}
+
+message RevertProportionalElectionEndResultFinalizationRequest {
+  /*
+    ech-name: electionIdentification
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: is-guid
+    description: Eindeutige, technische Identifikation der Proporzwahl.
+  */
+  string proportional_election_id = 1;
+}
+
+message ValidateEnterProportionalElectionCountOfVotersRequest {
+  EnterProportionalElectionCountOfVotersRequest request = 1;
+}

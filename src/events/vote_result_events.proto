@@ -1,0 +1,91 @@
+// (c) Copyright 2022 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.events.v1;
+
+import "data/count_of_voters_event_data.proto";
+import "data/event_info.proto";
+import "data/vote_result_event_data.proto";
+import "shared/vote.proto";
+
+message VoteResultSubmissionStarted {
+  data.EventInfo event_info = 1;
+  string vote_result_id = 2;
+  string vote_id = 3;
+  string counting_circle_id = 4;
+}
+
+message VoteResultEntryDefined {
+  data.EventInfo event_info = 1;
+  string vote_result_id = 2;
+  shared.v1.VoteResultEntry result_entry = 3;
+  data.VoteResultEntryParamsEventData result_entry_params = 4;
+}
+
+message VoteResultCountOfVotersEntered {
+  data.EventInfo event_info = 1;
+  string vote_result_id = 2;
+  repeated data.VoteBallotResultsCountOfVotersEventData results_count_of_voters = 3;
+}
+
+message VoteBallotResultsCountOfVotersEntered {
+  string ballot_id = 1;
+  data.PoliticalBusinessCountOfVotersEventData count_of_voters = 2;
+}
+
+message VoteResultCorrectionEntered {
+  data.EventInfo event_info = 1;
+  string vote_result_id = 2;
+  repeated data.VoteBallotResultsEventData results = 8;
+}
+
+message VoteResultEntered {
+  data.EventInfo event_info = 1;
+  string vote_result_id = 2;
+  repeated data.VoteBallotResultsEventData results = 8;
+}
+
+message VoteBallotResultsEntered {
+  string ballot_id = 1;
+  repeated data.VoteBallotQuestionResultsEventData question_results = 2;
+  repeated data.VoteTieBreakQuestionResultsEventData tie_break_question_results = 3;
+}
+
+message VoteResultSubmissionFinished {
+  data.EventInfo event_info = 1;
+  string vote_result_id = 2;
+}
+
+message VoteResultCorrectionFinished {
+  data.EventInfo event_info = 1;
+  string vote_result_id = 2;
+  string comment = 3;
+}
+
+message VoteResultFlaggedForCorrection {
+  data.EventInfo event_info = 1;
+  string vote_result_id = 2;
+  string comment = 3;
+}
+
+message VoteResultAuditedTentatively {
+  data.EventInfo event_info = 1;
+  string vote_result_id = 2;
+}
+
+message VoteResultResettedToSubmissionFinished {
+  data.EventInfo event_info = 1;
+  string vote_result_id = 2;
+}
+
+message VoteResultPlausibilised {
+  data.EventInfo event_info = 1;
+  string vote_result_id = 2;
+}
+
+message VoteResultResettedToAuditedTentatively {
+  data.EventInfo event_info = 1;
+  string vote_result_id = 2;
+}

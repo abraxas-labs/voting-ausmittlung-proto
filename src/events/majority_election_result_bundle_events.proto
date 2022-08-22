@@ -1,0 +1,80 @@
+// (c) Copyright 2022 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.events.v1;
+
+import "data/event_info.proto";
+import "data/majority_election_result_bundle_event_data.proto";
+import "data/majority_election_result_event_data.proto";
+import "shared/majority_election.proto";
+
+message MajorityElectionResultBundleCreated {
+  data.EventInfo event_info = 1;
+  string bundle_id = 2;
+  string election_result_id = 3;
+  int32 bundle_number = 4;
+  shared.v1.MajorityElectionResultEntry result_entry = 5;
+  data.MajorityElectionResultEntryParamsEventData result_entry_params = 6;
+}
+
+message MajorityElectionResultBundleDeleted {
+  data.EventInfo event_info = 1;
+  string bundle_id = 2;
+}
+
+message MajorityElectionResultBundleReviewSucceeded {
+  data.EventInfo event_info = 1;
+  string bundle_id = 2;
+}
+
+message MajorityElectionResultBundleReviewRejected {
+  data.EventInfo event_info = 1;
+  string bundle_id = 2;
+}
+
+message MajorityElectionResultBallotCreated {
+  data.EventInfo event_info = 1;
+  string bundle_id = 2;
+  string election_result_id = 3;
+  int32 ballot_number = 4;
+  int32 empty_vote_count = 5;
+  int32 individual_vote_count = 6;
+  repeated string selected_candidate_ids = 7;
+  repeated data.SecondaryMajorityElectionResultBallotEventData secondary_majority_election_results = 8;
+  int32 invalid_vote_count = 9;
+}
+
+message MajorityElectionResultBallotUpdated {
+  data.EventInfo event_info = 1;
+  string bundle_id = 2;
+  string election_result_id = 3;
+  int32 ballot_number = 4;
+  int32 empty_vote_count = 5;
+  int32 individual_vote_count = 6;
+  repeated string selected_candidate_ids = 7;
+  repeated data.SecondaryMajorityElectionResultBallotEventData secondary_majority_election_results = 8;
+  int32 invalid_vote_count = 9;
+}
+
+message MajorityElectionResultBallotDeleted {
+  data.EventInfo event_info = 1;
+  string bundle_id = 2;
+  string election_result_id = 3;
+  int32 ballot_number = 4;
+}
+
+message MajorityElectionResultBundleSubmissionFinished {
+  data.EventInfo event_info = 1;
+  string bundle_id = 2;
+  string election_result_id = 3;
+  repeated int32 sample_ballot_numbers = 4;
+}
+
+message MajorityElectionResultBundleCorrectionFinished {
+  data.EventInfo event_info = 1;
+  string bundle_id = 2;
+  string election_result_id = 3;
+  repeated int32 sample_ballot_numbers = 4;
+}

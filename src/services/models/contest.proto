@@ -1,0 +1,180 @@
+// (c) Copyright 2022 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.services.v1.models;
+
+import "google/protobuf/timestamp.proto";
+import "shared/domain_of_influence.proto";
+
+message Contest {
+  /*
+    ech-name: contestIdentification
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Urnengangs.
+  */
+  string id = 1;
+
+  /*
+    ech-name: contestDate
+    ech-type:: xs:date
+    description: Datum des Urnengangs jjjj-mm-tt
+  */
+  google.protobuf.Timestamp date = 2;
+
+  /*
+    ech-name: contestDescription
+    ech-length: 100
+    ech-type: string
+    description: Freitext von maximal 100 Zeichen, pro relevanter Sprache
+  */
+  string description = 3;
+
+  google.protobuf.Timestamp end_of_testing_phase = 4;
+  bool testing_phase_ended = 5;
+
+  /*
+    ech-name: domainOfInfluenceIdentification
+    ech-length: 50
+    ech-type: string
+    description: Interne ID des Wahlkreises des liefernden Systems
+  */
+  string domain_of_influence_id = 6;
+
+  bool e_voting = 7;
+
+  /*
+    ech-name: eVotingPeriodFrom
+    ech-length:
+    ech-type: datetime
+    description: Datum und Zeit der Öffnung der elektronischen Urne
+  */
+  google.protobuf.Timestamp e_voting_from = 8;
+
+  /*
+    ech-name: eVotingPeriodTill
+    ech-length:
+    ech-type: datetime
+    description: Datum und Zeit der Schliessung der elektronischen Urne
+  */
+  google.protobuf.Timestamp e_voting_to = 9;
+
+  /*
+    validations: exact-enum
+    description: Status vom Urnengang.
+  */
+  ContestState state = 10;
+
+  /*
+    validations: exact-enum
+    description: Status vom Urnengang.
+  */
+  bool e_voting_results_imported = 11;
+}
+
+message ContestSummaries {
+  repeated ContestSummary contest_summaries = 1;
+}
+
+message ContestSummary {
+  /*
+    ech-name: contestIdentification
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Urnengangs.
+  */
+  string id = 1;
+
+  /*
+    ech-name: contestDate
+    ech-length:
+    ech-type: date
+    description: Datum des Urnengangs jjjj-mm-tt
+  */
+  google.protobuf.Timestamp date = 2;
+
+  /*
+    ech-name: contestDescription
+    ech-length: 100
+    ech-type: string
+    description: Freitext von maximal 100 Zeichen, pro relevanter Sprache
+  */
+  string description = 3;
+
+  google.protobuf.Timestamp end_of_testing_phase = 4;
+  bool testing_phase_ended = 5;
+
+  /*
+    ech-name: domainOfInfluenceIdentification
+    ech-length: 50
+    ech-type: string
+    description: Interne ID des Wahlkreises des liefernden Systems
+  */
+  string domain_of_influence_id = 6;
+
+  bool e_voting = 7;
+
+  /*
+    ech-name: eVotingPeriodFrom
+    ech-length:
+    ech-type: datetime
+    description: Datum und Zeit der Öffnung der elektronischen Urne
+  */
+  google.protobuf.Timestamp e_voting_from = 8;
+
+  /*
+    ech-name: eVotingPeriodTill
+    ech-length:
+    ech-type: datetime
+    description: Datum und Zeit der Schliessung der elektronischen Urne
+  */
+  google.protobuf.Timestamp e_voting_to = 9;
+
+  repeated ContestSummaryEntryDetails contest_entries_details = 10;
+  ContestState state = 11;
+  bool e_voting_results_imported = 12;
+}
+
+message ContestSummaryEntryDetails {
+
+  /*
+    ech-name: domainOfInfluenceType
+    ech-length:
+    ech-type: token
+    description: Beschreibt die Stufe. Können einzelne Einflussbereiche keinem der explizit definierten Typen zugeordnet werden, so ist für diese „AN“ (andere) zu verwenden.
+    values: CH = Bund, CT = Kanton, BZ = Bezirk / Amt / Verwaltungskreis, MU = Gemeinde, SC = Schulgemeinde, KI = Kirchgemeinde, OG = Ortsbürgergemeinden, KO = Korporationen, SK = Stadtkreis, AN = andere
+  */
+  shared.v1.DomainOfInfluenceType domain_of_influence_type = 1;
+  int32 contest_entries_count = 2;
+}
+
+enum ContestState {
+  /*
+    description: the proto default value, should never be used
+  */
+  CONTEST_STATE_UNSPECIFIED = 0;
+  /*
+    description: contest is in testing phase
+  */
+  CONTEST_STATE_TESTING_PHASE = 1;
+  /*
+    description: contest takes place in the future or today, but is not in the testing phase anymore.
+  */
+  CONTEST_STATE_ACTIVE = 2;
+  /*
+    description: contest has taken place in the past and is locked
+  */
+  CONTEST_STATE_PAST_LOCKED = 3;
+  /*
+    description: contest has taken place in the past and is unlocked and will automatically get locked after the day ends.
+  */
+  CONTEST_STATE_PAST_UNLOCKED = 4;
+  /*
+    description: contest is archived
+  */
+  CONTEST_STATE_ARCHIVED = 5;
+}

@@ -1,0 +1,367 @@
+// (c) Copyright 2022 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.services.v1.requests;
+
+import "google/protobuf/wrappers.proto";
+import "requests/count_of_voters_requests.proto";
+import "shared/vote.proto";
+
+/*
+  description: Either set vote_id and counting_circle_id or vote_result_id
+*/
+message GetVoteResultRequest {
+  /*
+    ech-name: voteIdentification
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: is-guid,allow-undefined
+    description: Eindeutige Identifikation der Abstimmung.
+  */
+  string vote_id = 1;
+
+  /*
+    ech-name: countingCircleId
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: is-guid,allow-undefined
+    description: Eindeutige Identifikation des Auszählungskreises. Es handelt sich dabei um die lokale Identifikation des Quellregisters.
+  */
+  string counting_circle_id = 2;
+
+  /*
+    validations: is-guid,allow-undefined
+    description: Eindeutige Identifikation des Abstimmungsresultates.
+  */
+  string vote_result_id = 3;
+}
+
+message DefineVoteResultEntryRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige Identifikation des Abstimmungsresultates.
+  */
+  string vote_result_id = 1;
+
+  /*
+    validations: exact-enum
+    description: Erfassungsmethode der Ergebnisse.
+  */
+  shared.v1.VoteResultEntry result_entry = 2;
+
+  /*
+    description: Parameter für Wahlzettelerfassung.
+  */
+  DefineVoteResultEntryParamsRequest result_entry_params = 3;
+}
+
+message DefineVoteResultEntryParamsRequest {
+  /*
+    validations: typeof(int32),min-value(1),max-value(100)
+    description: Prozentuale Stichprobengrösse für die Auszählung der Wahlzettel.
+  */
+  int32 ballot_bundle_sample_size_percent = 1;
+
+  /*
+    validations: is-type(bool)
+    description: 'True' für die automatische Vergabe von Bundnummern, sonst 'False' für die manuelle Vergabe.
+  */
+  bool automatic_ballot_bundle_number_generation = 2;
+}
+
+message EnterVoteResultCountOfVotersRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige Identifikation des Abstimmungsresultates.
+  */
+  string vote_result_id = 1;
+  repeated EnterVoteBallotResultsCountOfVotersRequest results_count_of_voters = 2;
+}
+
+message EnterVoteBallotResultsCountOfVotersRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige Identifikation des Wahlzettels.
+  */
+  string ballot_id = 1;
+
+  /*
+    description: Erfasste Wählerdaten für das Geschäft.
+  */
+  EnterPoliticalBusinessCountOfVotersRequest count_of_voters = 2;
+}
+
+message EnterVoteResultsRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige Identifikation des Abstimmungsresultates.
+  */
+  string vote_result_id = 1;
+  repeated EnterVoteBallotResultsRequest results = 2;
+}
+
+message EnterVoteResultCorrectionRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige Identifikation des Abstimmungsresultates.
+  */
+  string vote_result_id = 1;
+
+  /*
+    description: Eingabe Resultate für Wahlzettel.
+  */
+  repeated EnterVoteBallotResultsRequest results = 2;
+}
+
+message EnterVoteBallotResultsRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige Identifikation des Wahlzettels.
+  */  
+  string ballot_id = 1;
+
+  /*
+    description: Erfasste Wählerdaten für das Geschäft.
+  */
+  EnterPoliticalBusinessCountOfVotersRequest count_of_voters = 2;
+
+  /*
+    description: Resultate der Fragen eines Stimmzettels.
+  */
+  repeated EnterVoteBallotQuestionResultRequest question_results = 3;
+
+  /*
+    validations: allow-undefined
+    description: Resultate der Stichfragen eines Stimmzettels.
+  */
+  repeated EnterVoteTieBreakQuestionResultRequest tie_break_question_results = 4;
+}
+
+message EnterVoteBallotQuestionResultRequest {
+  /*
+    validations: typeof(int32),min-value(1),max-value(Int32.Max)
+    description: Fragennummer
+  */
+  int32 question_number = 1;
+
+  /*
+    validations: typeof(int32),min-value(0),max-value(Int32.Max),allow-undefined
+    description: Anzahl 'Ja' Stimmen
+  */
+  google.protobuf.Int32Value received_count_yes = 2;
+
+  /*
+    validations: typeof(int32),min-value(0),max-value(Int32.Max),allow-undefined
+    description: Anzahl 'Nein' Stimmen
+  */
+  google.protobuf.Int32Value received_count_no = 3;
+
+  /*
+    validations: typeof(int32),min-value(0),max-value(Int32.Max),allow-undefined
+    description: Anzahl 'Undefinierter' Stimmen
+  */
+  google.protobuf.Int32Value received_count_unspecified = 4;
+}
+
+message EnterVoteTieBreakQuestionResultRequest {
+  /*
+    validations: typeof(int32),min-value(1),max-value(Int32.Max)
+    description: Fragennummer
+  */
+  int32 question_number = 1;
+
+  /*
+    validations: typeof(int32),min-value(0),max-value(Int32.Max),allow-undefined
+    description: Anzahl 'Q1' Stimmen
+  */
+  google.protobuf.Int32Value received_count_q1 = 2;
+
+  /*
+    validations: typeof(int32),min-value(0),max-value(Int32.Max),allow-undefined
+    description: Anzahl 'Q2' Stimmen
+  */
+  google.protobuf.Int32Value received_count_q2 = 3;
+
+  /*
+    validations: typeof(int32),min-value(0),max-value(Int32.Max),allow-undefined
+    description: Anzahl 'Undefinierter' Stimmen
+  */
+  google.protobuf.Int32Value received_count_unspecified = 4;
+}
+
+message VoteResultPrepareSubmissionFinishedRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige Identifikation des Abstimmungsresultates.
+  */
+  string vote_result_id = 1;
+}
+
+message VoteResultSubmissionFinishedRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige Identifikation des Abstimmungsresultates.
+  */
+  string vote_result_id = 1;
+
+  /*
+    validations: min-length(32), max-length(36),standard-singleline-text
+    description: Eindeutige, technische Identifikation der Zweifaktor-Transaktion (siehe: https://docs.nevis.net/apidoc/authcloud/#enroll-your-access-app)
+  */
+  string second_factor_transaction_id = 2;
+}
+
+message VoteResultPrepareCorrectionFinishedRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige Identifikation des Abstimmungsresultates.
+  */
+  string vote_result_id = 1;
+}
+
+message VoteResultCorrectionFinishedRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige Identifikation des Abstimmungsresultates.
+  */
+  string vote_result_id = 1;
+
+  /*
+    validations: max-length(500),standard-multiline-text,allow-undefined
+    description: Kommentar zur abgeschlossenen Korrektur.
+  */
+  string comment = 2;
+
+  /*
+    validations: min-length(32), max-length(36),standard-singleline-text
+    description: Eindeutige, technische Identifikation der Zweifaktor-Transaktion (siehe: https://docs.nevis.net/apidoc/authcloud/#enroll-your-access-app)
+  */
+  string second_factor_transaction_id = 3;
+}
+
+message VoteResultFlagForCorrectionRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige Identifikation des Abstimmungsresultates.
+  */
+  string vote_result_id = 1;
+
+  /*
+    validations: max-length(500),standard-multiline-text,allow-undefined
+    description: Kommentar für angeforderte Korrektur.
+  */
+  string comment = 2;
+}
+
+message VoteResultAuditedTentativelyRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige Identifikationen der Abstimmungsresultate.
+  */
+  repeated string vote_result_ids = 1;
+}
+
+message VoteResultResetToSubmissionFinishedRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige Identifikation des Abstimmungsresultates.
+  */
+  string vote_result_id = 1;
+}
+
+message VoteResultsPlausibiliseRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige Identifikation des Abstimmungsresultates.
+  */
+  repeated string vote_result_ids = 1;
+}
+
+message VoteResultsResetToAuditedTentativelyRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige Identifikation des Abstimmungsresultates.
+  */
+  repeated string vote_result_ids = 1;
+}
+
+/*
+  description: Abfrage der Abstimmungsresultate.
+*/
+message GetVoteEndResultRequest {
+  /*
+    ech-name: voteIdentification
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: is-guid
+    description: Eindeutige Identifikation der Abstimmung.
+  */
+  string vote_id = 1;
+}
+
+message PrepareFinalizeVoteEndResultRequest {
+  /*
+    ech-name: voteIdentification
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: is-guid
+    description: Eindeutige Identifikation der Abstimmung.
+  */
+  string vote_id = 1;
+}
+
+message FinalizeVoteEndResultRequest {
+  /*
+    ech-name: voteIdentification
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: is-guid
+    description: Eindeutige Identifikation der Abstimmung.
+  */
+  string vote_id = 1;
+
+  /*
+    validations: min-length(32), max-length(36),standard-singleline-text
+    description: Eindeutige, technische Identifikation der Zweifaktor-Transaktion (siehe: https://docs.nevis.net/apidoc/authcloud/#enroll-your-access-app)
+  */
+  string second_factor_transaction_id = 2;
+}
+
+message RevertVoteEndResultFinalizationRequest {
+  /*
+    ech-name: voteIdentification
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: is-guid
+    description: Eindeutige Identifikation der Abstimmung.
+  */
+  string vote_id = 1;
+}
+
+message GetBallotResultRequest {
+  /*
+    validations: is-guid
+    description: Bund ist auf Wahlzettelresultat gespeichert.
+  */
+  string ballot_result_id = 1;
+}
+
+message ValidateEnterVoteResultCountOfVotersRequest {
+  EnterVoteResultCountOfVotersRequest request = 1;
+}
+
+/*
+  description: Validierung der Abstimmungsresultate.
+*/
+message ValidateEnterVoteResultsRequest {
+  EnterVoteResultsRequest request = 1;
+}
+
+/*
+  description: Validierung der korrigierten Abstimmungsresultate.
+*/
+message ValidateEnterVoteResultCorrectionRequest {
+  EnterVoteResultCorrectionRequest request = 1;
+}

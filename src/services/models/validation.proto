@@ -1,0 +1,110 @@
+// (c) Copyright 2022 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.services.v1.models;
+
+import "google/protobuf/timestamp.proto";
+import "models/political_business.proto";
+import "shared/domain_of_influence.proto";
+import "shared/validation.proto";
+import "shared/voting_channel.proto";
+
+message ValidationResult {
+  shared.v1.Validation validation = 1;
+  bool is_valid = 2;
+  bool is_optional = 3;
+  oneof data {
+    ValidationPoliticalBusinessData political_business_data = 4;
+    ValidationVoteAccountedBallotsEqualQnData vote_accounted_ballots_equal_qn_data = 5;
+    ValidationMajorityElectionNumberOfMandatesTimesAccountedBallotsEqualCandVotesPlusEmptyPlusInvalidVotesData majority_election_number_of_mandates_times_accounted_ballots_equal_cand_votes_plus_empty_invalid_votes_data = 6;
+    ValidationProportionalElectionAccountedBallotsEqualModifiedPlusUnmodifiedListsData proportional_election_accounted_ballots_equal_modified_plus_unmodified_lists_data = 7;
+    ValidationComparisonVoterParticipationsData comparison_voter_participations_data = 8;
+    ValidationComparisonCountOfVotersData comparison_count_of_voters_data = 9;
+    ValidationComparisonVotingChannelsData comparison_voting_channels_data = 10;
+    ValidationComparisonValidVotingCardsWithAccountedBallotsData comparison_valid_voting_cards_with_accounted_ballots_data = 11;
+  }
+}
+
+message ValidationOverview {
+  repeated ValidationResult validation_results = 1;
+  bool is_valid = 2;
+}
+
+message ValidationPoliticalBusinessData {
+  PoliticalBusinessType political_business_type = 1;
+}
+
+message ValidationVoteAccountedBallotsEqualQnData {
+  /*
+    validations: typeof(int32),min-value(1),max-value(Int32.Max)
+    description: Fragennummer
+  */
+  int32 question_number = 1;
+}
+
+message ValidationMajorityElectionNumberOfMandatesTimesAccountedBallotsEqualCandVotesPlusEmptyPlusInvalidVotesData {
+  /*
+    validations: typeof(int32),min-value(0),max-value(Int32.Max)
+    description: Anzahl leere Zeilen
+  */
+  int32 empty_vote_count = 1;
+
+  /*
+    validations: typeof(int32),min-value(0),max-value(Int32.Max)
+    description: Anzahl ungültiger Abstimmungen.
+  */
+  int32 invalid_vote_count = 2;
+  int32 candidate_votes_incl_individual = 3;
+  int32 number_of_mandates = 4;
+  int32 total_accounted_ballots = 5;
+  int32 sum_vote_count = 6;
+  int32 number_of_mandates_times_accounted_ballots = 7;
+}
+
+message ValidationProportionalElectionAccountedBallotsEqualModifiedPlusUnmodifiedListsData {
+  int32 total_accounted_ballots = 1;
+  int32 total_count_of_ballots = 2;
+  int32 total_count_of_unmodified_lists = 3;
+  int32 sum_ballots_and_unmodified_lists = 4;
+}
+
+message ValidationComparisonVoterParticipationsData {
+  double threshold_percent = 1;
+  double deviation_percent = 2;
+
+  /*
+    ech-name: domainOfInfluenceType
+    ech-type:: xs:token
+    validations: exact-enum
+    description: Beschreibt die Stufe des Einflussbereichs. Können einzelne Einflussbereiche keinem der explizit definierten Typen zugeordnet werden, so ist für diese „AN“ (andere) zu verwenden.
+    values: CH = Bund, CT = Kanton, BZ = Bezirk / Amt / Verwaltungskreis, MU = Gemeinde, SC = Schulgemeinde, KI = Kirchgemeinde, OG = Ortsbürgergemeinden, KO = Korporationen, SK = Stadtkreis, AN = andere
+  */
+  shared.v1.DomainOfInfluenceType domain_of_influence_type = 3;
+}
+
+message ValidationComparisonCountOfVotersData {
+  double threshold_percent = 1;
+  double deviation_percent = 2;
+  int32 deviation = 3;
+  google.protobuf.Timestamp previous_date = 4;
+  int32 previous_count = 5;
+  int32 current_count = 6;
+}
+
+message ValidationComparisonVotingChannelsData {
+  double threshold_percent = 1;
+  double deviation_percent = 2;
+  int32 deviation = 3;
+  shared.v1.VotingChannel voting_channel = 4;
+  google.protobuf.Timestamp previous_date = 5;
+  int32 previous_count = 6;
+  int32 current_count = 7;
+}
+
+message ValidationComparisonValidVotingCardsWithAccountedBallotsData {
+  double threshold_percent = 1;
+  double deviation_percent = 2;
+  PoliticalBusinessType political_business_type = 3;
+}

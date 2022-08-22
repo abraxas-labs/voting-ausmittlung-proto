@@ -1,0 +1,61 @@
+// (c) Copyright 2022 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.services.v1.requests;
+
+import "models/contest.proto";
+
+/*
+  description: Details zu einem Urnengang anfragen.
+*/
+message GetContestRequest {
+  /*
+    ech-name: contestIdentification
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Urnengangs.
+  */
+  string id = 1;
+}
+
+/*
+  description: Zugeordnete Auszählungskreise zu einem Urnengang anfragen.
+*/
+message GetAccessibleCountingCirclesRequest {
+  /*
+    ech-name: contestIdentification
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Urnengangs.
+  */
+  string contest_id = 1;
+}
+
+/*
+  description: Alle Urnengänge mit einem spezifischen Status anfragen.
+*/
+message ListContestSummariesRequest {
+  /*
+    validations: exact-enum
+    description: Filterung basierend auf Urnengangstatus.
+  */
+  repeated models.ContestState states = 1;
+}
+
+/*
+  description: Alle Geschäftsverbindungen für einen Urnengang abfragen.
+*/
+message ListPoliticalBusinessUnionsRequest {
+  /*
+    ech-name: contestIdentification
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Urnengangs.
+  */
+  string contest_id = 1;
+}

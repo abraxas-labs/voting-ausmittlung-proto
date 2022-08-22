@@ -1,0 +1,28 @@
+// (c) Copyright 2022 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.events.v1;
+
+import "data/event_info.proto";
+import "data/majority_election_end_result_event_data.proto";
+
+message MajorityElectionEndResultLotDecisionsUpdated {
+  data.EventInfo event_info = 1;
+  string majority_election_id = 2;
+  string majority_election_end_result_id = 3;
+  repeated data.MajorityElectionEndResultLotDecisionEventData lot_decisions = 4;
+}
+
+message MajorityElectionEndResultFinalized {
+  data.EventInfo event_info = 1;
+  string majority_election_end_result_id = 2;
+  string majority_election_id = 3;
+}
+
+message MajorityElectionEndResultFinalizationReverted {
+  data.EventInfo event_info = 1;
+  string majority_election_end_result_id = 2;
+  string majority_election_id = 3;
+}

@@ -1,0 +1,36 @@
+// (c) Copyright 2022 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.events.v1.data;
+
+import "google/protobuf/wrappers.proto";
+import "shared/ballot_number_generation.proto";
+
+message SecondaryMajorityElectionCandidateResultsEventData {
+  string secondary_majority_election_id = 1;
+  // vereinzelte
+  google.protobuf.Int32Value individual_vote_count = 2;
+  repeated MajorityElectionCandidateResultCountEventData candidate_results = 3;
+  google.protobuf.Int32Value empty_vote_count = 4;
+  google.protobuf.Int32Value invalid_vote_count = 5;
+}
+
+message MajorityElectionCandidateResultCountEventData {
+  string candidate_id = 1;
+  google.protobuf.Int32Value vote_count = 2;
+}
+
+message MajorityElectionBallotGroupResultEventData {
+  string ballot_group_id = 1;
+  int32 vote_count = 2;
+}
+
+message MajorityElectionResultEntryParamsEventData {
+  int32 ballot_bundle_size = 1;
+  int32 ballot_bundle_sample_size = 2;
+  bool automatic_ballot_bundle_number_generation = 3;
+  shared.v1.BallotNumberGeneration ballot_number_generation = 4;
+  bool automatic_empty_vote_counting = 5;
+}

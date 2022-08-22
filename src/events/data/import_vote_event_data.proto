@@ -1,0 +1,27 @@
+// (c) Copyright 2022 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.events.v1.data;
+
+message VoteBallotResultImportEventData {
+  string ballot_id = 1;
+  repeated BallotQuestionResultImportEventData question_results = 2;
+  repeated TieBreakQuestionResultImportEventData tie_break_question_results = 3;
+  int32 count_of_voters = 4;
+}
+
+message BallotQuestionResultImportEventData {
+  int32 question_number = 1;
+  int32 count_yes = 2;
+  int32 count_no = 3;
+  int32 count_unspecified = 4;
+}
+
+message TieBreakQuestionResultImportEventData {
+  int32 question_number = 1;
+  int32 count_q1 = 2;
+  int32 count_q2 = 3;
+  int32 count_unspecified = 4;
+}

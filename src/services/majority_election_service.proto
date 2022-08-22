@@ -1,0 +1,14 @@
+// (c) Copyright 2022 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.services.v1;
+
+import "models/majority_election.proto";
+import "requests/majority_election_requests.proto";
+
+service MajorityElectionService {
+  rpc ListCandidates(requests.ListMajorityElectionCandidatesRequest) returns (models.MajorityElectionCandidates);
+  rpc ListSecondaryElectionCandidates(requests.ListSecondaryMajorityElectionCandidatesRequest) returns (models.SecondaryMajorityElectionCandidates);
+}

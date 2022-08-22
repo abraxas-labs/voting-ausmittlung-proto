@@ -1,0 +1,201 @@
+// (c) Copyright 2022 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.services.v1.requests;
+
+import "google/protobuf/wrappers.proto";
+
+message GetProportionalElectionResultBundlesRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Wahlergebnisses.
+  */  
+  string election_result_id = 1;
+}
+
+message GetProportionalElectionResultBundleRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Bundes.
+  */
+  string bundle_id = 1;
+}
+
+message GetProportionalElectionResultBallotRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Bundes.
+  */
+  string bundle_id = 1;
+
+  /*
+    ech-name: electronicBallotIdentification
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: typeof(int32),min-value(1),max-value(Int32.MaxValue)
+    description: Eindeutige, technische Identifikation des Wahlzettels.
+  */
+  int32 ballot_number = 2;
+}
+
+message CreateProportionalElectionResultBundleRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Wahlergebnisses.
+  */
+  string election_result_id = 1;
+
+  /*
+    ech-name: listIdentification
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: is-guid
+    description: Eindeutige, technische Identifikation der Liste.
+  */
+  string list_id = 2;
+
+  /*
+    validations: typeof(int32),min-value(1),max-value(Int32.MaxValue)
+    description: Eindeutiger numerischer Wert für den Bund.
+  */
+  google.protobuf.Int32Value bundle_number = 3;
+}
+
+message DeleteProportionalElectionResultBundleRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Bundes.
+  */
+  string bundle_id = 1;
+}
+
+message RejectProportionalElectionBundleReviewRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Bundes.
+  */
+  string bundle_id = 1;
+}
+
+message SucceedProportionalElectionBundleReviewRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Bundes.
+  */
+  string bundle_id = 1;
+}
+
+message CreateProportionalElectionResultBallotRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Bundes.
+  */
+  string bundle_id = 1;
+
+  /*
+    validations: typeof(int32),min-value(0),max-value(Int32.Max),allow-undefined
+    description: Anzahl leere Zeilen
+  */
+  google.protobuf.Int32Value empty_vote_count = 2;
+
+  /*
+    validations: allow-undefined
+    description: Akutalisierte Proporzwahlkandidaten aus veränderter Liste.
+  */
+  repeated CreateUpdateProportionalElectionResultBallotCandidateRequest candidates = 3;
+}
+
+message UpdateProportionalElectionResultBallotRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Bundes.
+  */
+  string bundle_id = 1;
+
+  /*
+    ech-name: electronicBallotIdentification
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: typeof(int32),min-value(1),max-value(Int32.MaxValue)
+    description: Eindeutige, technische Identifikation des Wahlzettels.
+  */
+  int32 ballot_number = 2;
+
+  /*
+    validations: typeof(int32),min-value(0),max-value(Int32.Max),allow-undefined
+    description: Anzahl leere Zeilen
+  */
+  google.protobuf.Int32Value empty_vote_count = 3;
+
+  /*
+    validations: allow-undefined
+    description: Akutalisierte Proporzwahlkandidaten aus veränderter Liste.
+  */
+  repeated CreateUpdateProportionalElectionResultBallotCandidateRequest candidates = 4;
+}
+
+message CreateUpdateProportionalElectionResultBallotCandidateRequest {
+  /*
+    ech-name: candidateIdentification
+    ech-length: 50
+    ech-type: xs:token
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Kandidaten.
+  */
+  string candidate_id = 1;
+
+  /*
+    validations: typeof(int32),min-value(1),max-value(Int32.MaxValue)
+    description: Position auf Liste.
+  */
+  int32 position = 2;
+
+  /*
+    validations: type(bool)
+    description: 'true' wenn der Kandidat auf der ursprünglichen Liste steht, 'false' falls die Liste modifiziert wurde um den Kandidaten hinzuzufügen.
+  */
+  bool on_list = 3;
+}
+
+message DeleteProportionalElectionResultBallotRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Bundes.
+  */
+  string bundle_id = 1;
+
+  /*
+    ech-name: electronicBallotIdentification
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: typeof(int32),min-value(1),max-value(Int32.MaxValue)
+    description: Eindeutige, technische Identifikation des Wahlzettels.
+  */
+  int32 ballot_number = 2;
+}
+
+message ProportionalElectionResultBundleSubmissionFinishedRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Bundes.
+  */
+  string bundle_id = 1;
+}
+
+message ProportionalElectionResultBundleCorrectionFinishedRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Bundes.
+  */
+  string bundle_id = 1;
+}
+
+message GetProportionalElectionResultBundleChangesRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Wahlergebnisses.
+  */
+  string election_result_id = 1;
+}

@@ -1,0 +1,98 @@
+// (c) Copyright 2022 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.events.v1;
+
+import "data/count_of_voters_event_data.proto";
+import "data/event_info.proto";
+import "data/majority_election_result_event_data.proto";
+import "google/protobuf/wrappers.proto";
+import "shared/majority_election.proto";
+
+message MajorityElectionResultSubmissionStarted {
+  data.EventInfo event_info = 1;
+  string election_result_id = 2;
+  string election_id = 3;
+  string counting_circle_id = 4;
+}
+
+message MajorityElectionResultEntryDefined {
+  data.EventInfo event_info = 1;
+  string election_result_id = 2;
+  shared.v1.MajorityElectionResultEntry result_entry = 3;
+  data.MajorityElectionResultEntryParamsEventData result_entry_params = 4;
+}
+
+message MajorityElectionResultCountOfVotersEntered {
+  data.EventInfo event_info = 1;
+  string election_result_id = 2;
+  data.PoliticalBusinessCountOfVotersEventData count_of_voters = 3;
+}
+
+message MajorityElectionCandidateResultsEntered {
+  data.EventInfo event_info = 1;
+  string election_result_id = 2;
+  // vereinzelte
+  google.protobuf.Int32Value individual_vote_count = 3;
+  repeated data.MajorityElectionCandidateResultCountEventData candidate_results = 4;
+  repeated data.SecondaryMajorityElectionCandidateResultsEventData secondary_election_candidate_results = 5;
+  google.protobuf.Int32Value empty_vote_count = 6;
+  google.protobuf.Int32Value invalid_vote_count = 7;
+}
+
+message MajorityElectionBallotGroupResultsEntered {
+  data.EventInfo event_info = 1;
+  string election_result_id = 2;
+  repeated data.MajorityElectionBallotGroupResultEventData results = 3;
+}
+
+message MajorityElectionResultBundleNumberEntered {
+  data.EventInfo event_info = 1;
+  string election_result_id = 2;
+  int32 bundle_number = 3;
+}
+
+message MajorityElectionResultBundleNumberFreed {
+  data.EventInfo event_info = 1;
+  string election_result_id = 2;
+  int32 bundle_number = 3;
+}
+
+message MajorityElectionResultSubmissionFinished {
+  data.EventInfo event_info = 1;
+  string election_result_id = 2;
+}
+
+message MajorityElectionResultCorrectionFinished {
+  data.EventInfo event_info = 1;
+  string election_result_id = 2;
+  string comment = 3;
+}
+
+message MajorityElectionResultFlaggedForCorrection {
+  data.EventInfo event_info = 1;
+  string election_result_id = 2;
+  string comment = 3;
+}
+
+message MajorityElectionResultAuditedTentatively {
+  data.EventInfo event_info = 1;
+  string election_result_id = 2;
+}
+
+message MajorityElectionResultResettedToSubmissionFinished {
+  data.EventInfo event_info = 1;
+  string election_result_id = 2;
+}
+
+message MajorityElectionResultPlausibilised {
+  data.EventInfo event_info = 1;
+  string election_result_id = 2;
+}
+
+message MajorityElectionResultResettedToAuditedTentatively {
+  data.EventInfo event_info = 1;
+  string election_result_id = 2;
+}

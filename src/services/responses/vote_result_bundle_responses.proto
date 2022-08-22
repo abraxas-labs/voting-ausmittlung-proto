@@ -1,0 +1,49 @@
+// (c) Copyright 2022 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.services.v1.responses;
+
+import "models/vote_result.proto";
+import "models/vote_result_bundle.proto";
+
+message GetVoteResultBundleResponse {
+  /*
+    description: bundle is stored on ballot result
+  */
+  models.BallotResult ballot_result = 1;
+  models.VoteResult vote_result = 2;
+  models.VoteResultBundle bundle = 3;
+}
+
+message CreateVoteResultBundleResponse {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Bundes.
+  */
+  string bundle_id = 1;
+
+  /*
+    validations: typeof(int32),min-value(1),max-value(Int32.MaxValue)
+    description: Eindeutiger numerischer Wert für den Bund.
+  */
+  int32 bundle_number = 2;
+}
+
+message CreateVoteResultBallotResponse {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Bundes.
+  */
+  string bundle_id = 1;
+
+  /*
+    ech-name: electronicBallotIdentification
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: typeof(int32),min-value(1),max-value(Int32.MaxValue)
+    description: Eindeutige, technische Identifikation des Wahlzettels.
+  */
+  int32 ballot_number = 2;
+}

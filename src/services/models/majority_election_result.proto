@@ -1,0 +1,137 @@
+// (c) Copyright 2022 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.services.v1.models;
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+import "models/count_of_voters.proto";
+import "models/counting_circle.proto";
+import "models/majority_election.proto";
+import "models/majority_election_result_sub_total.proto";
+import "shared/ballot_number_generation.proto";
+import "shared/majority_election.proto";
+
+message MajorityElectionResult {
+  string id = 1;
+  string counting_circle_id = 2;
+  MajorityElection election = 3;
+  repeated SecondaryMajorityElectionResult secondary_majority_election_results = 4;
+  shared.v1.MajorityElectionResultEntry entry = 5;
+  MajorityElectionResultEntryParams entry_params = 6;
+  CountingCircleResultState state = 7;
+  google.protobuf.Timestamp submission_done_timestamp = 8;
+  int32 total_count_of_voters = 9;
+  PoliticalBusinessNullableCountOfVoters count_of_voters = 10;
+  bool all_bundles_reviewed_or_deleted = 11;
+  repeated MajorityElectionCandidateResult candidate_results = 12;
+  int32 conventional_count_of_ballot_group_votes = 13;
+  int32 conventional_count_of_detailed_entered_ballots = 14;
+  MajorityElectionResultSubTotal e_voting_sub_total = 15;
+  MajorityElectionResultNullableSubTotal conventional_sub_total = 16;
+
+  /*
+    validations: typeof(int32),min-value(0),max-value(Int32.Max)
+    description: Anzahl vereinzelter Nennungen eines Kandiaten (welcher sich nicht auf der Liste befindet).
+  */
+  int32 individual_vote_count = 17;
+
+  /*
+    validations: typeof(int32),min-value(0),max-value(Int32.Max)
+    description: Anzahl leere Zeilen
+  */
+  int32 empty_vote_count = 18;
+
+  /*
+    validations: typeof(int32),min-value(0),max-value(Int32.Max)
+    description: Anzahl ungültiger Abstimmungen.
+  */
+  int32 invalid_vote_count = 19;
+  int32 total_candidate_vote_count_excl_individual = 20;
+  int32 total_candidate_vote_count_incl_individual = 21;
+  CountingCircle counting_circle = 22;
+  bool has_unmapped_write_ins = 23;
+}
+
+message SecondaryMajorityElectionResult {
+  SecondaryMajorityElection secondary_majority_election = 1;
+  repeated MajorityElectionCandidateResult candidate_results = 2;
+  MajorityElectionResultSubTotal e_voting_sub_total = 3;
+  MajorityElectionResultNullableSubTotal conventional_sub_total = 4;
+  
+  /*
+    validations: typeof(int32),min-value(0),max-value(Int32.Max)
+    description: Anzahl vereinzelter Nennungen eines Kandiaten (welcher sich nicht auf der Liste befindet).
+  */
+  int32 individual_vote_count = 5;
+
+  /*
+    validations: typeof(int32),min-value(0),max-value(Int32.Max)
+    description: Anzahl leere Zeilen
+  */
+  int32 empty_vote_count = 6;
+
+  /*
+    validations: typeof(int32),min-value(0),max-value(Int32.Max)
+    description: Anzahl ungültiger Abstimmungen.
+  */
+  int32 invalid_vote_count = 7;
+  int32 total_candidate_vote_count_excl_individual = 8;
+  int32 total_candidate_vote_count_incl_individual = 9;
+}
+
+message MajorityElectionResultEntryParams {
+  /*
+    validations: typeof(int32),min-value(1),max-value(Int32.Max)
+    description: Bundgrösse für die Auszählung der Wahlzettel.
+  */
+  int32 ballot_bundle_size = 1;
+
+  /*
+    validations: typeof(int32),min-value(1),max-value(Int32.Max)
+    description: Stichprobengrösse für die Auszählung der Wahlzettel.
+  */
+  int32 ballot_bundle_sample_size = 2;
+
+  /*
+    validations: is-type(bool)
+    description: 'True' für die automatische Vergabe von Bundnummern, sonst 'False' für die manuelle Vergabe.
+  */
+  bool automatic_ballot_bundle_number_generation = 3;
+
+  /*
+    validations: exact-enum
+    description: Art der Vergabe von Wahlzettelnummern.
+  */
+  shared.v1.BallotNumberGeneration ballot_number_generation = 4;
+
+  /*
+    validations: is-type(bool)
+    description: 'True' für die automatische Erfassung leerer Zeilen, sonst 'False' für die manuelle Erfassung.
+  */
+  bool automatic_empty_vote_counting = 5;
+}
+
+message MajorityElectionBallotGroupResults {
+  MajorityElectionResult election_result = 1;
+  repeated MajorityElectionBallotGroupResult ballot_group_results = 2;
+}
+
+message MajorityElectionBallotGroupResult {
+  MajorityElectionBallotGroup ballot_group = 1;
+
+  /*
+    validations: typeof(int32),min-value(0),max-value(Int32.Max)
+    description: Anzahl gültiger Stimmen.
+  */
+  int32 vote_count = 2;
+}
+
+message MajorityElectionCandidateResult {
+  MajorityElectionCandidate candidate = 1;
+  int32 e_voting_vote_count = 2;
+  google.protobuf.Int32Value conventional_vote_count = 3;
+  int32 vote_count = 4;
+}

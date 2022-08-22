@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageId>Voting.Ausmittlung.Service.Proto</PackageId>
+    <Title>Voting.Ausmittlung.Service.Proto Protofiles</Title>
+    <Description>Abraxas Voting Project with service protofiles for Dok.Voting.Ausmittlung</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Protobuf Include="../../../../src/services/**/*.proto" ProtoRoot="../../../../src/services" AdditionalImportDirs="../../../../src" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../Voting.Ausmittlung.Shared.Proto/Voting.Ausmittlung.Shared.Proto.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,171 @@
+// (c) Copyright 2022 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.services.v1.models;
+
+import "google/protobuf/wrappers.proto";
+import "models/contest.proto";
+import "models/contest_counting_circle_details.proto";
+import "models/count_of_voters.proto";
+import "models/majority_election.proto";
+import "models/majority_election_result_sub_total.proto";
+
+message MajorityElectionEndResult {
+  Contest contest = 1;
+  MajorityElection majority_election = 2;
+  AggregatedContestCountingCircleDetails domain_of_influence_details = 3;
+  int32 total_count_of_voters = 4;
+  int32 count_of_done_counting_circles = 5;
+  int32 total_count_of_counting_circles = 6;
+  bool all_counting_circles_done = 7;
+  PoliticalBusinessCountOfVoters count_of_voters = 8;
+  repeated MajorityElectionCandidateEndResult candidate_end_results = 9;
+  repeated SecondaryMajorityElectionEndResult secondary_majority_election_end_results = 10;
+  MajorityElectionResultSubTotal e_voting_sub_total = 11;
+  MajorityElectionResultSubTotal conventional_sub_total = 12;
+
+  /*
+    validations: typeof(int32),min-value(0),max-value(Int32.Max)
+    description: Anzahl vereinzelter Nennungen eines Kandiaten (welcher sich nicht auf der Liste befindet).
+  */
+  int32 individual_vote_count = 13;
+
+  /*
+    validations: typeof(int32),min-value(0),max-value(Int32.Max)
+    description: Anzahl leere Zeilen
+  */
+  int32 empty_vote_count = 14;
+
+  /*
+    validations: typeof(int32),min-value(0),max-value(Int32.Max)
+    description: Anzahl ungültiger Abstimmungen.
+  */
+  int32 invalid_vote_count = 15;
+  int32 total_candidate_vote_count_excl_individual = 16;
+  int32 total_candidate_vote_count_incl_individual = 17;
+  bool finalized = 18;
+  MajorityElectionEndResultCalculation calculation = 19;
+}
+
+message MajorityElectionEndResultCalculation {
+  /*
+    description: only set if the absolute majority algoritm is used.
+  */
+  google.protobuf.Int32Value absolute_majority = 1;
+}
+
+message SecondaryMajorityElectionEndResult {
+  SecondaryMajorityElection secondary_majority_election = 1;
+  repeated MajorityElectionCandidateEndResult candidate_end_results = 2;
+  MajorityElectionResultSubTotal e_voting_sub_total = 3;
+  MajorityElectionResultSubTotal conventional_sub_total = 4;
+
+  /*
+    validations: typeof(int32),min-value(0),max-value(Int32.Max)
+    description: Anzahl vereinzelter Nennungen eines Kandiaten (welcher sich nicht auf der Liste befindet).
+  */
+  int32 individual_vote_count = 5;
+
+  /*
+    validations: typeof(int32),min-value(0),max-value(Int32.Max)
+    description: Anzahl leere Zeilen
+  */
+  int32 empty_vote_count = 6;
+
+  /*
+    validations: typeof(int32),min-value(0),max-value(Int32.Max)
+    description: Anzahl ungültiger Abstimmungen.
+  */
+  int32 invalid_vote_count = 7;
+  int32 total_candidate_vote_count_excl_individual = 8;
+  int32 total_candidate_vote_count_incl_individual = 9;
+}
+
+message MajorityElectionCandidateEndResult {
+  MajorityElectionCandidate candidate = 1;
+
+  /*
+    validations: typeof(int32),min-value(0),max-value(Int32.Max)
+    description: Anzahl gültiger Stimmen.
+  */
+  int32 vote_count = 2;
+  int32 e_voting_vote_count = 3;
+  int32 conventional_vote_count = 4;
+
+  /*
+    validations: min-value(1),max-value(Int32.Max)
+    description: Rang nach Losentscheid
+  */
+  int32 rank = 5;
+  /*
+    description: when a lot decision is made
+  */
+  bool lot_decision = 6;
+  /*
+    description: when there are multiple candidate end results with the same vote count
+  */
+  bool lot_decision_enabled = 7;
+  /*
+    description: when a lot decision must be done, ex: rank <= number of mandates
+  */
+  bool lot_decision_required = 8;
+  MajorityElectionCandidateEndResultState state = 9;
+}
+
+enum MajorityElectionCandidateEndResultState {
+  MAJORITY_ELECTION_CANDIDATE_END_RESULT_STATE_UNSPECIFIED = 0;
+  MAJORITY_ELECTION_CANDIDATE_END_RESULT_STATE_PENDING = 1;
+  MAJORITY_ELECTION_CANDIDATE_END_RESULT_STATE_ABSOLUTE_MAJORITY_AND_ELECTED = 2;
+  MAJORITY_ELECTION_CANDIDATE_END_RESULT_STATE_ABSOLUTE_MAJORITY_AND_NOT_ELECTED = 3;
+  MAJORITY_ELECTION_CANDIDATE_END_RESULT_STATE_NO_ABSOLUTE_MAJORITY_AND_NOT_ELECTED_BUT_RANK_OK = 4;
+  MAJORITY_ELECTION_CANDIDATE_END_RESULT_STATE_ELECTED = 5;
+  MAJORITY_ELECTION_CANDIDATE_END_RESULT_STATE_NOT_ELECTED = 6;
+  MAJORITY_ELECTION_CANDIDATE_END_RESULT_STATE_NOT_ELIGIBLE = 7;
+}
+
+message MajorityElectionEndResultLotDecision {
+  /*
+    ech-name: candidateIdentification
+    ech-length: 50
+    ech-type: xs:token
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Kandidaten.
+  */
+  string candidate_id = 1;
+
+  /*
+    validations: min-value(1),max-value(Int32.Max)
+    description: Rang nach Losentscheid
+  */
+  int32 rank = 2;
+}
+
+message MajorityElectionEndResultAvailableLotDecisions {
+  MajorityElection majority_election = 1;
+  repeated MajorityElectionEndResultAvailableLotDecision lot_decisions = 2;
+  repeated SecondaryMajorityElectionEndResultAvailableLotDecisions secondary_lot_decisions = 3;
+}
+
+message SecondaryMajorityElectionEndResultAvailableLotDecisions {
+  SecondaryMajorityElection secondary_majority_election = 1;
+  repeated MajorityElectionEndResultAvailableLotDecision lot_decisions = 2;
+}
+
+message MajorityElectionEndResultAvailableLotDecision {
+  MajorityElectionCandidate candidate = 1;
+  /*
+    description: rank when a lot decision is already made
+  */
+  google.protobuf.Int32Value selected_rank = 2;
+
+  /*
+    validations: typeof(int32),min-value(0),max-value(Int32.Max)
+    description: Anzahl gültiger Stimmen.
+  */
+  int32 vote_count = 3;
+  bool lot_decision_required = 4;
+  repeated int32 selectable_ranks = 5;
+  int32 original_rank = 6;
+}

@@ -1,0 +1,66 @@
+// (c) Copyright 2022 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.services.v1.requests;
+
+import "google/protobuf/wrappers.proto";
+import "shared/sex.proto";
+import "shared/voter_type.proto";
+
+  /*
+    description: Eingabe der Wählerdaten für ein Geschäft.
+  */
+message EnterPoliticalBusinessCountOfVotersRequest { 
+  /*
+    validations: typeof(int32),min-value(0),max-value(Int32.MaxValue)
+    description: Anz. erhaltener Stimm-/Wahlzettel via konventionell.
+  */
+  google.protobuf.Int32Value conventional_received_ballots = 1;
+
+  /*
+    validations: typeof(int32),min-value(0),max-value(Int32.MaxValue)
+    description: Anz. invalider Stimm-/Wahlzettel via konventionell.
+  */
+  google.protobuf.Int32Value conventional_invalid_ballots = 2;
+
+  /*
+    validations: typeof(int32),min-value(0),max-value(Int32.MaxValue)
+    description: Anz. leerer Stimm-/Wahlzettel via konventionell.
+  */
+  google.protobuf.Int32Value conventional_blank_ballots = 3;
+
+  /*
+    validations: typeof(int32),min-value(0),max-value(Int32.MaxValue)
+    description: Anz. in betracht fallender Stimm-/Wahlzettel via konventionell.
+  */
+  google.protobuf.Int32Value conventional_accounted_ballots = 4;
+}
+
+/*
+  description: Aktualisierung Details zu Stimmberechtigten Personen.
+*/
+message UpdateCountOfVotersInformationSubTotalRequest {
+  /*
+    ech-name: eCH-0044:sex
+    ech-type:: xs:enumeration
+    validations: exact-enum
+    description: Geschlecht der Wähler.
+  */
+  shared.v1.SexType sex = 1;
+
+  /*
+    ech-name: voterType
+    ech-type:: xs:nonNegativeInteger
+    validations: exact-enum
+    description: Typ der Wähler.
+  */
+  shared.v1.VoterType voter_type = 2;
+
+  /*
+    validations: typeof(int32),min-value(0),max-value(Int32.MaxValue)
+    description: Anzahl stimmberechtigter Wähler.
+  */
+  google.protobuf.Int32Value count_of_voters = 3;
+}

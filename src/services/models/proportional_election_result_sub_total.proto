@@ -1,0 +1,115 @@
+// (c) Copyright 2022 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.services.v1.models;
+
+message ProportionalElectionResultSubTotal {
+  /*
+    description: total count of unmodified lists with a party
+  */
+  int32 total_count_of_unmodified_lists = 1;
+  /*
+    description: total count of modified lists with a party
+  */
+  int32 total_count_of_modified_lists = 2;
+  /*
+    description: count of lists without a source list / party
+  */
+  int32 total_count_of_lists_without_party = 3;
+  /*
+    description: count of ballots (=total count of modified lists with and without party)
+  */
+  int32 total_count_of_ballots = 4;
+  /*
+    description: count of votes gained from blank rows on lists/ballots without a source list / party
+  */
+  int32 total_count_of_blank_rows_on_lists_without_party = 5;
+  /*
+    description: total count of lists with a party (modified + unmodified)
+  */
+  int32 total_count_of_lists_with_party = 6;
+  /*
+    description: total count of lists (with and without party)
+  */
+  int32 total_count_of_lists = 7;
+}
+
+message ProportionalElectionListResultSubTotal {
+  /*
+    description: The count of unmodified lists that were handed in for this list
+  */
+  int32 unmodified_lists_count = 1;
+  /*
+    description: The count of candidate votes gained from unmodified lists
+  */
+  int32 unmodified_list_votes_count = 2;
+  /*
+    description: The count of votes gained from blank rows from unmodified lists
+  */
+  int32 unmodified_list_blank_rows_count = 3;
+  /*
+    description: The count of modified lists that were handed in for this list
+  */
+  int32 modified_lists_count = 4;
+  /*
+    description: The count of candidate votes gained from modified lists
+  */
+  int32 modified_list_votes_count = 5;
+  /*
+    description: The count of votes gained from blank rows from modified lists
+  */
+  int32 modified_list_blank_rows_count = 6;
+  /*
+    description: The count of votes gained from "other" lists (panaschieren)
+  */
+  int32 list_votes_count_on_other_lists = 7;
+  /*
+    description: The count of votes gained from unmodified lists and from blank rows on unmodified lists
+  */
+  int32 unmodified_list_votes_count_incl_blank_rows = 8;
+  /*
+    description: The count of votes gained from modified lists and from blank rows on modified lists
+  */
+  int32 modified_list_votes_count_incl_blank_rows = 9;
+  /*
+    description: The count of candidate votes gained from unmodifed and modified lists
+  */
+  int32 list_votes_count = 10;
+  /*
+    description: The count of lists (modified + unmodified)
+  */
+  int32 list_count = 11;
+  /*
+    description: The count of votes gained from blank rows from unmodified and modified lists
+  */
+  int32 blank_rows_count = 12;
+  /*
+    description: The sum list votes count and blank rows count
+  */
+  int32 total_vote_count = 13;
+}
+
+message ProportionalElectionCandidateResultSubTotal {
+  /*
+    description: The count of votes gained from unmodified lists
+  */
+  int32 unmodified_list_votes_count = 1;
+  /*
+    description: The count of candidate votes gained from modified lists
+  */
+  int32 modified_list_votes_count = 2;
+  /*
+    description: The count of candidate votes gained from "other" lists (panaschieren)
+  */
+  int32 count_of_votes_on_other_lists = 3;
+  /*
+    description: The count of votes gained from accumulating this candidate (kumulieren)
+  */
+  int32 count_of_votes_from_accumulations = 4;
+  /*
+    description: Total count of votes (unmodified list votes + modified list votes)
+  */
+  int32 vote_count = 5;
+}

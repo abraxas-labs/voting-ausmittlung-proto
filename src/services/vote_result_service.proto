@@ -1,0 +1,39 @@
+// (c) Copyright 2022 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.services.v1;
+
+import "google/protobuf/empty.proto";
+import "models/id_value.proto";
+import "models/validation.proto";
+import "models/vote_end_result.proto";
+import "models/vote_result.proto";
+import "requests/vote_result_requests.proto";
+
+service VoteResultService {
+  rpc Get(requests.GetVoteResultRequest) returns (models.VoteResult);
+  rpc DefineEntry(requests.DefineVoteResultEntryRequest) returns (google.protobuf.Empty);
+  rpc EnterCountOfVoters(requests.EnterVoteResultCountOfVotersRequest) returns (google.protobuf.Empty);
+  rpc EnterResults(requests.EnterVoteResultsRequest) returns (google.protobuf.Empty);
+  rpc EnterCorrectionResults(requests.EnterVoteResultCorrectionRequest) returns (google.protobuf.Empty);
+  rpc PrepareSubmissionFinished(requests.VoteResultPrepareSubmissionFinishedRequest) returns (models.IdValue);
+  rpc SubmissionFinished(requests.VoteResultSubmissionFinishedRequest) returns (google.protobuf.Empty);
+  rpc PrepareCorrectionFinished(requests.VoteResultPrepareCorrectionFinishedRequest) returns (models.IdValue);
+  rpc CorrectionFinished(requests.VoteResultCorrectionFinishedRequest) returns (google.protobuf.Empty);
+  rpc FlagForCorrection(requests.VoteResultFlagForCorrectionRequest) returns (google.protobuf.Empty);
+  rpc AuditedTentatively(requests.VoteResultAuditedTentativelyRequest) returns (google.protobuf.Empty);
+  rpc ResetToSubmissionFinished(requests.VoteResultResetToSubmissionFinishedRequest) returns (google.protobuf.Empty);
+  rpc Plausibilise(requests.VoteResultsPlausibiliseRequest) returns (google.protobuf.Empty);
+  rpc ResetToAuditedTentatively(requests.VoteResultsResetToAuditedTentativelyRequest) returns (google.protobuf.Empty);
+  rpc GetEndResult(requests.GetVoteEndResultRequest) returns (models.VoteEndResult);
+  rpc GetBallotResult(requests.GetBallotResultRequest) returns (models.BallotResult);
+  rpc PrepareFinalizeEndResult(requests.PrepareFinalizeVoteEndResultRequest) returns (models.IdValue);
+  rpc FinalizeEndResult(requests.FinalizeVoteEndResultRequest) returns (google.protobuf.Empty);
+  rpc RevertEndResultFinalization(requests.RevertVoteEndResultFinalizationRequest) returns (google.protobuf.Empty);
+
+  rpc ValidateEnterCountOfVoters(requests.ValidateEnterVoteResultCountOfVotersRequest) returns (models.ValidationOverview);
+  rpc ValidateEnterResults(requests.ValidateEnterVoteResultsRequest) returns (models.ValidationOverview);
+  rpc ValidateEnterCorrectionResults(requests.ValidateEnterVoteResultCorrectionRequest) returns (models.ValidationOverview);
+}

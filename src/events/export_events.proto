@@ -1,0 +1,61 @@
+// (c) Copyright 2022 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.events.v1;
+
+import "data/event_info.proto";
+import "data/export_event_data.proto";
+import "shared/domain_of_influence.proto";
+import "shared/export.proto";
+
+// a manual user-triggered export is generated
+message ExportGenerated {
+  data.EventInfo event_info = 1;
+  string request_id = 2; // a random id which correlates all exports of the same user request.
+  string key = 3;
+  repeated string political_business_ids = 4;
+  string counting_circle_id = 5;
+  string contest_id = 6;
+  string ech_message_id = 7; // if it is an ech message, the id which is passed in the envelope of the ech message content
+  shared.v1.DomainOfInfluenceType domain_of_influence_type = 8;
+}
+
+// an export from e ResultExportConfiguration is triggered
+message ResultExportTriggered {
+  data.EventInfo event_info = 1;
+  string contest_id = 2;
+  string export_configuration_id = 3;
+  string job_id = 4;
+  shared.v1.ResultExportTriggerMode trigger_mode = 5;
+}
+
+// an export form a ResultExportConfiguration was generated
+message ResultExportGenerated {
+  data.EventInfo event_info = 1;
+  string contest_id = 2;
+  string export_configuration_id = 3;
+  string job_id = 4;
+  string file_name = 5;
+  string key = 6;
+  string ech_message_id = 7;
+  string connector_file_id = 8; // the file id of the connector (only set if written to the connector)
+  shared.v1.DomainOfInfluenceType domain_of_influence_type = 9;
+  string counting_circle_id = 10;
+  repeated string political_business_ids = 11;
+}
+
+// an export from a ResultExportConfiguration has completed
+message ResultExportCompleted {
+  data.EventInfo event_info = 1;
+  string contest_id = 2;
+  string export_configuration_id = 3;
+  string job_id = 4;
+  shared.v1.ResultExportTriggerMode trigger_mode = 5;
+}
+
+message ResultExportConfigurationUpdated {
+  data.EventInfo event_info = 1;
+  data.ResultExportConfigurationEventData export_configuration = 2;
+}

@@ -1,0 +1,274 @@
+// (c) Copyright 2022 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.services.v1.requests;
+
+import "google/protobuf/wrappers.proto";
+
+/*
+  description: Alle Bunde von Wahlergebnis anfragen.
+*/
+message GetMajorityElectionResultBundlesRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Wahlergebnisses.
+  */
+  string election_result_id = 1;
+}
+
+/*
+  description: Bund von Wahlergebnis anfragen.
+*/
+message GetMajorityElectionResultBundleRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Bundes.
+  */
+  string bundle_id = 1;
+}
+
+/*
+  description: Wahlzettel für Majorzwahlergebnis anfragen.
+*/
+message GetMajorityElectionResultBallotRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Bundes.
+  */
+  string bundle_id = 1;
+
+  /*
+    ech-name: electronicBallotIdentification
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: typeof(int32),min-value(1),max-value(Int32.MaxValue)
+    description: Eindeutige, technische Identifikation des Wahlzettels.
+  */
+  int32 ballot_number = 2;
+}
+
+/*
+  description: Bund für Majorzwahlergebnis erfasssen.
+*/
+message CreateMajorityElectionResultBundleRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Wahlergebnisses.
+  */  
+  string election_result_id = 1;
+
+  /*
+    validations: typeof(int32),min-value(1),max-value(Int32.MaxValue)
+    description: Eindeutiger numerischer Wert für den Bund.
+  */
+  google.protobuf.Int32Value bundle_number = 2;
+}
+
+/*
+  description: Bund für Majorzwahlergebnis löschen.
+*/
+message DeleteMajorityElectionResultBundleRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Bundes.
+  */
+  string bundle_id = 1;
+}
+
+/*
+  description: Bund für Majorzwahlergebnis nach Überprüfung ablehnen.
+*/
+message RejectMajorityElectionBundleReviewRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Bundes.
+  */
+  string bundle_id = 1;
+}
+
+/*
+  description: Bund für Majorzwahlergebnis nach Überprüfung akzeptieren.
+*/
+message SucceedMajorityElectionBundleReviewRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Bundes.
+  */
+  string bundle_id = 1;
+}
+
+/*
+  description: Wahlzettel für Majorzwahlergebnis erfassen.
+*/
+message CreateMajorityElectionResultBallotRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Bundes.
+  */
+  string bundle_id = 1;
+
+  /*
+    validations: typeof(int32),min-value(0),max-value(Int32.Max),allow-undefined
+    description: Anzahl leere Zeilen
+  */
+  google.protobuf.Int32Value empty_vote_count = 2;
+
+  /*
+    validations: typeof(int32),min-value(0),max-value(Int32.Max)
+    description: Anzahl vereinzelter Nennungen eines Kandiaten (welcher sich nicht auf der Liste befindet).
+  */
+  int32 individual_vote_count = 3;
+
+  /*
+    validations: is-guid
+    description: Selektierte Kandidaten.
+  */
+  repeated string selected_candidate_ids = 4;
+
+  repeated CreateUpdateSecondaryMajorityElectionResultBallotRequest secondary_majority_election_results = 5;
+
+  /*
+    validations: typeof(int32),min-value(0),max-value(Int32.Max)
+    description: Anzahl ungültiger Abstimmungen.
+  */
+  int32 invalid_vote_count = 6;
+}
+
+/*
+  description: Wahlzettel für Majorzwahlergebnis aktualisieren.
+*/
+message UpdateMajorityElectionResultBallotRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Bundes.
+  */
+  string bundle_id = 1;
+
+  /*
+    ech-name: electronicBallotIdentification
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: typeof(int32),min-value(1),max-value(Int32.MaxValue)
+    description: Eindeutige, technische Identifikation des Wahlzettels.
+  */
+  int32 ballot_number = 2;
+
+  /*
+    validations: typeof(int32),min-value(0),max-value(Int32.Max),allow-undefined
+    description: Anzahl leere Zeilen
+  */
+  google.protobuf.Int32Value empty_vote_count = 3;
+
+  /*
+    validations: typeof(int32),min-value(0),max-value(Int32.Max)
+    description: Anzahl vereinzelter Nennungen eines Kandiaten (welcher sich nicht auf der Liste befindet).
+  */
+  int32 individual_vote_count = 4;
+
+  /*
+    validations: is-guid
+    description: Selektierte Kandidaten.
+  */
+  repeated string selected_candidate_ids = 5;
+
+  repeated CreateUpdateSecondaryMajorityElectionResultBallotRequest secondary_majority_election_results = 6;
+
+  /*
+    validations: typeof(int32),min-value(0),max-value(Int32.Max)
+    description: Anzahl ungültiger Abstimmungen.
+  */
+  int32 invalid_vote_count = 7;
+}
+
+/*
+  description: Wahlzettel für Majorznebenwahlergebnis erstellen oder aktualisieren.
+*/
+message CreateUpdateSecondaryMajorityElectionResultBallotRequest {
+  /*
+    ech-name: electionIdentification
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: is-guid
+    description: Eindeutige, technische Identifikation der Majorznebenwahl.
+  */
+  string secondary_majority_election_id = 1;
+
+  /*
+    validations: typeof(int32),min-value(0),max-value(Int32.Max),allow-undefined
+    description: Anzahl leere Zeilen
+  */
+  google.protobuf.Int32Value empty_vote_count = 2;
+
+  /*
+    validations: typeof(int32),min-value(0),max-value(Int32.Max)
+    description: Anzahl vereinzelter Nennungen eines Kandiaten (welcher sich nicht auf der Liste befindet).
+  */
+  int32 individual_vote_count = 3;
+
+  /*
+    validations: is-guid
+    description: Selektierte Kandidaten.
+  */
+  repeated string selected_candidate_ids = 4;
+
+  /*
+    validations: typeof(int32),min-value(0),max-value(Int32.Max)
+    description: Anzahl ungültiger Abstimmungen.
+  */
+  int32 invalid_vote_count = 5;
+}
+
+/*
+  description: Wahlzettel für Majorzwahlergebnis löschen.
+*/
+message DeleteMajorityElectionResultBallotRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Bundes.
+  */
+  string bundle_id = 1;
+
+  /*
+    ech-name: electronicBallotIdentification
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: typeof(int32),min-value(1),max-value(Int32.MaxValue)
+    description: Eindeutige, technische Identifikation des Wahlzettels.
+  */
+  int32 ballot_number = 2;
+}
+
+/*
+  description: Vollständiger oder als Restbund erfasster Bund für Majorzwahlergebnis einreichen.
+*/
+message MajorityElectionResultBundleSubmissionFinishedRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Bundes.
+  */
+  string bundle_id = 1;
+}
+
+/*
+  description: Korrektur von Bund für Majorzwahlergebnis einreichen.
+*/
+message MajorityElectionResultBundleCorrectionFinishedRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Bundes.
+  */
+  string bundle_id = 1;
+}
+
+/*
+  description: Änderungen für Bund von Majorzwahlergebnis anfragen.
+*/
+message GetMajorityElectionResultBundleChangesRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Wahlergebnisses.
+  */
+  string election_result_id = 1;
+}

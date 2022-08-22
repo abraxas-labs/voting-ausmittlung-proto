@@ -1,0 +1,45 @@
+// (c) Copyright 2022 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.services.v1.models;
+
+import "models/ballot_bundle.proto";
+import "models/user.proto";
+import "models/vote.proto";
+import "models/vote_result.proto";
+import "shared/vote_result.proto";
+
+message VoteResultBundles {
+  BallotResult ballot_result = 1;
+  VoteResult vote_result = 2;
+  repeated VoteResultBundle bundles = 3;
+}
+
+message VoteResultBundle {
+  string id = 1;
+  int32 number = 2;
+  BallotBundleState state = 3;
+  int32 count_of_ballots = 4;
+  User created_by = 5;
+  User reviewed_by = 6;
+  repeated int32 ballot_numbers_to_review = 7;
+}
+
+message VoteResultBallot {
+  int32 number = 1;
+  repeated VoteResultBallotQuestionAnswer question_answers = 2;
+  repeated VoteResultBallotTieBreakQuestionAnswer tie_break_question_answers = 3;
+}
+
+message VoteResultBallotQuestionAnswer {
+  BallotQuestion question = 1;
+  shared.v1.BallotQuestionAnswer answer = 2;
+}
+
+message VoteResultBallotTieBreakQuestionAnswer {
+  TieBreakQuestion question = 1;
+  shared.v1.TieBreakQuestionAnswer answer = 2;
+}
+

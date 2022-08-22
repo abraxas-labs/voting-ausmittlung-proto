@@ -1,0 +1,84 @@
+// (c) Copyright 2022 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.events.v1;
+
+import "data/count_of_voters_event_data.proto";
+import "data/event_info.proto";
+import "data/proportional_election_result_event_data.proto";
+
+message ProportionalElectionResultSubmissionStarted {
+  data.EventInfo event_info = 1;
+  string election_result_id = 2;
+  string election_id = 3;
+  string counting_circle_id = 4;
+}
+
+message ProportionalElectionResultEntryDefined {
+  data.EventInfo event_info = 1;
+  string election_result_id = 2;
+  data.ProportionalElectionResultEntryParamsEventData result_entry_params = 3;
+}
+
+message ProportionalElectionResultCountOfVotersEntered {
+  data.EventInfo event_info = 1;
+  string election_result_id = 2;
+  data.PoliticalBusinessCountOfVotersEventData count_of_voters = 3;
+}
+
+message ProportionalElectionUnmodifiedListResultsEntered {
+  data.EventInfo event_info = 1;
+  string election_result_id = 2;
+  repeated data.ProportionalElectionUnmodifiedListResultEventData results = 3;
+}
+
+message ProportionalElectionResultBundleNumberEntered {
+  data.EventInfo event_info = 1;
+  string election_result_id = 2;
+  int32 bundle_number = 3;
+}
+
+message ProportionalElectionResultBundleNumberFreed {
+  data.EventInfo event_info = 1;
+  string election_result_id = 2;
+  int32 bundle_number = 3;
+}
+
+message ProportionalElectionResultSubmissionFinished {
+  data.EventInfo event_info = 1;
+  string election_result_id = 2;
+}
+
+message ProportionalElectionResultCorrectionFinished {
+  data.EventInfo event_info = 1;
+  string election_result_id = 2;
+  string comment = 3;
+}
+
+message ProportionalElectionResultFlaggedForCorrection {
+  data.EventInfo event_info = 1;
+  string election_result_id = 2;
+  string comment = 3;
+}
+
+message ProportionalElectionResultAuditedTentatively {
+  data.EventInfo event_info = 1;
+  string election_result_id = 2;
+}
+
+message ProportionalElectionResultResettedToSubmissionFinished {
+  data.EventInfo event_info = 1;
+  string election_result_id = 2;
+}
+
+message ProportionalElectionResultPlausibilised {
+  data.EventInfo event_info = 1;
+  string election_result_id = 2;
+}
+
+message ProportionalElectionResultResettedToAuditedTentatively {
+  data.EventInfo event_info = 1;
+  string election_result_id = 2;
+}

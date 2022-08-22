@@ -1,0 +1,24 @@
+// (c) Copyright 2022 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.events.v1;
+
+import "data/event_info.proto";
+import "data/import_proportional_election_event_data.proto";
+
+message ProportionalElectionResultImported {
+  data.EventInfo event_info = 1;
+  string import_id = 2;
+  string contest_id = 3;
+  string proportional_election_id = 4;
+  string counting_circle_id = 5;
+  repeated data.ProportionalElectionCandidateResultImportEventData candidate_results = 6;
+  repeated data.ProportionalElectionListResultImportEventData list_results = 7;
+  int32 count_of_unmodified_lists = 8;
+  int32 count_of_modified_lists = 9;
+  int32 count_of_lists_without_party = 10;
+  int32 count_of_blank_rows_on_lists_without_party = 11;
+  int32 count_of_voters = 12;
+}

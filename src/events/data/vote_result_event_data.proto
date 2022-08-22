@@ -1,0 +1,39 @@
+// (c) Copyright 2022 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.events.v1.data;
+
+import "data/count_of_voters_event_data.proto";
+import "google/protobuf/wrappers.proto";
+
+message VoteBallotResultsCountOfVotersEventData {
+  string ballot_id = 1;
+  PoliticalBusinessCountOfVotersEventData count_of_voters = 2;
+}
+
+message VoteBallotResultsEventData {
+  string ballot_id = 1;
+  repeated VoteBallotQuestionResultsEventData question_results = 2;
+  repeated VoteTieBreakQuestionResultsEventData tie_break_question_results = 3;
+}
+
+message VoteBallotQuestionResultsEventData {
+  int32 question_number = 1;
+  google.protobuf.Int32Value received_count_yes = 2;
+  google.protobuf.Int32Value received_count_no = 3;
+  google.protobuf.Int32Value received_count_unspecified = 4;
+}
+
+message VoteTieBreakQuestionResultsEventData {
+  int32 question_number = 1;
+  google.protobuf.Int32Value received_count_q1 = 2;
+  google.protobuf.Int32Value received_count_q2 = 3;
+  google.protobuf.Int32Value received_count_unspecified = 4;
+}
+
+message VoteResultEntryParamsEventData {
+  int32 ballot_bundle_sample_size_percent = 1;
+  bool automatic_ballot_bundle_number_generation = 2;
+}

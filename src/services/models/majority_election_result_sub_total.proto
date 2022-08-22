@@ -1,0 +1,48 @@
+// (c) Copyright 2022 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.services.v1.models;
+
+import "google/protobuf/wrappers.proto";
+
+message MajorityElectionResultSubTotal {
+  int32 individual_vote_count = 1;
+
+  /*
+    validations: typeof(int32),min-value(0),max-value(Int32.Max)
+    description: Anzahl leere Zeilen
+  */
+  int32 empty_vote_count = 2;
+
+  /*
+    validations: typeof(int32),min-value(0),max-value(Int32.Max)
+    description: Anzahl ungültiger Abstimmungen.
+  */
+  int32 invalid_vote_count = 3;
+  int32 total_candidate_vote_count_excl_individual = 4;
+  int32 total_candidate_vote_count_incl_individual = 5;
+}
+
+message MajorityElectionResultNullableSubTotal {
+  /*
+    validations: typeof(int32),min-value(0),max-value(Int32.Max),allow-undefined
+    description: Anzahl vereinzelter Nennungen eines Kandiaten (welcher sich nicht auf der Liste befindet).
+  */
+  google.protobuf.Int32Value individual_vote_count = 1;
+
+  /*
+    validations: typeof(int32),min-value(0),max-value(Int32.Max),allow-undefined
+    description: Anzahl leere Zeilen
+  */
+  google.protobuf.Int32Value empty_vote_count = 2;
+
+  /*
+    validations: typeof(int32),min-value(0),max-value(Int32.Max),allow-undefined
+    description: Anzahl ungültiger Abstimmungen.
+  */
+  google.protobuf.Int32Value invalid_vote_count = 3;
+  int32 total_candidate_vote_count_excl_individual = 4;
+  int32 total_candidate_vote_count_incl_individual = 5;
+}

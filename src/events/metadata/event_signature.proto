@@ -1,0 +1,14 @@
+// (c) Copyright 2022 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.events.v1.metadata;
+
+message EventSignatureMetadata {
+  int32 signature_version = 1;
+  string contest_id = 2;
+  string host_id = 3;
+  string key_id = 4;
+  bytes signature = 5;
+}

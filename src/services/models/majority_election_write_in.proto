@@ -1,0 +1,45 @@
+// (c) Copyright 2022 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.services.v1.models;
+
+import "models/political_business.proto";
+import "shared/majority_election_write_in.proto";
+
+message MajorityElectionContestWriteInMappings {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Imports.
+  */
+  string import_id = 1;
+  repeated MajorityElectionWriteInMappings election_write_in_mappings = 2;
+}
+
+message MajorityElectionWriteInMappings {
+  SimplePoliticalBusiness election = 1;
+  bool invalid_votes = 2;
+  repeated MajorityElectionWriteInMapping write_in_mappings = 3;
+}
+
+message MajorityElectionWriteInMapping {
+  string id = 1;
+  string write_in_candidate_name = 2;
+
+  /*
+    validations: typeof(int32),min-value(0),max-value(Int32.Max)
+    description: Anzahl gültiger Stimmen.
+  */
+  int32 vote_count = 3;
+  shared.v1.MajorityElectionWriteInMappingTarget target = 4;
+
+  /*
+    ech-name: candidateIdentification
+    ech-length: 50
+    ech-type: xs:token
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Kandidaten.
+  */
+  string candidate_id = 5;
+}

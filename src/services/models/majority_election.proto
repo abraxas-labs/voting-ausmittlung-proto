@@ -1,0 +1,284 @@
+// (c) Copyright 2022 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.services.v1.models;
+
+import "models/contest.proto";
+import "models/domain_of_influence.proto";
+import "models/swiss_abroad_voting_right.proto";
+import "shared/ballot_number_generation.proto";
+import "shared/majority_election.proto";
+
+message MajorityElection {
+  /*
+    ech-name: electionIdentification
+    ech-length: 50
+    ech-type: string
+    description: Eindeutige Identifikation der Wahl durch den Lieferanten der Daten.
+  */
+  string id = 1;
+
+  string political_business_number = 2;
+
+  /*
+    ech-name: electionDescription
+    ech-length: 255
+    ech-type: string
+    description:
+  */
+  string official_description = 3;
+
+  /*
+    ech-name: electionDescriptionShort
+    ech-length: 100
+    ech-type: string
+    description:
+  */
+  string short_description = 4;
+
+  string internal_description = 5;
+
+  /*
+    ech-name: numberOfMandates
+    ech-length:
+    ech-type: nonNegativInteger
+    description: Anzahl der zu vergebenden Mandate.
+  */
+  int32 number_of_mandates = 6;
+
+  MajorityElectionMandateAlgorithm mandate_algorithm = 7;
+  bool individual_empty_ballots_allowed = 8;
+  bool candidate_check_digit = 9;
+
+  /*
+    validations: typeof(int32),min-value(1),max-value(Int32.Max)
+    description: Bundgrösse für die Auszählung der Wahlzettel.
+  */
+  int32 ballot_bundle_size = 10;
+
+  /*
+    validations: typeof(int32),min-value(1),max-value(Int32.Max)
+    description: Stichprobengrösse für die Auszählung der Wahlzettel.
+  */
+  int32 ballot_bundle_sample_size = 11;
+
+  /*
+    validations: is-type(bool)
+    description: 'True' für die automatische Vergabe von Bundnummern, sonst 'False' für die manuelle Vergabe.
+  */
+  bool automatic_ballot_bundle_number_generation = 12;
+
+  /*
+    validations: exact-enum
+    description: Art der Vergabe von Wahlzettelnummern.
+  */
+  shared.v1.BallotNumberGeneration ballot_number_generation = 13;
+
+  /*
+    validations: is-type(bool)
+    description: 'True' für die automatische Erfassung leerer Zeilen, sonst 'False' für die manuelle Erfassung.
+  */
+  bool automatic_empty_vote_counting = 14;
+  bool enforce_empty_vote_counting_for_counting_circles = 15;
+
+  /*
+    validations: exact-enum
+    description: Erfassungsmethode der Ergebnisse.
+  */
+  shared.v1.MajorityElectionResultEntry result_entry = 16;
+  bool enforce_result_entry_for_counting_circles = 17;
+  SwissAbroadVotingRight swiss_abroad_voting_right = 18;
+
+  /*
+    ech-name: domainOfInfluenceIdentification
+    ech-length:
+    ech-type:
+    description:
+  */
+  string domain_of_influence_id = 19;
+
+  /*
+    ech-name: contestIdentification
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Urnengangs.
+  */
+  string contest_id = 20;
+
+  bool active = 21;
+  string title = 22;
+  int32 count_of_secondary_elections = 23;
+  DomainOfInfluence domain_of_influence = 24;
+  bool invalid_votes = 25;
+
+  /*
+    ech-name: contestIdentification
+    ech-length: 50
+    ech-type: string
+    description: Eindeutige, technische Identifikation des Urnengangs.
+  */
+  Contest contest = 26;
+}
+
+message MajorityElectionCandidates {
+  repeated MajorityElectionCandidate candidates = 1;
+  repeated SecondaryMajorityElectionCandidates secondary_election_candidates = 2;
+}
+
+message SecondaryMajorityElectionCandidates {
+  /*
+    ech-name: electionIdentification
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: is-guid
+    description: Eindeutige, technische Identifikation der Majorzwahl.
+  */
+  string secondary_majority_election_id = 1;
+  repeated MajorityElectionCandidate candidates = 2;
+}
+
+message MajorityElectionCandidate {
+  /*
+    ech-name: candidateIdentification
+    ech-length: 50
+    ech-type: xs:token
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Kandidaten.
+  */
+  string id = 1;
+
+  string number = 2;
+  string political_first_name = 3;
+  string political_last_name = 4;
+
+  /*
+    ech-name: firstName
+    ech-length:
+    ech-type: string
+    description: Vornamen des Kandidaten in der Reihenfolge wie sie in amtlichen Dokumenten geführt werden.
+  */
+  string first_name = 5;
+
+  /*
+    ech-name: familyName
+    ech-length:
+    ech-type: string
+    description: Familienname des Kandidaten. Es handelt sich dabei bei ledigen Personen um den amtlichen Namen und bei verheirateten, verwitweten, geschiedenen, oder in eingetragener Partnerschaft lebenden Personen um den sogenannten Allianznamen.
+  */
+  string last_name = 6;
+
+  /*
+    ech-name: partyNameShort
+    ech-length: 12
+    ech-type: string
+    description: Parteiname kurz (zwingend).
+  */
+  string party = 7;
+  int32 position = 8;
+  string description = 9;
+}
+
+message SecondaryMajorityElection {
+  /*
+    ech-name: candidateIdentification
+    ech-length: 50
+    ech-type: xs:token
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Kandidaten.
+  */
+  string id = 1;
+
+  string political_business_number = 2;
+
+  /*
+    ech-name: electionDescription
+    ech-length: 255
+    ech-type: string
+    description:
+  */
+  string official_description = 3;
+
+  /*
+    ech-name: electionDescriptionShort
+    ech-length: 100
+    ech-type: string
+    description:
+  */
+  string short_description = 4;
+
+
+  string internal_description = 5;
+
+  /*
+    ech-name: numberOfMandates
+    ech-length:
+    ech-type: nonNegativInteger
+    description: Anzahl der zu vergebenden Mandate.
+  */
+  int32 number_of_mandates = 6;
+
+  bool active = 7;
+  string title = 8;
+}
+
+message MajorityElectionBallotGroup {
+  /*
+    ech-name: electronicBallotIdentifikation
+    ech-length: 50
+    ech-type: string
+    description: Eindeutige, technische Identifikation der Vorlage. (zwingend).
+  */
+  string id = 1;
+
+  /*
+    ech-name: electionIdentification
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: is-guid
+    description: Eindeutige, technische Identifikation der Majorzwahl.
+  */
+  string majority_election_id = 2;
+
+  /*
+    ech-name: electronicBallotDescriptionShort
+    ech-length: 100
+    ech-type: string
+    description: Eindeutige Identifikation der Wahl durch den Lieferanten der Daten.
+  */
+  string short_description = 3;
+
+  /*
+    ech-name: electronicBallotDescriptionLong
+    ech-length: 255
+    ech-type: string
+    description: Eindeutige Identifikation der Wahl durch den Lieferanten der Daten.
+  */
+  string description = 4;
+
+  /*
+    ech-name: electronicBallotPosition
+    ech-length: 
+    ech-type: integer
+    description: Position an welcher die Vorlage geführt werden soll.
+  */
+  int32 position = 5;
+  repeated MajorityElectionBallotGroupEntry entries = 6;
+}
+
+message MajorityElectionBallotGroupEntry {
+  repeated MajorityElectionCandidate candidates = 1;
+  oneof political_business {
+    MajorityElection election = 2;
+    SecondaryMajorityElection secondary_election = 3;
+  }
+  bool has_individual_candidate = 4;
+}
+
+enum MajorityElectionMandateAlgorithm {
+  MAJORITY_ELECTION_MANDATE_ALGORITHM_UNSPECIFIED = 0;
+  MAJORITY_ELECTION_MANDATE_ALGORITHM_ABSOLUTE_MAJORITY = 1;
+  MAJORITY_ELECTION_MANDATE_ALGORITHM_RELATIVE_MAJORITY = 2;
+}

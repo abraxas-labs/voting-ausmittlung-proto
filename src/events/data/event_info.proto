@@ -1,0 +1,26 @@
+// (c) Copyright 2022 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.events.v1.data;
+
+import "google/protobuf/timestamp.proto";
+
+message EventInfo {
+  EventInfoUser user = 1;
+  EventInfoTenant tenant = 2;
+  google.protobuf.Timestamp timestamp = 3;
+}
+
+message EventInfoUser {
+  string id = 1;
+  string username = 2;
+  string first_name = 3;
+  string last_name = 4;
+}
+
+message EventInfoTenant {
+  string id = 1;
+  string name = 2;
+}

@@ -1,0 +1,12 @@
+// (c) Copyright 2022 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.shared.v1;
+
+enum BallotNumberGeneration {
+  BALLOT_NUMBER_GENERATION_UNSPECIFIED = 0;
+  BALLOT_NUMBER_GENERATION_RESTART_FOR_EACH_BUNDLE = 1;
+  BALLOT_NUMBER_GENERATION_CONTINUOUS_FOR_ALL_BUNDLES = 2;
+}

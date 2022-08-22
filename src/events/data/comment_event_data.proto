@@ -1,0 +1,16 @@
+// (c) Copyright 2022 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.events.v1.data;
+
+import "data/user_event_data.proto";
+import "google/protobuf/timestamp.proto";
+
+message CommentEventData {
+  string content = 1;
+  google.protobuf.Timestamp created_at = 2;
+  bool created_by_monitoring_authority = 3;
+  UserEventData created_by = 4;
+}

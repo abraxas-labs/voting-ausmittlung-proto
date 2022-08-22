@@ -1,0 +1,57 @@
+// (c) Copyright 2022 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.services.v1.models;
+
+import "models/contact_person.proto";
+
+message CountingCircles {
+  repeated CountingCircle counting_circles = 1;
+}
+
+message CountingCircle {
+  /*
+    ech-name: countingCircleId
+    ech-length: undefined
+    ech-type:: identifierType
+    description: Eindeutige Identifikation des Auszählungskreises. Es handelt sich dabei um die lokale Identifikation des Quellregisters.
+  */
+  string id = 1;
+
+  /*
+    ech-name: countingCircleName
+    ech-length: 100
+    ech-type: string
+    description: Name des Auszählungskreises.
+  */
+  string name = 2;
+
+  string bfs = 3;
+  Authority responsible_authority = 4;
+  ContactPerson contact_person_during_event = 5;
+  bool contact_person_same_during_event_as_after = 6;
+  ContactPerson contact_person_after_event = 7;
+}
+
+message Authority {
+  string secure_connect_id = 1;
+  string name = 2;
+  string street = 3;
+  string zip = 4;
+  string city = 5;
+  string phone = 6;
+  string email = 7;
+}
+
+enum CountingCircleResultState {
+  COUNTING_CIRCLE_RESULT_STATE_UNSPECIFIED = 0;
+  COUNTING_CIRCLE_RESULT_STATE_INITIAL = 1; // Initial, Erfassung noch nicht gestartet
+  COUNTING_CIRCLE_RESULT_STATE_SUBMISSION_ONGOING = 2; // in Erfassung
+  COUNTING_CIRCLE_RESULT_STATE_READY_FOR_CORRECTION = 3; // zur Korrektur
+  COUNTING_CIRCLE_RESULT_STATE_SUBMISSION_DONE = 4; // Erfassung beendet
+  COUNTING_CIRCLE_RESULT_STATE_CORRECTION_DONE = 5; // Korrektur beendet
+  COUNTING_CIRCLE_RESULT_STATE_AUDITED_TENTATIVELY = 6; // Vorläufig geprüft
+  COUNTING_CIRCLE_RESULT_STATE_PLAUSIBILISED = 7; // Plausibilisiert
+}

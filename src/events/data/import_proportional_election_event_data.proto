@@ -1,0 +1,37 @@
+// (c) Copyright 2022 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.events.v1.data;
+
+message ProportionalElectionListResultImportEventData {
+  string list_id = 1;
+  int32 unmodified_lists_count = 2;
+  int32 unmodified_list_votes_count = 3;
+  int32 unmodified_list_blank_rows_count = 4;
+  int32 modified_lists_count = 5;
+  int32 modified_list_votes_count = 6;
+  int32 list_votes_count_on_other_lists = 7;
+  int32 modified_list_blank_rows_count = 8;
+}
+
+message ProportionalElectionCandidateResultImportEventData {
+  string candidate_id = 1;
+  // unveränderte
+  int32 unmodified_list_votes_count = 2;
+  // veränderte
+  int32 modified_list_votes_count = 3;
+  // panaschiert
+  int32 count_of_votes_on_other_lists = 4;
+  // kumuliert
+  int32 count_of_votes_from_accumulations = 5;
+  repeated ProportionalElectionCandidateVoteSourceResultImportEventData vote_sources = 7;
+}
+
+message ProportionalElectionCandidateVoteSourceResultImportEventData {
+  // the list of the vote source
+  // if this is empty string the source is a ballot without a party
+  string list_id = 1;
+  int32 vote_count = 2;
+}

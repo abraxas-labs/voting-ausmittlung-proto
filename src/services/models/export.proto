@@ -1,0 +1,84 @@
+// (c) Copyright 2022 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.services.v1.models;
+
+import "google/protobuf/wrappers.proto";
+import "shared/domain_of_influence.proto";
+
+message ResultExportTemplates {
+  repeated ResultExportTemplate templates = 1;
+}
+
+message ResultExportTemplate {
+  string key = 1;
+  string description = 2;
+  repeated string political_business_ids = 3;
+  ExportEntityType entity_type = 4;
+  ExportFileFormat format = 5;
+
+  /*
+    ech-name: countingCircleId
+    ech-length:
+    ech-type: string
+    description: Eindeutige Identifikation des Auszählungskreises. Es handelt sich dabei um die lokale Identifikation des Quellregisters.
+  */
+  string counting_circle_id = 6;
+  string political_business_numbers = 7;
+
+  /*
+    ech-name: domainOfInfluenceType
+    ech-type:: xs:token
+    validations: exact-enum
+    description: Beschreibt die Stufe des Einflussbereichs. Können einzelne Einflussbereiche keinem der explizit definierten Typen zugeordnet werden, so ist für diese „AN“ (andere) zu verwenden.
+    values: CH = Bund, CT = Kanton, BZ = Bezirk / Amt / Verwaltungskreis, MU = Gemeinde, SC = Schulgemeinde, KI = Kirchgemeinde, OG = Ortsbürgergemeinden, KO = Korporationen, SK = Stadtkreis, AN = andere
+  */
+  shared.v1.DomainOfInfluenceType domain_of_influence_type = 8;
+  string political_business_union_id = 9;
+}
+
+message ResultExportConfigurations {
+  repeated ResultExportConfiguration configurations = 1;
+}
+
+message ResultExportConfiguration {
+  /*
+    ech-name: contestIdentification
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Urnengangs.
+  */
+  string contest_id = 1;
+
+  /*
+    validations: is-guid
+    description: Technische Identifikation der ausgewählten Export Konfiguration.
+  */
+  string export_configuration_id = 2;
+  string description = 3;
+  repeated string political_business_ids = 4;
+
+  /*
+    validations: typeof(int32),min-value(2),max-value(240),allow-undefined
+    description: if this value is not set, this export can only be triggered manually.
+  */
+  google.protobuf.Int32Value interval_minutes = 5;
+}
+
+enum ExportFileFormat {
+  EXPORT_FILE_FORMAT_UNSPECIFIED = 0;
+  EXPORT_FILE_FORMAT_CSV = 1;
+  EXPORT_FILE_FORMAT_PDF = 2;
+  EXPORT_FILE_FORMAT_XML = 3;
+}
+
+enum ExportEntityType {
+  EXPORT_ENTITY_TYPE_UNSPECIFIED = 0;
+  EXPORT_ENTITY_TYPE_CONTEST = 1;
+  EXPORT_ENTITY_TYPE_VOTE = 2;
+  EXPORT_ENTITY_TYPE_MAJORITY_ELECTION = 3;
+  EXPORT_ENTITY_TYPE_PROPORTIONAL_ELECTION = 4;
+}

@@ -1,0 +1,134 @@
+// (c) Copyright 2022 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.services.v1.models;
+
+import "models/contest.proto";
+import "models/domain_of_influence.proto";
+import "models/swiss_abroad_voting_right.proto";
+import "shared/ballot_number_generation.proto";
+
+message ProportionalElection {
+  string id = 1;
+  string political_business_number = 2;
+  string official_description = 3;
+  string short_description = 4;
+  string internal_description = 5;
+  int32 number_of_mandates = 6;
+  ProportionalElectionMandateAlgorithm mandate_algorithm = 7;
+  bool candidate_check_digit = 8;
+
+  /*
+    validations: typeof(int32),min-value(1),max-value(Int32.Max)
+    description: Bundgrösse für die Auszählung der Wahlzettel.
+  */
+  int32 ballot_bundle_size = 9;
+
+  /*
+    validations: is-type(bool)
+    description: 'True' für die automatische Vergabe von Bundnummern, sonst 'False' für die manuelle Vergabe.
+  */
+  bool automatic_ballot_bundle_number_generation = 10;
+
+  /*
+    validations: exact-enum
+    description: Art der Vergabe von Wahlzettelnummern.
+  */
+  shared.v1.BallotNumberGeneration ballot_number_generation = 11;
+
+  /*
+    validations: is-type(bool)
+    description: 'True' für die automatische Erfassung leerer Zeilen, sonst 'False' für die manuelle Erfassung.
+  */
+  bool automatic_empty_vote_counting = 12;
+  bool enforce_empty_vote_counting_for_counting_circles = 13;
+  SwissAbroadVotingRight swiss_abroad_voting_right = 14;
+  string domain_of_influence_id = 15;
+  string contest_id = 16;
+  bool active = 17;
+
+  /*
+    validations: typeof(int32),min-value(1),max-value(Int32.Max)
+    description: Stichprobengrösse für die Auszählung der Wahlzettel.
+  */
+  int32 ballot_bundle_sample_size = 18;
+  string title = 19;
+  DomainOfInfluence domain_of_influence = 20;
+  Contest contest = 21;
+}
+
+enum ProportionalElectionMandateAlgorithm {
+  PROPORTIONAL_ELECTION_MANDATE_ALGORITHM_UNSPECIFIED = 0;
+  PROPORTIONAL_ELECTION_MANDATE_ALGORITHM_HAGENBACH_BISCHOFF = 1;
+  PROPORTIONAL_ELECTION_MANDATE_ALGORITHM_DOPPELTER_PUKELSHEIM_5_QUORUM = 2;
+  PROPORTIONAL_ELECTION_MANDATE_ALGORITHM_DOPPELTER_PUKELSHEIM_0_QUORUM = 3;
+}
+
+message ProportionalElectionLists {
+  repeated ProportionalElectionList lists = 1;
+}
+
+message ProportionalElectionList {
+  string id = 1;
+
+  /*
+    ech-name: electionIdentification
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: is-guid
+    description: Eindeutige, technische Identifikation der Proporzwahl.
+  */
+  string proportional_election_id = 2;
+  string order_number = 3;
+  string short_description = 4;
+  int32 blank_row_count = 5;
+  int32 position = 6;
+  string description = 7;
+}
+
+message ProportionalElectionCandidates {
+  repeated ProportionalElectionCandidate candidates = 1;
+}
+
+message ProportionalElectionCandidate {
+  string id = 1;
+
+  /*
+    ech-name: listIdentification
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: is-guid
+    description: Eindeutige, technische Identifikation der Liste.
+  */
+  string list_id = 2;
+  string list_number = 3;
+  string number = 4;
+  string political_first_name = 5;
+  string political_last_name = 6;
+  string description = 7;
+  int32 position = 8;
+  bool accumulated = 9;
+  int32 accumulated_position = 10;
+  string number_including_list = 11;
+  string list_description = 12;
+  string list_short_description = 13;
+  int32 list_position = 14;
+}
+
+message ProportionalElectionListUnion {
+  string id = 1;
+
+  /*
+    ech-name: electionIdentification
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: is-guid
+    description: Eindeutige, technische Identifikation der Proporzwahl.
+  */
+  string proportional_election_id = 2;
+  string description = 3;
+  int32 position = 4;
+  string proportional_election_root_list_union_id = 5;
+}

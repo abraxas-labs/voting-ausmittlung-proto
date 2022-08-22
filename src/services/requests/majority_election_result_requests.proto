@@ -1,0 +1,450 @@
+// (c) Copyright 2022 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.services.v1.requests;
+
+import "google/protobuf/wrappers.proto";
+import "requests/count_of_voters_requests.proto";
+import "shared/ballot_number_generation.proto";
+import "shared/majority_election.proto";
+
+/*
+  description: Majorzwahlergebnis abfragen. Es wird entweder 'election_id' und 'counting_circle_id' oder 'election_result_id' gesetzt.
+*/
+message GetMajorityElectionResultRequest {
+  /*
+    ech-name: electionIdentification
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: is-guid,allow-undefined
+    description: Eindeutige, technische Identifikation der Wahl.
+  */
+  string election_id = 1;
+
+  /*
+    ech-name: countingCircleId
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: is-guid,allow-undefined
+    description: Eindeutige Identifikation des Auszählungskreises. Es handelt sich dabei um die lokale Identifikation des Quellregisters.
+  */
+  string counting_circle_id = 2;
+
+  /*
+    validations: is-guid,allow-undefined
+    description: Eindeutige, technische Identifikation des Wahlergebnisses.
+  */
+  string election_result_id = 3;
+}
+
+message GetMajorityElectionBallotGroupResultsRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Wahlergebnisses.
+  */
+  string election_result_id = 1;
+}
+
+/*
+  description: Definition der Erfassungsmethode (Endresultate, Detailerfassung).
+*/
+message DefineMajorityElectionResultEntryRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Wahlergebnisses.
+  */
+  string election_result_id = 1;
+
+  /*
+    validations: exact-enum
+    description: Erfassungsmethode der Ergebnisse.
+  */
+  shared.v1.MajorityElectionResultEntry result_entry = 2;
+
+  /*
+    validations: allow-undefined
+    description: Parameter für Detailerfassung.
+  */
+  DefineMajorityElectionResultEntryParamsRequest result_entry_params = 3;
+}
+
+/*
+  description: Definition der Parameter für die Detailerfassung.
+*/
+message DefineMajorityElectionResultEntryParamsRequest {
+  /*
+    validations: typeof(int32),min-value(1),max-value(Int32.Max)
+    description: Bundgrösse für die Auszählung der Wahlzettel.
+  */
+  int32 ballot_bundle_size = 1;
+
+  /*
+    validations: typeof(int32),min-value(1),max-value(Int32.Max)
+    description: Stichprobengrösse für die Auszählung der Wahlzettel.
+  */
+  int32 ballot_bundle_sample_size = 2;
+
+  /*
+    validations: is-type(bool)
+    description: 'True' für die automatische Vergabe von Bundnummern, sonst 'False' für die manuelle Vergabe.
+  */
+  bool automatic_ballot_bundle_number_generation = 3;
+
+  /*
+    validations: exact-enum
+    description: Art der Vergabe von Wahlzettelnummern.
+  */
+  shared.v1.BallotNumberGeneration ballot_number_generation = 4;
+
+  /*
+    validations: is-type(bool)
+    description: 'True' für die automatische Erfassung leerer Zeilen, sonst 'False' für die manuelle Erfassung.
+  */
+  bool automatic_empty_vote_counting = 5;
+}
+
+message EnterMajorityElectionCountOfVotersRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Wahlergebnisses.
+  */
+  string election_result_id = 1;
+  
+  /*
+    description: Erfasste Wählerdaten für das Geschäft.
+  */
+  EnterPoliticalBusinessCountOfVotersRequest count_of_voters = 2;
+}
+
+message EnterMajorityElectionCandidateResultsRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Wahlergebnisses.
+  */
+  string election_result_id = 1;
+
+  /*
+    description: Erfasste Wählerdaten für das Geschäft.
+  */
+  EnterPoliticalBusinessCountOfVotersRequest count_of_voters = 2;
+
+  /*
+    validations: typeof(int32),min-value(0),max-value(Int32.Max),allow-undefined
+    description: Anzahl vereinzelter Nennungen eines Kandiaten (welcher sich nicht auf der Liste befindet).
+  */
+  google.protobuf.Int32Value individual_vote_count = 3;
+
+  /*
+    description: Endresultat-Eingabe für Majorzwahl Kandidatur.
+  */
+  repeated EnterMajorityElectionCandidateResultRequest candidate_results = 4;
+
+  /*
+    validations: allow-undefined
+    description: Endresultat-Eingabe für Majorznebenwahl Kandidatur.
+  */
+  repeated EnterSecondaryMajorityElectionCandidateResultsRequest secondary_election_candidate_results = 5;
+
+  /*
+    validations: typeof(int32),min-value(0),max-value(Int32.Max),allow-undefined
+    description: Anzahl leere Zeilen
+  */
+  google.protobuf.Int32Value empty_vote_count = 6;
+
+  /*
+    validations: typeof(int32),min-value(0),max-value(Int32.Max),allow-undefined
+    description: Anzahl ungültiger Abstimmungen.
+  */
+  google.protobuf.Int32Value invalid_vote_count = 7;
+}
+
+/*
+  validations: allow-undefined
+  description: Endresultat-Eingabe für Majorznebenwahl Kandidatur.
+*/
+message EnterSecondaryMajorityElectionCandidateResultsRequest {
+  /*
+    ech-name: electionIdentification
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: is-guid
+    description: Eindeutige, technische Identifikation der Majorznebenwahl.
+  */
+  string secondary_majority_election_id = 1;
+
+  /*
+    validations: typeof(int32),min-value(0),max-value(Int32.Max),allow-undefined
+    description: Anzahl vereinzelter Nennungen eines Kandiaten (welcher sich nicht auf der Liste befindet).
+  */
+  google.protobuf.Int32Value individual_vote_count = 2;
+
+  /*
+    description: Endresultat-Eingabe für Majorzwahl Kandidatur.
+  */
+  repeated EnterMajorityElectionCandidateResultRequest candidate_results = 3;
+
+  /*
+    validations: typeof(int32),min-value(0),max-value(Int32.Max),allow-undefined
+    description: Anzahl leere Zeilen
+  */  
+  google.protobuf.Int32Value empty_vote_count = 4;
+
+  /*
+    validations: typeof(int32),min-value(0),max-value(Int32.Max),allow-undefined
+    description: Anzahl ungültiger Abstimmungen.
+  */
+  google.protobuf.Int32Value invalid_vote_count = 5;
+}
+
+/*
+  description: Endresultat-Eingabe für Majorzwahl Kandidatur.
+*/
+message EnterMajorityElectionCandidateResultRequest {
+  /*
+    ech-name: candidateIdentification
+    ech-length: 50
+    ech-type: xs:token
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Kandidaten.
+  */
+  string candidate_id = 1;
+
+  /*
+    validations: typeof(int32),min-value(0),max-value(Int32.Max),allow-undefined
+    description: Anzahl gültiger Stimmen.
+  */
+  google.protobuf.Int32Value vote_count = 2;
+}
+
+/*
+  description: Endresultat-Eingabe für Majorzwahl Kandidatur.
+*/
+message EnterMajorityElectionBallotGroupResultsRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Wahlergebnisses.
+  */
+  string election_result_id = 1;
+
+  /*
+    description: Eingabe Resultate für Wahlzettelgruppe.
+  */
+  repeated EnterMajorityElectionBallotGroupResultRequest results = 2;
+}
+
+/*
+  description: Detailerfassung nach Wahlzettelgruppe für Majorzwahl.
+*/
+message EnterMajorityElectionBallotGroupResultRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation der Wahlzettelgruppe.
+  */
+  string ballot_group_id = 1;
+
+  /*
+    validations: typeof(int32),min-value(0),max-value(Int32.Max)
+    description: Anzahl gültiger Stimmen.
+  */
+  int32 vote_count = 2;
+}
+
+message MajorityElectionResultPrepareSubmissionFinishedRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Wahlergebnisses.
+  */
+  string election_result_id = 1;
+}
+
+message MajorityElectionResultSubmissionFinishedRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Wahlergebnisses.
+  */
+  string election_result_id = 1;
+
+  /*
+    validations: min-length(32),max-length(36),standard-singleline-text
+    description: Eindeutige, technische Identifikation der Zweifaktor-Transaktion (siehe: https://docs.nevis.net/apidoc/authcloud/#enroll-your-access-app)
+  */
+  string second_factor_transaction_id = 2;
+}
+
+message MajorityElectionResultPrepareCorrectionFinishedRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Wahlergebnisses.
+  */
+  string election_result_id = 1;
+}
+
+message MajorityElectionResultCorrectionFinishedRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Wahlergebnisses.
+  */
+  string election_result_id = 1;
+
+  /*
+    validations: max-length(500),standard-multiline-text,allow-undefined
+    description: Kommentar zur abgeschlossenen Korrektur.
+  */
+  string comment = 2;
+
+  /*
+    validations: min-length(32), max-length(36),standard-singleline-text
+    description: Eindeutige, technische Identifikation der Zweifaktor-Transaktion (siehe: https://docs.nevis.net/apidoc/authcloud/#enroll-your-access-app)
+  */
+  string second_factor_transaction_id = 3;
+}
+
+message MajorityElectionResultFlagForCorrectionRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Wahlergebnisses.
+  */
+  string election_result_id = 1;
+
+  /*
+    validations: max-length(500),standard-multiline-text,allow-undefined
+    description: Kommentar zur für angeforderte Korrektur.
+  */
+  string comment = 2;
+}
+
+message MajorityElectionResultAuditedTentativelyRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Wahlergebnisses.
+  */
+  repeated string election_result_ids = 1;
+}
+
+message MajorityElectionResultResetToSubmissionFinishedRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Wahlergebnisses.
+  */
+  string election_result_id = 1;
+}
+
+message MajorityElectionResultsPlausibiliseRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Wahlergebnisses.
+  */
+  repeated string election_result_ids = 1;
+}
+
+message MajorityElectionResultsResetToAuditedTentativelyRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Wahlergebnisses.
+  */
+  repeated string election_result_ids = 1;
+}
+
+message GetMajorityElectionEndResultRequest {
+  /*
+    ech-name: electionIdentification
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: is-guid
+    description: Eindeutige, technische Identifikation der Majorzwahl.
+  */
+  string majority_election_id = 1;
+}
+
+message GetMajorityElectionEndResultAvailableLotDecisionsRequest {
+  /*
+    ech-name: electionIdentification
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: is-guid
+    description: Eindeutige, technische Identifikation der Majorzwahl.
+  */
+  string majority_election_id = 1;
+}
+
+message UpdateMajorityElectionEndResultLotDecisionsRequest {
+  /*
+    ech-name: electionIdentification
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: is-guid
+    description: Eindeutige, technische Identifikation der Majorzwahl.
+  */
+  string majority_election_id = 1;
+
+  /*
+    description: Losentscheide fällen.
+  */
+  repeated UpdateMajorityElectionEndResultLotDecisionRequest lot_decisions = 2;
+}
+
+message UpdateMajorityElectionEndResultLotDecisionRequest {
+  /*
+    ech-name: candidateIdentification
+    ech-length: 50
+    ech-type: xs:token
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Kandidaten.
+  */
+  string candidate_id = 1;
+
+  /*
+    validations: min-value(1),max-value(Int32.Max)
+    description: Rang nach Losentscheid
+  */
+  int32 rank = 2;
+}
+
+message PrepareFinalizeMajorityElectionEndResultRequest {
+  /*
+    ech-name: electionIdentification
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: is-guid
+    description: Eindeutige, technische Identifikation der Majorzwahl.
+  */
+  string majority_election_id = 1;
+}
+
+message FinalizeMajorityElectionEndResultRequest {
+  /*
+    ech-name: electionIdentification
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: is-guid
+    description: Eindeutige, technische Identifikation der Majorzwahl.
+  */
+  string majority_election_id = 1;
+
+  /*
+    validations: min-length(32), max-length(36),standard-singleline-text
+    description: Eindeutige, technische Identifikation der Zweifaktor-Transaktion (siehe: https://docs.nevis.net/apidoc/authcloud/#enroll-your-access-app)
+  */
+  string second_factor_transaction_id = 2;
+}
+
+message RevertMajorityElectionEndResultFinalizationRequest {
+  /*
+    ech-name: electionIdentification
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: is-guid
+    description: Eindeutige, technische Identifikation der Majorzwahl.
+  */
+  string majority_election_id = 1;
+}
+
+message ValidateEnterMajorityElectionCountOfVotersRequest {
+  EnterMajorityElectionCountOfVotersRequest request = 1;
+}
+
+message ValidateEnterMajorityElectionCandidateResultsRequest {
+  EnterMajorityElectionCandidateResultsRequest request = 1;
+}

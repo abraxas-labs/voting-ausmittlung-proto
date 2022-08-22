@@ -1,0 +1,14 @@
+// (c) Copyright 2022 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.services.v1.models;
+
+message ContactPerson {
+  string first_name = 1;
+  string family_name = 2;
+  string phone = 3;
+  string mobile_phone = 4;
+  string email = 5;
+}

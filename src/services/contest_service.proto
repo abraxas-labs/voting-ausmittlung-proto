@@ -1,0 +1,18 @@
+// (c) Copyright 2022 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.services.v1;
+
+import "models/contest.proto";
+import "models/counting_circle.proto";
+import "models/political_business_union.proto";
+import "requests/contest_requests.proto";
+
+service ContestService {
+  rpc Get(requests.GetContestRequest) returns (models.Contest);
+  rpc GetAccessibleCountingCircles(requests.GetAccessibleCountingCirclesRequest) returns (models.CountingCircles);
+  rpc ListSummaries(requests.ListContestSummariesRequest) returns (models.ContestSummaries);
+  rpc ListPoliticalBusinessUnions(requests.ListPoliticalBusinessUnionsRequest) returns (models.PoliticalBusinessUnions);
+}

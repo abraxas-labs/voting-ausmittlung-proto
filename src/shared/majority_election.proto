@@ -1,0 +1,12 @@
+// (c) Copyright 2022 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.shared.v1;
+
+enum MajorityElectionResultEntry {
+  MAJORITY_ELECTION_RESULT_ENTRY_UNSPECIFIED = 0;;
+  MAJORITY_ELECTION_RESULT_ENTRY_FINAL_RESULTS = 1;
+  MAJORITY_ELECTION_RESULT_ENTRY_DETAILED = 2;
+}

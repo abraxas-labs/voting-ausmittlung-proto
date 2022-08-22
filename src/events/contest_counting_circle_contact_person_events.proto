@@ -1,0 +1,27 @@
+// (c) Copyright 2022 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.events.v1;
+
+import "data/contact_person_event_data.proto";
+import "data/event_info.proto";
+
+message ContestCountingCircleContactPersonCreated {
+  data.EventInfo event_info = 1;
+  string contest_counting_circle_contact_person_id = 2;
+  string counting_circle_id = 3;
+  string contest_id = 4;
+  data.ContactPersonEventData contact_person_during_event = 5;
+  bool contact_person_same_during_event_as_after = 6;
+  data.ContactPersonEventData contact_person_after_event = 7;
+}
+
+message ContestCountingCircleContactPersonUpdated {
+  data.EventInfo event_info = 1;
+  string contest_counting_circle_contact_person_id = 2;
+  data.ContactPersonEventData contact_person_during_event = 3;
+  bool contact_person_same_during_event_as_after = 4;
+  data.ContactPersonEventData contact_person_after_event = 5;
+}

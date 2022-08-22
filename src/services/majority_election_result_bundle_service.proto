@@ -1,0 +1,27 @@
+// (c) Copyright 2022 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.services.v1;
+
+import "google/protobuf/empty.proto";
+import "models/majority_election_result_bundle.proto";
+import "requests/majority_election_result_bundle_requests.proto";
+import "responses/majority_election_result_bundle_responses.proto";
+
+service MajorityElectionResultBundleService {
+  rpc GetBundles(requests.GetMajorityElectionResultBundlesRequest) returns (models.MajorityElectionResultBundles);
+  rpc GetBundle(requests.GetMajorityElectionResultBundleRequest) returns (responses.GetMajorityElectionResultBundleResponse);
+  rpc GetBallot(requests.GetMajorityElectionResultBallotRequest) returns (models.MajorityElectionResultBallot);
+  rpc CreateBundle(requests.CreateMajorityElectionResultBundleRequest) returns (responses.CreateMajorityElectionResultBundleResponse);
+  rpc DeleteBundle(requests.DeleteMajorityElectionResultBundleRequest) returns (google.protobuf.Empty);
+  rpc CreateBallot(requests.CreateMajorityElectionResultBallotRequest) returns (responses.CreateMajorityElectionResultBallotResponse);
+  rpc UpdateBallot(requests.UpdateMajorityElectionResultBallotRequest) returns (google.protobuf.Empty);
+  rpc DeleteBallot(requests.DeleteMajorityElectionResultBallotRequest) returns (google.protobuf.Empty);
+  rpc BundleSubmissionFinished(requests.MajorityElectionResultBundleSubmissionFinishedRequest) returns (google.protobuf.Empty);
+  rpc BundleCorrectionFinished(requests.MajorityElectionResultBundleCorrectionFinishedRequest) returns (google.protobuf.Empty);
+  rpc RejectBundleReview(requests.RejectMajorityElectionBundleReviewRequest) returns (google.protobuf.Empty);
+  rpc SucceedBundleReview(requests.SucceedMajorityElectionBundleReviewRequest) returns (google.protobuf.Empty);
+  rpc GetBundleChanges(requests.GetMajorityElectionResultBundleChangesRequest) returns (stream models.MajorityElectionResultBundle);
+}

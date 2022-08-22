@@ -1,0 +1,51 @@
+// (c) Copyright 2022 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.events.v1;
+
+import "data/event_info.proto";
+import "data/import_majority_election_event_data.proto";
+
+message MajorityElectionResultImported {
+  data.EventInfo event_info = 1;
+  string import_id = 2;
+  string contest_id = 3;
+  string majority_election_id = 4;
+  string counting_circle_id = 5;
+  repeated data.MajorityElectionCandidateResultImportEventData candidate_results = 6;
+  repeated data.MajorityElectionWriteInEventData write_ins = 7;
+  int32 empty_vote_count = 8;
+  int32 invalid_vote_count = 9;
+  int32 total_candidate_vote_count_excl_individual = 10;
+  int32 count_of_voters = 11;
+}
+
+message SecondaryMajorityElectionResultImported {
+  data.EventInfo event_info = 1;
+  string import_id = 2;
+  string contest_id = 3;
+  string secondary_majority_election_id = 4;
+  string counting_circle_id = 5;
+  repeated data.MajorityElectionCandidateResultImportEventData candidate_results = 6;
+  repeated data.MajorityElectionWriteInEventData write_ins = 7;
+  int32 empty_vote_count = 8;
+  int32 invalid_vote_count = 9;
+  int32 total_candidate_vote_count_excl_individual = 10;
+  int32 count_of_voters = 11;
+}
+
+message MajorityElectionWriteInsMapped {
+  data.EventInfo event_info = 1;
+  string counting_circle_id = 2;
+  string majority_election_id = 3;
+  repeated data.MajorityElectionWriteInMappedEventData write_in_mappings = 4;
+}
+
+message SecondaryMajorityElectionWriteInsMapped {
+  data.EventInfo event_info = 1;
+  string counting_circle_id = 2;
+  string secondary_majority_election_id = 3;
+  repeated data.MajorityElectionWriteInMappedEventData write_in_mappings = 4;
+}

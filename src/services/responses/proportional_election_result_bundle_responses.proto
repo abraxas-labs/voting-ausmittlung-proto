@@ -1,0 +1,47 @@
+// (c) Copyright 2022 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.services.v1.responses;
+
+import "models/proportional_election_result.proto";
+import "models/proportional_election_result_bundle.proto";
+
+message GetProportionalElectionResultBundleResponse {
+  models.ProportionalElectionResult election_result = 1;
+  models.ProportionalElectionResultBundle bundle = 2;
+}
+
+message CreateProportionalElectionResultBundleResponse {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Bundes.
+  */
+  string bundle_id = 1;
+
+  /*
+    validations: typeof(int32),min-value(1),max-value(Int32.MaxValue)
+    description: Eindeutiger numerischer Wert für den Bund.
+  */
+  int32 bundle_number = 2;
+}
+
+
+message CreateProportionalElectionResultBallotResponse {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Bundes.
+  */
+  string bundle_id = 1;
+
+  /*
+    ech-name: electronicBallotIdentification
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: typeof(int32),min-value(1),max-value(Int32.MaxValue)
+    description: Eindeutige, technische Identifikation des Wahlzettels.
+  */
+  int32 ballot_number = 2;
+}
+

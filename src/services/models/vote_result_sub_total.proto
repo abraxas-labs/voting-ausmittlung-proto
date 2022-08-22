@@ -1,0 +1,32 @@
+// (c) Copyright 2022 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.services.v1.models;
+
+import "google/protobuf/wrappers.proto";
+
+message BallotQuestionResultSubTotal {
+  int32 total_count_of_answer_yes = 1;
+  int32 total_count_of_answer_no = 2;
+  int32 total_count_of_answer_unspecified = 3;
+}
+
+message BallotQuestionResultNullableSubTotal {
+  google.protobuf.Int32Value total_count_of_answer_yes = 1;
+  google.protobuf.Int32Value total_count_of_answer_no = 2;
+  google.protobuf.Int32Value total_count_of_answer_unspecified = 3;
+}
+
+message TieBreakQuestionResultSubTotal {
+  int32 total_count_of_answer_q1 = 1;
+  int32 total_count_of_answer_q2 = 2;
+  int32 total_count_of_answer_unspecified = 3;
+}
+
+message TieBreakQuestionResultNullableSubTotal {
+  google.protobuf.Int32Value total_count_of_answer_q1 = 1;
+  google.protobuf.Int32Value total_count_of_answer_q2 = 2;
+  google.protobuf.Int32Value total_count_of_answer_unspecified = 3;
+}

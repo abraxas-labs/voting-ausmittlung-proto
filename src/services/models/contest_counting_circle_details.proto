@@ -1,0 +1,37 @@
+// (c) Copyright 2022 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.services.v1.models;
+
+import "models/count_of_voters.proto";
+import "models/voting_cards.proto";
+
+message ContestCountingCircleDetails {
+  /*
+    ech-name: contestIdentification
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Urnengangs.
+  */
+  string contest_id = 1;
+
+  /*
+    ech-name: countingCircleId
+    ech-length:
+    ech-type: string
+    description: Eindeutige Identifikation des Auszählungskreises. Es handelt sich dabei um die lokale Identifikation des Quellregisters.
+  */
+  string counting_circle_id = 2;
+
+  CountOfVotersInformation count_of_voters_information = 3;
+  repeated VotingCardResultDetail voting_cards = 4;
+  bool e_voting = 5;
+}
+
+message AggregatedContestCountingCircleDetails {
+  CountOfVotersInformation count_of_voters_information = 1;
+  repeated VotingCardResultDetail voting_cards = 2;
+}

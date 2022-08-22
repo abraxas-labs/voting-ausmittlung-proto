@@ -1,0 +1,25 @@
+// (c) Copyright 2022 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.events.v1.data;
+
+import "shared/majority_election_write_in.proto";
+
+message MajorityElectionCandidateResultImportEventData {
+  string candidate_id = 1;
+  int32 vote_count = 2;
+}
+
+message MajorityElectionWriteInMappedEventData {
+  string write_in_mapping_id = 1;
+  shared.v1.MajorityElectionWriteInMappingTarget target = 2;
+  string candidate_id = 3;
+}
+
+message MajorityElectionWriteInEventData {
+  string write_in_mapping_id = 1;
+  string write_in_candidate_name = 2;
+  int32 vote_count = 3;
+}

@@ -1,0 +1,73 @@
+// (c) Copyright 2022 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.events.v1;
+
+import "data/event_info.proto";
+import "data/proportional_election_result_bundle_event_data.proto";
+import "data/proportional_election_result_event_data.proto";
+
+message ProportionalElectionResultBundleCreated {
+  data.EventInfo event_info = 1;
+  string bundle_id = 2;
+  string election_result_id = 3;
+  string list_id = 4;
+  int32 bundle_number = 5;
+  data.ProportionalElectionResultEntryParamsEventData result_entry_params = 6;
+}
+
+message ProportionalElectionResultBundleDeleted {
+  data.EventInfo event_info = 1;
+  string bundle_id = 2;
+}
+
+message ProportionalElectionResultBundleReviewSucceeded {
+  data.EventInfo event_info = 1;
+  string bundle_id = 2;
+}
+
+message ProportionalElectionResultBundleReviewRejected {
+  data.EventInfo event_info = 1;
+  string bundle_id = 2;
+}
+
+message ProportionalElectionResultBallotCreated {
+  data.EventInfo event_info = 1;
+  string bundle_id = 2;
+  string election_result_id = 3;
+  int32 ballot_number = 4;
+  int32 empty_vote_count = 5;
+  repeated data.ProportionalElectionResultBallotUpdatedCandidateEventData candidates = 6;
+}
+
+message ProportionalElectionResultBallotUpdated {
+  data.EventInfo event_info = 1;
+  string bundle_id = 2;
+  string election_result_id = 3;
+  int32 ballot_number = 4;
+  int32 empty_vote_count = 5;
+  repeated data.ProportionalElectionResultBallotUpdatedCandidateEventData candidates = 6;
+}
+
+message ProportionalElectionResultBallotDeleted {
+  data.EventInfo event_info = 1;
+  string bundle_id = 2;
+  string election_result_id = 3;
+  int32 ballot_number = 4;
+}
+
+message ProportionalElectionResultBundleSubmissionFinished {
+  data.EventInfo event_info = 1;
+  string bundle_id = 2;
+  string election_result_id = 3;
+  repeated int32 sample_ballot_numbers = 4;
+}
+
+message ProportionalElectionResultBundleCorrectionFinished {
+  data.EventInfo event_info = 1;
+  string bundle_id = 2;
+  string election_result_id = 3;
+  repeated int32 sample_ballot_numbers = 4;
+}
