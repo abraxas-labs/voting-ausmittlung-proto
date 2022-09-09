@@ -5,6 +5,8 @@ syntax = "proto3";
 
 package abraxas.voting.ausmittlung.services.v1.requests;
 
+import "rules/rules.proto";
+
 message GetResultOverviewRequest {
   /*
     ech-name: contestIdentification
@@ -13,7 +15,7 @@ message GetResultOverviewRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Urnengangs.
   */
-  string contest_id = 1;
+  string contest_id = 1 [(validation.v1.rules).string.guid = true];
 }
 
 message GetResultListRequest {
@@ -24,7 +26,7 @@ message GetResultListRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Urnengangs.
   */
-  string contest_id = 1;
+  string contest_id = 1 [(validation.v1.rules).string.guid = true];
 
   /*
     ech-name: countingCircleId
@@ -33,7 +35,7 @@ message GetResultListRequest {
     validations: is-guid
     description: Eindeutige Identifikation des Auszählungskreises. Es handelt sich dabei um die lokale Identifikation des Quellregisters.
   */
-  string counting_circle_id = 2;
+  string counting_circle_id = 2 [(validation.v1.rules).string.guid = true];
 }
 
 message GetResultCommentsRequest {
@@ -41,7 +43,7 @@ message GetResultCommentsRequest {
     validations: is-guid
     description: Eindeutige Identifikation des Abstimmungsresultates.
   */
-  string result_id = 1;
+  string result_id = 1 [(validation.v1.rules).string.guid = true];
 }
 
 message GetResultStateChangesRequest {
@@ -52,5 +54,5 @@ message GetResultStateChangesRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Urnengangs.
   */
-  string contest_id = 1;
+  string contest_id = 1 [(validation.v1.rules).string.guid = true];
 }

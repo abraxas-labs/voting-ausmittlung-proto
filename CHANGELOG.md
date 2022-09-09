@@ -1,4 +1,4 @@
-# ✨ Changelog (`v1.80.0`)
+# ✨ Changelog (`v1.81.3`)
 
 All notable changes to this project will be documented in this file.
 
@@ -8,11 +8,35 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Version Info
 
 ```text
-This version -------- v1.80.0
-Previous version ---- v1.79.2
+This version -------- v1.81.3
+Previous version ---- v1.80.0
 Initial version ----- v1.79.2
-Total commits ------- 8
+Total commits ------- 9
 ```
+
+## [v1.81.3] - 2022-09-07
+
+### 🔄 Changed
+
+- validation rule hardening
+
+## [v1.81.2] - 2022-08-29
+
+### 🔄 Changed
+
+- match integer max value comment and validation
+
+## [v1.81.1] - 2022-08-29
+
+### 🔄 Changed
+
+- define max. numeric limitations for business input validation
+
+## [v1.81.0] - 2022-08-26
+
+### 🆕 Added
+
+- Added proto validators at the requests.
 
 ## [v1.80.0] - 2022-08-17
 

@@ -6,36 +6,37 @@ syntax = "proto3";
 package abraxas.voting.ausmittlung.services.v1.requests;
 
 import "google/protobuf/wrappers.proto";
+import "rules/rules.proto";
 import "shared/sex.proto";
 import "shared/voter_type.proto";
 
   /*
     description: Eingabe der Wählerdaten für ein Geschäft.
   */
-message EnterPoliticalBusinessCountOfVotersRequest { 
+message EnterPoliticalBusinessCountOfVotersRequest {
   /*
-    validations: typeof(int32),min-value(0),max-value(Int32.MaxValue)
+    validations: typeof(int32),min-value(0),max-value(1000000)
     description: Anz. erhaltener Stimm-/Wahlzettel via konventionell.
   */
-  google.protobuf.Int32Value conventional_received_ballots = 1;
+  google.protobuf.Int32Value conventional_received_ballots = 1 [(validation.v1.rules).integer = { min_value: 0, max_value: 1000000}];
 
   /*
-    validations: typeof(int32),min-value(0),max-value(Int32.MaxValue)
+    validations: typeof(int32),min-value(0),max-value(1000000)
     description: Anz. invalider Stimm-/Wahlzettel via konventionell.
   */
-  google.protobuf.Int32Value conventional_invalid_ballots = 2;
+  google.protobuf.Int32Value conventional_invalid_ballots = 2 [(validation.v1.rules).integer = { min_value: 0, max_value: 1000000}];
 
   /*
-    validations: typeof(int32),min-value(0),max-value(Int32.MaxValue)
+    validations: typeof(int32),min-value(0),max-value(1000000)
     description: Anz. leerer Stimm-/Wahlzettel via konventionell.
   */
-  google.protobuf.Int32Value conventional_blank_ballots = 3;
+  google.protobuf.Int32Value conventional_blank_ballots = 3 [(validation.v1.rules).integer = { min_value: 0, max_value: 1000000}];
 
   /*
-    validations: typeof(int32),min-value(0),max-value(Int32.MaxValue)
+    validations: typeof(int32),min-value(0),max-value(1000000)
     description: Anz. in betracht fallender Stimm-/Wahlzettel via konventionell.
   */
-  google.protobuf.Int32Value conventional_accounted_ballots = 4;
+  google.protobuf.Int32Value conventional_accounted_ballots = 4 [(validation.v1.rules).integer = { min_value: 0, max_value: 1000000}];
 }
 
 /*
@@ -48,7 +49,7 @@ message UpdateCountOfVotersInformationSubTotalRequest {
     validations: exact-enum
     description: Geschlecht der Wähler.
   */
-  shared.v1.SexType sex = 1;
+  shared.v1.SexType sex = 1 [(validation.v1.rules).enum.exact_enum = true];
 
   /*
     ech-name: voterType
@@ -56,11 +57,11 @@ message UpdateCountOfVotersInformationSubTotalRequest {
     validations: exact-enum
     description: Typ der Wähler.
   */
-  shared.v1.VoterType voter_type = 2;
+  shared.v1.VoterType voter_type = 2 [(validation.v1.rules).enum.exact_enum = true];
 
   /*
-    validations: typeof(int32),min-value(0),max-value(Int32.MaxValue)
+    validations: typeof(int32),min-value(0),max-value(1000000)
     description: Anzahl stimmberechtigter Wähler.
   */
-  google.protobuf.Int32Value count_of_voters = 3;
+  google.protobuf.Int32Value count_of_voters = 3 [(validation.v1.rules).integer = { min_value: 0, max_value: 1000000}];
 }

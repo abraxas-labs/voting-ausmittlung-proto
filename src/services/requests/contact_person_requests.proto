@@ -5,34 +5,36 @@ syntax = "proto3";
 
 package abraxas.voting.ausmittlung.services.v1.requests;
 
+import "rules/rules.proto";
+
 message EnterContactPersonRequest {
   /*
     validations: min-length(2),max-length(50),standard-singleline-text,allow-undefined
     description: Vorname
   */
-  string first_name = 1;
+  string first_name = 1 [(validation.v1.rules).string = { min_length: 2, max_length: 50, simple_sl_text: true, allow_empty: true }];
 
   /*
     validations: min-length(2),max-length(50),standard-singleline-text,allow-undefined
     description: Familienname (Nachname)
   */
-  string family_name = 2;
+  string family_name = 2 [(validation.v1.rules).string = { min_length: 2, max_length: 50, simple_sl_text: true, allow_empty: true }];
 
   /*
     validations: is-phone
     description: Telefonnummer (Festnetz)
   */
-  string phone = 3;
+  string phone = 3 [(validation.v1.rules).string.phone = true];
 
   /*
     validations: is-phone,allow-undefined
     description: Telefonnummer (Mobil)
   */
-  string mobile_phone = 4;
+  string mobile_phone = 4 [(validation.v1.rules).string = { phone: true, allow_empty: true }];
 
   /*
     validations: is-email,allow-undefined
-    description: E-Mail Adresse 
+    description: E-Mail Adresse
   */
-  string email = 5;
+  string email = 5 [(validation.v1.rules).string = { email: true, allow_empty: true }];
 }

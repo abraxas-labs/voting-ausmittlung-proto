@@ -7,6 +7,7 @@ package abraxas.voting.ausmittlung.services.v1.requests;
 
 import "google/protobuf/wrappers.proto";
 import "requests/count_of_voters_requests.proto";
+import "rules/rules.proto";
 import "shared/ballot_number_generation.proto";
 import "shared/majority_election.proto";
 
@@ -21,7 +22,7 @@ message GetMajorityElectionResultRequest {
     validations: is-guid,allow-undefined
     description: Eindeutige, technische Identifikation der Wahl.
   */
-  string election_id = 1;
+  string election_id = 1 [(validation.v1.rules).string = { guid: true, allow_empty: true }];
 
   /*
     ech-name: countingCircleId
@@ -30,13 +31,13 @@ message GetMajorityElectionResultRequest {
     validations: is-guid,allow-undefined
     description: Eindeutige Identifikation des Auszählungskreises. Es handelt sich dabei um die lokale Identifikation des Quellregisters.
   */
-  string counting_circle_id = 2;
+  string counting_circle_id = 2 [(validation.v1.rules).string = { guid: true, allow_empty: true }];
 
   /*
     validations: is-guid,allow-undefined
     description: Eindeutige, technische Identifikation des Wahlergebnisses.
   */
-  string election_result_id = 3;
+  string election_result_id = 3 [(validation.v1.rules).string = { guid: true, allow_empty: true }];
 }
 
 message GetMajorityElectionBallotGroupResultsRequest {
@@ -44,7 +45,7 @@ message GetMajorityElectionBallotGroupResultsRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Wahlergebnisses.
   */
-  string election_result_id = 1;
+  string election_result_id = 1 [(validation.v1.rules).string.guid = true];
 }
 
 /*
@@ -55,13 +56,13 @@ message DefineMajorityElectionResultEntryRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Wahlergebnisses.
   */
-  string election_result_id = 1;
+  string election_result_id = 1 [(validation.v1.rules).string.guid = true];
 
   /*
     validations: exact-enum
     description: Erfassungsmethode der Ergebnisse.
   */
-  shared.v1.MajorityElectionResultEntry result_entry = 2;
+  shared.v1.MajorityElectionResultEntry result_entry = 2 [(validation.v1.rules).enum.exact_enum = true];
 
   /*
     validations: allow-undefined
@@ -75,16 +76,16 @@ message DefineMajorityElectionResultEntryRequest {
 */
 message DefineMajorityElectionResultEntryParamsRequest {
   /*
-    validations: typeof(int32),min-value(1),max-value(Int32.Max)
+    validations: typeof(int32),min-value(1),max-value(500)
     description: Bundgrösse für die Auszählung der Wahlzettel.
   */
-  int32 ballot_bundle_size = 1;
+  int32 ballot_bundle_size = 1 [(validation.v1.rules).integer = { min_value: 1, max_value: 500}];
 
   /*
-    validations: typeof(int32),min-value(1),max-value(Int32.Max)
+    validations: typeof(int32),min-value(1),max-value(500)
     description: Stichprobengrösse für die Auszählung der Wahlzettel.
   */
-  int32 ballot_bundle_sample_size = 2;
+  int32 ballot_bundle_sample_size = 2 [(validation.v1.rules).integer = { min_value: 1, max_value: 500}];
 
   /*
     validations: is-type(bool)
@@ -96,7 +97,7 @@ message DefineMajorityElectionResultEntryParamsRequest {
     validations: exact-enum
     description: Art der Vergabe von Wahlzettelnummern.
   */
-  shared.v1.BallotNumberGeneration ballot_number_generation = 4;
+  shared.v1.BallotNumberGeneration ballot_number_generation = 4 [(validation.v1.rules).enum.exact_enum = true];
 
   /*
     validations: is-type(bool)
@@ -110,12 +111,12 @@ message EnterMajorityElectionCountOfVotersRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Wahlergebnisses.
   */
-  string election_result_id = 1;
-  
+  string election_result_id = 1 [(validation.v1.rules).string.guid = true];
+
   /*
     description: Erfasste Wählerdaten für das Geschäft.
   */
-  EnterPoliticalBusinessCountOfVotersRequest count_of_voters = 2;
+  EnterPoliticalBusinessCountOfVotersRequest count_of_voters = 2 [(validation.v1.rules).object.required = true];
 }
 
 message EnterMajorityElectionCandidateResultsRequest {
@@ -123,18 +124,18 @@ message EnterMajorityElectionCandidateResultsRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Wahlergebnisses.
   */
-  string election_result_id = 1;
+  string election_result_id = 1 [(validation.v1.rules).string.guid = true];
 
   /*
     description: Erfasste Wählerdaten für das Geschäft.
   */
-  EnterPoliticalBusinessCountOfVotersRequest count_of_voters = 2;
+  EnterPoliticalBusinessCountOfVotersRequest count_of_voters = 2 [(validation.v1.rules).object.required = true];
 
   /*
-    validations: typeof(int32),min-value(0),max-value(Int32.Max),allow-undefined
+    validations: typeof(int32),min-value(0),max-value(1000000),allow-undefined
     description: Anzahl vereinzelter Nennungen eines Kandiaten (welcher sich nicht auf der Liste befindet).
   */
-  google.protobuf.Int32Value individual_vote_count = 3;
+  google.protobuf.Int32Value individual_vote_count = 3 [(validation.v1.rules).integer = { min_value: 0, max_value: 1000000}];
 
   /*
     description: Endresultat-Eingabe für Majorzwahl Kandidatur.
@@ -148,16 +149,16 @@ message EnterMajorityElectionCandidateResultsRequest {
   repeated EnterSecondaryMajorityElectionCandidateResultsRequest secondary_election_candidate_results = 5;
 
   /*
-    validations: typeof(int32),min-value(0),max-value(Int32.Max),allow-undefined
+    validations: typeof(int32),min-value(0),max-value(1000000),allow-undefined
     description: Anzahl leere Zeilen
   */
-  google.protobuf.Int32Value empty_vote_count = 6;
+  google.protobuf.Int32Value empty_vote_count = 6 [(validation.v1.rules).integer = { min_value: 0, max_value: 1000000}];
 
   /*
-    validations: typeof(int32),min-value(0),max-value(Int32.Max),allow-undefined
+    validations: typeof(int32),min-value(0),max-value(1000000),allow-undefined
     description: Anzahl ungültiger Abstimmungen.
   */
-  google.protobuf.Int32Value invalid_vote_count = 7;
+  google.protobuf.Int32Value invalid_vote_count = 7 [(validation.v1.rules).integer = { min_value: 0, max_value: 1000000}];
 }
 
 /*
@@ -172,13 +173,13 @@ message EnterSecondaryMajorityElectionCandidateResultsRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation der Majorznebenwahl.
   */
-  string secondary_majority_election_id = 1;
+  string secondary_majority_election_id = 1 [(validation.v1.rules).string.guid = true];
 
   /*
-    validations: typeof(int32),min-value(0),max-value(Int32.Max),allow-undefined
+    validations: typeof(int32),min-value(0),max-value(1000000),allow-undefined
     description: Anzahl vereinzelter Nennungen eines Kandiaten (welcher sich nicht auf der Liste befindet).
   */
-  google.protobuf.Int32Value individual_vote_count = 2;
+  google.protobuf.Int32Value individual_vote_count = 2 [(validation.v1.rules).integer = { min_value: 0, max_value: 1000000}];
 
   /*
     description: Endresultat-Eingabe für Majorzwahl Kandidatur.
@@ -186,16 +187,16 @@ message EnterSecondaryMajorityElectionCandidateResultsRequest {
   repeated EnterMajorityElectionCandidateResultRequest candidate_results = 3;
 
   /*
-    validations: typeof(int32),min-value(0),max-value(Int32.Max),allow-undefined
+    validations: typeof(int32),min-value(0),max-value(1000000),allow-undefined
     description: Anzahl leere Zeilen
-  */  
-  google.protobuf.Int32Value empty_vote_count = 4;
+  */
+  google.protobuf.Int32Value empty_vote_count = 4 [(validation.v1.rules).integer = { min_value: 0, max_value: 1000000}];
 
   /*
-    validations: typeof(int32),min-value(0),max-value(Int32.Max),allow-undefined
+    validations: typeof(int32),min-value(0),max-value(1000000),allow-undefined
     description: Anzahl ungültiger Abstimmungen.
   */
-  google.protobuf.Int32Value invalid_vote_count = 5;
+  google.protobuf.Int32Value invalid_vote_count = 5 [(validation.v1.rules).integer = { min_value: 0, max_value: 1000000}];
 }
 
 /*
@@ -209,13 +210,13 @@ message EnterMajorityElectionCandidateResultRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Kandidaten.
   */
-  string candidate_id = 1;
+  string candidate_id = 1 [(validation.v1.rules).string.guid = true];
 
   /*
-    validations: typeof(int32),min-value(0),max-value(Int32.Max),allow-undefined
+    validations: typeof(int32),min-value(0),max-value(1000000),allow-undefined
     description: Anzahl gültiger Stimmen.
   */
-  google.protobuf.Int32Value vote_count = 2;
+  google.protobuf.Int32Value vote_count = 2 [(validation.v1.rules).integer = { min_value: 0, max_value: 1000000}];
 }
 
 /*
@@ -226,7 +227,7 @@ message EnterMajorityElectionBallotGroupResultsRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Wahlergebnisses.
   */
-  string election_result_id = 1;
+  string election_result_id = 1 [(validation.v1.rules).string.guid = true];
 
   /*
     description: Eingabe Resultate für Wahlzettelgruppe.
@@ -242,13 +243,13 @@ message EnterMajorityElectionBallotGroupResultRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation der Wahlzettelgruppe.
   */
-  string ballot_group_id = 1;
+  string ballot_group_id = 1 [(validation.v1.rules).string.guid = true];
 
   /*
-    validations: typeof(int32),min-value(0),max-value(Int32.Max)
+    validations: typeof(int32),min-value(0),max-value(1000000)
     description: Anzahl gültiger Stimmen.
   */
-  int32 vote_count = 2;
+  int32 vote_count = 2 [(validation.v1.rules).integer = { min_value: 0, max_value: 1000000}];
 }
 
 message MajorityElectionResultPrepareSubmissionFinishedRequest {
@@ -256,7 +257,7 @@ message MajorityElectionResultPrepareSubmissionFinishedRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Wahlergebnisses.
   */
-  string election_result_id = 1;
+  string election_result_id = 1 [(validation.v1.rules).string.guid = true];
 }
 
 message MajorityElectionResultSubmissionFinishedRequest {
@@ -264,13 +265,13 @@ message MajorityElectionResultSubmissionFinishedRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Wahlergebnisses.
   */
-  string election_result_id = 1;
+  string election_result_id = 1 [(validation.v1.rules).string.guid = true];
 
   /*
-    validations: min-length(32),max-length(36),standard-singleline-text
+    validations: is-guid
     description: Eindeutige, technische Identifikation der Zweifaktor-Transaktion (siehe: https://docs.nevis.net/apidoc/authcloud/#enroll-your-access-app)
   */
-  string second_factor_transaction_id = 2;
+  string second_factor_transaction_id = 2 [(validation.v1.rules).string.guid = true];
 }
 
 message MajorityElectionResultPrepareCorrectionFinishedRequest {
@@ -278,7 +279,7 @@ message MajorityElectionResultPrepareCorrectionFinishedRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Wahlergebnisses.
   */
-  string election_result_id = 1;
+  string election_result_id = 1 [(validation.v1.rules).string.guid = true];
 }
 
 message MajorityElectionResultCorrectionFinishedRequest {
@@ -286,19 +287,19 @@ message MajorityElectionResultCorrectionFinishedRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Wahlergebnisses.
   */
-  string election_result_id = 1;
+  string election_result_id = 1 [(validation.v1.rules).string.guid = true];
 
   /*
     validations: max-length(500),standard-multiline-text,allow-undefined
     description: Kommentar zur abgeschlossenen Korrektur.
   */
-  string comment = 2;
+  string comment = 2 [(validation.v1.rules).string = { max_length: 500, complex_ml_text: true, allow_empty: true }];
 
   /*
-    validations: min-length(32), max-length(36),standard-singleline-text
+    validations: is-guid
     description: Eindeutige, technische Identifikation der Zweifaktor-Transaktion (siehe: https://docs.nevis.net/apidoc/authcloud/#enroll-your-access-app)
   */
-  string second_factor_transaction_id = 3;
+  string second_factor_transaction_id = 3 [(validation.v1.rules).string.guid = true];
 }
 
 message MajorityElectionResultFlagForCorrectionRequest {
@@ -306,13 +307,13 @@ message MajorityElectionResultFlagForCorrectionRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Wahlergebnisses.
   */
-  string election_result_id = 1;
+  string election_result_id = 1 [(validation.v1.rules).string.guid = true];
 
   /*
     validations: max-length(500),standard-multiline-text,allow-undefined
     description: Kommentar zur für angeforderte Korrektur.
   */
-  string comment = 2;
+  string comment = 2 [(validation.v1.rules).string = { max_length: 500, complex_ml_text: true, allow_empty: true }];
 }
 
 message MajorityElectionResultAuditedTentativelyRequest {
@@ -320,7 +321,7 @@ message MajorityElectionResultAuditedTentativelyRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Wahlergebnisses.
   */
-  repeated string election_result_ids = 1;
+  repeated string election_result_ids = 1 [(validation.v1.rules).string.guid = true];
 }
 
 message MajorityElectionResultResetToSubmissionFinishedRequest {
@@ -328,7 +329,7 @@ message MajorityElectionResultResetToSubmissionFinishedRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Wahlergebnisses.
   */
-  string election_result_id = 1;
+  string election_result_id = 1 [(validation.v1.rules).string.guid = true];
 }
 
 message MajorityElectionResultsPlausibiliseRequest {
@@ -336,7 +337,7 @@ message MajorityElectionResultsPlausibiliseRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Wahlergebnisses.
   */
-  repeated string election_result_ids = 1;
+  repeated string election_result_ids = 1 [(validation.v1.rules).string.guid = true];
 }
 
 message MajorityElectionResultsResetToAuditedTentativelyRequest {
@@ -344,7 +345,7 @@ message MajorityElectionResultsResetToAuditedTentativelyRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Wahlergebnisses.
   */
-  repeated string election_result_ids = 1;
+  repeated string election_result_ids = 1 [(validation.v1.rules).string.guid = true];
 }
 
 message GetMajorityElectionEndResultRequest {
@@ -355,7 +356,7 @@ message GetMajorityElectionEndResultRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation der Majorzwahl.
   */
-  string majority_election_id = 1;
+  string majority_election_id = 1 [(validation.v1.rules).string.guid = true];
 }
 
 message GetMajorityElectionEndResultAvailableLotDecisionsRequest {
@@ -366,7 +367,7 @@ message GetMajorityElectionEndResultAvailableLotDecisionsRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation der Majorzwahl.
   */
-  string majority_election_id = 1;
+  string majority_election_id = 1 [(validation.v1.rules).string.guid = true];
 }
 
 message UpdateMajorityElectionEndResultLotDecisionsRequest {
@@ -377,7 +378,7 @@ message UpdateMajorityElectionEndResultLotDecisionsRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation der Majorzwahl.
   */
-  string majority_election_id = 1;
+  string majority_election_id = 1 [(validation.v1.rules).string.guid = true];
 
   /*
     description: Losentscheide fällen.
@@ -393,13 +394,13 @@ message UpdateMajorityElectionEndResultLotDecisionRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Kandidaten.
   */
-  string candidate_id = 1;
+  string candidate_id = 1 [(validation.v1.rules).string.guid = true];
 
   /*
-    validations: min-value(1),max-value(Int32.Max)
+    validations: min-value(1),max-value(100)
     description: Rang nach Losentscheid
   */
-  int32 rank = 2;
+  int32 rank = 2 [(validation.v1.rules).integer = { min_value: 1, max_value: 100}];
 }
 
 message PrepareFinalizeMajorityElectionEndResultRequest {
@@ -410,7 +411,7 @@ message PrepareFinalizeMajorityElectionEndResultRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation der Majorzwahl.
   */
-  string majority_election_id = 1;
+  string majority_election_id = 1 [(validation.v1.rules).string.guid = true];
 }
 
 message FinalizeMajorityElectionEndResultRequest {
@@ -421,13 +422,13 @@ message FinalizeMajorityElectionEndResultRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation der Majorzwahl.
   */
-  string majority_election_id = 1;
+  string majority_election_id = 1 [(validation.v1.rules).string.guid = true];
 
   /*
-    validations: min-length(32), max-length(36),standard-singleline-text
+    validations: is-guid
     description: Eindeutige, technische Identifikation der Zweifaktor-Transaktion (siehe: https://docs.nevis.net/apidoc/authcloud/#enroll-your-access-app)
   */
-  string second_factor_transaction_id = 2;
+  string second_factor_transaction_id = 2 [(validation.v1.rules).string.guid = true];
 }
 
 message RevertMajorityElectionEndResultFinalizationRequest {
@@ -438,13 +439,13 @@ message RevertMajorityElectionEndResultFinalizationRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation der Majorzwahl.
   */
-  string majority_election_id = 1;
+  string majority_election_id = 1 [(validation.v1.rules).string.guid = true];
 }
 
 message ValidateEnterMajorityElectionCountOfVotersRequest {
-  EnterMajorityElectionCountOfVotersRequest request = 1;
+  EnterMajorityElectionCountOfVotersRequest request = 1 [(validation.v1.rules).object.required = true];
 }
 
 message ValidateEnterMajorityElectionCandidateResultsRequest {
-  EnterMajorityElectionCandidateResultsRequest request = 1;
+  EnterMajorityElectionCandidateResultsRequest request = 1 [(validation.v1.rules).object.required = true];
 }

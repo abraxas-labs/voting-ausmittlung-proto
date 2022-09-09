@@ -5,6 +5,8 @@ syntax = "proto3";
 
 package abraxas.voting.ausmittlung.services.v1.requests;
 
+import "rules/rules.proto";
+
 /*
   description: Kandidaten für die Majorzwahl anfragen.
 */
@@ -16,7 +18,7 @@ message ListMajorityElectionCandidatesRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation der Wahl.
   */
-  string election_id = 1;
+  string election_id = 1 [(validation.v1.rules).string.guid = true];
 
   /*
     validations: is-type(bool)
@@ -36,5 +38,5 @@ message ListSecondaryMajorityElectionCandidatesRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation der Nebenwahl.
   */
-  string secondary_election_id = 1;
+  string secondary_election_id = 1 [(validation.v1.rules).string.guid = true];
 }

@@ -28,7 +28,6 @@ message MajorityElectionWriteInMapping {
   string write_in_candidate_name = 2;
 
   /*
-    validations: typeof(int32),min-value(0),max-value(Int32.Max)
     description: Anzahl gültiger Stimmen.
   */
   int32 vote_count = 3;

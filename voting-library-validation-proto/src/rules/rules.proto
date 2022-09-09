@@ -1,0 +1,38 @@
+// (c) Copyright 2022 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.validation.v1;
+
+import "google/protobuf/descriptor.proto";
+import "rules/string_rules.proto";
+import "rules/integer_rules.proto";
+import "rules/enum_rules.proto";
+import "rules/object_rules.proto";
+
+message Rules {
+  /*
+    Allgemeine Objekt Regeln.
+  */
+  optional ObjectRules object = 1;
+
+  /*
+    Enum Regeln.
+  */
+  optional EnumRules enum = 2;
+
+  /*
+    String Regeln.
+  */
+  optional StringRules string = 3;
+
+  /*
+    Integer Regeln.
+  */
+  optional IntegerRules integer = 4;
+}
+
+extend google.protobuf.FieldOptions {
+  optional Rules rules = 50001;
+}

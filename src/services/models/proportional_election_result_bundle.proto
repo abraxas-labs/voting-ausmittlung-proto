@@ -30,7 +30,6 @@ message ProportionalElectionResultBallot {
   int32 number = 1;
 
   /*
-    validations: typeof(int32),min-value(0),max-value(Int32.Max)
     description: Anzahl leere Zeilen
   */
   int32 empty_vote_count = 2;

@@ -7,6 +7,7 @@ package abraxas.voting.ausmittlung.services.v1.requests;
 
 import "google/protobuf/wrappers.proto";
 import "requests/count_of_voters_requests.proto";
+import "rules/rules.proto";
 import "shared/vote.proto";
 
 /*
@@ -20,7 +21,7 @@ message GetVoteResultRequest {
     validations: is-guid,allow-undefined
     description: Eindeutige Identifikation der Abstimmung.
   */
-  string vote_id = 1;
+  string vote_id = 1 [(validation.v1.rules).string = { guid: true, allow_empty: true }];
 
   /*
     ech-name: countingCircleId
@@ -29,13 +30,13 @@ message GetVoteResultRequest {
     validations: is-guid,allow-undefined
     description: Eindeutige Identifikation des Auszählungskreises. Es handelt sich dabei um die lokale Identifikation des Quellregisters.
   */
-  string counting_circle_id = 2;
+  string counting_circle_id = 2 [(validation.v1.rules).string = { guid: true, allow_empty: true }];
 
   /*
     validations: is-guid,allow-undefined
     description: Eindeutige Identifikation des Abstimmungsresultates.
   */
-  string vote_result_id = 3;
+  string vote_result_id = 3 [(validation.v1.rules).string = { guid: true, allow_empty: true }];
 }
 
 message DefineVoteResultEntryRequest {
@@ -43,13 +44,13 @@ message DefineVoteResultEntryRequest {
     validations: is-guid
     description: Eindeutige Identifikation des Abstimmungsresultates.
   */
-  string vote_result_id = 1;
+  string vote_result_id = 1 [(validation.v1.rules).string.guid = true];
 
   /*
     validations: exact-enum
     description: Erfassungsmethode der Ergebnisse.
   */
-  shared.v1.VoteResultEntry result_entry = 2;
+  shared.v1.VoteResultEntry result_entry = 2 [(validation.v1.rules).enum.exact_enum = true];
 
   /*
     description: Parameter für Wahlzettelerfassung.
@@ -62,7 +63,7 @@ message DefineVoteResultEntryParamsRequest {
     validations: typeof(int32),min-value(1),max-value(100)
     description: Prozentuale Stichprobengrösse für die Auszählung der Wahlzettel.
   */
-  int32 ballot_bundle_sample_size_percent = 1;
+  int32 ballot_bundle_sample_size_percent = 1 [(validation.v1.rules).integer = { min_value: 1, max_value: 100 }];
 
   /*
     validations: is-type(bool)
@@ -76,7 +77,7 @@ message EnterVoteResultCountOfVotersRequest {
     validations: is-guid
     description: Eindeutige Identifikation des Abstimmungsresultates.
   */
-  string vote_result_id = 1;
+  string vote_result_id = 1 [(validation.v1.rules).string.guid = true];
   repeated EnterVoteBallotResultsCountOfVotersRequest results_count_of_voters = 2;
 }
 
@@ -85,12 +86,12 @@ message EnterVoteBallotResultsCountOfVotersRequest {
     validations: is-guid
     description: Eindeutige Identifikation des Wahlzettels.
   */
-  string ballot_id = 1;
+  string ballot_id = 1 [(validation.v1.rules).string.guid = true];
 
   /*
     description: Erfasste Wählerdaten für das Geschäft.
   */
-  EnterPoliticalBusinessCountOfVotersRequest count_of_voters = 2;
+  EnterPoliticalBusinessCountOfVotersRequest count_of_voters = 2 [(validation.v1.rules).object.required = true];
 }
 
 message EnterVoteResultsRequest {
@@ -98,7 +99,7 @@ message EnterVoteResultsRequest {
     validations: is-guid
     description: Eindeutige Identifikation des Abstimmungsresultates.
   */
-  string vote_result_id = 1;
+  string vote_result_id = 1 [(validation.v1.rules).string.guid = true];
   repeated EnterVoteBallotResultsRequest results = 2;
 }
 
@@ -107,7 +108,7 @@ message EnterVoteResultCorrectionRequest {
     validations: is-guid
     description: Eindeutige Identifikation des Abstimmungsresultates.
   */
-  string vote_result_id = 1;
+  string vote_result_id = 1 [(validation.v1.rules).string.guid = true];
 
   /*
     description: Eingabe Resultate für Wahlzettel.
@@ -119,13 +120,13 @@ message EnterVoteBallotResultsRequest {
   /*
     validations: is-guid
     description: Eindeutige Identifikation des Wahlzettels.
-  */  
-  string ballot_id = 1;
+  */
+  string ballot_id = 1 [(validation.v1.rules).string.guid = true];
 
   /*
     description: Erfasste Wählerdaten für das Geschäft.
   */
-  EnterPoliticalBusinessCountOfVotersRequest count_of_voters = 2;
+  EnterPoliticalBusinessCountOfVotersRequest count_of_voters = 2 [(validation.v1.rules).object.required = true];
 
   /*
     description: Resultate der Fragen eines Stimmzettels.
@@ -141,54 +142,54 @@ message EnterVoteBallotResultsRequest {
 
 message EnterVoteBallotQuestionResultRequest {
   /*
-    validations: typeof(int32),min-value(1),max-value(Int32.Max)
+    validations: typeof(int32),min-value(1),max-value(50)
     description: Fragennummer
   */
-  int32 question_number = 1;
+  int32 question_number = 1 [(validation.v1.rules).integer = { min_value: 1, max_value: 50}];
 
   /*
-    validations: typeof(int32),min-value(0),max-value(Int32.Max),allow-undefined
+    validations: typeof(int32),min-value(0),max-value(1000000),allow-undefined
     description: Anzahl 'Ja' Stimmen
   */
-  google.protobuf.Int32Value received_count_yes = 2;
+  google.protobuf.Int32Value received_count_yes = 2 [(validation.v1.rules).integer = { min_value: 0, max_value: 1000000}];
 
   /*
-    validations: typeof(int32),min-value(0),max-value(Int32.Max),allow-undefined
+    validations: typeof(int32),min-value(0),max-value(1000000),allow-undefined
     description: Anzahl 'Nein' Stimmen
   */
-  google.protobuf.Int32Value received_count_no = 3;
+  google.protobuf.Int32Value received_count_no = 3 [(validation.v1.rules).integer = { min_value: 0, max_value: 1000000}];
 
   /*
-    validations: typeof(int32),min-value(0),max-value(Int32.Max),allow-undefined
+    validations: typeof(int32),min-value(0),max-value(1000000),allow-undefined
     description: Anzahl 'Undefinierter' Stimmen
   */
-  google.protobuf.Int32Value received_count_unspecified = 4;
+  google.protobuf.Int32Value received_count_unspecified = 4 [(validation.v1.rules).integer = { min_value: 0, max_value: 1000000}];
 }
 
 message EnterVoteTieBreakQuestionResultRequest {
   /*
-    validations: typeof(int32),min-value(1),max-value(Int32.Max)
+    validations: typeof(int32),min-value(1),max-value(50)
     description: Fragennummer
   */
-  int32 question_number = 1;
+  int32 question_number = 1 [(validation.v1.rules).integer = { min_value: 1, max_value: 50}];
 
   /*
-    validations: typeof(int32),min-value(0),max-value(Int32.Max),allow-undefined
+    validations: typeof(int32),min-value(0),max-value(1000000),allow-undefined
     description: Anzahl 'Q1' Stimmen
   */
-  google.protobuf.Int32Value received_count_q1 = 2;
+  google.protobuf.Int32Value received_count_q1 = 2 [(validation.v1.rules).integer = { min_value: 0, max_value: 1000000}];
 
   /*
-    validations: typeof(int32),min-value(0),max-value(Int32.Max),allow-undefined
+    validations: typeof(int32),min-value(0),max-value(1000000),allow-undefined
     description: Anzahl 'Q2' Stimmen
   */
-  google.protobuf.Int32Value received_count_q2 = 3;
+  google.protobuf.Int32Value received_count_q2 = 3 [(validation.v1.rules).integer = { min_value: 0, max_value: 1000000}];
 
   /*
-    validations: typeof(int32),min-value(0),max-value(Int32.Max),allow-undefined
+    validations: typeof(int32),min-value(0),max-value(1000000),allow-undefined
     description: Anzahl 'Undefinierter' Stimmen
   */
-  google.protobuf.Int32Value received_count_unspecified = 4;
+  google.protobuf.Int32Value received_count_unspecified = 4 [(validation.v1.rules).integer = { min_value: 0, max_value: 1000000}];
 }
 
 message VoteResultPrepareSubmissionFinishedRequest {
@@ -196,7 +197,7 @@ message VoteResultPrepareSubmissionFinishedRequest {
     validations: is-guid
     description: Eindeutige Identifikation des Abstimmungsresultates.
   */
-  string vote_result_id = 1;
+  string vote_result_id = 1 [(validation.v1.rules).string.guid = true];
 }
 
 message VoteResultSubmissionFinishedRequest {
@@ -204,13 +205,13 @@ message VoteResultSubmissionFinishedRequest {
     validations: is-guid
     description: Eindeutige Identifikation des Abstimmungsresultates.
   */
-  string vote_result_id = 1;
+  string vote_result_id = 1 [(validation.v1.rules).string.guid = true];
 
   /*
-    validations: min-length(32), max-length(36),standard-singleline-text
+    validations: is-guid
     description: Eindeutige, technische Identifikation der Zweifaktor-Transaktion (siehe: https://docs.nevis.net/apidoc/authcloud/#enroll-your-access-app)
   */
-  string second_factor_transaction_id = 2;
+  string second_factor_transaction_id = 2 [(validation.v1.rules).string.guid = true];
 }
 
 message VoteResultPrepareCorrectionFinishedRequest {
@@ -218,7 +219,7 @@ message VoteResultPrepareCorrectionFinishedRequest {
     validations: is-guid
     description: Eindeutige Identifikation des Abstimmungsresultates.
   */
-  string vote_result_id = 1;
+  string vote_result_id = 1 [(validation.v1.rules).string.guid = true];
 }
 
 message VoteResultCorrectionFinishedRequest {
@@ -226,19 +227,19 @@ message VoteResultCorrectionFinishedRequest {
     validations: is-guid
     description: Eindeutige Identifikation des Abstimmungsresultates.
   */
-  string vote_result_id = 1;
+  string vote_result_id = 1 [(validation.v1.rules).string.guid = true];
 
   /*
     validations: max-length(500),standard-multiline-text,allow-undefined
     description: Kommentar zur abgeschlossenen Korrektur.
   */
-  string comment = 2;
+  string comment = 2 [(validation.v1.rules).string = { max_length: 500, complex_ml_text: true, allow_empty: true }];
 
   /*
-    validations: min-length(32), max-length(36),standard-singleline-text
+    validations: is-guid
     description: Eindeutige, technische Identifikation der Zweifaktor-Transaktion (siehe: https://docs.nevis.net/apidoc/authcloud/#enroll-your-access-app)
   */
-  string second_factor_transaction_id = 3;
+  string second_factor_transaction_id = 3 [(validation.v1.rules).string.guid = true];
 }
 
 message VoteResultFlagForCorrectionRequest {
@@ -246,13 +247,13 @@ message VoteResultFlagForCorrectionRequest {
     validations: is-guid
     description: Eindeutige Identifikation des Abstimmungsresultates.
   */
-  string vote_result_id = 1;
+  string vote_result_id = 1 [(validation.v1.rules).string.guid = true];
 
   /*
     validations: max-length(500),standard-multiline-text,allow-undefined
     description: Kommentar für angeforderte Korrektur.
   */
-  string comment = 2;
+  string comment = 2 [(validation.v1.rules).string = { max_length: 500, complex_ml_text: true, allow_empty: true }];
 }
 
 message VoteResultAuditedTentativelyRequest {
@@ -260,7 +261,7 @@ message VoteResultAuditedTentativelyRequest {
     validations: is-guid
     description: Eindeutige Identifikationen der Abstimmungsresultate.
   */
-  repeated string vote_result_ids = 1;
+  repeated string vote_result_ids = 1 [(validation.v1.rules).string.guid = true];
 }
 
 message VoteResultResetToSubmissionFinishedRequest {
@@ -268,7 +269,7 @@ message VoteResultResetToSubmissionFinishedRequest {
     validations: is-guid
     description: Eindeutige Identifikation des Abstimmungsresultates.
   */
-  string vote_result_id = 1;
+  string vote_result_id = 1 [(validation.v1.rules).string.guid = true];
 }
 
 message VoteResultsPlausibiliseRequest {
@@ -276,7 +277,7 @@ message VoteResultsPlausibiliseRequest {
     validations: is-guid
     description: Eindeutige Identifikation des Abstimmungsresultates.
   */
-  repeated string vote_result_ids = 1;
+  repeated string vote_result_ids = 1 [(validation.v1.rules).string.guid = true];
 }
 
 message VoteResultsResetToAuditedTentativelyRequest {
@@ -284,7 +285,7 @@ message VoteResultsResetToAuditedTentativelyRequest {
     validations: is-guid
     description: Eindeutige Identifikation des Abstimmungsresultates.
   */
-  repeated string vote_result_ids = 1;
+  repeated string vote_result_ids = 1 [(validation.v1.rules).string.guid = true];
 }
 
 /*
@@ -298,7 +299,7 @@ message GetVoteEndResultRequest {
     validations: is-guid
     description: Eindeutige Identifikation der Abstimmung.
   */
-  string vote_id = 1;
+  string vote_id = 1 [(validation.v1.rules).string.guid = true];
 }
 
 message PrepareFinalizeVoteEndResultRequest {
@@ -309,7 +310,7 @@ message PrepareFinalizeVoteEndResultRequest {
     validations: is-guid
     description: Eindeutige Identifikation der Abstimmung.
   */
-  string vote_id = 1;
+  string vote_id = 1 [(validation.v1.rules).string.guid = true];
 }
 
 message FinalizeVoteEndResultRequest {
@@ -320,13 +321,13 @@ message FinalizeVoteEndResultRequest {
     validations: is-guid
     description: Eindeutige Identifikation der Abstimmung.
   */
-  string vote_id = 1;
+  string vote_id = 1 [(validation.v1.rules).string.guid = true];
 
   /*
-    validations: min-length(32), max-length(36),standard-singleline-text
+    validations: is-guid
     description: Eindeutige, technische Identifikation der Zweifaktor-Transaktion (siehe: https://docs.nevis.net/apidoc/authcloud/#enroll-your-access-app)
   */
-  string second_factor_transaction_id = 2;
+  string second_factor_transaction_id = 2 [(validation.v1.rules).string.guid = true];
 }
 
 message RevertVoteEndResultFinalizationRequest {
@@ -337,7 +338,7 @@ message RevertVoteEndResultFinalizationRequest {
     validations: is-guid
     description: Eindeutige Identifikation der Abstimmung.
   */
-  string vote_id = 1;
+  string vote_id = 1 [(validation.v1.rules).string.guid = true];
 }
 
 message GetBallotResultRequest {
@@ -345,23 +346,23 @@ message GetBallotResultRequest {
     validations: is-guid
     description: Bund ist auf Wahlzettelresultat gespeichert.
   */
-  string ballot_result_id = 1;
+  string ballot_result_id = 1 [(validation.v1.rules).string.guid = true];
 }
 
 message ValidateEnterVoteResultCountOfVotersRequest {
-  EnterVoteResultCountOfVotersRequest request = 1;
+  EnterVoteResultCountOfVotersRequest request = 1 [(validation.v1.rules).object.required = true];
 }
 
 /*
   description: Validierung der Abstimmungsresultate.
 */
 message ValidateEnterVoteResultsRequest {
-  EnterVoteResultsRequest request = 1;
+  EnterVoteResultsRequest request = 1 [(validation.v1.rules).object.required = true];
 }
 
 /*
   description: Validierung der korrigierten Abstimmungsresultate.
 */
 message ValidateEnterVoteResultCorrectionRequest {
-  EnterVoteResultCorrectionRequest request = 1;
+  EnterVoteResultCorrectionRequest request = 1 [(validation.v1.rules).object.required = true];
 }

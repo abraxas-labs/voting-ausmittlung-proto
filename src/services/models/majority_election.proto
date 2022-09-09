@@ -53,13 +53,11 @@ message MajorityElection {
   bool candidate_check_digit = 9;
 
   /*
-    validations: typeof(int32),min-value(1),max-value(Int32.Max)
     description: Bundgrösse für die Auszählung der Wahlzettel.
   */
   int32 ballot_bundle_size = 10;
 
   /*
-    validations: typeof(int32),min-value(1),max-value(Int32.Max)
     description: Stichprobengrösse für die Auszählung der Wahlzettel.
   */
   int32 ballot_bundle_sample_size = 11;

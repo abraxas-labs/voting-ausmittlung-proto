@@ -6,6 +6,7 @@ syntax = "proto3";
 package abraxas.voting.ausmittlung.services.v1.requests;
 
 import "google/protobuf/wrappers.proto";
+import "rules/rules.proto";
 import "shared/vote_result.proto";
 
 message GetVoteResultBundlesRequest {
@@ -13,7 +14,7 @@ message GetVoteResultBundlesRequest {
     validations: is-guid
     description: Bund ist auf Wahlzettelresultat gespeichert.
   */
-  string ballot_result_id = 1;
+  string ballot_result_id = 1 [(validation.v1.rules).string.guid = true];
 }
 
 message GetVoteResultBundleRequest {
@@ -21,7 +22,7 @@ message GetVoteResultBundleRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Bundes.
   */
-  string bundle_id = 1;
+  string bundle_id = 1 [(validation.v1.rules).string.guid = true];
 }
 
 message GetVoteResultBallotRequest {
@@ -29,16 +30,16 @@ message GetVoteResultBallotRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Bundes.
   */
-  string bundle_id = 1;
+  string bundle_id = 1 [(validation.v1.rules).string.guid = true];
 
   /*
     ech-name: electronicBallotIdentification
     ech-length: [1,50]
     ech-type:: xs:token
-    validations: typeof(int32),min-value(1),max-value(Int32.MaxValue)
+    validations: typeof(int32),min-value(1),max-value(1000000)
     description: Eindeutige, technische Identifikation des Wahlzettels.
   */
-  int32 ballot_number = 2;
+  int32 ballot_number = 2 [(validation.v1.rules).integer = { min_value: 1, max_value: 1000000}];
 }
 
 message CreateVoteResultBundleRequest {
@@ -46,19 +47,19 @@ message CreateVoteResultBundleRequest {
     validations: is-guid
     description: Eindeutige Identifikation des Abstimmungsresultates.
   */
-  string vote_result_id = 1;
+  string vote_result_id = 1 [(validation.v1.rules).string.guid = true];
 
   /*
     validations: is-guid
     description: Bund ist auf Wahlzettelresultat gespeichert.
   */
-  string ballot_result_id = 2;
+  string ballot_result_id = 2 [(validation.v1.rules).string.guid = true];
 
   /*
-    validations: typeof(int32),min-value(1),max-value(Int32.MaxValue)
+    validations: typeof(int32),min-value(1),max-value(1000000)
     description: Eindeutiger numerischer Wert für den Bund.
   */
-  google.protobuf.Int32Value bundle_number = 3;
+  google.protobuf.Int32Value bundle_number = 3 [(validation.v1.rules).integer = { min_value: 1, max_value: 1000000}];
 }
 
 message DeleteVoteResultBundleRequest {
@@ -66,13 +67,13 @@ message DeleteVoteResultBundleRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Bundes.
   */
-  string bundle_id = 1;
+  string bundle_id = 1 [(validation.v1.rules).string.guid = true];
 
   /*
     validations: is-guid
     description: bundle is stored on ballot result
   */
-  string ballot_result_id = 2;
+  string ballot_result_id = 2 [(validation.v1.rules).string.guid = true];
 }
 
 message RejectVoteBundleReviewRequest {
@@ -80,7 +81,7 @@ message RejectVoteBundleReviewRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Bundes.
   */
-  string bundle_id = 1;
+  string bundle_id = 1 [(validation.v1.rules).string.guid = true];
 }
 
 message SucceedVoteBundleReviewRequest {
@@ -88,7 +89,7 @@ message SucceedVoteBundleReviewRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Bundes.
   */
-  string bundle_id = 1;
+  string bundle_id = 1 [(validation.v1.rules).string.guid = true];
 }
 
 message CreateVoteResultBallotRequest {
@@ -96,7 +97,7 @@ message CreateVoteResultBallotRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Bundes.
   */
-  string bundle_id = 1;
+  string bundle_id = 1 [(validation.v1.rules).string.guid = true];
 
   /*
     description: Resultate der Fragen eines Stimmzettels.
@@ -115,16 +116,16 @@ message UpdateVoteResultBallotRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Bundes.
   */
-  string bundle_id = 1;
+  string bundle_id = 1 [(validation.v1.rules).string.guid = true];
 
   /*
     ech-name: electronicBallotIdentification
     ech-length: [1,50]
     ech-type:: xs:token
-    validations: typeof(int32),min-value(1),max-value(Int32.MaxValue)
+    validations: typeof(int32),min-value(1),max-value(1000000)
     description: Eindeutige, technische Identifikation des Wahlzettels.
   */
-  int32 ballot_number = 2;
+  int32 ballot_number = 2 [(validation.v1.rules).integer = { min_value: 1, max_value: 1000000}];
 
   /*
     description: Resultate der Fragen eines Stimmzettels.
@@ -143,16 +144,16 @@ message UpdateVoteResultBallotRequest {
 */
 message CreateUpdateVoteResultBallotQuestionAnswerRequest {
   /*
-    validations: typeof(int32),min-value(1),max-value(Int32.Max)
+    validations: typeof(int32),min-value(1),max-value(50)
     description: Fragennummer
   */
-  int32 question_number = 1;
+  int32 question_number = 1 [(validation.v1.rules).integer = { min_value: 1, max_value: 50}];
 
   /*
     validations: is-enum,allow-undefined
     description: Fragennummer
   */
-  shared.v1.BallotQuestionAnswer answer = 2;
+  shared.v1.BallotQuestionAnswer answer = 2 [(validation.v1.rules).enum = { exact_enum: true, allow_unspecified: true }];
 }
 
 /*
@@ -160,16 +161,16 @@ message CreateUpdateVoteResultBallotQuestionAnswerRequest {
 */
 message CreateUpdateVoteResultBallotTieBreakQuestionAnswerRequest {
   /*
-    validations: typeof(int32),min-value(1),max-value(Int32.Max)
+    validations: typeof(int32),min-value(1),max-value(50)
     description: Fragennummer
   */
-  int32 question_number = 1;
+  int32 question_number = 1 [(validation.v1.rules).integer = { min_value: 1, max_value: 50}];
 
   /*
     validations: is-enum,allow-undefined
     description: Fragennummer
   */
-  shared.v1.TieBreakQuestionAnswer answer = 2;
+  shared.v1.TieBreakQuestionAnswer answer = 2 [(validation.v1.rules).enum = { exact_enum: true, allow_unspecified: true }];
 }
 
 message DeleteVoteResultBallotRequest {
@@ -177,16 +178,16 @@ message DeleteVoteResultBallotRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Bundes.
   */
-  string bundle_id = 1;
+  string bundle_id = 1 [(validation.v1.rules).string.guid = true];
 
   /*
     ech-name: electronicBallotIdentification
     ech-length: [1,50]
     ech-type:: xs:token
-    validations: typeof(int32),min-value(1),max-value(Int32.MaxValue)
+    validations: typeof(int32),min-value(1),max-value(1000000)
     description: Eindeutige, technische Identifikation des Wahlzettels.
   */
-  int32 ballot_number = 2;
+  int32 ballot_number = 2 [(validation.v1.rules).integer = { min_value: 1, max_value: 1000000}];
 }
 
 message VoteResultBundleSubmissionFinishedRequest {
@@ -194,7 +195,7 @@ message VoteResultBundleSubmissionFinishedRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Bundes.
   */
-  string bundle_id = 1;
+  string bundle_id = 1 [(validation.v1.rules).string.guid = true];
 }
 
 message VoteResultBundleCorrectionFinishedRequest {
@@ -202,7 +203,7 @@ message VoteResultBundleCorrectionFinishedRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Bundes.
   */
-  string bundle_id = 1;
+  string bundle_id = 1 [(validation.v1.rules).string.guid = true];
 }
 
 message GetVoteResultBundleChangesRequest {
@@ -210,5 +211,5 @@ message GetVoteResultBundleChangesRequest {
     validations: is-guid
     description: Bund ist auf Wahlzettelresultat gespeichert.
   */
-  string ballot_result_id = 1;
+  string ballot_result_id = 1 [(validation.v1.rules).string.guid = true];
 }

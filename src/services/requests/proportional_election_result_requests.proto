@@ -6,6 +6,7 @@ syntax = "proto3";
 package abraxas.voting.ausmittlung.services.v1.requests;
 
 import "requests/count_of_voters_requests.proto";
+import "rules/rules.proto";
 import "shared/ballot_number_generation.proto";
 
 /*
@@ -19,7 +20,7 @@ message GetProportionalElectionResultRequest {
     validations: is-guid,allow-undefined
     description: Eindeutige, technische Identifikation der Wahl.
   */
-  string election_id = 1;
+  string election_id = 1 [(validation.v1.rules).string = { guid: true, allow_empty: true }];
 
   /*
     ech-name: countingCircleId
@@ -28,13 +29,13 @@ message GetProportionalElectionResultRequest {
     validations: is-guid,allow-undefined
     description: Eindeutige Identifikation des Auszählungskreises. Es handelt sich dabei um die lokale Identifikation des Quellregisters.
   */
-  string counting_circle_id = 2;
+  string counting_circle_id = 2 [(validation.v1.rules).string = { guid: true, allow_empty: true }];
 
   /*
     validations: is-guid,allow-undefined
     description: Eindeutige, technische Identifikation des Wahlergebnisses.
   */
-  string election_result_id = 3;
+  string election_result_id = 3 [(validation.v1.rules).string = { guid: true, allow_empty: true }];
 }
 
 message GetProportionalElectionUnmodifiedListResultsRequest {
@@ -42,7 +43,7 @@ message GetProportionalElectionUnmodifiedListResultsRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Wahlergebnisses.
   */
-  string election_result_id = 1;
+  string election_result_id = 1 [(validation.v1.rules).string.guid = true];
 }
 
 message GetProportionalElectionListResultsRequest {
@@ -50,7 +51,7 @@ message GetProportionalElectionListResultsRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Wahlergebnisses.
   */
-  string election_result_id = 1;
+  string election_result_id = 1 [(validation.v1.rules).string.guid = true];
 }
 
 message DefineProportionalElectionResultEntryRequest {
@@ -58,26 +59,26 @@ message DefineProportionalElectionResultEntryRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Wahlergebnisses.
   */
-  string election_result_id = 1;
+  string election_result_id = 1 [(validation.v1.rules).string.guid = true];
 
   /*
     description: Parameter für Wahlzettelerfassung.
   */
-  DefineProportionalElectionResultEntryParamsRequest result_entry_params = 2;
+  DefineProportionalElectionResultEntryParamsRequest result_entry_params = 2 [(validation.v1.rules).object.required = true];
 }
 
 message DefineProportionalElectionResultEntryParamsRequest {
   /*
-    validations: typeof(int32),min-value(1),max-value(Int32.Max)
+    validations: typeof(int32),min-value(1),max-value(500)
     description: Bundgrösse für die Auszählung der Wahlzettel.
   */
-  int32 ballot_bundle_size = 2;
+  int32 ballot_bundle_size = 2 [(validation.v1.rules).integer = { min_value: 1, max_value: 500}];
 
   /*
-    validations: typeof(int32),min-value(1),max-value(Int32.Max)
+    validations: typeof(int32),min-value(1),max-value(500)
     description: Stichprobengrösse für die Auszählung der Wahlzettel.
   */
-  int32 ballot_bundle_sample_size = 3;
+  int32 ballot_bundle_sample_size = 3 [(validation.v1.rules).integer = { min_value: 1, max_value: 500}];
 
   /*
     validations: is-type(bool)
@@ -89,7 +90,7 @@ message DefineProportionalElectionResultEntryParamsRequest {
     validations: exact-enum
     description: Art der Vergabe von Wahlzettelnummern.
   */
-  shared.v1.BallotNumberGeneration ballot_number_generation = 5;
+  shared.v1.BallotNumberGeneration ballot_number_generation = 5 [(validation.v1.rules).enum.exact_enum = true];
 
   /*
     validations: is-type(bool)
@@ -103,12 +104,12 @@ message EnterProportionalElectionCountOfVotersRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Wahlergebnisses.
   */
-  string election_result_id = 1;
+  string election_result_id = 1 [(validation.v1.rules).string.guid = true];
 
   /*
     description: Erfasste Wählerdaten für das Geschäft.
   */
-  EnterPoliticalBusinessCountOfVotersRequest count_of_voters = 2;
+  EnterPoliticalBusinessCountOfVotersRequest count_of_voters = 2 [(validation.v1.rules).object.required = true];
 }
 
 /*
@@ -119,7 +120,7 @@ message EnterProportionalElectionUnmodifiedListResultsRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Wahlergebnisses.
   */
-  string election_result_id = 1;
+  string election_result_id = 1 [(validation.v1.rules).string.guid = true];
 
   /*
     description: Wahlergebnis eines unveränderten Wahlzettels.
@@ -135,21 +136,21 @@ message EnterProportionalElectionUnmodifiedListResultRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation der Liste.
   */
-  string list_id = 1;
+  string list_id = 1 [(validation.v1.rules).string.guid = true];
 
   /*
-    validations: typeof(int32),min-value(0),max-value(Int32.Max)
+    validations: typeof(int32),min-value(0),max-value(1000000)
     description: Anzahl gültiger Stimmen.
   */
-  int32 vote_count = 2;
+  int32 vote_count = 2 [(validation.v1.rules).integer = { min_value: 0, max_value: 1000000}];
 }
 
 message ProportionalElectionResultPrepareSubmissionFinishedRequest {
   /*
     validations: is-guid
     description: Eindeutige, technische Identifikation des Wahlergebnisses.
-  */  
-  string election_result_id = 1;
+  */
+  string election_result_id = 1 [(validation.v1.rules).string.guid = true];
 }
 
 message ProportionalElectionResultSubmissionFinishedRequest {
@@ -157,13 +158,13 @@ message ProportionalElectionResultSubmissionFinishedRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Wahlergebnisses.
   */
-  string election_result_id = 1;
+  string election_result_id = 1 [(validation.v1.rules).string.guid = true];
 
   /*
-    validations: min-length(32), max-length(36),standard-singleline-text
+    validations: is-guid
     description: Eindeutige, technische Identifikation der Zweifaktor-Transaktion (siehe: https://docs.nevis.net/apidoc/authcloud/#enroll-your-access-app)
   */
-  string second_factor_transaction_id = 2;
+  string second_factor_transaction_id = 2 [(validation.v1.rules).string.guid = true];
 }
 
 message ProportionalElectionResultPrepareCorrectionFinishedRequest {
@@ -171,7 +172,7 @@ message ProportionalElectionResultPrepareCorrectionFinishedRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Wahlergebnisses.
   */
-  string election_result_id = 1;
+  string election_result_id = 1 [(validation.v1.rules).string.guid = true];
 }
 
 message ProportionalElectionResultCorrectionFinishedRequest {
@@ -179,19 +180,19 @@ message ProportionalElectionResultCorrectionFinishedRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Wahlergebnisses.
   */
-  string election_result_id = 1;
+  string election_result_id = 1 [(validation.v1.rules).string.guid = true];
 
   /*
     validations: max-length(500),standard-multiline-text,allow-undefined
     description: Kommentar zur abgeschlossenen Korrektur.
   */
-  string comment = 2;
+  string comment = 2 [(validation.v1.rules).string = { max_length: 500, complex_ml_text: true, allow_empty: true }];
 
   /*
-    validations: min-length(32), max-length(36),standard-singleline-text
+    validations: is-guid
     description: Eindeutige, technische Identifikation der Zweifaktor-Transaktion (siehe: https://docs.nevis.net/apidoc/authcloud/#enroll-your-access-app)
   */
-  string second_factor_transaction_id = 3;
+  string second_factor_transaction_id = 3 [(validation.v1.rules).string.guid = true];
 }
 
 message ProportionalElectionResultFlagForCorrectionRequest {
@@ -199,13 +200,13 @@ message ProportionalElectionResultFlagForCorrectionRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Wahlergebnisses.
   */
-  string election_result_id = 1;
+  string election_result_id = 1 [(validation.v1.rules).string.guid = true];
 
   /*
     validations: max-length(500),standard-multiline-text,allow-undefined
     description: Kommentar für angeforderte Korrektur.
   */
-  string comment = 2;
+  string comment = 2 [(validation.v1.rules).string = { max_length: 500, complex_ml_text: true, allow_empty: true }];
 }
 
 message ProportionalElectionResultAuditedTentativelyRequest {
@@ -213,7 +214,7 @@ message ProportionalElectionResultAuditedTentativelyRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Wahlergebnisses.
   */
-  repeated string election_result_ids = 1;
+  repeated string election_result_ids = 1 [(validation.v1.rules).string.guid = true];
 }
 
 message ProportionalElectionResultResetToSubmissionFinishedRequest {
@@ -221,7 +222,7 @@ message ProportionalElectionResultResetToSubmissionFinishedRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Wahlergebnisses.
   */
-  string election_result_id = 1;
+  string election_result_id = 1 [(validation.v1.rules).string.guid = true];
 }
 
 message ProportionalElectionResultsPlausibiliseRequest {
@@ -229,7 +230,7 @@ message ProportionalElectionResultsPlausibiliseRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Wahlergebnisses.
   */
-  repeated string election_result_ids = 1;
+  repeated string election_result_ids = 1 [(validation.v1.rules).string.guid = true];
 }
 
 message ProportionalElectionResultsResetToAuditedTentativelyRequest {
@@ -237,7 +238,7 @@ message ProportionalElectionResultsResetToAuditedTentativelyRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Wahlergebnisses.
   */
-  repeated string election_result_ids = 1;
+  repeated string election_result_ids = 1 [(validation.v1.rules).string.guid = true];
 }
 
 message GetProportionalElectionEndResultRequest {
@@ -248,7 +249,7 @@ message GetProportionalElectionEndResultRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation der Proporzwahl.
   */
-  string proportional_election_id = 1;
+  string proportional_election_id = 1 [(validation.v1.rules).string.guid = true];
 }
 
 message GetProportionalElectionListEndResultAvailableLotDecisionsRequest {
@@ -256,7 +257,7 @@ message GetProportionalElectionListEndResultAvailableLotDecisionsRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation der Proporzwahl-Liste.
   */
-  string proportional_election_list_id = 1;
+  string proportional_election_list_id = 1 [(validation.v1.rules).string.guid = true];
 }
 
 message UpdateProportionalElectionListEndResultLotDecisionsRequest {
@@ -264,7 +265,7 @@ message UpdateProportionalElectionListEndResultLotDecisionsRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation der Proporzwahl-Liste.
   */
-  string proportional_election_list_id = 1;
+  string proportional_election_list_id = 1 [(validation.v1.rules).string.guid = true];
 
   /*
     description: Losentscheide fällen.
@@ -280,13 +281,13 @@ message UpdateProportionalElectionEndResultLotDecisionRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Kandidaten.
   */
-  string candidate_id = 1;
+  string candidate_id = 1 [(validation.v1.rules).string.guid = true];
 
   /*
-    validations: min-value(1),max-value(Int32.Max)
+    validations: min-value(1),max-value(50)
     description: Rang nach Losentscheid
   */
-  int32 rank = 2;
+  int32 rank = 2 [(validation.v1.rules).integer = { min_value: 1, max_value: 50}];
 }
 
 message PrepareFinalizeProportionalElectionEndResultRequest {
@@ -296,8 +297,8 @@ message PrepareFinalizeProportionalElectionEndResultRequest {
     ech-type:: xs:token
     validations: is-guid
     description: Eindeutige, technische Identifikation der Proporzwahl.
-  */  
-  string proportional_election_id = 1;
+  */
+  string proportional_election_id = 1 [(validation.v1.rules).string.guid = true];
 }
 
 message FinalizeProportionalElectionEndResultRequest {
@@ -308,13 +309,13 @@ message FinalizeProportionalElectionEndResultRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation der Proporzwahl.
   */
-  string proportional_election_id = 1;
+  string proportional_election_id = 1 [(validation.v1.rules).string.guid = true];
 
   /*
-    validations: min-length(32), max-length(36),standard-singleline-text
+    validations: is-guid
     description: Eindeutige, technische Identifikation der Zweifaktor-Transaktion (siehe: https://docs.nevis.net/apidoc/authcloud/#enroll-your-access-app)
   */
-  string second_factor_transaction_id = 2;
+  string second_factor_transaction_id = 2 [(validation.v1.rules).string.guid = true];
 }
 
 message RevertProportionalElectionEndResultFinalizationRequest {
@@ -325,9 +326,9 @@ message RevertProportionalElectionEndResultFinalizationRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation der Proporzwahl.
   */
-  string proportional_election_id = 1;
+  string proportional_election_id = 1 [(validation.v1.rules).string.guid = true];
 }
 
 message ValidateEnterProportionalElectionCountOfVotersRequest {
-  EnterProportionalElectionCountOfVotersRequest request = 1;
+  EnterProportionalElectionCountOfVotersRequest request = 1 [(validation.v1.rules).object.required = true];
 }

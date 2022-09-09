@@ -6,6 +6,7 @@ syntax = "proto3";
 package abraxas.voting.ausmittlung.services.v1.requests;
 
 import "models/political_business.proto";
+import "rules/rules.proto";
 import "shared/majority_election_write_in.proto";
 
 message ListResultImportsRequest {
@@ -16,7 +17,7 @@ message ListResultImportsRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Urnengangs.
   */
-  string contest_id = 1;
+  string contest_id = 1 [(validation.v1.rules).string.guid = true];
 }
 
 message DeleteResultImportDataRequest {
@@ -27,7 +28,7 @@ message DeleteResultImportDataRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Urnengangs.
   */
-  string contest_id = 1;
+  string contest_id = 1 [(validation.v1.rules).string.guid = true];
 }
 
 message GetMajorityElectionWriteInMappingsRequest {
@@ -38,7 +39,7 @@ message GetMajorityElectionWriteInMappingsRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Urnengangs.
   */
-  string contest_id = 1;
+  string contest_id = 1 [(validation.v1.rules).string.guid = true];
 
   /*
     ech-name: countingCircleId
@@ -47,7 +48,7 @@ message GetMajorityElectionWriteInMappingsRequest {
     validations: is-guid
     description: Eindeutige Identifikation des Auszählungskreises. Es handelt sich dabei um die lokale Identifikation des Quellregisters.
   */
-  string counting_circle_id = 2;
+  string counting_circle_id = 2 [(validation.v1.rules).string.guid = true];
 }
 
 message MapMajorityElectionWriteInsRequest {
@@ -55,7 +56,7 @@ message MapMajorityElectionWriteInsRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Imports.
   */
-  string import_id = 1;
+  string import_id = 1 [(validation.v1.rules).string.guid = true];
 
   /*
     ech-name: electionIdentification
@@ -64,7 +65,7 @@ message MapMajorityElectionWriteInsRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation der Wahl.
   */
-  string election_id = 2;
+  string election_id = 2 [(validation.v1.rules).string.guid = true];
 
   /*
     ech-name: countingCircleId
@@ -73,13 +74,13 @@ message MapMajorityElectionWriteInsRequest {
     validations: is-guid
     description: Eindeutige Identifikation des Auszählungskreises. Es handelt sich dabei um die lokale Identifikation des Quellregisters.
   */
-  string counting_circle_id = 3;
+  string counting_circle_id = 3 [(validation.v1.rules).string.guid = true];
 
   /*
     validations: exact-enum
     description: Geschäftstyp.
   */
-  models.PoliticalBusinessType political_business_type = 4;
+  models.PoliticalBusinessType political_business_type = 4 [(validation.v1.rules).enum.exact_enum = true];
   repeated MapMajorityElectionWriteInRequest mappings = 5;
 }
 
@@ -88,14 +89,14 @@ message MapMajorityElectionWriteInRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des manuell erfassten Kandidaten.
   */
-  string write_in_id = 1;
+  string write_in_id = 1 [(validation.v1.rules).string.guid = true];
 
   /*
     validations: exact-enum
     description: Geschäftstyp.
   */
-  shared.v1.MajorityElectionWriteInMappingTarget target = 2;
-  
+  shared.v1.MajorityElectionWriteInMappingTarget target = 2 [(validation.v1.rules).enum.exact_enum = true];
+
   /*
     ech-name: candidateIdentification
     ech-length: 50
@@ -103,5 +104,5 @@ message MapMajorityElectionWriteInRequest {
     validations: is-guid,allow-undefined
     description: Eindeutige, technische Identifikation des Kandidaten.
   */
-  string candidate_id = 3;
+  string candidate_id = 3 [(validation.v1.rules).string = { guid: true, allow_empty: true }];
 }

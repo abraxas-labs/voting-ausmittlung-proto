@@ -6,6 +6,7 @@ syntax = "proto3";
 package abraxas.voting.ausmittlung.services.v1.requests;
 
 import "requests/contact_person_requests.proto";
+import "rules/rules.proto";
 
 message CreateContestCountingCircleContactPersonRequest {
   /*
@@ -15,7 +16,7 @@ message CreateContestCountingCircleContactPersonRequest {
     validations: is-guid
     description: Eindeutige Identifikation des Auszählungskreises. Es handelt sich dabei um die lokale Identifikation des Quellregisters.
   */
-  string counting_circle_id = 1;
+  string counting_circle_id = 1 [(validation.v1.rules).string.guid = true];
 
   /*
     ech-name: contestIdentification
@@ -24,12 +25,12 @@ message CreateContestCountingCircleContactPersonRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Urnengangs.
   */
-  string contest_id = 2;
+  string contest_id = 2 [(validation.v1.rules).string.guid = true];
 
   /*
     description: Kontaktdaten vor und während der Abstimmung/Wahl.
   */
-  EnterContactPersonRequest contact_person_during_event = 3;
+  EnterContactPersonRequest contact_person_during_event = 3 [(validation.v1.rules).object.required = true];
 
   /*
     validations: is-type(bool)
@@ -51,12 +52,12 @@ message UpdateContestCountingCircleContactPersonRequest {
     validations: is-guid
     description: Eindeutige Identifikation des Auszählungskreises. Es handelt sich dabei um die lokale Identifikation des Quellregisters.
   */
-  string id = 1;
+  string id = 1 [(validation.v1.rules).string.guid = true];
 
   /*
     description: Kontaktdaten vor und während der Abstimmung/Wahl.
   */
-  EnterContactPersonRequest contact_person_during_event = 3;
+  EnterContactPersonRequest contact_person_during_event = 3 [(validation.v1.rules).object.required = true];
 
   /*
     validations: is-type(bool)

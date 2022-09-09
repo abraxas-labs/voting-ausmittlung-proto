@@ -6,13 +6,14 @@ syntax = "proto3";
 package abraxas.voting.ausmittlung.services.v1.requests;
 
 import "google/protobuf/wrappers.proto";
+import "rules/rules.proto";
 
 message GetProportionalElectionResultBundlesRequest {
   /*
     validations: is-guid
     description: Eindeutige, technische Identifikation des Wahlergebnisses.
-  */  
-  string election_result_id = 1;
+  */
+  string election_result_id = 1 [(validation.v1.rules).string.guid = true];
 }
 
 message GetProportionalElectionResultBundleRequest {
@@ -20,7 +21,7 @@ message GetProportionalElectionResultBundleRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Bundes.
   */
-  string bundle_id = 1;
+  string bundle_id = 1 [(validation.v1.rules).string.guid = true];
 }
 
 message GetProportionalElectionResultBallotRequest {
@@ -28,16 +29,16 @@ message GetProportionalElectionResultBallotRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Bundes.
   */
-  string bundle_id = 1;
+  string bundle_id = 1 [(validation.v1.rules).string.guid = true];
 
   /*
     ech-name: electronicBallotIdentification
     ech-length: [1,50]
     ech-type:: xs:token
-    validations: typeof(int32),min-value(1),max-value(Int32.MaxValue)
+    validations: typeof(int32),min-value(1),max-value(1000000)
     description: Eindeutige, technische Identifikation des Wahlzettels.
   */
-  int32 ballot_number = 2;
+  int32 ballot_number = 2 [(validation.v1.rules).integer = { min_value: 1, max_value: 1000000}];
 }
 
 message CreateProportionalElectionResultBundleRequest {
@@ -45,22 +46,22 @@ message CreateProportionalElectionResultBundleRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Wahlergebnisses.
   */
-  string election_result_id = 1;
+  string election_result_id = 1 [(validation.v1.rules).string.guid = true];
 
   /*
     ech-name: listIdentification
     ech-length: [1,50]
     ech-type:: xs:token
-    validations: is-guid
+    validations: is-guid,allow-undefined
     description: Eindeutige, technische Identifikation der Liste.
   */
-  string list_id = 2;
+  string list_id = 2 [(validation.v1.rules).string = { guid: true, allow_empty: true }];
 
   /*
-    validations: typeof(int32),min-value(1),max-value(Int32.MaxValue)
+    validations: typeof(int32),min-value(1),max-value(1000000)
     description: Eindeutiger numerischer Wert für den Bund.
   */
-  google.protobuf.Int32Value bundle_number = 3;
+  google.protobuf.Int32Value bundle_number = 3 [(validation.v1.rules).integer = { min_value: 1, max_value: 1000000}];
 }
 
 message DeleteProportionalElectionResultBundleRequest {
@@ -68,7 +69,7 @@ message DeleteProportionalElectionResultBundleRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Bundes.
   */
-  string bundle_id = 1;
+  string bundle_id = 1 [(validation.v1.rules).string.guid = true];
 }
 
 message RejectProportionalElectionBundleReviewRequest {
@@ -76,7 +77,7 @@ message RejectProportionalElectionBundleReviewRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Bundes.
   */
-  string bundle_id = 1;
+  string bundle_id = 1 [(validation.v1.rules).string.guid = true];
 }
 
 message SucceedProportionalElectionBundleReviewRequest {
@@ -84,7 +85,7 @@ message SucceedProportionalElectionBundleReviewRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Bundes.
   */
-  string bundle_id = 1;
+  string bundle_id = 1 [(validation.v1.rules).string.guid = true];
 }
 
 message CreateProportionalElectionResultBallotRequest {
@@ -92,13 +93,13 @@ message CreateProportionalElectionResultBallotRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Bundes.
   */
-  string bundle_id = 1;
+  string bundle_id = 1 [(validation.v1.rules).string.guid = true];
 
   /*
-    validations: typeof(int32),min-value(0),max-value(Int32.Max),allow-undefined
+    validations: typeof(int32),min-value(0),max-value(1000000),allow-undefined
     description: Anzahl leere Zeilen
   */
-  google.protobuf.Int32Value empty_vote_count = 2;
+  google.protobuf.Int32Value empty_vote_count = 2 [(validation.v1.rules).integer = { min_value: 0, max_value: 1000000}];
 
   /*
     validations: allow-undefined
@@ -112,22 +113,22 @@ message UpdateProportionalElectionResultBallotRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Bundes.
   */
-  string bundle_id = 1;
+  string bundle_id = 1 [(validation.v1.rules).string.guid = true];
 
   /*
     ech-name: electronicBallotIdentification
     ech-length: [1,50]
     ech-type:: xs:token
-    validations: typeof(int32),min-value(1),max-value(Int32.MaxValue)
+    validations: typeof(int32),min-value(1),max-value(1000000)
     description: Eindeutige, technische Identifikation des Wahlzettels.
   */
-  int32 ballot_number = 2;
+  int32 ballot_number = 2 [(validation.v1.rules).integer = { min_value: 1, max_value: 1000000}];
 
   /*
-    validations: typeof(int32),min-value(0),max-value(Int32.Max),allow-undefined
+    validations: typeof(int32),min-value(0),max-value(1000000),allow-undefined
     description: Anzahl leere Zeilen
   */
-  google.protobuf.Int32Value empty_vote_count = 3;
+  google.protobuf.Int32Value empty_vote_count = 3 [(validation.v1.rules).integer = { min_value: 0, max_value: 1000000}];
 
   /*
     validations: allow-undefined
@@ -144,13 +145,13 @@ message CreateUpdateProportionalElectionResultBallotCandidateRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Kandidaten.
   */
-  string candidate_id = 1;
+  string candidate_id = 1 [(validation.v1.rules).string.guid = true];
 
   /*
-    validations: typeof(int32),min-value(1),max-value(Int32.MaxValue)
+    validations: typeof(int32),min-value(1),max-value(50)
     description: Position auf Liste.
   */
-  int32 position = 2;
+  int32 position = 2 [(validation.v1.rules).integer = { min_value: 1, max_value: 50}];
 
   /*
     validations: type(bool)
@@ -164,16 +165,16 @@ message DeleteProportionalElectionResultBallotRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Bundes.
   */
-  string bundle_id = 1;
+  string bundle_id = 1 [(validation.v1.rules).string.guid = true];
 
   /*
     ech-name: electronicBallotIdentification
     ech-length: [1,50]
     ech-type:: xs:token
-    validations: typeof(int32),min-value(1),max-value(Int32.MaxValue)
+    validations: typeof(int32),min-value(1),max-value(1000000)
     description: Eindeutige, technische Identifikation des Wahlzettels.
   */
-  int32 ballot_number = 2;
+  int32 ballot_number = 2 [(validation.v1.rules).integer = { min_value: 1, max_value: 1000000}];
 }
 
 message ProportionalElectionResultBundleSubmissionFinishedRequest {
@@ -181,7 +182,7 @@ message ProportionalElectionResultBundleSubmissionFinishedRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Bundes.
   */
-  string bundle_id = 1;
+  string bundle_id = 1 [(validation.v1.rules).string.guid = true];
 }
 
 message ProportionalElectionResultBundleCorrectionFinishedRequest {
@@ -189,7 +190,7 @@ message ProportionalElectionResultBundleCorrectionFinishedRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Bundes.
   */
-  string bundle_id = 1;
+  string bundle_id = 1 [(validation.v1.rules).string.guid = true];
 }
 
 message GetProportionalElectionResultBundleChangesRequest {
@@ -197,5 +198,5 @@ message GetProportionalElectionResultBundleChangesRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Wahlergebnisses.
   */
-  string election_result_id = 1;
+  string election_result_id = 1 [(validation.v1.rules).string.guid = true];
 }

@@ -27,19 +27,16 @@ message MajorityElectionEndResult {
   MajorityElectionResultSubTotal conventional_sub_total = 12;
 
   /*
-    validations: typeof(int32),min-value(0),max-value(Int32.Max)
     description: Anzahl vereinzelter Nennungen eines Kandiaten (welcher sich nicht auf der Liste befindet).
   */
   int32 individual_vote_count = 13;
 
   /*
-    validations: typeof(int32),min-value(0),max-value(Int32.Max)
     description: Anzahl leere Zeilen
   */
   int32 empty_vote_count = 14;
 
   /*
-    validations: typeof(int32),min-value(0),max-value(Int32.Max)
     description: Anzahl ungültiger Abstimmungen.
   */
   int32 invalid_vote_count = 15;
@@ -63,19 +60,16 @@ message SecondaryMajorityElectionEndResult {
   MajorityElectionResultSubTotal conventional_sub_total = 4;
 
   /*
-    validations: typeof(int32),min-value(0),max-value(Int32.Max)
     description: Anzahl vereinzelter Nennungen eines Kandiaten (welcher sich nicht auf der Liste befindet).
   */
   int32 individual_vote_count = 5;
 
   /*
-    validations: typeof(int32),min-value(0),max-value(Int32.Max)
     description: Anzahl leere Zeilen
   */
   int32 empty_vote_count = 6;
 
   /*
-    validations: typeof(int32),min-value(0),max-value(Int32.Max)
     description: Anzahl ungültiger Abstimmungen.
   */
   int32 invalid_vote_count = 7;
@@ -87,7 +81,6 @@ message MajorityElectionCandidateEndResult {
   MajorityElectionCandidate candidate = 1;
 
   /*
-    validations: typeof(int32),min-value(0),max-value(Int32.Max)
     description: Anzahl gültiger Stimmen.
   */
   int32 vote_count = 2;
@@ -95,7 +88,6 @@ message MajorityElectionCandidateEndResult {
   int32 conventional_vote_count = 4;
 
   /*
-    validations: min-value(1),max-value(Int32.Max)
     description: Rang nach Losentscheid
   */
   int32 rank = 5;
@@ -136,7 +128,6 @@ message MajorityElectionEndResultLotDecision {
   string candidate_id = 1;
 
   /*
-    validations: min-value(1),max-value(Int32.Max)
     description: Rang nach Losentscheid
   */
   int32 rank = 2;
@@ -161,7 +152,6 @@ message MajorityElectionEndResultAvailableLotDecision {
   google.protobuf.Int32Value selected_rank = 2;
 
   /*
-    validations: typeof(int32),min-value(0),max-value(Int32.Max)
     description: Anzahl gültiger Stimmen.
   */
   int32 vote_count = 3;

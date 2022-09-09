@@ -7,6 +7,7 @@ package abraxas.voting.ausmittlung.services.v1.requests;
 
 import "requests/count_of_voters_requests.proto";
 import "requests/voting_cards_requests.proto";
+import "rules/rules.proto";
 
 /*
   description: Details von Stimmberechtigten und Stimmrechtsausweisen für den Auszählungskreis eines Urnenganges.
@@ -19,7 +20,7 @@ message UpdateContestCountingCircleDetailsRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Urnengangs.
   */
-  string contest_id = 1;
+  string contest_id = 1 [(validation.v1.rules).string.guid = true];
 
   /*
     ech-name: countingCircleId
@@ -28,7 +29,7 @@ message UpdateContestCountingCircleDetailsRequest {
     validations: is-guid
     description: Eindeutige Identifikation des Auszählungskreises. Es handelt sich dabei um die lokale Identifikation des Quellregisters.
   */
-  string counting_circle_id = 2;
+  string counting_circle_id = 2 [(validation.v1.rules).string.guid = true];
 
   repeated UpdateCountOfVotersInformationSubTotalRequest count_of_voters = 3;
   repeated UpdateVotingCardResultDetailRequest voting_cards = 4;
@@ -38,6 +39,6 @@ message UpdateContestCountingCircleDetailsRequest {
   description: Validierung der Angaben von Stimmberechtigten und Stimmrechtsausweisen für den Auszählungskreis eines Urnenganges.
 */
 message ValidateUpdateContestCountingCircleDetailsRequest {
-  
-  UpdateContestCountingCircleDetailsRequest request = 1;
+
+  UpdateContestCountingCircleDetailsRequest request = 1 [(validation.v1.rules).object.required = true];
 }

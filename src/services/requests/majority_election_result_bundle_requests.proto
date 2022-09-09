@@ -6,6 +6,7 @@ syntax = "proto3";
 package abraxas.voting.ausmittlung.services.v1.requests;
 
 import "google/protobuf/wrappers.proto";
+import "rules/rules.proto";
 
 /*
   description: Alle Bunde von Wahlergebnis anfragen.
@@ -15,7 +16,7 @@ message GetMajorityElectionResultBundlesRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Wahlergebnisses.
   */
-  string election_result_id = 1;
+  string election_result_id = 1 [(validation.v1.rules).string.guid = true];
 }
 
 /*
@@ -26,7 +27,7 @@ message GetMajorityElectionResultBundleRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Bundes.
   */
-  string bundle_id = 1;
+  string bundle_id = 1 [(validation.v1.rules).string.guid = true];
 }
 
 /*
@@ -37,16 +38,16 @@ message GetMajorityElectionResultBallotRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Bundes.
   */
-  string bundle_id = 1;
+  string bundle_id = 1 [(validation.v1.rules).string.guid = true];
 
   /*
     ech-name: electronicBallotIdentification
     ech-length: [1,50]
     ech-type:: xs:token
-    validations: typeof(int32),min-value(1),max-value(Int32.MaxValue)
+    validations: typeof(int32),min-value(1),max-value(1000000)
     description: Eindeutige, technische Identifikation des Wahlzettels.
   */
-  int32 ballot_number = 2;
+  int32 ballot_number = 2 [(validation.v1.rules).integer = { min_value: 1, max_value: 1000000}];
 }
 
 /*
@@ -56,14 +57,14 @@ message CreateMajorityElectionResultBundleRequest {
   /*
     validations: is-guid
     description: Eindeutige, technische Identifikation des Wahlergebnisses.
-  */  
-  string election_result_id = 1;
+  */
+  string election_result_id = 1 [(validation.v1.rules).string.guid = true];
 
   /*
-    validations: typeof(int32),min-value(1),max-value(Int32.MaxValue)
+    validations: typeof(int32),min-value(1),max-value(1000000)
     description: Eindeutiger numerischer Wert für den Bund.
   */
-  google.protobuf.Int32Value bundle_number = 2;
+  google.protobuf.Int32Value bundle_number = 2 [(validation.v1.rules).integer = { min_value: 1, max_value: 1000000}];
 }
 
 /*
@@ -74,7 +75,7 @@ message DeleteMajorityElectionResultBundleRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Bundes.
   */
-  string bundle_id = 1;
+  string bundle_id = 1 [(validation.v1.rules).string.guid = true];
 }
 
 /*
@@ -85,7 +86,7 @@ message RejectMajorityElectionBundleReviewRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Bundes.
   */
-  string bundle_id = 1;
+  string bundle_id = 1 [(validation.v1.rules).string.guid = true];
 }
 
 /*
@@ -96,7 +97,7 @@ message SucceedMajorityElectionBundleReviewRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Bundes.
   */
-  string bundle_id = 1;
+  string bundle_id = 1 [(validation.v1.rules).string.guid = true];
 }
 
 /*
@@ -107,33 +108,33 @@ message CreateMajorityElectionResultBallotRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Bundes.
   */
-  string bundle_id = 1;
+  string bundle_id = 1 [(validation.v1.rules).string.guid = true];
 
   /*
-    validations: typeof(int32),min-value(0),max-value(Int32.Max),allow-undefined
+    validations: typeof(int32),min-value(0),max-value(1000000),allow-undefined
     description: Anzahl leere Zeilen
   */
-  google.protobuf.Int32Value empty_vote_count = 2;
+  google.protobuf.Int32Value empty_vote_count = 2 [(validation.v1.rules).integer = { min_value: 0, max_value: 1000000}];
 
   /*
-    validations: typeof(int32),min-value(0),max-value(Int32.Max)
+    validations: typeof(int32),min-value(0),max-value(1000000)
     description: Anzahl vereinzelter Nennungen eines Kandiaten (welcher sich nicht auf der Liste befindet).
   */
-  int32 individual_vote_count = 3;
+  int32 individual_vote_count = 3 [(validation.v1.rules).integer = { min_value: 0, max_value: 1000000}];
 
   /*
     validations: is-guid
     description: Selektierte Kandidaten.
   */
-  repeated string selected_candidate_ids = 4;
+  repeated string selected_candidate_ids = 4 [(validation.v1.rules).string.guid = true];
 
   repeated CreateUpdateSecondaryMajorityElectionResultBallotRequest secondary_majority_election_results = 5;
 
   /*
-    validations: typeof(int32),min-value(0),max-value(Int32.Max)
+    validations: typeof(int32),min-value(0),max-value(1000000)
     description: Anzahl ungültiger Abstimmungen.
   */
-  int32 invalid_vote_count = 6;
+  int32 invalid_vote_count = 6 [(validation.v1.rules).integer = { min_value: 0, max_value: 1000000}];
 }
 
 /*
@@ -144,42 +145,42 @@ message UpdateMajorityElectionResultBallotRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Bundes.
   */
-  string bundle_id = 1;
+  string bundle_id = 1 [(validation.v1.rules).string.guid = true];
 
   /*
     ech-name: electronicBallotIdentification
     ech-length: [1,50]
     ech-type:: xs:token
-    validations: typeof(int32),min-value(1),max-value(Int32.MaxValue)
+    validations: typeof(int32),min-value(1),max-value(1000000)
     description: Eindeutige, technische Identifikation des Wahlzettels.
   */
-  int32 ballot_number = 2;
+  int32 ballot_number = 2 [(validation.v1.rules).integer = { min_value: 1, max_value: 1000000}];
 
   /*
-    validations: typeof(int32),min-value(0),max-value(Int32.Max),allow-undefined
+    validations: typeof(int32),min-value(0),max-value(1000000),allow-undefined
     description: Anzahl leere Zeilen
   */
-  google.protobuf.Int32Value empty_vote_count = 3;
+  google.protobuf.Int32Value empty_vote_count = 3 [(validation.v1.rules).integer = { min_value: 0, max_value: 1000000}];
 
   /*
-    validations: typeof(int32),min-value(0),max-value(Int32.Max)
+    validations: typeof(int32),min-value(0),max-value(1000000)
     description: Anzahl vereinzelter Nennungen eines Kandiaten (welcher sich nicht auf der Liste befindet).
   */
-  int32 individual_vote_count = 4;
+  int32 individual_vote_count = 4 [(validation.v1.rules).integer = { min_value: 0, max_value: 1000000}];
 
   /*
     validations: is-guid
     description: Selektierte Kandidaten.
   */
-  repeated string selected_candidate_ids = 5;
+  repeated string selected_candidate_ids = 5 [(validation.v1.rules).string.guid = true];
 
   repeated CreateUpdateSecondaryMajorityElectionResultBallotRequest secondary_majority_election_results = 6;
 
   /*
-    validations: typeof(int32),min-value(0),max-value(Int32.Max)
+    validations: typeof(int32),min-value(0),max-value(1000000)
     description: Anzahl ungültiger Abstimmungen.
   */
-  int32 invalid_vote_count = 7;
+  int32 invalid_vote_count = 7 [(validation.v1.rules).integer = { min_value: 0, max_value: 1000000}];
 }
 
 /*
@@ -193,31 +194,31 @@ message CreateUpdateSecondaryMajorityElectionResultBallotRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation der Majorznebenwahl.
   */
-  string secondary_majority_election_id = 1;
+  string secondary_majority_election_id = 1 [(validation.v1.rules).string.guid = true];
 
   /*
-    validations: typeof(int32),min-value(0),max-value(Int32.Max),allow-undefined
+    validations: typeof(int32),min-value(0),max-value(1000000),allow-undefined
     description: Anzahl leere Zeilen
   */
-  google.protobuf.Int32Value empty_vote_count = 2;
+  google.protobuf.Int32Value empty_vote_count = 2 [(validation.v1.rules).integer = { min_value: 0, max_value: 1000000}];
 
   /*
-    validations: typeof(int32),min-value(0),max-value(Int32.Max)
+    validations: typeof(int32),min-value(0),max-value(1000000)
     description: Anzahl vereinzelter Nennungen eines Kandiaten (welcher sich nicht auf der Liste befindet).
   */
-  int32 individual_vote_count = 3;
+  int32 individual_vote_count = 3 [(validation.v1.rules).integer = { min_value: 0, max_value: 1000000}];
 
   /*
     validations: is-guid
     description: Selektierte Kandidaten.
   */
-  repeated string selected_candidate_ids = 4;
+  repeated string selected_candidate_ids = 4 [(validation.v1.rules).string.guid = true];
 
   /*
-    validations: typeof(int32),min-value(0),max-value(Int32.Max)
+    validations: typeof(int32),min-value(0),max-value(1000000)
     description: Anzahl ungültiger Abstimmungen.
   */
-  int32 invalid_vote_count = 5;
+  int32 invalid_vote_count = 5 [(validation.v1.rules).integer = { min_value: 0, max_value: 1000000}];
 }
 
 /*
@@ -228,16 +229,16 @@ message DeleteMajorityElectionResultBallotRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Bundes.
   */
-  string bundle_id = 1;
+  string bundle_id = 1 [(validation.v1.rules).string.guid = true];
 
   /*
     ech-name: electronicBallotIdentification
     ech-length: [1,50]
     ech-type:: xs:token
-    validations: typeof(int32),min-value(1),max-value(Int32.MaxValue)
+    validations: typeof(int32),min-value(1),max-value(1000000)
     description: Eindeutige, technische Identifikation des Wahlzettels.
   */
-  int32 ballot_number = 2;
+  int32 ballot_number = 2 [(validation.v1.rules).integer = { min_value: 1, max_value: 1000000}];
 }
 
 /*
@@ -248,7 +249,7 @@ message MajorityElectionResultBundleSubmissionFinishedRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Bundes.
   */
-  string bundle_id = 1;
+  string bundle_id = 1 [(validation.v1.rules).string.guid = true];
 }
 
 /*
@@ -259,7 +260,7 @@ message MajorityElectionResultBundleCorrectionFinishedRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Bundes.
   */
-  string bundle_id = 1;
+  string bundle_id = 1 [(validation.v1.rules).string.guid = true];
 }
 
 /*
@@ -270,5 +271,5 @@ message GetMajorityElectionResultBundleChangesRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Wahlergebnisses.
   */
-  string election_result_id = 1;
+  string election_result_id = 1 [(validation.v1.rules).string.guid = true];
 }

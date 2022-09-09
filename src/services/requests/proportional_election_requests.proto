@@ -5,6 +5,8 @@ syntax = "proto3";
 
 package abraxas.voting.ausmittlung.services.v1.requests;
 
+import "rules/rules.proto";
+
 message GetProportionalElectionListsRequest {
   /*
     ech-name: electionIdentification
@@ -13,7 +15,7 @@ message GetProportionalElectionListsRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation der Wahl.
   */
-  string election_id = 1;
+  string election_id = 1 [(validation.v1.rules).string.guid = true];
 }
 
 message GetProportionalElectionListRequest {
@@ -24,7 +26,7 @@ message GetProportionalElectionListRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation der Liste.
   */
-  string list_id = 1;
+  string list_id = 1 [(validation.v1.rules).string.guid = true];
 }
 
 message ListProportionalElectionCandidatesRequest {
@@ -35,5 +37,5 @@ message ListProportionalElectionCandidatesRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation der Wahl.
   */
-  string election_id = 1;
+  string election_id = 1 [(validation.v1.rules).string.guid = true];
 }

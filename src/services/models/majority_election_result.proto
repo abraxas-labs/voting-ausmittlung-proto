@@ -33,19 +33,16 @@ message MajorityElectionResult {
   MajorityElectionResultNullableSubTotal conventional_sub_total = 16;
 
   /*
-    validations: typeof(int32),min-value(0),max-value(Int32.Max)
     description: Anzahl vereinzelter Nennungen eines Kandiaten (welcher sich nicht auf der Liste befindet).
   */
   int32 individual_vote_count = 17;
 
   /*
-    validations: typeof(int32),min-value(0),max-value(Int32.Max)
     description: Anzahl leere Zeilen
   */
   int32 empty_vote_count = 18;
 
   /*
-    validations: typeof(int32),min-value(0),max-value(Int32.Max)
     description: Anzahl ungültiger Abstimmungen.
   */
   int32 invalid_vote_count = 19;
@@ -62,19 +59,16 @@ message SecondaryMajorityElectionResult {
   MajorityElectionResultNullableSubTotal conventional_sub_total = 4;
   
   /*
-    validations: typeof(int32),min-value(0),max-value(Int32.Max)
     description: Anzahl vereinzelter Nennungen eines Kandiaten (welcher sich nicht auf der Liste befindet).
   */
   int32 individual_vote_count = 5;
 
   /*
-    validations: typeof(int32),min-value(0),max-value(Int32.Max)
     description: Anzahl leere Zeilen
   */
   int32 empty_vote_count = 6;
 
   /*
-    validations: typeof(int32),min-value(0),max-value(Int32.Max)
     description: Anzahl ungültiger Abstimmungen.
   */
   int32 invalid_vote_count = 7;
@@ -84,13 +78,11 @@ message SecondaryMajorityElectionResult {
 
 message MajorityElectionResultEntryParams {
   /*
-    validations: typeof(int32),min-value(1),max-value(Int32.Max)
     description: Bundgrösse für die Auszählung der Wahlzettel.
   */
   int32 ballot_bundle_size = 1;
 
   /*
-    validations: typeof(int32),min-value(1),max-value(Int32.Max)
     description: Stichprobengrösse für die Auszählung der Wahlzettel.
   */
   int32 ballot_bundle_sample_size = 2;
@@ -123,7 +115,6 @@ message MajorityElectionBallotGroupResult {
   MajorityElectionBallotGroup ballot_group = 1;
 
   /*
-    validations: typeof(int32),min-value(0),max-value(Int32.Max)
     description: Anzahl gültiger Stimmen.
   */
   int32 vote_count = 2;

@@ -6,6 +6,7 @@ syntax = "proto3";
 package abraxas.voting.ausmittlung.services.v1.requests;
 
 import "models/contest.proto";
+import "rules/rules.proto";
 
 /*
   description: Details zu einem Urnengang anfragen.
@@ -18,7 +19,7 @@ message GetContestRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Urnengangs.
   */
-  string id = 1;
+  string id = 1 [(validation.v1.rules).string.guid = true];
 }
 
 /*
@@ -32,7 +33,7 @@ message GetAccessibleCountingCirclesRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Urnengangs.
   */
-  string contest_id = 1;
+  string contest_id = 1 [(validation.v1.rules).string.guid = true];
 }
 
 /*
@@ -43,7 +44,7 @@ message ListContestSummariesRequest {
     validations: exact-enum
     description: Filterung basierend auf Urnengangstatus.
   */
-  repeated models.ContestState states = 1;
+  repeated models.ContestState states = 1 [(validation.v1.rules).enum.exact_enum = true];;
 }
 
 /*
@@ -57,5 +58,5 @@ message ListPoliticalBusinessUnionsRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Urnengangs.
   */
-  string contest_id = 1;
+  string contest_id = 1 [(validation.v1.rules).string.guid = true];
 }

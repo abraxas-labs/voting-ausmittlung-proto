@@ -15,13 +15,11 @@ message GetMajorityElectionResultBundleResponse {
 
 message CreateMajorityElectionResultBundleResponse {
   /*
-    validations: is-guid
     description: Eindeutige, technische Identifikation des Bundes.
   */
   string bundle_id = 1;
 
   /*
-    validations: typeof(int32),min-value(1),max-value(Int32.MaxValue)
     description: Eindeutiger numerischer Wert für den Bund.
   */
   int32 bundle_number = 2;
@@ -29,16 +27,11 @@ message CreateMajorityElectionResultBundleResponse {
 
 message CreateMajorityElectionResultBallotResponse {
   /*
-    validations: is-guid
     description: Eindeutige, technische Identifikation des Bundes.
   */
   string bundle_id = 1;
 
   /*
-    ech-name: electronicBallotIdentification
-    ech-length: [1,50]
-    ech-type:: xs:token
-    validations: typeof(int32),min-value(1),max-value(Int32.MaxValue)
     description: Eindeutige, technische Identifikation des Wahlzettels.
   */
   int32 ballot_number = 2;

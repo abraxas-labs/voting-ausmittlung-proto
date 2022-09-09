@@ -95,13 +95,11 @@ message ProportionalElectionCandidateEndResult {
   ProportionalElectionCandidate candidate = 1;
 
   /*
-    validations: typeof(int32),min-value(0),max-value(Int32.Max)
     description: Anzahl gültiger Stimmen.
   */
   int32 vote_count = 2;
 
   /*
-    validations: min-value(1),max-value(Int32.Max)
     description: Rang nach Losentscheid
   */
   int32 rank = 3;
@@ -140,7 +138,6 @@ message ProportionalElectionEndResultLotDecision {
   string candidate_id = 1;
 
   /*
-    validations: min-value(1),max-value(Int32.Max)
     description: Rang nach Losentscheid
   */
   int32 rank = 2;
@@ -163,7 +160,6 @@ message ProportionalElectionEndResultAvailableLotDecision {
   google.protobuf.Int32Value selected_rank = 2;
 
   /*
-    validations: typeof(int32),min-value(0),max-value(Int32.Max)
     description: Anzahl gültiger Stimmen.
   */
   int32 vote_count = 3;

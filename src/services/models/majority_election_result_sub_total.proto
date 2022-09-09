@@ -11,13 +11,11 @@ message MajorityElectionResultSubTotal {
   int32 individual_vote_count = 1;
 
   /*
-    validations: typeof(int32),min-value(0),max-value(Int32.Max)
     description: Anzahl leere Zeilen
   */
   int32 empty_vote_count = 2;
 
   /*
-    validations: typeof(int32),min-value(0),max-value(Int32.Max)
     description: Anzahl ungültiger Abstimmungen.
   */
   int32 invalid_vote_count = 3;
@@ -27,19 +25,16 @@ message MajorityElectionResultSubTotal {
 
 message MajorityElectionResultNullableSubTotal {
   /*
-    validations: typeof(int32),min-value(0),max-value(Int32.Max),allow-undefined
     description: Anzahl vereinzelter Nennungen eines Kandiaten (welcher sich nicht auf der Liste befindet).
   */
   google.protobuf.Int32Value individual_vote_count = 1;
 
   /*
-    validations: typeof(int32),min-value(0),max-value(Int32.Max),allow-undefined
     description: Anzahl leere Zeilen
   */
   google.protobuf.Int32Value empty_vote_count = 2;
 
   /*
-    validations: typeof(int32),min-value(0),max-value(Int32.Max),allow-undefined
     description: Anzahl ungültiger Abstimmungen.
   */
   google.protobuf.Int32Value invalid_vote_count = 3;

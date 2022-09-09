@@ -8,13 +8,8 @@ PROTOC_GEN_DOC_VERSION=1.5.0
 
 BIN="${PWD}/bin"
 OUT="${PWD}/grpc"
-PROTO_PACKAGE_PATH="${PWD}/../../src/services"
-PROTO_ROOT_PATH="${PWD}/../../src"
-PROTO_SHARED_PATH="${PWD}/../../src/shared"
-PROTO_EVENTS_PATH="${PWD}/../../src/events"
-DOCS_OUT_PACKAGE="${PWD}/../../docs/services"
-DOCS_OUT_EVENTS="${PWD}/../../docs/events"
-PROTO_VALIDATION_PACKAGE_PATH="${PWD}/../../voting-library-validation-proto/src"
+PROTO_PATH="${PWD}/../../src"
+DOCS_OUT="${PWD}/../../docs"
 export PATH="$PATH:$BIN"
 
 echo "Check / Install proto tools"
@@ -60,29 +55,16 @@ fi
 
 echo "Generate protos"
 
-rm -rf "${OUT}"
 mkdir -p "${OUT}"
-mkdir -p "${DOCS_OUT_PACKAGE}"
-mkdir -p "${DOCS_OUT_EVENTS}"
+mkdir -p "${DOCS_OUT}"
 
 ${protoc_exec} \
     --plugin=protoc-gen-grpc-web=${protoc_grpc_web_exec} \
     --plugin=proto-gen-doc=${protoc_gen_doc_exec} \
     -I=${BIN}/include \
-    -I=${PROTO_PACKAGE_PATH} \
-    -I=${PROTO_ROOT_PATH} \
-    -I=${PROTO_VALIDATION_PACKAGE_PATH} \
+    -I=${PROTO_PATH} \
     --js_out=import_style=commonjs,binary:${OUT} \
     --grpc-web_out=import_style=commonjs+dts,mode=grpcwebtext:${OUT} \
-    --doc_out="${DOCS_OUT_PACKAGE}" \
+    --doc_out="${DOCS_OUT}" \
     --doc_opt=html,index.html:google/* \
-    $(find ${PROTO_PACKAGE_PATH} ${PROTO_SHARED_PATH} -name '*.proto')
-
-${protoc_exec} \
-    --plugin=proto-gen-doc=${protoc_gen_doc_exec} \
-    -I=${BIN}/include \
-    -I=${PROTO_EVENTS_PATH} \
-    -I=${PROTO_ROOT_PATH} \
-    --doc_out="${DOCS_OUT_EVENTS}" \
-    --doc_opt=html,index.html:google/* \
-    $(find ${PROTO_EVENTS_PATH} ${PROTO_SHARED_PATH} -name '*.proto')
+    $(find ${PROTO_PATH} -name '*.proto')

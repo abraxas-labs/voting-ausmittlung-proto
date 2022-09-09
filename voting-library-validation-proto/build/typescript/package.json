@@ -1,0 +1,12 @@
+{
+    "name": "@abraxas/voting-library-validation-proto",
+    "version": "0.0.0-development",
+    "description": "Abraxas Dokumente project containing protobuf code for Voting.Lib.ProtoValidation",
+    "keywords": [
+      "protobuf",
+      "Abraxas",
+      "Voting",
+      "proto"
+    ],
+    "author": "Abraxas Informatik AG"
+  }

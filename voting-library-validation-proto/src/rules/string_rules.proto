@@ -1,0 +1,89 @@
+// (c) Copyright 2022 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.validation.v1;
+
+message StringRules {
+  /*
+    Der Wert darf leer sein. Wenn der Wert leer sein darf, werden alle anderen String Regeln ignoriert.
+  */
+  optional bool allow_empty = 1;
+
+  /*
+    Der Wert ist vom Typ GUID nach RFC 4122.
+  */
+  optional bool guid = 2;
+
+  /*
+    Die minimale Länge die erlaubt ist.
+  */
+  optional int32 min_length = 3;
+
+  /*
+    Die maximale Länge die erlaubt ist.
+  */
+  optional int32 max_length = 4;
+
+  /*
+    Der String muss dem vorgegebenen Regex entsprechen.
+  */
+  optional string regex = 5;
+
+  /*
+    Der Wert entspricht einer validen E-Mail Adresse.
+  */
+  optional bool email = 6;
+
+  /*
+    Der Wert entspricht einer validen Telefonnummer.
+  */
+  optional bool phone = 7;
+
+  /*
+    Der Wert besteht aus numerischen Zeichen.
+  */
+  optional bool numeric = 8;
+
+  /*
+    Der Wert besteht aus alphabetischen Zeichen.
+  */
+  optional bool alpha = 9;
+
+  /*
+    Der Wert besteht aus alphabetischen Zeichen mit Leerzeichen.
+  */
+  optional bool alpha_white = 10;
+
+  /*
+    Der Wert besteht aus alphanumerischen Zeichen mit Leerzeichen.
+  */
+  optional bool alpha_num_white = 11;
+
+  /*
+    Einfacher einzeiliger Text mit folgenden Charaktersets: Alphanumerische
+    Zeichen jeder Sprache, Akzente, Umlaute, Leerzeichen, Bindestrich, Apostroph.
+  */
+  optional bool simple_sl_text = 12;
+
+  /*
+    Einfacher mehrzeiliger Text mit folgenden Charaktersets: Alphanumerische
+    Zeichen jeder Sprache, Akzente, Umlaute, Leerzeichen, Bindestrich, Apostroph.
+  */
+  optional bool simple_ml_text = 13;
+
+  /*
+    Komplexer einzeiliger Text mit folgenden Charaktersets: Alphanumerische
+    Zeichen jeder Sprache, Akzente, Umlaute, diverse standard
+    Satzzeichen (Interpunktion).
+  */
+  optional bool complex_sl_text = 14;
+
+  /*
+    Komplexer mehrzeiliger Text mit folgenden Charaktersets: Alphanumerische
+    Zeichen jeder Sprache, Akzente, Umlaute, diverse standard
+    Satzzeichen (Interpunktion).
+  */
+  optional bool complex_ml_text = 15;
+}

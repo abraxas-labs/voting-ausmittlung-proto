@@ -7,6 +7,7 @@ package abraxas.voting.ausmittlung.services.v1.requests;
 
 import "google/protobuf/wrappers.proto";
 import "models/political_business.proto";
+import "rules/rules.proto";
 
 /*
   description: Export Templates für ein spezifisches Geschäft und Auszählungskreis anfragen.
@@ -19,7 +20,7 @@ message GetCountingCircleResultExportTemplatesRequest {
     validations: is-guid
     description: Eindeutige Identifikation des Auszählungskreises. Es handelt sich dabei um die lokale Identifikation des Quellregisters.
   */
-  string counting_circle_id = 1;
+  string counting_circle_id = 1 [(validation.v1.rules).string.guid = true];
 
   /*
     ech-name: countingCircleId
@@ -28,13 +29,13 @@ message GetCountingCircleResultExportTemplatesRequest {
     validations: is-guid
     description: Eindeutige Identifikation des Geschäftes.
   */
-  string political_business_id = 2;
+  string political_business_id = 2 [(validation.v1.rules).string.guid = true];
 
     /*
     validations: exact-enum
     description: Der Typ vom Geschäft.
   */
-  models.PoliticalBusinessType political_business_type = 3;
+  models.PoliticalBusinessType political_business_type = 3 [(validation.v1.rules).enum.exact_enum = true];
 }
 
 /*
@@ -48,13 +49,13 @@ message GetPoliticalBusinessResultExportTemplatesRequest {
     validations: is-guid
     description: Eindeutige Identifikation des Geschäftes.
   */
-  string political_business_id = 1;
+  string political_business_id = 1 [(validation.v1.rules).string.guid = true];
 
   /*
     validations: exact-enum
     description: Der Typ vom Geschäft.
   */
-  models.PoliticalBusinessType political_business_type = 2;
+  models.PoliticalBusinessType political_business_type = 2 [(validation.v1.rules).enum.exact_enum = true];
 }
 
 /*
@@ -68,7 +69,7 @@ message GetMultiplePoliticalBusinessesResultExportTemplatesRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Urnengangs.
   */
-  string contest_id = 1;
+  string contest_id = 1 [(validation.v1.rules).string.guid = true];
 }
 
 /*
@@ -82,7 +83,7 @@ message GetMultiplePoliticalBusinessesCountingCircleResultExportTemplatesRequest
     validations: is-guid
     description: Eindeutige, technische Identifikation des Urnengangs.
   */
-  string contest_id = 1;
+  string contest_id = 1 [(validation.v1.rules).string.guid = true];
 
   /*
     ech-name: countingCircleId
@@ -91,7 +92,7 @@ message GetMultiplePoliticalBusinessesCountingCircleResultExportTemplatesRequest
     validations: is-guid
     description: Eindeutige Identifikation des Auszählungskreises. Es handelt sich dabei um die lokale Identifikation des Quellregisters.
   */
-  string counting_circle_id = 2;
+  string counting_circle_id = 2 [(validation.v1.rules).string.guid = true];
 }
 
 /*
@@ -105,7 +106,7 @@ message GetContestExportTemplatesRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Urnengangs.
   */
-  string contest_id = 1;
+  string contest_id = 1 [(validation.v1.rules).string.guid = true];
 }
 
 /*
@@ -119,13 +120,13 @@ message GetPoliticalBusinessUnionResultExportTemplatesRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation der Geschäftsverbindung.
   */
-  string political_business_union_id = 1;
+  string political_business_union_id = 1 [(validation.v1.rules).string.guid = true];
 
   /*
     validations: exact-enum
     description: Der Typ vom Geschäft.
   */
-  models.PoliticalBusinessType political_business_type = 2;
+  models.PoliticalBusinessType political_business_type = 2 [(validation.v1.rules).enum.exact_enum = true];
 }
 
 /*
@@ -139,7 +140,7 @@ message ListResultExportConfigurationsRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Urnengangs.
   */
-  string contest_id = 1;
+  string contest_id = 1 [(validation.v1.rules).string.guid = true];
 }
 
 /*
@@ -153,25 +154,25 @@ message UpdateResultExportConfigurationRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Urnengangs.
   */
-  string contest_id = 1;
+  string contest_id = 1 [(validation.v1.rules).string.guid = true];
 
   /*
     validations: is-guid
     description: Technische Identifikation der ausgewählten Export Konfiguration.
   */
-  string export_configuration_id = 2;
+  string export_configuration_id = 2 [(validation.v1.rules).string.guid = true];
 
   /*
     validations: is-guid
     description: Technische Identifikationen mehrerer Geschäfte.
   */
-  repeated string political_business_ids = 3;
+  repeated string political_business_ids = 3 [(validation.v1.rules).string.guid = true];
 
   /*
     validations: typeof(int32),min-value(2),max-value(240),allow-undefined
     description: Interval in Minuten für das automatische Generieren von Exports für definierte Schnittstellen. Das Interval kann zwischen 5 Minuten und 24 Stunden eingestellt werden.
   */
-  google.protobuf.Int32Value interval_minutes = 4;
+  google.protobuf.Int32Value interval_minutes = 4 [(validation.v1.rules).integer = { min_value: 2, max_value: 240 }];
 }
 
 message TriggerResultExportRequest {
@@ -182,17 +183,17 @@ message TriggerResultExportRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Urnengangs.
   */
-  string contest_id = 1;
+  string contest_id = 1 [(validation.v1.rules).string.guid = true];
 
   /*
     validations: is-guid
     description: Technische Identifikation der ausgewählten Export Konfiguration.
   */
-  string export_configuration_id = 2;
+  string export_configuration_id = 2 [(validation.v1.rules).string.guid = true];
 
   /*
     validations: is-guid
     description: Ausgewählte Geschäfte für manuell- oder automatisierte Exports. Die Geschäfte werden mitgesendet, da neu hinzugefügte oder entfernte Geschäfte existieren können, welche noch nicht gespeichert wurden.
   */
-  repeated string political_business_ids = 3;
+  repeated string political_business_ids = 3 [(validation.v1.rules).string.guid = true];
 }

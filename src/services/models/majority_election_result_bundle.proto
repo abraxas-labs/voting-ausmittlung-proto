@@ -26,7 +26,6 @@ message MajorityElectionResultBundle {
     ech-name: electronicBallotIdentification
     ech-length: [1,50]
     ech-type:: xs:token
-    validations: typeof(int32),min-value(1),max-value(Int32.MaxValue)
     description: Eindeutige, technische Identifikationen der zu überprüfenden Wahlzettel.
   */
   repeated int32 ballot_numbers_to_review = 7;
@@ -36,13 +35,11 @@ message MajorityElectionResultBallot {
   int32 number = 1;
 
   /*
-    validations: typeof(int32),min-value(0),max-value(Int32.Max)
     description: Anzahl leere Zeilen
   */
   int32 empty_vote_count = 2;
 
   /*
-    validations: typeof(int32),min-value(0),max-value(Int32.Max)
     description: Anzahl vereinzelter Nennungen eines Kandiaten (welcher sich nicht auf der Liste befindet).
   */
   int32 individual_vote_count = 3;
@@ -50,7 +47,6 @@ message MajorityElectionResultBallot {
   repeated SecondaryMajorityElectionResultBallot secondary_majority_election_ballots = 5;
 
   /*
-    validations: typeof(int32),min-value(0),max-value(Int32.Max)
     description: Anzahl ungültiger Abstimmungen.
   */
   int32 invalid_vote_count = 6;
@@ -67,20 +63,17 @@ message SecondaryMajorityElectionResultBallot {
   string election_id = 1;
 
   /*
-    validations: typeof(int32),min-value(0),max-value(Int32.Max)
     description: Anzahl leere Zeilen
   */
   int32 empty_vote_count = 2;
 
   /*
-    validations: typeof(int32),min-value(0),max-value(Int32.Max)
     description: Anzahl vereinzelter Nennungen eines Kandiaten (welcher sich nicht auf der Liste befindet).
   */
   int32 individual_vote_count = 3;
   repeated MajorityElectionBallotCandidate candidates = 4;
 
   /*
-    validations: typeof(int32),min-value(0),max-value(Int32.Max)
     description: Anzahl ungültiger Abstimmungen.
   */
   int32 invalid_vote_count = 5;
