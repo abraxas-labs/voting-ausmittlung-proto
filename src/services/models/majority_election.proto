@@ -119,6 +119,13 @@ message MajorityElection {
     description: Eindeutige, technische Identifikation des Urnengangs.
   */
   Contest contest = 26;
+
+  /*
+    validations: exact-enum
+    description: Überprüfungsmethode der Bundkontrolle.
+  */
+  shared.v1.MajorityElectionReviewProcedure review_procedure = 27;
+  bool enforce_review_procedure_for_counting_circles = 28;
 }
 
 message MajorityElectionCandidates {
@@ -258,7 +265,7 @@ message MajorityElectionBallotGroup {
 
   /*
     ech-name: electronicBallotPosition
-    ech-length: 
+    ech-length:
     ech-type: integer
     description: Position an welcher die Vorlage geführt werden soll.
   */

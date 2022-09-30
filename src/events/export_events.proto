@@ -22,6 +22,16 @@ message ExportGenerated {
   shared.v1.DomainOfInfluenceType domain_of_influence_type = 8;
 }
 
+// a manual user-triggered bundle review export is generated
+message BundleReviewExportGenerated {
+  data.EventInfo event_info = 1;
+  string key = 2;
+  string political_business_id = 3;
+  string political_business_result_bundle_id = 4;
+  string counting_circle_id = 5;
+  string contest_id = 6;
+}
+
 // an export from e ResultExportConfiguration is triggered
 message ResultExportTriggered {
   data.EventInfo event_info = 1;

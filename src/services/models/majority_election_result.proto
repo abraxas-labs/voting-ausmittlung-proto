@@ -57,7 +57,7 @@ message SecondaryMajorityElectionResult {
   repeated MajorityElectionCandidateResult candidate_results = 2;
   MajorityElectionResultSubTotal e_voting_sub_total = 3;
   MajorityElectionResultNullableSubTotal conventional_sub_total = 4;
-  
+
   /*
     description: Anzahl vereinzelter Nennungen eines Kandiaten (welcher sich nicht auf der Liste befindet).
   */
@@ -104,6 +104,12 @@ message MajorityElectionResultEntryParams {
     description: 'True' für die automatische Erfassung leerer Zeilen, sonst 'False' für die manuelle Erfassung.
   */
   bool automatic_empty_vote_counting = 5;
+
+  /*
+    validations: exact-enum
+    description: Überprüfungsmethode der Bundkontrolle.
+  */
+  shared.v1.MajorityElectionReviewProcedure review_procedure = 6;
 }
 
 message MajorityElectionBallotGroupResults {

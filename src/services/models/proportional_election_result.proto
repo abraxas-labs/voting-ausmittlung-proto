@@ -11,6 +11,7 @@ import "models/counting_circle.proto";
 import "models/proportional_election.proto";
 import "models/proportional_election_result_sub_total.proto";
 import "shared/ballot_number_generation.proto";
+import "shared/proportional_election.proto";
 
 message ProportionalElectionResult {
   string id = 1;
@@ -84,6 +85,12 @@ message ProportionalElectionResultEntryParams {
     description: 'True' für die automatische Erfassung leerer Zeilen, sonst 'False' für die manuelle Erfassung.
   */
   bool automatic_empty_vote_counting = 5;
+
+  /*
+    validations: exact-enum
+    description: Überprüfungsmethode der Bundkontrolle.
+  */
+  shared.v1.ProportionalElectionReviewProcedure review_procedure = 6;
 }
 
 message ProportionalElectionUnmodifiedListResults {

@@ -6,7 +6,7 @@ syntax = "proto3";
 package abraxas.voting.ausmittlung.services.v1;
 
 import "google/protobuf/empty.proto";
-import "models/id_value.proto";
+import "models/second_factor_transaction.proto";
 import "models/majority_election_end_result.proto";
 import "models/majority_election_result.proto";
 import "models/validation.proto";
@@ -19,9 +19,9 @@ service MajorityElectionResultService {
   rpc EnterCountOfVoters(requests.EnterMajorityElectionCountOfVotersRequest) returns (google.protobuf.Empty);
   rpc EnterCandidateResults(requests.EnterMajorityElectionCandidateResultsRequest) returns (google.protobuf.Empty);
   rpc EnterBallotGroupResults(requests.EnterMajorityElectionBallotGroupResultsRequest) returns (google.protobuf.Empty);
-  rpc PrepareSubmissionFinished(requests.MajorityElectionResultPrepareSubmissionFinishedRequest) returns (models.IdValue);
+  rpc PrepareSubmissionFinished(requests.MajorityElectionResultPrepareSubmissionFinishedRequest) returns (models.SecondFactorTransaction);
   rpc SubmissionFinished(requests.MajorityElectionResultSubmissionFinishedRequest) returns (google.protobuf.Empty);
-  rpc PrepareCorrectionFinished(requests.MajorityElectionResultPrepareCorrectionFinishedRequest) returns (models.IdValue);
+  rpc PrepareCorrectionFinished(requests.MajorityElectionResultPrepareCorrectionFinishedRequest) returns (models.SecondFactorTransaction);
   rpc CorrectionFinished(requests.MajorityElectionResultCorrectionFinishedRequest) returns (google.protobuf.Empty);
   rpc FlagForCorrection(requests.MajorityElectionResultFlagForCorrectionRequest) returns (google.protobuf.Empty);
   rpc AuditedTentatively(requests.MajorityElectionResultAuditedTentativelyRequest) returns (google.protobuf.Empty);
@@ -31,7 +31,7 @@ service MajorityElectionResultService {
   rpc GetEndResult(requests.GetMajorityElectionEndResultRequest) returns (models.MajorityElectionEndResult);
   rpc GetEndResultAvailableLotDecisions(requests.GetMajorityElectionEndResultAvailableLotDecisionsRequest) returns (models.MajorityElectionEndResultAvailableLotDecisions);
   rpc UpdateEndResultLotDecisions(requests.UpdateMajorityElectionEndResultLotDecisionsRequest) returns (google.protobuf.Empty);
-  rpc PrepareFinalizeEndResult(requests.PrepareFinalizeMajorityElectionEndResultRequest) returns (models.IdValue);
+  rpc PrepareFinalizeEndResult(requests.PrepareFinalizeMajorityElectionEndResultRequest) returns (models.SecondFactorTransaction);
   rpc FinalizeEndResult(requests.FinalizeMajorityElectionEndResultRequest) returns (google.protobuf.Empty);
   rpc RevertEndResultFinalization(requests.RevertMajorityElectionEndResultFinalizationRequest) returns (google.protobuf.Empty);
 

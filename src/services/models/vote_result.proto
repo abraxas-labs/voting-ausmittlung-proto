@@ -67,4 +67,10 @@ message VoteResultEntryParams {
     description: 'True' für die automatische Vergabe von Bundnummern, sonst 'False' für die manuelle Vergabe.
   */
   bool automatic_ballot_bundle_number_generation = 2;
+
+  /*
+    validations: exact-enum
+    description: Überprüfungsmethode der Bundkontrolle.
+  */
+  shared.v1.VoteReviewProcedure review_procedure = 3;
 }

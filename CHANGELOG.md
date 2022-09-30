@@ -1,4 +1,4 @@
-# ✨ Changelog (`v1.81.3`)
+# ✨ Changelog (`v1.83.0`)
 
 All notable changes to this project will be documented in this file.
 
@@ -8,11 +8,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Version Info
 
 ```text
-This version -------- v1.81.3
-Previous version ---- v1.80.0
+This version -------- v1.83.0
+Previous version ---- v1.81.3
 Initial version ----- v1.79.2
-Total commits ------- 9
+Total commits ------- 3
 ```
+
+## [v1.83.0] - 2022-09-27
+
+### 🆕 Added
+
+- second factor transaction code
+
+## [v1.82.0] - 2022-09-26
+
+### 🆕 Added
+
+- review procedure for vote, majority election and proportional election
+
+## [v1.81.4] - 2022-09-15
+
+### 🔄 Changed
+
+- Proto validation files include in npm package fixed
 
 ## [v1.81.3] - 2022-09-07
 

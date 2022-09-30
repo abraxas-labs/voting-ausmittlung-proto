@@ -1,0 +1,12 @@
+// (c) Copyright 2022 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.shared.v1;
+
+enum ProportionalElectionReviewProcedure {
+  PROPORTIONAL_ELECTION_REVIEW_PROCEDURE_UNSPECIFIED = 0;
+  PROPORTIONAL_ELECTION_REVIEW_PROCEDURE_ELECTRONICALLY = 1;
+  PROPORTIONAL_ELECTION_REVIEW_PROCEDURE_PHYSICALLY = 2;
+}

@@ -7,6 +7,7 @@ package abraxas.voting.ausmittlung.events.v1.data;
 
 import "data/count_of_voters_event_data.proto";
 import "google/protobuf/wrappers.proto";
+import "shared/vote.proto";
 
 message VoteBallotResultsCountOfVotersEventData {
   string ballot_id = 1;
@@ -36,4 +37,5 @@ message VoteTieBreakQuestionResultsEventData {
 message VoteResultEntryParamsEventData {
   int32 ballot_bundle_sample_size_percent = 1;
   bool automatic_ballot_bundle_number_generation = 2;
+  shared.v1.VoteReviewProcedure review_procedure = 3;
 }

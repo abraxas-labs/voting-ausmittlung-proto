@@ -104,6 +104,12 @@ message DefineMajorityElectionResultEntryParamsRequest {
     description: 'True' für die automatische Erfassung leerer Zeilen, sonst 'False' für die manuelle Erfassung.
   */
   bool automatic_empty_vote_counting = 5;
+
+  /*
+    validations: exact-enum
+    description: Überprüfungsmethode der Bundkontrolle.
+  */
+  shared.v1.MajorityElectionReviewProcedure review_procedure = 6 [(validation.v1.rules).enum.exact_enum = true];
 }
 
 message EnterMajorityElectionCountOfVotersRequest {

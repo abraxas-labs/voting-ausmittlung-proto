@@ -8,6 +8,7 @@ package abraxas.voting.ausmittlung.services.v1.requests;
 import "requests/count_of_voters_requests.proto";
 import "rules/rules.proto";
 import "shared/ballot_number_generation.proto";
+import "shared/proportional_election.proto";
 
 /*
   description: Either set election_id and counting_circle_id or election_result_id.
@@ -97,6 +98,12 @@ message DefineProportionalElectionResultEntryParamsRequest {
     description: 'True' für die automatische Erfassung leerer Zeilen, sonst 'False' für die manuelle Erfassung.
   */
   bool automatic_empty_vote_counting = 6;
+
+  /*
+    validations: exact-enum
+    description: Überprüfungsmethode der Bundkontrolle.
+  */
+  shared.v1.ProportionalElectionReviewProcedure review_procedure = 7 [(validation.v1.rules).enum.exact_enum = true];
 }
 
 message EnterProportionalElectionCountOfVotersRequest {

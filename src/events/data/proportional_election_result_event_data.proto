@@ -6,6 +6,7 @@ syntax = "proto3";
 package abraxas.voting.ausmittlung.events.v1.data;
 
 import "shared/ballot_number_generation.proto";
+import "shared/proportional_election.proto";
 
 
 message ProportionalElectionResultEntryParamsEventData {
@@ -14,6 +15,7 @@ message ProportionalElectionResultEntryParamsEventData {
   bool automatic_ballot_bundle_number_generation = 3;
   shared.v1.BallotNumberGeneration ballot_number_generation = 4;
   bool automatic_empty_vote_counting = 5;
+  shared.v1.ProportionalElectionReviewProcedure review_procedure = 6;
 }
 
 message ProportionalElectionUnmodifiedListResultEventData {

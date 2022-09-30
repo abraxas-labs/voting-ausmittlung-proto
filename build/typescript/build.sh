@@ -76,7 +76,7 @@ ${protoc_exec} \
     --grpc-web_out=import_style=commonjs+dts,mode=grpcwebtext:${OUT} \
     --doc_out="${DOCS_OUT_PACKAGE}" \
     --doc_opt=html,index.html:google/* \
-    $(find ${PROTO_PACKAGE_PATH} ${PROTO_SHARED_PATH} -name '*.proto')
+    $(find ${PROTO_PACKAGE_PATH} ${PROTO_SHARED_PATH} ${PROTO_VALIDATION_PACKAGE_PATH} -name '*.proto')
 
 ${protoc_exec} \
     --plugin=proto-gen-doc=${protoc_gen_doc_exec} \

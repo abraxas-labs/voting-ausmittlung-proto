@@ -9,6 +9,7 @@ import "models/contest.proto";
 import "models/domain_of_influence.proto";
 import "models/swiss_abroad_voting_right.proto";
 import "shared/ballot_number_generation.proto";
+import "shared/proportional_election.proto";
 
 message ProportionalElection {
   string id = 1;
@@ -55,6 +56,13 @@ message ProportionalElection {
   string title = 19;
   DomainOfInfluence domain_of_influence = 20;
   Contest contest = 21;
+
+  /*
+    validations: exact-enum
+    description: Überprüfungsmethode der Bundkontrolle.
+  */
+  shared.v1.ProportionalElectionReviewProcedure review_procedure = 22;
+  bool enforce_review_procedure_for_counting_circles = 23;
 }
 
 enum ProportionalElectionMandateAlgorithm {

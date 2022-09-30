@@ -6,7 +6,7 @@ syntax = "proto3";
 package abraxas.voting.ausmittlung.services.v1;
 
 import "google/protobuf/empty.proto";
-import "models/id_value.proto";
+import "models/second_factor_transaction.proto";
 import "models/validation.proto";
 import "models/vote_end_result.proto";
 import "models/vote_result.proto";
@@ -18,9 +18,9 @@ service VoteResultService {
   rpc EnterCountOfVoters(requests.EnterVoteResultCountOfVotersRequest) returns (google.protobuf.Empty);
   rpc EnterResults(requests.EnterVoteResultsRequest) returns (google.protobuf.Empty);
   rpc EnterCorrectionResults(requests.EnterVoteResultCorrectionRequest) returns (google.protobuf.Empty);
-  rpc PrepareSubmissionFinished(requests.VoteResultPrepareSubmissionFinishedRequest) returns (models.IdValue);
+  rpc PrepareSubmissionFinished(requests.VoteResultPrepareSubmissionFinishedRequest) returns (models.SecondFactorTransaction);
   rpc SubmissionFinished(requests.VoteResultSubmissionFinishedRequest) returns (google.protobuf.Empty);
-  rpc PrepareCorrectionFinished(requests.VoteResultPrepareCorrectionFinishedRequest) returns (models.IdValue);
+  rpc PrepareCorrectionFinished(requests.VoteResultPrepareCorrectionFinishedRequest) returns (models.SecondFactorTransaction);
   rpc CorrectionFinished(requests.VoteResultCorrectionFinishedRequest) returns (google.protobuf.Empty);
   rpc FlagForCorrection(requests.VoteResultFlagForCorrectionRequest) returns (google.protobuf.Empty);
   rpc AuditedTentatively(requests.VoteResultAuditedTentativelyRequest) returns (google.protobuf.Empty);
@@ -29,7 +29,7 @@ service VoteResultService {
   rpc ResetToAuditedTentatively(requests.VoteResultsResetToAuditedTentativelyRequest) returns (google.protobuf.Empty);
   rpc GetEndResult(requests.GetVoteEndResultRequest) returns (models.VoteEndResult);
   rpc GetBallotResult(requests.GetBallotResultRequest) returns (models.BallotResult);
-  rpc PrepareFinalizeEndResult(requests.PrepareFinalizeVoteEndResultRequest) returns (models.IdValue);
+  rpc PrepareFinalizeEndResult(requests.PrepareFinalizeVoteEndResultRequest) returns (models.SecondFactorTransaction);
   rpc FinalizeEndResult(requests.FinalizeVoteEndResultRequest) returns (google.protobuf.Empty);
   rpc RevertEndResultFinalization(requests.RevertVoteEndResultFinalizationRequest) returns (google.protobuf.Empty);
 

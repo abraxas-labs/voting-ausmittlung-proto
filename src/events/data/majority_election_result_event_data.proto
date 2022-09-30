@@ -7,6 +7,7 @@ package abraxas.voting.ausmittlung.events.v1.data;
 
 import "google/protobuf/wrappers.proto";
 import "shared/ballot_number_generation.proto";
+import "shared/majority_election.proto";
 
 message SecondaryMajorityElectionCandidateResultsEventData {
   string secondary_majority_election_id = 1;
@@ -33,4 +34,5 @@ message MajorityElectionResultEntryParamsEventData {
   bool automatic_ballot_bundle_number_generation = 3;
   shared.v1.BallotNumberGeneration ballot_number_generation = 4;
   bool automatic_empty_vote_counting = 5;
+  shared.v1.MajorityElectionReviewProcedure review_procedure = 6;
 }
