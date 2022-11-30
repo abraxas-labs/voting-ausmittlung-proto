@@ -89,3 +89,8 @@ message VoteResultResettedToAuditedTentatively {
   data.EventInfo event_info = 1;
   string vote_result_id = 2;
 }
+
+message VoteResultResetted {
+  data.EventInfo event_info = 1;
+  string vote_result_id = 2;
+}

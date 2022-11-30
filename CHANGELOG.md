@@ -1,4 +1,4 @@
-# ✨ Changelog (`v1.83.0`)
+# ✨ Changelog (`v1.85.0`)
 
 All notable changes to this project will be documented in this file.
 
@@ -8,11 +8,39 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Version Info
 
 ```text
-This version -------- v1.83.0
-Previous version ---- v1.81.3
+This version -------- v1.85.0
+Previous version ---- v1.83.0
 Initial version ----- v1.79.2
-Total commits ------- 3
+Total commits ------- 4
 ```
+
+## [v1.85.0] - 2022-11-28
+
+### 🆕 Added
+
+- Event signature public key metadata
+
+### 🔄 Changed
+
+- Changed event signature models
+
+## [v1.84.2] - 2022-11-25
+
+### 🔄 Changed
+
+- contact person name min length to 1
+
+## [v1.84.1] - 2022-11-03
+
+### 🆕 Added
+
+- add eVoting invalid and accounted ballots for count of voters
+
+## [v1.84.0] - 2022-10-26
+
+### 🆕 Added
+
+- Reset counting circle results in testing phase
 
 ## [v1.83.0] - 2022-09-27
 

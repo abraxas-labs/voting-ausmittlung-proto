@@ -5,10 +5,14 @@ syntax = "proto3";
 
 package abraxas.voting.ausmittlung.events.v1.metadata;
 
-message EventSignatureMetadata {
+message EventSignatureBusinessMetadata {
   int32 signature_version = 1;
   string contest_id = 2;
   string host_id = 3;
   string key_id = 4;
   bytes signature = 5;
+}
+
+message EventSignaturePublicKeyMetadata {
+  bytes hsm_signature = 1;
 }

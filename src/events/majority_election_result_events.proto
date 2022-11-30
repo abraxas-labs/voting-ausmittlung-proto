@@ -96,3 +96,8 @@ message MajorityElectionResultResettedToAuditedTentatively {
   data.EventInfo event_info = 1;
   string election_result_id = 2;
 }
+
+message MajorityElectionResultResetted {
+  data.EventInfo event_info = 1;
+  string election_result_id = 2;
+}

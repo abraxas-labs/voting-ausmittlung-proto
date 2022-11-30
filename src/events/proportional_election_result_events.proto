@@ -82,3 +82,8 @@ message ProportionalElectionResultResettedToAuditedTentatively {
   data.EventInfo event_info = 1;
   string election_result_id = 2;
 }
+
+message ProportionalElectionResultResetted {
+  data.EventInfo event_info = 1;
+  string election_result_id = 2;
+}

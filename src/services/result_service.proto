@@ -5,6 +5,7 @@ syntax = "proto3";
 
 package abraxas.voting.ausmittlung.services.v1;
 
+import "google/protobuf/empty.proto";
 import "models/comment.proto";
 import "models/results.proto";
 import "requests/result_requests.proto";
@@ -14,4 +15,5 @@ service ResultService {
   rpc GetList(requests.GetResultListRequest) returns (models.ResultList);
   rpc GetResultComments(requests.GetResultCommentsRequest) returns (models.Comments);
   rpc GetStateChanges(requests.GetResultStateChangesRequest) returns (stream models.ResultStateChange);
+  rpc ResetCountingCircleResults(requests.ResetCountingCircleResultsRequest) returns (google.protobuf.Empty);
 }
