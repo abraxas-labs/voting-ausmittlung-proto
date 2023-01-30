@@ -1,0 +1,13 @@
+// (c) Copyright 2022 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.shared.v1;
+
+enum ProportionalElectionCandidateEndResultState {
+  PROPORTIONAL_ELECTION_CANDIDATE_END_RESULT_STATE_UNSPECIFIED = 0;
+  PROPORTIONAL_ELECTION_CANDIDATE_END_RESULT_STATE_PENDING = 1;
+  PROPORTIONAL_ELECTION_CANDIDATE_END_RESULT_STATE_ELECTED = 2;
+  PROPORTIONAL_ELECTION_CANDIDATE_END_RESULT_STATE_NOT_ELECTED = 3;
+}

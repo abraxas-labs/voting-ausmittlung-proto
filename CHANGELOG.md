@@ -1,4 +1,4 @@
-# ✨ Changelog (`v1.85.0`)
+# ✨ Changelog (`v1.87.0`)
 
 All notable changes to this project will be documented in this file.
 
@@ -8,11 +8,35 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Version Info
 
 ```text
-This version -------- v1.85.0
-Previous version ---- v1.83.0
+This version -------- v1.87.0
+Previous version ---- v1.85.0
 Initial version ----- v1.79.2
 Total commits ------- 4
 ```
+
+## [v1.87.0] - 2023-01-17
+
+### 🔄 Changed
+
+- manual proportional election end result
+
+## [v1.86.1] - 2023-01-03
+
+### ❌ Removed
+
+- remove internal description, invalid votes and individual empty ballots allowed from elections
+
+## [v1.86.0] - 2022-12-22
+
+### 🆕 Added
+
+- Added political business export metadata for Seantis token
+
+## [v1.85.1] - 2022-12-16
+
+### 🆕 Added
+
+- add domain of influence canton
 
 ## [v1.85.0] - 2022-11-28
 
@@ -101,9 +125,6 @@ Total commits ------- 4
 ### 🔄 Changed
 
 - add event docs
-- License and release documents
-- add bbt artifact build pipeline
-- add license file headers
 
 ## [v1.79.2] - 2022-05-02
 

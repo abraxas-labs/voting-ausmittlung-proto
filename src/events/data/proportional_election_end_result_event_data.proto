@@ -5,7 +5,14 @@ syntax = "proto3";
 
 package abraxas.voting.ausmittlung.events.v1.data;
 
+import "shared/proportional_election_end_result.proto";
+
 message ProportionalElectionEndResultLotDecisionEventData {
   string candidate_id = 1;
   int32 rank = 2;
+}
+
+message ProportionalElectionManualCandidateEndResultEventData {
+  string candidate_id = 1;
+  shared.v1.ProportionalElectionCandidateEndResultState state = 2;
 }

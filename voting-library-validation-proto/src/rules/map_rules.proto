@@ -1,0 +1,27 @@
+// (c) Copyright 2022 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.validation.v1;
+
+import "rules/string_rules.proto";
+
+message MapRules {
+  /*
+    Key Regeln.
+  */
+  optional MapEntryComponentRules key = 1;
+
+  /*
+    Value Regeln.
+  */
+  optional MapEntryComponentRules value = 2;
+}
+
+message MapEntryComponentRules {
+  /*
+    String Regeln.
+  */
+  optional StringRules string = 1;
+}

@@ -11,6 +11,7 @@ import "models/contest_counting_circle_details.proto";
 import "models/count_of_voters.proto";
 import "models/proportional_election.proto";
 import "models/proportional_election_result_sub_total.proto";
+import "shared/proportional_election_end_result.proto";
 
 message ProportionalElectionEndResult {
   Contest contest = 1;
@@ -23,6 +24,7 @@ message ProportionalElectionEndResult {
   PoliticalBusinessCountOfVoters count_of_voters = 8;
   repeated ProportionalElectionListEndResult list_end_results = 9;
   bool finalized = 10;
+  bool manual_end_result_required = 11;
 }
 
 message ProportionalElectionListEndResult {
@@ -115,16 +117,9 @@ message ProportionalElectionCandidateEndResult {
     description: when a lot decision must be done, ex: rank <= number of mandates
   */
   bool lot_decision_required = 6;
-  ProportionalElectionCandidateEndResultState state = 7;
+  shared.v1.ProportionalElectionCandidateEndResultState state = 7;
   ProportionalElectionCandidateResultSubTotal e_voting_sub_total = 8;
   ProportionalElectionCandidateResultSubTotal conventional_sub_total = 9;
-}
-
-enum ProportionalElectionCandidateEndResultState {
-  PROPORTIONAL_ELECTION_CANDIDATE_END_RESULT_STATE_UNSPECIFIED = 0;
-  PROPORTIONAL_ELECTION_CANDIDATE_END_RESULT_STATE_PENDING = 1;
-  PROPORTIONAL_ELECTION_CANDIDATE_END_RESULT_STATE_ELECTED = 2;
-  PROPORTIONAL_ELECTION_CANDIDATE_END_RESULT_STATE_NOT_ELECTED = 3;
 }
 
 message ProportionalElectionEndResultLotDecision {

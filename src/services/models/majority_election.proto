@@ -12,6 +12,9 @@ import "shared/ballot_number_generation.proto";
 import "shared/majority_election.proto";
 
 message MajorityElection {
+  reserved 5, 8, 25;
+  reserved "internal_description", "individual_empty_ballots_allowed", "invalid_votes";
+
   /*
     ech-name: electionIdentification
     ech-length: 50
@@ -38,8 +41,6 @@ message MajorityElection {
   */
   string short_description = 4;
 
-  string internal_description = 5;
-
   /*
     ech-name: numberOfMandates
     ech-length:
@@ -49,7 +50,6 @@ message MajorityElection {
   int32 number_of_mandates = 6;
 
   MajorityElectionMandateAlgorithm mandate_algorithm = 7;
-  bool individual_empty_ballots_allowed = 8;
   bool candidate_check_digit = 9;
 
   /*
@@ -110,7 +110,6 @@ message MajorityElection {
   string title = 22;
   int32 count_of_secondary_elections = 23;
   DomainOfInfluence domain_of_influence = 24;
-  bool invalid_votes = 25;
 
   /*
     ech-name: contestIdentification
@@ -187,6 +186,9 @@ message MajorityElectionCandidate {
 }
 
 message SecondaryMajorityElection {
+  reserved 5;
+  reserved "internal_description";
+
   /*
     ech-name: candidateIdentification
     ech-length: 50
@@ -213,9 +215,6 @@ message SecondaryMajorityElection {
     description:
   */
   string short_description = 4;
-
-
-  string internal_description = 5;
 
   /*
     ech-name: numberOfMandates

@@ -66,6 +66,9 @@ message ResultExportConfiguration {
     description: if this value is not set, this export can only be triggered manually.
   */
   google.protobuf.Int32Value interval_minutes = 5;
+
+  ExportProvider provider = 6;
+  map<string, PoliticalBusinessExportMetadata> political_business_metadata = 7;
 }
 
 enum ExportFileFormat {
@@ -81,4 +84,14 @@ enum ExportEntityType {
   EXPORT_ENTITY_TYPE_VOTE = 2;
   EXPORT_ENTITY_TYPE_MAJORITY_ELECTION = 3;
   EXPORT_ENTITY_TYPE_PROPORTIONAL_ELECTION = 4;
+}
+
+enum ExportProvider {
+  EXPORT_PROVIDER_UNSPECIFIED = 0;
+  EXPORT_PROVIDER_STANDARD = 1;
+  EXPORT_PROVIDER_SEANTIS = 2;
+}
+
+message PoliticalBusinessExportMetadata {
+  string token = 1;
 }

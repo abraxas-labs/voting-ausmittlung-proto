@@ -12,11 +12,12 @@ import "shared/ballot_number_generation.proto";
 import "shared/proportional_election.proto";
 
 message ProportionalElection {
+  reserved 5;
+  reserved "internal_description";
   string id = 1;
   string political_business_number = 2;
   string official_description = 3;
   string short_description = 4;
-  string internal_description = 5;
   int32 number_of_mandates = 6;
   ProportionalElectionMandateAlgorithm mandate_algorithm = 7;
   bool candidate_check_digit = 8;

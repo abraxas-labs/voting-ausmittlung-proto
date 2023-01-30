@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Voting.Lib.Validation.Proto" Version="1.0.1" GeneratePathProperty="true" />
+    <PackageReference Include="Voting.Lib.Validation.Proto" Version="1.1.0" GeneratePathProperty="true" />
   </ItemGroup>
 
   <ItemGroup>

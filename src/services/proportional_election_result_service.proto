@@ -34,6 +34,6 @@ service ProportionalElectionResultService {
   rpc PrepareFinalizeEndResult(requests.PrepareFinalizeProportionalElectionEndResultRequest) returns (models.SecondFactorTransaction);
   rpc FinalizeEndResult(requests.FinalizeProportionalElectionEndResultRequest) returns (google.protobuf.Empty);
   rpc RevertEndResultFinalization(requests.RevertProportionalElectionEndResultFinalizationRequest) returns (google.protobuf.Empty);
-
+  rpc EnterManualListEndResult(requests.EnterProportionalElectionManualListEndResultRequest) returns (google.protobuf.Empty);
   rpc ValidateEnterCountOfVoters(requests.ValidateEnterProportionalElectionCountOfVotersRequest) returns (models.ValidationOverview);
 }

@@ -9,6 +9,7 @@ import "requests/count_of_voters_requests.proto";
 import "rules/rules.proto";
 import "shared/ballot_number_generation.proto";
 import "shared/proportional_election.proto";
+import "shared/proportional_election_end_result.proto";
 
 /*
   description: Either set election_id and counting_circle_id or election_result_id.
@@ -338,4 +339,14 @@ message RevertProportionalElectionEndResultFinalizationRequest {
 
 message ValidateEnterProportionalElectionCountOfVotersRequest {
   EnterProportionalElectionCountOfVotersRequest request = 1 [(validation.v1.rules).object.required = true];
+}
+
+message EnterProportionalElectionManualListEndResultRequest {
+  string proportional_election_list_id = 1 [(validation.v1.rules).string.guid = true];
+  repeated EnterProportionalElectionManualCandidateEndResultRequest candidate_end_results = 2;
+}
+
+message EnterProportionalElectionManualCandidateEndResultRequest {
+  string candidate_id = 1 [(validation.v1.rules).string.guid = true];
+  shared.v1.ProportionalElectionCandidateEndResultState state = 2 [(validation.v1.rules).enum.exact_enum = true];
 }

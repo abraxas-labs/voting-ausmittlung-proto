@@ -8,6 +8,8 @@ package abraxas.voting.validation.v1;
 import "google/protobuf/descriptor.proto";
 import "rules/string_rules.proto";
 import "rules/integer_rules.proto";
+import "rules/double_rules.proto";
+import "rules/map_rules.proto";
 import "rules/enum_rules.proto";
 import "rules/object_rules.proto";
 
@@ -31,6 +33,16 @@ message Rules {
     Integer Regeln.
   */
   optional IntegerRules integer = 4;
+
+  /*
+    Double Regeln.
+  */
+  optional DoubleRules double = 5;
+
+  /*
+    Map Regeln.
+  */
+  optional MapRules map = 6;
 }
 
 extend google.protobuf.FieldOptions {

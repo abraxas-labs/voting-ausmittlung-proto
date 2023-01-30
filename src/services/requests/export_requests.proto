@@ -173,6 +173,11 @@ message UpdateResultExportConfigurationRequest {
     description: Interval in Minuten für das automatische Generieren von Exports für definierte Schnittstellen. Das Interval kann zwischen 5 Minuten und 24 Stunden eingestellt werden.
   */
   google.protobuf.Int32Value interval_minutes = 4 [(validation.v1.rules).integer = { min_value: 2, max_value: 240 }];
+
+  /*
+    description: Export-Metadata pro Geschäft, welche für Exports gebraucht werden.
+  */
+  map<string, UpdatePoliticalBusinessExportMetadataRequest> political_business_metadata = 5 [(validation.v1.rules).map.key.string.guid = true];
 }
 
 message TriggerResultExportRequest {
@@ -196,4 +201,17 @@ message TriggerResultExportRequest {
     description: Ausgewählte Geschäfte für manuell- oder automatisierte Exports. Die Geschäfte werden mitgesendet, da neu hinzugefügte oder entfernte Geschäfte existieren können, welche noch nicht gespeichert wurden.
   */
   repeated string political_business_ids = 3 [(validation.v1.rules).string.guid = true];
+
+  /*
+    description: Export-Metadata pro Geschäft, welche für Exports gebraucht werden. Wird mitgesendet, da die Werte ggf. verändert und noch nicht gespeichert wurden.
+  */
+  map<string, UpdatePoliticalBusinessExportMetadataRequest> political_business_metadata = 4 [(validation.v1.rules).map.key.string.guid = true];
+}
+
+message UpdatePoliticalBusinessExportMetadataRequest {
+  /*
+    validations: min-length(1),max-length(100),complex-singleline-text,allow-undefined
+    description: Token, welches für einige Export-Provider (z.B. Seantis) benötigt wird.
+  */
+  string token = 1 [(validation.v1.rules).string = { allow_empty: true, complex_sl_text: true, min_length: 1, max_length: 100 }];
 }

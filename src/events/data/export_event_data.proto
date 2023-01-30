@@ -15,4 +15,10 @@ message ResultExportConfigurationEventData {
 
   // if this value is not set, this export can only be triggered manually.
   google.protobuf.Int32Value interval_minutes = 5;
+
+  map<string, PoliticalBusinessExportMetadataEventData> political_business_metadata = 6;
+}
+
+message PoliticalBusinessExportMetadataEventData {
+  string token = 1;
 }
