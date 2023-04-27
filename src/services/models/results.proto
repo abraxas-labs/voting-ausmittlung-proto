@@ -72,6 +72,22 @@ message ResultImport {
   */
   bool deleted = 5;
   string file_name = 6;
+
+  // Counting circles that were not imported, but were included in the original import file.
+  repeated ResultImportIgnoredCountingCircle ignored_counting_circles = 7;
+}
+
+message ResultImportIgnoredCountingCircle {
+  // The counting circle ID from the import file.
+  string counting_circle_id = 1;
+  
+  // The counting circle description if it is a "test counting circle".
+  string counting_circle_description = 2;
+
+  // A counting circle explicitely used for testing the eVoting functionality
+  // which VOTING Ausmittlung needs to ignore during the import process.
+  // If the ignored counting circle is not a "test counting circle", something went wrong.
+  bool is_test_counting_circle = 3;
 }
 
 message ResultStateChange {

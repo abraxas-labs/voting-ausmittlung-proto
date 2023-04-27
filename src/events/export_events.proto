@@ -10,7 +10,7 @@ import "data/export_event_data.proto";
 import "shared/domain_of_influence.proto";
 import "shared/export.proto";
 
-// a manual user-triggered export is generated
+// a manual user-triggered data export is generated
 message ExportGenerated {
   data.EventInfo event_info = 1;
   string request_id = 2; // a random id which correlates all exports of the same user request.

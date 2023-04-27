@@ -11,16 +11,25 @@ import "models/contest_counting_circle_details.proto";
 import "models/count_of_voters.proto";
 import "models/majority_election.proto";
 import "models/majority_election_result_sub_total.proto";
+import "models/voting_cards.proto";
 
 message MajorityElectionEndResult {
   Contest contest = 1;
   MajorityElection majority_election = 2;
-  AggregatedContestCountingCircleDetails domain_of_influence_details = 3;
-  int32 total_count_of_voters = 4;
+
+  /* Detailed information about the total count of voters who are able to vote ("Stimmberechtigte") */
+  CountOfVotersInformation count_of_voters_information = 3;
+
+  /* The received voting cards ("Stimmrechtsausweise") */
+  repeated VotingCardResultDetail voting_cards = 4;
+
   int32 count_of_done_counting_circles = 5;
   int32 total_count_of_counting_circles = 6;
   bool all_counting_circles_done = 7;
+
+  /* The count of voters who voted in the majority election */
   PoliticalBusinessCountOfVoters count_of_voters = 8;
+
   repeated MajorityElectionCandidateEndResult candidate_end_results = 9;
   repeated SecondaryMajorityElectionEndResult secondary_majority_election_end_results = 10;
   MajorityElectionResultSubTotal e_voting_sub_total = 11;

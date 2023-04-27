@@ -1,4 +1,4 @@
-# ✨ Changelog (`v1.87.0`)
+# ✨ Changelog (`v1.94.0`)
 
 All notable changes to this project will be documented in this file.
 
@@ -8,11 +8,59 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Version Info
 
 ```text
-This version -------- v1.87.0
-Previous version ---- v1.85.0
+This version -------- v1.94.0
+Previous version ---- v1.87.0
 Initial version ----- v1.79.2
-Total commits ------- 4
+Total commits ------- 8
 ```
+
+## [v1.94.0] - 2023-04-12
+
+### 🔄 Changed
+
+- add counting circle votings cards imported event
+
+## [v1.93.0] - 2023-04-05
+
+### 🔄 Changed
+
+- add e-voting blank and invalid ballots for proportional elections and votes
+
+## [v1.92.0] - 2023-03-30
+
+### 🔄 Changed
+
+- add e-voting blank ballots
+
+## [v1.91.1] - 2023-03-28
+
+### 🔄 Changed
+
+- show correct count of voters information and voting cards on end results
+
+## [v1.91.0] - 2023-03-01
+
+### 🔄 Changed
+
+- protocol export state changes
+
+## [v1.90.0] - 2023-02-28
+
+### 🔄 Changed
+
+- add test counting circles to result import
+
+## [v1.89.0] - 2023-02-23
+
+### 🔄 Changed
+
+- add protocol exports
+
+## [v1.88.0] - 2023-01-30
+
+### 🔄 Changed
+
+- new export templates api
 
 ## [v1.87.0] - 2023-01-17
 

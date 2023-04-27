@@ -10,13 +10,20 @@ import "models/contest_counting_circle_details.proto";
 import "models/count_of_voters.proto";
 import "models/vote.proto";
 import "models/vote_result_sub_total.proto";
+import "models/voting_cards.proto";
 
 message VoteEndResult {
   Contest contest = 1;
   Vote vote = 2;
-  AggregatedContestCountingCircleDetails domain_of_influence_details = 3;
-  repeated BallotEndResult ballot_end_results = 4;
-  int32 total_count_of_voters = 5;
+  
+  /* Detailed information about the total count of voters who are able to vote ("Stimmberechtigte") */
+  CountOfVotersInformation count_of_voters_information = 3;
+
+  /* The received voting cards ("Stimmrechtsausweise") */
+  repeated VotingCardResultDetail voting_cards = 4;
+
+  repeated BallotEndResult ballot_end_results = 5;
+
   int32 count_of_done_counting_circles = 6;
   int32 total_count_of_counting_circles = 7;
   bool all_counting_circles_done = 8;

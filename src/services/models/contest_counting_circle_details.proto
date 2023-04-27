@@ -30,8 +30,3 @@ message ContestCountingCircleDetails {
   repeated VotingCardResultDetail voting_cards = 4;
   bool e_voting = 5;
 }
-
-message AggregatedContestCountingCircleDetails {
-  CountOfVotersInformation count_of_voters_information = 1;
-  repeated VotingCardResultDetail voting_cards = 2;
-}

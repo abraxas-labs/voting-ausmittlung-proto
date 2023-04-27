@@ -10,6 +10,9 @@ message VoteBallotResultImportEventData {
   repeated BallotQuestionResultImportEventData question_results = 2;
   repeated TieBreakQuestionResultImportEventData tie_break_question_results = 3;
   int32 count_of_voters = 4;
+  
+  /* Ballots (= "Stimmzettel") which are blank, meaning all questions contained an empty vote */
+  int32 blank_ballot_count = 5;
 }
 
 message BallotQuestionResultImportEventData {

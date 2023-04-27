@@ -1,0 +1,38 @@
+// (c) Copyright 2022 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.events.v1;
+
+import "data/event_info.proto";
+import "shared/domain_of_influence.proto";
+
+// a manual user-triggered protocol export has been started
+message ProtocolExportStarted {
+  data.EventInfo event_info = 1;
+  string protocol_export_id = 2; // Uniquely identifies an export template in a contest
+  string contest_id = 3;
+  string export_template_id = 4; // The ID which uniquely identifies the export template (includes information about which political business etc)
+  string callback_token = 5; // The token which needs to be provided when completing the protocol export
+  string file_name = 6;
+
+  // The fields below are just informative, to keep it in line with the ExportGenerated event
+  string request_id = 7; // A random ID which correlates all exports of the same user request.
+  string export_key = 8; // The key of the export template
+  string political_business_id = 9;
+  string counting_circle_id = 10;
+  shared.v1.DomainOfInfluenceType domain_of_influence_type = 11;
+  string political_business_union_id = 12;
+}
+
+message ProtocolExportCompleted {
+  data.EventInfo event_info = 1;
+  string protocol_export_id = 2;
+  int32 print_job_id = 3; // The print job ID of DmDoc, which can be used to retrieve the generated export
+}
+
+message ProtocolExportFailed {
+  data.EventInfo event_info = 1;
+  string protocol_export_id = 2;
+}

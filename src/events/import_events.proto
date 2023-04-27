@@ -6,6 +6,7 @@ syntax = "proto3";
 package abraxas.voting.ausmittlung.events.v1;
 
 import "data/event_info.proto";
+import "data/import_event_data.proto";
 
 message ResultImportCreated {
   data.EventInfo event_info = 1;
@@ -19,6 +20,7 @@ message ResultImportStarted {
   string file_name = 3;
   string contest_id = 4;
   string ech_message_id = 5;
+  repeated data.ImportIgnoredCountingCircleEventData ignored_counting_circles = 6;
 }
 
 message ResultImportCompleted {

@@ -21,4 +21,10 @@ message ProportionalElectionResultImported {
   int32 count_of_lists_without_party = 10;
   int32 count_of_blank_rows_on_lists_without_party = 11;
   int32 count_of_voters = 12;
+  
+  /* Ballots which are blank, meaning no list and no candidates specified */
+  int32 blank_ballot_count = 13;
+  
+  /* Ballots which are invalid, for example ballots with a list, but no candidates */
+  int32 invalid_ballot_count = 14;
 }

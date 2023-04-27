@@ -6,37 +6,45 @@ syntax = "proto3";
 package abraxas.voting.ausmittlung.services.v1.models;
 
 import "google/protobuf/wrappers.proto";
-import "shared/domain_of_influence.proto";
+import "google/protobuf/timestamp.proto";
+import "models/contest.proto";
+import "models/counting_circle.proto";
 
-message ResultExportTemplates {
-  repeated ResultExportTemplate templates = 1;
+message DataExportTemplates {
+  repeated DataExportTemplate templates = 1;
+  models.Contest contest = 2;
+  models.CountingCircle counting_circle = 3;
 }
 
-message ResultExportTemplate {
-  string key = 1;
+message DataExportTemplate {
+  string export_template_id = 1;
   string description = 2;
-  repeated string political_business_ids = 3;
-  ExportEntityType entity_type = 4;
-  ExportFileFormat format = 5;
+  string entity_description = 3;
+}
 
-  /*
-    ech-name: countingCircleId
-    ech-length:
-    ech-type: string
-    description: Eindeutige Identifikation des Auszählungskreises. Es handelt sich dabei um die lokale Identifikation des Quellregisters.
-  */
-  string counting_circle_id = 6;
-  string political_business_numbers = 7;
+message ProtocolExports {
+  repeated ProtocolExport protocol_exports = 1;
+  models.Contest contest = 2;
+  models.CountingCircle counting_circle = 3;
+}
 
-  /*
-    ech-name: domainOfInfluenceType
-    ech-type:: xs:token
-    validations: exact-enum
-    description: Beschreibt die Stufe des Einflussbereichs. Können einzelne Einflussbereiche keinem der explizit definierten Typen zugeordnet werden, so ist für diese „AN“ (andere) zu verwenden.
-    values: CH = Bund, CT = Kanton, BZ = Bezirk / Amt / Verwaltungskreis, MU = Gemeinde, SC = Schulgemeinde, KI = Kirchgemeinde, OG = Ortsbürgergemeinden, KO = Korporationen, SK = Stadtkreis, AN = andere
-  */
-  shared.v1.DomainOfInfluenceType domain_of_influence_type = 8;
-  string political_business_union_id = 9;
+message ProtocolExport {
+  string export_template_id = 1;
+  string description = 2;
+  string entity_description = 3;
+
+  string protocol_export_id = 4;
+  ProtocolExportState state = 5;
+  string file_name = 6;
+  google.protobuf.Timestamp started = 7;
+}
+
+message ProtocolExportStateChange {
+  string protocol_export_id = 1;
+  string export_template_id = 2;
+  ProtocolExportState new_state = 3;
+  string file_name = 6;
+  google.protobuf.Timestamp started = 7;
 }
 
 message ResultExportConfigurations {
@@ -86,10 +94,28 @@ enum ExportEntityType {
   EXPORT_ENTITY_TYPE_PROPORTIONAL_ELECTION = 4;
 }
 
+enum ExportResultType {
+  EXPORT_RESULT_TYPE_UNSPECIFIED = 0;
+  EXPORT_RESULT_TYPE_COUNTING_CIRCLE_RESULT = 1;
+  EXPORT_RESULT_TYPE_POLITICAL_BUSINESS_RESULT = 2;
+  EXPORT_RESULT_TYPE_MULTIPLE_POLITICAL_BUSINESSES_RESULT = 3;
+  EXPORT_RESULT_TYPE_MULTIPLE_POLITICAL_BUSINESSES_COUNTING_CIRCLE_RESULT = 4;
+  EXPORT_RESULT_TYPE_CONTEST = 5;
+  EXPORT_RESULT_TYPE_POLITICAL_BUSINESS_UNION_RESULT = 6;
+  EXPORT_RESULT_TYPE_POLITICAL_BUSINESS_RESULT_BUNDLE_REVIEW = 7;
+}
+
 enum ExportProvider {
   EXPORT_PROVIDER_UNSPECIFIED = 0;
   EXPORT_PROVIDER_STANDARD = 1;
   EXPORT_PROVIDER_SEANTIS = 2;
+}
+
+enum ProtocolExportState {
+  PROTOCOL_EXPORT_STATE_UNSPECIFIED = 0;
+  PROTOCOL_EXPORT_STATE_GENERATING = 1;
+  PROTOCOL_EXPORT_STATE_COMPLETED = 2;
+  PROTOCOL_EXPORT_STATE_FAILED = 3;
 }
 
 message PoliticalBusinessExportMetadata {

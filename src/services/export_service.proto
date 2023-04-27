@@ -10,12 +10,10 @@ import "models/export.proto";
 import "requests/export_requests.proto";
 
 service ExportService {
-  rpc GetCountingCircleResultExportTemplates(requests.GetCountingCircleResultExportTemplatesRequest) returns (models.ResultExportTemplates);
-  rpc GetPoliticalBusinessResultExportTemplates(requests.GetPoliticalBusinessResultExportTemplatesRequest) returns (models.ResultExportTemplates);
-  rpc GetMultiplePoliticalBusinessesResultExportTemplates(requests.GetMultiplePoliticalBusinessesResultExportTemplatesRequest) returns (models.ResultExportTemplates);
-  rpc GetMultiplePoliticalBusinessesCountingCircleResultExportTemplates(requests.GetMultiplePoliticalBusinessesCountingCircleResultExportTemplatesRequest) returns (models.ResultExportTemplates);
-  rpc GetContestExportTemplates(requests.GetContestExportTemplatesRequest) returns (models.ResultExportTemplates);
-  rpc GetPoliticalBusinessUnionResultExportTemplates(requests.GetPoliticalBusinessUnionResultExportTemplatesRequest) returns (models.ResultExportTemplates);
+  rpc ListDataExportTemplates(requests.ListDataExportTemplatesRequest) returns (models.DataExportTemplates);
+  rpc ListProtocolExports(requests.ListProtocolExportsRequest) returns (models.ProtocolExports);
+  rpc StartProtocolExports(requests.StartProtocolExportsRequest) returns (google.protobuf.Empty);
+  rpc GetProtocolExportStateChanges(requests.GetProtocolExportStateChangesRequest) returns (stream models.ProtocolExportStateChange);
 
   rpc ListResultExportConfigurations(requests.ListResultExportConfigurationsRequest) returns (models.ResultExportConfigurations);
   rpc UpdateResultExportConfiguration(requests.UpdateResultExportConfigurationRequest) returns (google.protobuf.Empty);
