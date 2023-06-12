@@ -20,7 +20,7 @@ message MajorityElectionResultImported {
   int32 invalid_vote_count = 9;
   int32 total_candidate_vote_count_excl_individual = 10;
   int32 count_of_voters = 11;
-  
+
   /* Ballots which are blank, meaning no candidates specified */
   int32 blank_ballot_count = 12;
 }
@@ -51,4 +51,16 @@ message SecondaryMajorityElectionWriteInsMapped {
   string counting_circle_id = 2;
   string secondary_majority_election_id = 3;
   repeated data.MajorityElectionWriteInMappedEventData write_in_mappings = 4;
+}
+
+message MajorityElectionWriteInsReset {
+  data.EventInfo event_info = 1;
+  string counting_circle_id = 2;
+  string majority_election_id = 3;
+}
+
+message SecondaryMajorityElectionWriteInsReset {
+  data.EventInfo event_info = 1;
+  string counting_circle_id = 2;
+  string secondary_majority_election_id = 3;
 }

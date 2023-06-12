@@ -77,6 +77,8 @@ message ResultExportConfiguration {
 
   ExportProvider provider = 6;
   map<string, PoliticalBusinessExportMetadata> political_business_metadata = 7;
+
+  google.protobuf.Timestamp latest_execution = 8;
 }
 
 enum ExportFileFormat {

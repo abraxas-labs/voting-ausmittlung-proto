@@ -16,4 +16,5 @@ service ResultImportService {
 
   rpc GetMajorityElectionWriteInMappings(requests.GetMajorityElectionWriteInMappingsRequest) returns (models.MajorityElectionContestWriteInMappings);
   rpc MapMajorityElectionWriteIns(requests.MapMajorityElectionWriteInsRequest) returns (google.protobuf.Empty);
+  rpc ResetMajorityElectionWriteIns(requests.ResetMajorityElectionWriteInMappingsRequest) returns (google.protobuf.Empty);
 }

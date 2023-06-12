@@ -73,10 +73,14 @@ message ResultImport {
   bool deleted = 5;
   string file_name = 6;
 
+  // Counting circles that were imported.
+  repeated CountingCircle imported_counting_circles = 7;
+
   // Counting circles that were not imported, but were included in the original import file.
-  repeated ResultImportIgnoredCountingCircle ignored_counting_circles = 7;
+  repeated ResultImportIgnoredCountingCircle ignored_counting_circles = 8;
 }
 
+// Describes counting circles that were ignored during a result import.
 message ResultImportIgnoredCountingCircle {
   // The counting circle ID from the import file.
   string counting_circle_id = 1;

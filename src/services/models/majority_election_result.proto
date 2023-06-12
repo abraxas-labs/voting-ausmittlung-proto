@@ -128,7 +128,9 @@ message MajorityElectionBallotGroupResult {
 
 message MajorityElectionCandidateResult {
   MajorityElectionCandidate candidate = 1;
-  int32 e_voting_vote_count = 2;
-  google.protobuf.Int32Value conventional_vote_count = 3;
-  int32 vote_count = 4;
+  int32 e_voting_write_ins_vote_count = 2;
+  int32 e_voting_excl_write_ins_vote_count = 3;
+  int32 e_voting_incl_write_ins_vote_count = 4;
+  google.protobuf.Int32Value conventional_vote_count = 5;
+  int32 vote_count = 6;
 }

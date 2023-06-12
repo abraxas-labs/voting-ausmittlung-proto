@@ -1,4 +1,4 @@
-# ✨ Changelog (`v1.94.0`)
+# ✨ Changelog (`v1.97.0`)
 
 All notable changes to this project will be documented in this file.
 
@@ -8,11 +8,41 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Version Info
 
 ```text
-This version -------- v1.94.0
-Previous version ---- v1.87.0
+This version -------- v1.97.0
+Previous version ---- v1.94.0
 Initial version ----- v1.79.2
-Total commits ------- 8
+Total commits ------- 5
 ```
+
+## [v1.97.0] - 2023-05-31
+
+### 🔄 Changed
+
+- add latest execution timestamp to result export configuration
+
+## [v1.96.2] - 2023-05-31
+
+### 🔄 Changed
+
+- validate that majority elections have atleast one candidate
+
+## [v1.96.1] - 2023-05-26
+
+### 🔄 Changed
+
+- Make certain contact person fields required
+
+## [v1.96.0] - 2023-05-16
+
+### 🆕 Added
+
+- reset majority election write ins
+
+## [v1.95.0] - 2023-04-28
+
+### 🔄 Changed
+
+- show imported counting circles
 
 ## [v1.94.0] - 2023-04-12
 

@@ -13,14 +13,16 @@ message MajorityElectionResultSubTotal {
   /*
     description: Anzahl leere Zeilen
   */
-  int32 empty_vote_count = 2;
+  int32 empty_vote_count_incl_write_ins = 2;
+  int32 empty_vote_count_excl_write_ins = 3;
+  int32 empty_vote_count_write_ins = 4;
 
   /*
     description: Anzahl ungültiger Abstimmungen.
   */
-  int32 invalid_vote_count = 3;
-  int32 total_candidate_vote_count_excl_individual = 4;
-  int32 total_candidate_vote_count_incl_individual = 5;
+  int32 invalid_vote_count = 5;
+  int32 total_candidate_vote_count_excl_individual = 6;
+  int32 total_candidate_vote_count_incl_individual = 7;
 }
 
 message MajorityElectionResultNullableSubTotal {
@@ -32,12 +34,14 @@ message MajorityElectionResultNullableSubTotal {
   /*
     description: Anzahl leere Zeilen
   */
-  google.protobuf.Int32Value empty_vote_count = 2;
+  google.protobuf.Int32Value empty_vote_count_incl_write_ins = 2;
+  google.protobuf.Int32Value empty_vote_count_excl_write_ins = 3;
+  google.protobuf.Int32Value empty_vote_count_write_ins = 4;
 
   /*
     description: Anzahl ungültiger Abstimmungen.
   */
-  google.protobuf.Int32Value invalid_vote_count = 3;
-  int32 total_candidate_vote_count_excl_individual = 4;
-  int32 total_candidate_vote_count_incl_individual = 5;
+  google.protobuf.Int32Value invalid_vote_count = 5;
+  int32 total_candidate_vote_count_excl_individual = 6;
+  int32 total_candidate_vote_count_incl_individual = 7;
 }
