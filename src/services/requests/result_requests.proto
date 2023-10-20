@@ -76,3 +76,86 @@ message ResetCountingCircleResultsRequest {
   */
   string counting_circle_id = 2 [(validation.v1.rules).string.guid = true];
 }
+
+message ValidateCountingCircleResultsRequest {
+  /*
+    ech-name: contestIdentification
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Urnengangs.
+  */
+  string contest_id = 1 [(validation.v1.rules).string.guid = true];
+
+  /*
+    ech-name: countingCircleId
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: is-guid
+    description: Eindeutige Identifikation des Auszählungskreises. Es handelt sich dabei um die lokale Identifikation des Quellregisters.
+  */
+  string counting_circle_id = 2 [(validation.v1.rules).string.guid = true];
+
+  /*
+    validations: is-guid
+    description: Selektierte Resultate.
+  */
+  repeated string counting_circle_result_ids = 3 [(validation.v1.rules).string.guid = true];
+}
+
+message CountingCircleResultsPrepareSubmissionFinishedRequest {
+  /*
+    ech-name: contestIdentification
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Urnengangs.
+  */
+  string contest_id = 1 [(validation.v1.rules).string.guid = true];
+
+  /*
+    ech-name: countingCircleId
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: is-guid
+    description: Eindeutige Identifikation des Auszählungskreises. Es handelt sich dabei um die lokale Identifikation des Quellregisters.
+  */
+  string counting_circle_id = 2 [(validation.v1.rules).string.guid = true];
+
+  /*
+    validations: is-guid
+    description: Selektierte Resultate.
+  */
+  repeated string counting_circle_result_ids = 3 [(validation.v1.rules).string.guid = true];
+}
+
+message CountingCircleResultsSubmissionFinishedRequest {
+  /*
+    ech-name: contestIdentification
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Urnengangs.
+  */
+  string contest_id = 1 [(validation.v1.rules).string.guid = true];
+  /*
+    ech-name: countingCircleId
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: is-guid
+    description: Eindeutige Identifikation des Auszählungskreises. Es handelt sich dabei um die lokale Identifikation des Quellregisters.
+  */
+  string counting_circle_id = 2 [(validation.v1.rules).string.guid = true];
+
+  /*
+    validations: is-guid
+    description: Selektierte Resultate.
+  */
+  repeated string counting_circle_result_ids = 3 [(validation.v1.rules).string.guid = true];
+
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation der Zweifaktor-Transaktion (siehe: https://docs.nevis.net/apidoc/authcloud/#enroll-your-access-app)
+  */
+  string second_factor_transaction_id = 4 [(validation.v1.rules).string = { guid: true, allow_empty: true}];
+}

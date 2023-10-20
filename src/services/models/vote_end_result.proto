@@ -6,7 +6,6 @@ syntax = "proto3";
 package abraxas.voting.ausmittlung.services.v1.models;
 
 import "models/contest.proto";
-import "models/contest_counting_circle_details.proto";
 import "models/count_of_voters.proto";
 import "models/vote.proto";
 import "models/vote_result_sub_total.proto";
@@ -15,7 +14,7 @@ import "models/voting_cards.proto";
 message VoteEndResult {
   Contest contest = 1;
   Vote vote = 2;
-  
+
   /* Detailed information about the total count of voters who are able to vote ("Stimmberechtigte") */
   CountOfVotersInformation count_of_voters_information = 3;
 

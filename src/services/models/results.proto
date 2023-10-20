@@ -40,7 +40,7 @@ message ResultList {
   bool current_tenant_is_responsible = 5;
   CountingCircleResultState state = 6;
   bool swiss_abroad_have_voting_rights_on_any_business = 7;
-  
+
   /*
     description: The contact person may be overwritten for a specific contest. Empty if the contact person is not overwritten.
   */
@@ -84,7 +84,7 @@ message ResultImport {
 message ResultImportIgnoredCountingCircle {
   // The counting circle ID from the import file.
   string counting_circle_id = 1;
-  
+
   // The counting circle description if it is a "test counting circle".
   string counting_circle_description = 2;
 
@@ -97,4 +97,8 @@ message ResultImportIgnoredCountingCircle {
 message ResultStateChange {
   string id = 1;
   CountingCircleResultState new_state = 2;
+}
+
+message ResultImportChange {
+  bool has_write_ins = 1;
 }

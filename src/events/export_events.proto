@@ -42,6 +42,7 @@ message ResultExportTriggered {
 }
 
 // an export form a ResultExportConfiguration was generated
+// this event is no longer created, but still in use for backward compatibility
 message ResultExportGenerated {
   data.EventInfo event_info = 1;
   string contest_id = 2;

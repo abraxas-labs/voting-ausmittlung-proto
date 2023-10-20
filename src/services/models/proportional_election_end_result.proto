@@ -7,7 +7,6 @@ package abraxas.voting.ausmittlung.services.v1.models;
 
 import "google/protobuf/wrappers.proto";
 import "models/contest.proto";
-import "models/contest_counting_circle_details.proto";
 import "models/count_of_voters.proto";
 import "models/proportional_election.proto";
 import "models/proportional_election_result_sub_total.proto";
@@ -17,7 +16,7 @@ import "shared/proportional_election_end_result.proto";
 message ProportionalElectionEndResult {
   Contest contest = 1;
   ProportionalElection proportional_election = 2;
-  
+
   /* Detailed information about the total count of voters who are able to vote ("Stimmberechtigte") */
   CountOfVotersInformation count_of_voters_information = 3;
 
@@ -27,7 +26,7 @@ message ProportionalElectionEndResult {
   int32 count_of_done_counting_circles = 5;
   int32 total_count_of_counting_circles = 6;
   bool all_counting_circles_done = 7;
-  
+
   /* The count of voters who voted in the proportional election */
   PoliticalBusinessCountOfVoters count_of_voters = 8;
 

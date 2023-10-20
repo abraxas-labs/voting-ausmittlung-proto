@@ -1,4 +1,4 @@
-# ✨ Changelog (`v1.97.0`)
+# ✨ Changelog (`v1.99.3`)
 
 All notable changes to this project will be documented in this file.
 
@@ -8,11 +8,41 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Version Info
 
 ```text
-This version -------- v1.97.0
-Previous version ---- v1.94.0
+This version -------- v1.99.3
+Previous version ---- v1.97.0
 Initial version ----- v1.79.2
 Total commits ------- 5
 ```
+
+## [v1.99.3] - 2023-08-22
+
+### 🔄 Changed
+
+- revert deletion of ResultExportGenerated event
+
+## [v1.99.2] - 2023-07-26
+
+### ❌ Removed
+
+- remove result export generated event
+
+## [v1.99.1] - 2023-07-11
+
+### 🔄 Changed
+
+- allow empty for second factor transaction id
+
+## [v1.99.0] - 2023-06-28
+
+### 🆕 Added
+
+- add result import changes
+
+## [v1.98.0] - 2023-06-19
+
+### 🆕 Added
+
+- Multiple counting circle results submission finished
 
 ## [v1.97.0] - 2023-05-31
 

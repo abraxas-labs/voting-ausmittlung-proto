@@ -7,7 +7,6 @@ package abraxas.voting.ausmittlung.services.v1.models;
 
 import "google/protobuf/wrappers.proto";
 import "models/contest.proto";
-import "models/contest_counting_circle_details.proto";
 import "models/count_of_voters.proto";
 import "models/majority_election.proto";
 import "models/majority_election_result_sub_total.proto";

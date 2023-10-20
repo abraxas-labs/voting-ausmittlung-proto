@@ -11,6 +11,17 @@ import "shared/domain_of_influence.proto";
 import "shared/validation.proto";
 import "shared/voting_channel.proto";
 
+message ValidationSummaries {
+  repeated ValidationSummary summaries = 1;
+  bool is_valid = 2;
+}
+
+message ValidationSummary {
+  repeated ValidationResult validation_results = 1;
+  bool is_valid = 2;
+  string title = 3;
+}
+
 message ValidationResult {
   shared.v1.Validation validation = 1;
   bool is_valid = 2;
@@ -25,11 +36,6 @@ message ValidationResult {
     ValidationComparisonVotingChannelsData comparison_voting_channels_data = 10;
     ValidationComparisonValidVotingCardsWithAccountedBallotsData comparison_valid_voting_cards_with_accounted_ballots_data = 11;
   }
-}
-
-message ValidationOverview {
-  repeated ValidationResult validation_results = 1;
-  bool is_valid = 2;
 }
 
 message ValidationPoliticalBusinessData {

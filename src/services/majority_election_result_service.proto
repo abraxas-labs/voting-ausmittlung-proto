@@ -35,6 +35,6 @@ service MajorityElectionResultService {
   rpc FinalizeEndResult(requests.FinalizeMajorityElectionEndResultRequest) returns (google.protobuf.Empty);
   rpc RevertEndResultFinalization(requests.RevertMajorityElectionEndResultFinalizationRequest) returns (google.protobuf.Empty);
 
-  rpc ValidateEnterCountOfVoters(requests.ValidateEnterMajorityElectionCountOfVotersRequest) returns (models.ValidationOverview);
-  rpc ValidateEnterCandidateResults(requests.ValidateEnterMajorityElectionCandidateResultsRequest) returns (models.ValidationOverview);
+  rpc ValidateEnterCountOfVoters(requests.ValidateEnterMajorityElectionCountOfVotersRequest) returns (models.ValidationSummary);
+  rpc ValidateEnterCandidateResults(requests.ValidateEnterMajorityElectionCandidateResultsRequest) returns (models.ValidationSummary);
 }

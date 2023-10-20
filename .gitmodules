@@ -1,0 +1,3 @@
+[submodule "voting-library-validation-proto"]
+	path = voting-library-validation-proto
+	url = ../../voting-library/voting-library-validation-proto.git

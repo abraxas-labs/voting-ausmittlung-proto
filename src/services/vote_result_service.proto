@@ -33,7 +33,7 @@ service VoteResultService {
   rpc FinalizeEndResult(requests.FinalizeVoteEndResultRequest) returns (google.protobuf.Empty);
   rpc RevertEndResultFinalization(requests.RevertVoteEndResultFinalizationRequest) returns (google.protobuf.Empty);
 
-  rpc ValidateEnterCountOfVoters(requests.ValidateEnterVoteResultCountOfVotersRequest) returns (models.ValidationOverview);
-  rpc ValidateEnterResults(requests.ValidateEnterVoteResultsRequest) returns (models.ValidationOverview);
-  rpc ValidateEnterCorrectionResults(requests.ValidateEnterVoteResultCorrectionRequest) returns (models.ValidationOverview);
+  rpc ValidateEnterCountOfVoters(requests.ValidateEnterVoteResultCountOfVotersRequest) returns (models.ValidationSummary);
+  rpc ValidateEnterResults(requests.ValidateEnterVoteResultsRequest) returns (models.ValidationSummary);
+  rpc ValidateEnterCorrectionResults(requests.ValidateEnterVoteResultCorrectionRequest) returns (models.ValidationSummary);
 }

@@ -172,7 +172,7 @@ message ProportionalElectionResultSubmissionFinishedRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation der Zweifaktor-Transaktion (siehe: https://docs.nevis.net/apidoc/authcloud/#enroll-your-access-app)
   */
-  string second_factor_transaction_id = 2 [(validation.v1.rules).string.guid = true];
+  string second_factor_transaction_id = 2 [(validation.v1.rules).string = { guid: true, allow_empty: true}];
 }
 
 message ProportionalElectionResultPrepareCorrectionFinishedRequest {
@@ -200,7 +200,7 @@ message ProportionalElectionResultCorrectionFinishedRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation der Zweifaktor-Transaktion (siehe: https://docs.nevis.net/apidoc/authcloud/#enroll-your-access-app)
   */
-  string second_factor_transaction_id = 3 [(validation.v1.rules).string.guid = true];
+  string second_factor_transaction_id = 3 [(validation.v1.rules).string = { guid: true, allow_empty: true}];
 }
 
 message ProportionalElectionResultFlagForCorrectionRequest {
