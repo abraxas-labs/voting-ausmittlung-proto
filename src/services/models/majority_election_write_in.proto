@@ -1,4 +1,4 @@
-// (c) Copyright 2022 by Abraxas Informatik AG
+// (c) Copyright 2024 by Abraxas Informatik AG
 // For license information see LICENSE file
 
 syntax = "proto3";
@@ -41,4 +41,15 @@ message MajorityElectionWriteInMapping {
     description: Eindeutige, technische Identifikation des Kandidaten.
   */
   string candidate_id = 5;
+}
+
+message MajorityElectionWriteInMappingsChange {
+  string result_id = 1;
+  bool is_reset = 2;
+
+  /* Count of duplicates candidates on the same ballot, which were then mapped to empty/invalid positions */
+  int32 duplicated_candidates = 3;
+
+  /* Count of ballots that were mapped to invalid, since the ballot was empty after write ins mapping */
+  int32 invalid_due_to_empty_ballot = 4;
 }

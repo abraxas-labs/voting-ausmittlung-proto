@@ -1,0 +1,44 @@
+// (c) Copyright 2024 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.services.v1.requests;
+
+import "rules/rules.proto";
+import "shared/domain_of_influence.proto";
+
+/*
+  description: Elektorate für den Auszählungskreis eines Urnenganges.
+*/
+message UpdateContestCountingCircleElectoratesRequest {
+  /*
+    ech-name: contestIdentification
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Urnengangs.
+  */
+  string contest_id = 1 [(validation.v1.rules).string.guid = true];
+
+  /*
+    ech-name: countingCircleId
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: is-guid
+    description: Eindeutige Identifikation des Auszählungskreises. Es handelt sich dabei um die lokale Identifikation des Quellregisters.
+  */
+  string counting_circle_id = 2 [(validation.v1.rules).string.guid = true];
+  repeated CreateUpdateContestCountingCircleElectorateRequest electorates = 3;
+}
+
+/*
+  description: Elektorat für den Auszählungskreis eines Urnenganges.
+*/
+message CreateUpdateContestCountingCircleElectorateRequest {
+  /*
+    validations: exact-enum
+    description: Geschäftsebenen des Elektorats.
+  */
+  repeated shared.v1.DomainOfInfluenceType domain_of_influence_types = 1 [(validation.v1.rules).enum.exact_enum = true];
+}

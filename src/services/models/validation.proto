@@ -1,4 +1,4 @@
-// (c) Copyright 2022 by Abraxas Informatik AG
+// (c) Copyright 2024 by Abraxas Informatik AG
 // For license information see LICENSE file
 
 syntax = "proto3";
@@ -36,6 +36,8 @@ message ValidationResult {
     ValidationComparisonVotingChannelsData comparison_voting_channels_data = 10;
     ValidationComparisonValidVotingCardsWithAccountedBallotsData comparison_valid_voting_cards_with_accounted_ballots_data = 11;
   }
+  shared.v1.ValidationGroup validation_group = 12;
+  string group_value = 13;
 }
 
 message ValidationPoliticalBusinessData {

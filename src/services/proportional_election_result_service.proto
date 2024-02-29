@@ -1,4 +1,4 @@
-// (c) Copyright 2022 by Abraxas Informatik AG
+// (c) Copyright 2024 by Abraxas Informatik AG
 // For license information see LICENSE file
 
 syntax = "proto3";
@@ -36,4 +36,5 @@ service ProportionalElectionResultService {
   rpc RevertEndResultFinalization(requests.RevertProportionalElectionEndResultFinalizationRequest) returns (google.protobuf.Empty);
   rpc EnterManualListEndResult(requests.EnterProportionalElectionManualListEndResultRequest) returns (google.protobuf.Empty);
   rpc ValidateEnterCountOfVoters(requests.ValidateEnterProportionalElectionCountOfVotersRequest) returns (models.ValidationSummary);
+  rpc SubmissionFinishedAndAuditedTentatively(requests.ProportionalElectionResultSubmissionFinishedAndAuditedTentativelyRequest) returns (google.protobuf.Empty);
 }

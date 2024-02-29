@@ -1,4 +1,4 @@
-// (c) Copyright 2022 by Abraxas Informatik AG
+// (c) Copyright 2024 by Abraxas Informatik AG
 // For license information see LICENSE file
 
 syntax = "proto3";
@@ -75,4 +75,8 @@ enum DomainOfInfluenceCanton {
 
 message DomainOfInfluenceCantonDefaults {
   bool majority_election_invalid_votes = 1;
+  bool counting_machine_enabled = 2;
+  bool new_zh_features_enabled = 3;
+  bool majority_election_use_candidate_check_digit = 4;
+  bool proportional_election_use_candidate_check_digit = 5;
 }

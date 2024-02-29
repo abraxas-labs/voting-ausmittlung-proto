@@ -1,4 +1,4 @@
-// (c) Copyright 2022 by Abraxas Informatik AG
+// (c) Copyright 2024 by Abraxas Informatik AG
 // For license information see LICENSE file
 
 syntax = "proto3";
@@ -8,6 +8,7 @@ package abraxas.voting.ausmittlung.events.v1;
 import "data/count_of_voters_event_data.proto";
 import "data/event_info.proto";
 import "data/voting_card_event_data.proto";
+import "shared/counting_machine.proto";
 
 message ContestCountingCircleDetailsCreated {
   data.EventInfo event_info = 1;
@@ -16,6 +17,7 @@ message ContestCountingCircleDetailsCreated {
   string counting_circle_id = 4;
   data.CountOfVotersInformationEventData count_of_voters_information = 5;
   repeated data.VotingCardResultDetailEventData voting_cards = 6;
+  shared.v1.CountingMachine counting_machine = 7;
 }
 
 message ContestCountingCircleDetailsUpdated {
@@ -25,6 +27,7 @@ message ContestCountingCircleDetailsUpdated {
   string counting_circle_id = 4;
   data.CountOfVotersInformationEventData count_of_voters_information = 5;
   repeated data.VotingCardResultDetailEventData voting_cards = 6;
+  shared.v1.CountingMachine counting_machine = 7;
 }
 
 message ContestCountingCircleDetailsResetted {

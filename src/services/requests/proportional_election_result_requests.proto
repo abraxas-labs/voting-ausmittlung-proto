@@ -1,4 +1,4 @@
-// (c) Copyright 2022 by Abraxas Informatik AG
+// (c) Copyright 2024 by Abraxas Informatik AG
 // For license information see LICENSE file
 
 syntax = "proto3";
@@ -105,6 +105,12 @@ message DefineProportionalElectionResultEntryParamsRequest {
     description: Überprüfungsmethode der Bundkontrolle.
   */
   shared.v1.ProportionalElectionReviewProcedure review_procedure = 7 [(validation.v1.rules).enum.exact_enum = true];
+
+  /*
+    validations: is-type(bool)
+    description: 'True' für die Verwendung der Prüfziffer bei der Erfassung von Kandidaten, sonst 'False' für keine Prüfziffer.
+  */
+  bool candidate_check_digit = 8;
 }
 
 message EnterProportionalElectionCountOfVotersRequest {
@@ -349,4 +355,12 @@ message EnterProportionalElectionManualListEndResultRequest {
 message EnterProportionalElectionManualCandidateEndResultRequest {
   string candidate_id = 1 [(validation.v1.rules).string.guid = true];
   shared.v1.ProportionalElectionCandidateEndResultState state = 2 [(validation.v1.rules).enum.exact_enum = true];
+}
+
+message ProportionalElectionResultSubmissionFinishedAndAuditedTentativelyRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Wahlergebnisses.
+  */
+  string election_result_id = 1 [(validation.v1.rules).string.guid = true];
 }

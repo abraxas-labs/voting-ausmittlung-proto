@@ -1,4 +1,4 @@
-// (c) Copyright 2022 by Abraxas Informatik AG
+// (c) Copyright 2024 by Abraxas Informatik AG
 // For license information see LICENSE file
 
 syntax = "proto3";
@@ -16,6 +16,7 @@ message ProportionalElectionResultEntryParamsEventData {
   shared.v1.BallotNumberGeneration ballot_number_generation = 4;
   bool automatic_empty_vote_counting = 5;
   shared.v1.ProportionalElectionReviewProcedure review_procedure = 6;
+  bool candidate_check_digit = 7;
 }
 
 message ProportionalElectionUnmodifiedListResultEventData {

@@ -1,4 +1,4 @@
-// (c) Copyright 2022 by Abraxas Informatik AG
+// (c) Copyright 2024 by Abraxas Informatik AG
 // For license information see LICENSE file
 
 syntax = "proto3";
@@ -8,6 +8,7 @@ package abraxas.voting.ausmittlung.services.v1.requests;
 import "requests/count_of_voters_requests.proto";
 import "requests/voting_cards_requests.proto";
 import "rules/rules.proto";
+import "shared/counting_machine.proto";
 
 /*
   description: Details von Stimmberechtigten und Stimmrechtsausweisen für den Auszählungskreis eines Urnenganges.
@@ -33,6 +34,7 @@ message UpdateContestCountingCircleDetailsRequest {
 
   repeated UpdateCountOfVotersInformationSubTotalRequest count_of_voters = 3;
   repeated UpdateVotingCardResultDetailRequest voting_cards = 4;
+  shared.v1.CountingMachine counting_machine = 5 [(validation.v1.rules).enum = { exact_enum: true, allow_unspecified: true }];
 }
 
 /*

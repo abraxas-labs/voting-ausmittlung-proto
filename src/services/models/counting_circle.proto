@@ -1,4 +1,4 @@
-// (c) Copyright 2022 by Abraxas Informatik AG
+// (c) Copyright 2024 by Abraxas Informatik AG
 // For license information see LICENSE file
 
 syntax = "proto3";
@@ -6,6 +6,7 @@ syntax = "proto3";
 package abraxas.voting.ausmittlung.services.v1.models;
 
 import "models/contact_person.proto";
+import "shared/domain_of_influence.proto";
 
 message CountingCircles {
   repeated CountingCircle counting_circles = 1;
@@ -43,6 +44,10 @@ message Authority {
   string city = 5;
   string phone = 6;
   string email = 7;
+}
+
+message CountingCircleElectorate {
+  repeated shared.v1.DomainOfInfluenceType domain_of_influence_types = 1;
 }
 
 enum CountingCircleResultState {

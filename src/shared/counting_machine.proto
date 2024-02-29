@@ -1,0 +1,14 @@
+// (c) Copyright 2024 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.shared.v1;
+
+enum CountingMachine {
+  COUNTING_MACHINE_UNSPECIFIED = 0;
+  COUNTING_MACHINE_NONE = 1;
+  COUNTING_MACHINE_CALIBRATED_SCALES = 2;
+  COUNTING_MACHINE_BANKNOTE_COUNTING_MACHINE = 3;
+  COUNTING_MACHINE_OTHER = 4;
+}

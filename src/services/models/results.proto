@@ -1,4 +1,4 @@
-// (c) Copyright 2022 by Abraxas Informatik AG
+// (c) Copyright 2024 by Abraxas Informatik AG
 // For license information see LICENSE file
 
 syntax = "proto3";
@@ -8,6 +8,7 @@ package abraxas.voting.ausmittlung.services.v1.models;
 import "google/protobuf/timestamp.proto";
 import "models/contest.proto";
 import "models/contest_counting_circle_details.proto";
+import "models/contest_counting_circle_electorate.proto";
 import "models/counting_circle.proto";
 import "models/political_business.proto";
 import "models/user.proto";
@@ -48,6 +49,7 @@ message ResultList {
   bool must_update_contact_persons = 9;
   bool has_unmapped_e_voting_write_ins = 10;
   repeated VotingCardChannel enabled_voting_card_channels = 11;
+  ContestCountingCircleElectorateSummary electorate_summary = 12;
 }
 
 message ResultListResult {

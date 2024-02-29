@@ -1,0 +1,10 @@
+// (c) Copyright 2024 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.events.v1.data;
+
+message CountingCircleResultCountOfVotersInformationImportEventData {
+  int32 total_count_of_voters = 1;
+}

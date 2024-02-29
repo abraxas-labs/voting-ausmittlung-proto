@@ -1,4 +1,4 @@
-// (c) Copyright 2022 by Abraxas Informatik AG
+// (c) Copyright 2024 by Abraxas Informatik AG
 // For license information see LICENSE file
 
 syntax = "proto3";
@@ -141,6 +141,27 @@ message MapMajorityElectionWriteInRequest {
   */
   string candidate_id = 3 [(validation.v1.rules).string = { guid: true, allow_empty: true }];
 }
+
+message GetMajorityElectionWriteInMappingChangesRequest {
+  /*
+    ech-name: contestIdentification
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Urnengangs.
+  */
+  string contest_id = 1 [(validation.v1.rules).string.guid = true];
+
+  /*
+    ech-name: countingCircleId
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: is-guid
+    description: Eindeutige Identifikation des Auszählungskreises. Es handelt sich dabei um die lokale Identifikation des Quellregisters.
+  */
+  string counting_circle_id = 2 [(validation.v1.rules).string.guid = true];
+}
+
 
 message GetResultImportChangesRequest {
   /*

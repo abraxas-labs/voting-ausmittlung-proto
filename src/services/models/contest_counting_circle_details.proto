@@ -1,4 +1,4 @@
-// (c) Copyright 2022 by Abraxas Informatik AG
+// (c) Copyright 2024 by Abraxas Informatik AG
 // For license information see LICENSE file
 
 syntax = "proto3";
@@ -7,6 +7,7 @@ package abraxas.voting.ausmittlung.services.v1.models;
 
 import "models/count_of_voters.proto";
 import "models/voting_cards.proto";
+import "shared/counting_machine.proto";
 
 message ContestCountingCircleDetails {
   /*
@@ -29,4 +30,5 @@ message ContestCountingCircleDetails {
   CountOfVotersInformation count_of_voters_information = 3;
   repeated VotingCardResultDetail voting_cards = 4;
   bool e_voting = 5;
+  shared.v1.CountingMachine counting_machine = 6;
 }

@@ -1,4 +1,4 @@
-// (c) Copyright 2022 by Abraxas Informatik AG
+// (c) Copyright 2024 by Abraxas Informatik AG
 // For license information see LICENSE file
 
 syntax = "proto3";
@@ -32,6 +32,7 @@ service VoteResultService {
   rpc PrepareFinalizeEndResult(requests.PrepareFinalizeVoteEndResultRequest) returns (models.SecondFactorTransaction);
   rpc FinalizeEndResult(requests.FinalizeVoteEndResultRequest) returns (google.protobuf.Empty);
   rpc RevertEndResultFinalization(requests.RevertVoteEndResultFinalizationRequest) returns (google.protobuf.Empty);
+  rpc SubmissionFinishedAndAuditedTentatively(requests.VoteResultSubmissionFinishedAndAuditedTentativelyRequest) returns (google.protobuf.Empty);
 
   rpc ValidateEnterCountOfVoters(requests.ValidateEnterVoteResultCountOfVotersRequest) returns (models.ValidationSummary);
   rpc ValidateEnterResults(requests.ValidateEnterVoteResultsRequest) returns (models.ValidationSummary);

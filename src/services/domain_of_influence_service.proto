@@ -1,0 +1,14 @@
+// (c) Copyright 2024 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.services.v1;
+
+import "models/domain_of_influence.proto";
+import "requests/domain_of_influence_requests.proto";
+
+
+service DomainOfInfluenceService {
+  rpc GetCantonDefaults(requests.GetCantonDefaultsRequest) returns (models.DomainOfInfluenceCantonDefaults);
+}

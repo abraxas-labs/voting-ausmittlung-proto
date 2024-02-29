@@ -1,4 +1,4 @@
-// (c) Copyright 2022 by Abraxas Informatik AG
+// (c) Copyright 2024 by Abraxas Informatik AG
 // For license information see LICENSE file
 
 syntax = "proto3";
@@ -371,4 +371,12 @@ message ValidateEnterVoteResultsRequest {
 */
 message ValidateEnterVoteResultCorrectionRequest {
   EnterVoteResultCorrectionRequest request = 1 [(validation.v1.rules).object.required = true];
+}
+
+message VoteResultSubmissionFinishedAndAuditedTentativelyRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige Identifikation des Abstimmungsresultates.
+  */
+  string vote_result_id = 1 [(validation.v1.rules).string.guid = true];
 }

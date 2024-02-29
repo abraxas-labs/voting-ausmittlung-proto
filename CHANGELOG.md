@@ -1,4 +1,4 @@
-# ✨ Changelog (`v1.99.3`)
+# ✨ Changelog (`v1.111.0`)
 
 All notable changes to this project will be documented in this file.
 
@@ -8,11 +8,83 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Version Info
 
 ```text
-This version -------- v1.99.3
-Previous version ---- v1.97.0
+This version -------- v1.111.0
+Previous version ---- v1.99.3
 Initial version ----- v1.79.2
-Total commits ------- 5
+Total commits ------- 13
 ```
+
+## [v1.111.0] - 2024-02-28
+
+### :new: Added
+
+- write in mapping changes
+
+## [v1.110.0] - 2024-02-27
+
+### :new: Added
+
+- added invalid ballot write in mapping target
+
+## [v1.109.0] - 2024-02-22
+
+### 🆕 Added
+
+- add submission finished and audited tentatively endpoint
+
+## [v1.108.0] - 2024-02-19
+
+### 🆕 Added
+
+- Import ech-0110 count of voters informations
+
+## [v1.107.0] - 2024-02-06
+
+### 🆕 Added
+
+- Double proportional election mandate algorithms
+
+## [v1.106.0] - 2024-01-30
+
+### 🆕 Added
+
+- Counting circle electorates
+
+## [v1.105.0] - 2024-01-29
+
+### 🔄 Changed
+
+- track evoting write-in ballots
+
+## [v1.104.0] - 2024-01-29
+
+### 🆕 Added
+
+- add candidate check digit
+
+## [v1.103.0] - 2024-01-16
+
+### 🆕 Added
+
+- add new zh features flag
+
+## [v1.102.0] - 2024-01-11
+
+### :new: Added
+
+- added permission service
+
+## [v1.101.0] - 2023-12-20
+
+### 🆕 Added
+
+- Add counting machine to counting circle details
+
+## [v1.100.0] - 2023-12-19
+
+### 🆕 Added
+
+- add multiple ballot validation result
 
 ## [v1.99.3] - 2023-08-22
 
@@ -215,6 +287,14 @@ Total commits ------- 5
 ### 🆕 Added
 
 - Added proto validators at the requests.
+
+### 🔒 Security
+
+- Define input validation rules for service request models.
+
+### 🔄 Changed
+
+- Export templates should include the political business union id
 
 ## [v1.80.0] - 2022-08-17
 

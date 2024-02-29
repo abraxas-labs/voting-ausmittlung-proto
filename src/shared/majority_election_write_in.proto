@@ -1,4 +1,4 @@
-// (c) Copyright 2022 by Abraxas Informatik AG
+// (c) Copyright 2024 by Abraxas Informatik AG
 // For license information see LICENSE file
 
 syntax = "proto3";
@@ -9,6 +9,11 @@ enum MajorityElectionWriteInMappingTarget {
   MAJORITY_ELECTION_WRITE_IN_MAPPING_TARGET_UNSPECIFIED = 0;
   MAJORITY_ELECTION_WRITE_IN_MAPPING_TARGET_INDIVIDUAL = 1;
   MAJORITY_ELECTION_WRITE_IN_MAPPING_TARGET_CANDIDATE = 2;
+
+  // Certain cantons map invalid write ins to empty positions. These cantons do not use the Invalid mapping target.
   MAJORITY_ELECTION_WRITE_IN_MAPPING_TARGET_EMPTY = 3;
   MAJORITY_ELECTION_WRITE_IN_MAPPING_TARGET_INVALID = 4;
+
+  // Certain write ins can lead to the whole ballot becoming invalid, for example insults.
+  MAJORITY_ELECTION_WRITE_IN_MAPPING_TARGET_INVALID_BALLOT = 5;
 }

@@ -1,4 +1,4 @@
-// (c) Copyright 2022 by Abraxas Informatik AG
+// (c) Copyright 2024 by Abraxas Informatik AG
 // For license information see LICENSE file
 
 syntax = "proto3";
@@ -7,6 +7,7 @@ package abraxas.voting.ausmittlung.events.v1;
 
 import "data/event_info.proto";
 import "data/import_proportional_election_event_data.proto";
+import "data/import_counting_circle_result_count_of_voters_information_event_data.proto";
 
 message ProportionalElectionResultImported {
   data.EventInfo event_info = 1;
@@ -21,10 +22,12 @@ message ProportionalElectionResultImported {
   int32 count_of_lists_without_party = 10;
   int32 count_of_blank_rows_on_lists_without_party = 11;
   int32 count_of_voters = 12;
-  
+
   /* Ballots which are blank, meaning no list and no candidates specified */
   int32 blank_ballot_count = 13;
-  
+
   /* Ballots which are invalid, for example ballots with a list, but no candidates */
   int32 invalid_ballot_count = 14;
+
+  data.CountingCircleResultCountOfVotersInformationImportEventData count_of_voters_information = 15;
 }

@@ -1,0 +1,13 @@
+// (c) Copyright 2024 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.services.v1.models;
+
+import "models/counting_circle.proto";
+
+message ContestCountingCircleElectorateSummary {
+  repeated CountingCircleElectorate effective_electorates = 1;
+  repeated CountingCircleElectorate contest_counting_circle_electorates = 2;
+}

@@ -1,4 +1,4 @@
-// (c) Copyright 2022 by Abraxas Informatik AG
+// (c) Copyright 2024 by Abraxas Informatik AG
 // For license information see LICENSE file
 
 syntax = "proto3";
@@ -125,6 +125,7 @@ message MajorityElection {
   */
   shared.v1.MajorityElectionReviewProcedure review_procedure = 27;
   bool enforce_review_procedure_for_counting_circles = 28;
+  bool enforce_candidate_check_digit_for_counting_circles = 29;
 }
 
 message MajorityElectionCandidates {
@@ -183,6 +184,7 @@ message MajorityElectionCandidate {
   string party = 7;
   int32 position = 8;
   string description = 9;
+  int32 check_digit = 10;
 }
 
 message SecondaryMajorityElection {

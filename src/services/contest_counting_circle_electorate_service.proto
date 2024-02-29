@@ -1,0 +1,13 @@
+// (c) Copyright 2024 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.services.v1;
+
+import "google/protobuf/empty.proto";
+import "requests/contest_counting_circle_electorate_requests.proto";
+
+service ContestCountingCircleElectorateService {
+  rpc UpdateElectorates(requests.UpdateContestCountingCircleElectoratesRequest) returns (google.protobuf.Empty);
+}

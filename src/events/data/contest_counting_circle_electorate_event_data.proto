@@ -1,0 +1,13 @@
+// (c) Copyright 2024 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.events.v1.data;
+
+import "shared/domain_of_influence.proto";
+
+message ContestCountingCircleElectorateEventData {
+  string id = 1;
+  repeated shared.v1.DomainOfInfluenceType domain_of_influence_types = 2;
+}

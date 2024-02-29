@@ -1,4 +1,4 @@
-// (c) Copyright 2022 by Abraxas Informatik AG
+// (c) Copyright 2024 by Abraxas Informatik AG
 // For license information see LICENSE file
 
 syntax = "proto3";
@@ -7,6 +7,7 @@ package abraxas.voting.ausmittlung.events.v1;
 
 import "data/event_info.proto";
 import "data/import_majority_election_event_data.proto";
+import "data/import_counting_circle_result_count_of_voters_information_event_data.proto";
 
 message MajorityElectionResultImported {
   data.EventInfo event_info = 1;
@@ -14,7 +15,11 @@ message MajorityElectionResultImported {
   string contest_id = 3;
   string majority_election_id = 4;
   string counting_circle_id = 5;
+
+  /* Aggregated candidate results. Note that these are not final, they may change after the write-ins are mapped */
   repeated data.MajorityElectionCandidateResultImportEventData candidate_results = 6;
+
+  /* Aggregated write-in data which needs to be mapped to existing candidates */
   repeated data.MajorityElectionWriteInEventData write_ins = 7;
   int32 empty_vote_count = 8;
   int32 invalid_vote_count = 9;
@@ -23,6 +28,8 @@ message MajorityElectionResultImported {
 
   /* Ballots which are blank, meaning no candidates specified */
   int32 blank_ballot_count = 12;
+
+  data.CountingCircleResultCountOfVotersInformationImportEventData count_of_voters_information = 13;
 }
 
 message SecondaryMajorityElectionResultImported {
@@ -31,12 +38,42 @@ message SecondaryMajorityElectionResultImported {
   string contest_id = 3;
   string secondary_majority_election_id = 4;
   string counting_circle_id = 5;
+
+  /* Aggregated candidate results. Note that these are not final, they may change after the write-ins are mapped */
   repeated data.MajorityElectionCandidateResultImportEventData candidate_results = 6;
+
+  /* Aggregated write-in data which needs to be mapped to existing candidates */
   repeated data.MajorityElectionWriteInEventData write_ins = 7;
   int32 empty_vote_count = 8;
   int32 invalid_vote_count = 9;
   int32 total_candidate_vote_count_excl_individual = 10;
   int32 count_of_voters = 11;
+}
+
+/* Ballot which contains one or more write-ins. These ballots need to be tracked expicitely, since invalid write-ins may invalidate the whole ballot */
+message MajorityElectionWriteInBallotImported {
+  data.EventInfo event_info = 1;
+  string import_id = 2;
+  string contest_id = 3;
+  string majority_election_id = 4;
+  string counting_circle_id = 5;
+  repeated string candidate_ids = 6;
+  repeated string write_in_mapping_ids = 7;
+  int32 empty_vote_count = 8;
+  int32 invalid_vote_count = 9;
+}
+
+/* Ballot which contains one or more write-ins. These ballots need to be tracked expicitely, since invalid write-ins may invalidate the whole ballot */
+message SecondaryMajorityElectionWriteInBallotImported {
+  data.EventInfo event_info = 1;
+  string import_id = 2;
+  string contest_id = 3;
+  string secondary_majority_election_id = 4;
+  string counting_circle_id = 5;
+  repeated string candidate_ids = 6;
+  repeated string write_in_mapping_ids = 7;
+  int32 empty_vote_count = 8;
+  int32 invalid_vote_count = 9;
 }
 
 message MajorityElectionWriteInsMapped {

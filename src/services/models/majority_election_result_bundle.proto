@@ -1,4 +1,4 @@
-// (c) Copyright 2022 by Abraxas Informatik AG
+// (c) Copyright 2024 by Abraxas Informatik AG
 // For license information see LICENSE file
 
 syntax = "proto3";
@@ -21,7 +21,7 @@ message MajorityElectionResultBundle {
   int32 count_of_ballots = 4;
   User created_by = 5;
   User reviewed_by = 6;
-  
+
   /*
     ech-name: electronicBallotIdentification
     ech-length: [1,50]
@@ -88,4 +88,5 @@ message MajorityElectionBallotCandidate {
   string description = 6;
   int32 position = 7;
   bool selected = 8;
+  int32 check_digit = 9;
 }
