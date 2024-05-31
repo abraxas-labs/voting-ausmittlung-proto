@@ -1,0 +1,24 @@
+// (c) Copyright 2024 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.services.v1.models;
+
+import "models/contest.proto";
+import "models/political_business_union.proto";
+import "models/proportional_election_end_result.proto";
+
+message ProportionalElectionUnionEndResult {
+  Contest contest = 1;
+  models.PoliticalBusinessUnion proportional_election_union = 2;
+  repeated models.ProportionalElectionEndResult proportional_election_end_results = 3;
+
+  int32 count_of_done_elections = 4;
+  int32 total_count_of_elections = 5;
+  bool all_elections_done = 6;
+  bool finalized = 7;
+
+  /* Specifies whether this result only contains some of the counting circle results and not the "full" end result */
+  bool partial_result = 8;
+}

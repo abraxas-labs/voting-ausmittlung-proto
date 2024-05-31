@@ -10,7 +10,9 @@ import "models/contest.proto";
 import "models/contest_counting_circle_details.proto";
 import "models/contest_counting_circle_electorate.proto";
 import "models/counting_circle.proto";
+import "models/count_of_voters.proto";
 import "models/political_business.proto";
+import "models/political_business_union.proto";
 import "models/user.proto";
 import "models/voting_cards.proto";
 
@@ -18,6 +20,8 @@ message ResultOverview {
   Contest contest = 1;
   repeated SimplePoliticalBusiness political_businesses = 2;
   repeated ResultOverviewCountingCircleResults counting_circle_results = 3;
+  bool current_tenant_is_contest_manager = 4;
+  repeated PoliticalBusinessUnion political_business_unions = 5;
 }
 
 message ResultOverviewCountingCircleResults {
@@ -31,6 +35,10 @@ message ResultOverviewCountingCircleResult {
   string counting_circle_id = 3;
   CountingCircleResultState state = 4;
   google.protobuf.Timestamp submission_done_timestamp = 5;
+  google.protobuf.Timestamp audited_tentatively_timestamp = 6;
+  google.protobuf.Timestamp plausibilised_timestamp = 7;
+  PoliticalBusinessNullableCountOfVoters count_of_voters = 8;
+  bool published = 9;
 }
 
 message ResultList {
@@ -58,6 +66,8 @@ message ResultListResult {
   CountingCircleResultState state = 3;
   google.protobuf.Timestamp submission_done_timestamp = 4;
   bool has_comments = 5;
+  google.protobuf.Timestamp audited_tentatively_timestamp = 6;
+  google.protobuf.Timestamp plausibilised_timestamp = 7;
 }
 
 message ResultImports {

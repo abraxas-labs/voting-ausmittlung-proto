@@ -55,6 +55,7 @@ message ProportionalElectionResult {
     description: total count of lists (with and without party)
   */
   int32 total_count_of_lists = 19;
+  bool published = 20;
 }
 
 message ProportionalElectionResultEntryParams {

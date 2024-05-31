@@ -52,6 +52,9 @@ message MajorityElectionEndResult {
   int32 total_candidate_vote_count_incl_individual = 17;
   bool finalized = 18;
   MajorityElectionEndResultCalculation calculation = 19;
+
+  /* Specifies whether this result only contains some of the counting circle results and not the "full" end result */
+  bool partial_result = 20;
 }
 
 message MajorityElectionEndResultCalculation {

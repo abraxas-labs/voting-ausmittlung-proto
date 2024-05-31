@@ -97,7 +97,7 @@ message SucceedMajorityElectionBundleReviewRequest {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Bundes.
   */
-  string bundle_id = 1 [(validation.v1.rules).string.guid = true];
+  repeated string bundle_ids = 1 [(validation.v1.rules).string.guid = true];
 }
 
 /*

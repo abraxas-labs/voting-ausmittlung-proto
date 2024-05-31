@@ -6,6 +6,7 @@ syntax = "proto3";
 package abraxas.voting.ausmittlung.services.v1;
 
 import "google/protobuf/empty.proto";
+import "models/double_proportional_result.proto";
 import "models/second_factor_transaction.proto";
 import "models/proportional_election_result.proto";
 import "models/proportional_election_end_result.proto";
@@ -28,7 +29,9 @@ service ProportionalElectionResultService {
   rpc ResetToSubmissionFinished(requests.ProportionalElectionResultResetToSubmissionFinishedRequest) returns (google.protobuf.Empty);
   rpc Plausibilise(requests.ProportionalElectionResultsPlausibiliseRequest) returns (google.protobuf.Empty);
   rpc ResetToAuditedTentatively(requests.ProportionalElectionResultsResetToAuditedTentativelyRequest) returns (google.protobuf.Empty);
+  rpc GetPartialEndResult(requests.GetProportionalElectionPartialEndResultRequest) returns (models.ProportionalElectionEndResult);
   rpc GetEndResult(requests.GetProportionalElectionEndResultRequest) returns (models.ProportionalElectionEndResult);
+  rpc GetDoubleProportionalResult(requests.GetProportionalElectionDoubleProportionalResultRequest) returns (models.DoubleProportionalResult);
   rpc GetListEndResultAvailableLotDecisions(requests.GetProportionalElectionListEndResultAvailableLotDecisionsRequest) returns (models.ProportionalElectionListEndResultAvailableLotDecisions);
   rpc UpdateListEndResultLotDecisions(requests.UpdateProportionalElectionListEndResultLotDecisionsRequest) returns (google.protobuf.Empty);
   rpc PrepareFinalizeEndResult(requests.PrepareFinalizeProportionalElectionEndResultRequest) returns (models.SecondFactorTransaction);
@@ -37,4 +40,8 @@ service ProportionalElectionResultService {
   rpc EnterManualListEndResult(requests.EnterProportionalElectionManualListEndResultRequest) returns (google.protobuf.Empty);
   rpc ValidateEnterCountOfVoters(requests.ValidateEnterProportionalElectionCountOfVotersRequest) returns (models.ValidationSummary);
   rpc SubmissionFinishedAndAuditedTentatively(requests.ProportionalElectionResultSubmissionFinishedAndAuditedTentativelyRequest) returns (google.protobuf.Empty);
+  rpc GetDoubleProportionalResultSuperApportionmentAvailableLotDecisions(requests.GetProportionalElectionDoubleProportionalResultSuperApportionmentAvailableLotDecisionsRequest) returns (models.DoubleProportionalResultSuperApportionmentAvailableLotDecisions);
+  rpc UpdateDoubleProportionalResultSuperApportionmentLotDecision(requests.UpdateProportionalElectionDoubleProportionalResultSuperApportionmentLotDecisionRequest) returns (google.protobuf.Empty);
+  rpc Publish(requests.ProportionalElectionResultPublishRequest) returns (google.protobuf.Empty);
+  rpc Unpublish(requests.ProportionalElectionResultUnpublishRequest) returns (google.protobuf.Empty);
 }

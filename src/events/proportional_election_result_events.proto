@@ -87,3 +87,13 @@ message ProportionalElectionResultResetted {
   data.EventInfo event_info = 1;
   string election_result_id = 2;
 }
+
+message ProportionalElectionResultPublished {
+  data.EventInfo event_info = 1;
+  string election_result_id = 2;
+}
+
+message ProportionalElectionResultUnpublished {
+  data.EventInfo event_info = 1;
+  string election_result_id = 2;
+}

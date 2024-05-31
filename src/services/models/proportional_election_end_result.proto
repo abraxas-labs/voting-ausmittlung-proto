@@ -33,6 +33,9 @@ message ProportionalElectionEndResult {
   repeated ProportionalElectionListEndResult list_end_results = 9;
   bool finalized = 10;
   bool manual_end_result_required = 11;
+
+  /* Specifies whether this result only contains some of the counting circle results and not the "full" end result */
+  bool partial_result = 12;
 }
 
 message ProportionalElectionListEndResult {

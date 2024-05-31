@@ -255,7 +255,29 @@ message ProportionalElectionResultsResetToAuditedTentativelyRequest {
   repeated string election_result_ids = 1 [(validation.v1.rules).string.guid = true];
 }
 
+message GetProportionalElectionPartialEndResultRequest {
+  /*
+    ech-name: electionIdentification
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: is-guid
+    description: Eindeutige, technische Identifikation der Proporzwahl.
+  */
+  string proportional_election_id = 1 [(validation.v1.rules).string.guid = true];
+}
+
 message GetProportionalElectionEndResultRequest {
+  /*
+    ech-name: electionIdentification
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: is-guid
+    description: Eindeutige, technische Identifikation der Proporzwahl.
+  */
+  string proportional_election_id = 1 [(validation.v1.rules).string.guid = true];
+}
+
+message GetProportionalElectionDoubleProportionalResultRequest {
   /*
     ech-name: electionIdentification
     ech-length: [1,50]
@@ -363,4 +385,48 @@ message ProportionalElectionResultSubmissionFinishedAndAuditedTentativelyRequest
     description: Eindeutige, technische Identifikation des Wahlergebnisses.
   */
   string election_result_id = 1 [(validation.v1.rules).string.guid = true];
+}
+
+message GetProportionalElectionDoubleProportionalResultSuperApportionmentAvailableLotDecisionsRequest {
+  /*
+    ech-name: electionIdentification
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: is-guid
+    description: Eindeutige, technische Identifikation der Proporzwahl.
+  */
+  string proportional_election_id = 1 [(validation.v1.rules).string.guid = true];
+}
+
+message UpdateProportionalElectionDoubleProportionalResultSuperApportionmentLotDecisionRequest {
+  /*
+    ech-name: electionIdentification
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: is-guid
+    description: Eindeutige, technische Identifikation der Proporzwahl.
+  */
+  string proportional_election_id = 1 [(validation.v1.rules).string.guid = true];
+
+  /*
+    validations: typeof(int32),min-value(1),max-value(100)
+    description: Losnummer.
+  */
+  int32 number = 2 [(validation.v1.rules).integer = { min_value: 1, max_value: 100}];
+}
+
+message ProportionalElectionResultPublishRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Wahlergebnisses.
+  */
+  repeated string election_result_ids = 1 [(validation.v1.rules).string.guid = true];
+}
+
+message ProportionalElectionResultUnpublishRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Wahlergebnisses.
+  */
+  repeated string election_result_ids = 1 [(validation.v1.rules).string.guid = true];
 }

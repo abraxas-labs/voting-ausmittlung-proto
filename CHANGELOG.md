@@ -1,4 +1,4 @@
-# ✨ Changelog (`v1.111.0`)
+# ✨ Changelog (`v1.124.0`)
 
 All notable changes to this project will be documented in this file.
 
@@ -8,11 +8,107 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Version Info
 
 ```text
-This version -------- v1.111.0
-Previous version ---- v1.99.3
+This version -------- v1.124.0
+Previous version ---- v1.111.0
 Initial version ----- v1.79.2
-Total commits ------- 13
+Total commits ------- 16
 ```
+
+## [v1.124.0] - 2024-05-29
+
+### 🆕 Added
+
+- add published state to results
+
+## [v1.123.0] - 2024-05-22
+
+### 🆕 Added
+
+- add ballot question type
+
+## [v1.122.0] - 2024-05-16
+
+### 🆕 Added
+
+- double proportional sub apportionment lot decisions
+
+## [v1.121.0] - 2024-04-26
+
+### 🆕 Added
+
+- set multiple bundles to review succeed
+
+## [v1.120.2] - 2024-04-24
+
+### 🔄 Changed
+
+- move canton defaults from doi to contest
+
+## [v1.120.1] - 2024-04-23
+
+### ❌ Removed
+
+- remove result overview only owned option
+
+## [v1.120.0] - 2024-04-22
+
+### 🆕 Added
+
+- non cantonal double proportional result
+
+## [v1.119.0] - 2024-04-19
+
+### 🆕 Added
+
+- add state plausibilised disabled canton setting
+
+## [v1.118.0] - 2024-04-18
+
+### 🆕 Added
+
+- add counting circle result state descriptions
+
+## [v1.117.0] - 2024-04-11
+
+### :new: Added
+
+- added partial results
+
+## [v1.116.1] - 2024-04-08
+
+### ❌ Removed
+
+- remove unions from election end result
+
+## [v1.116.0] - 2024-03-27
+
+### 🆕 Added
+
+- Cantonal proportional election union results
+
+## [v1.115.0] - 2024-03-26
+
+### 🆕 Added
+
+- add political business unions to end results
+
+## [v1.114.0] - 2024-03-25
+
+### 🆕 Added
+
+- add political business unions to result overview
+
+## [v1.113.0] - 2024-03-12
+
+### 🆕 Added
+
+- add monitoring political business overview
+
+## [v1.112.0] - 2024-03-11
+
+### 🆕 Added
+
+- add vote result algorithm popular and counting circle majority
 
 ## [v1.111.0] - 2024-02-28
 
@@ -212,6 +308,66 @@ Total commits ------- 13
 
 - Added political business export metadata for Seantis token
 
+### 🆕 Added
+
+- add domain of influence canton
+
+### 🆕 Added
+
+- Event signature public key metadata
+
+### 🔄 Changed
+
+- Changed event signature models
+
+### 🔄 Changed
+
+- contact person name min length to 1
+
+### 🆕 Added
+
+- add eVoting invalid and accounted ballots for count of voters
+
+### 🆕 Added
+
+- Reset counting circle results in testing phase
+
+### 🆕 Added
+
+- second factor transaction code
+
+### 🆕 Added
+
+- review procedure for vote, majority election and proportional election
+
+### 🔄 Changed
+
+- Proto validation files include in npm package fixed
+
+### 🔄 Changed
+
+- validation rule hardening
+
+### 🔄 Changed
+
+- match integer max value comment and validation
+
+### 🔄 Changed
+
+- define max. numeric limitations for business input validation
+
+### 🆕 Added
+
+- Added proto validators at the requests.
+
+### 🔒 Security
+
+- Define input validation rules for service request models.
+
+### 🔄 Changed
+
+- Export templates should include the political business union id
+
 ## [v1.85.1] - 2022-12-16
 
 ### 🆕 Added
@@ -287,14 +443,6 @@ Total commits ------- 13
 ### 🆕 Added
 
 - Added proto validators at the requests.
-
-### 🔒 Security
-
-- Define input validation rules for service request models.
-
-### 🔄 Changed
-
-- Export templates should include the political business union id
 
 ## [v1.80.0] - 2022-08-17
 

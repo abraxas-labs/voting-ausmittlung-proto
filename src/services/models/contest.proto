@@ -6,6 +6,7 @@ syntax = "proto3";
 package abraxas.voting.ausmittlung.services.v1.models;
 
 import "google/protobuf/timestamp.proto";
+import "models/counting_circle.proto";
 import "shared/domain_of_influence.proto";
 
 message Contest {
@@ -73,6 +74,8 @@ message Contest {
     description: Status vom Urnengang.
   */
   bool e_voting_results_imported = 11;
+
+  ContestCantonDefaults canton_defaults = 12;
 }
 
 message ContestSummaries {
@@ -137,6 +140,7 @@ message ContestSummary {
   repeated ContestSummaryEntryDetails contest_entries_details = 10;
   ContestState state = 11;
   bool e_voting_results_imported = 12;
+  ContestCantonDefaults canton_defaults = 13;
 }
 
 message ContestSummaryEntryDetails {
@@ -177,4 +181,20 @@ enum ContestState {
     description: contest is archived
   */
   CONTEST_STATE_ARCHIVED = 5;
+}
+
+message ContestCantonDefaults {
+  repeated CountingCircleResultStateDescription counting_circle_result_state_descriptions = 1;
+  bool state_plausibilised_disabled = 2;
+  bool majority_election_invalid_votes = 3;
+  bool counting_machine_enabled = 4;
+  bool new_zh_features_enabled = 5;
+  bool majority_election_use_candidate_check_digit = 6;
+  bool proportional_election_use_candidate_check_digit = 7;
+  bool publish_results_enabled = 8;
+}
+
+message CountingCircleResultStateDescription {
+  CountingCircleResultState state = 1;
+  string description = 2;
 }

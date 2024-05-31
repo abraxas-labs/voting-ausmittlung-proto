@@ -62,7 +62,6 @@ message DomainOfInfluence {
 
   DomainOfInfluenceCanton canton = 9;
   ContactPerson contact_person = 10;
-  DomainOfInfluenceCantonDefaults canton_defaults = 11;
 }
 
 enum DomainOfInfluenceCanton {
@@ -71,12 +70,4 @@ enum DomainOfInfluenceCanton {
   DOMAIN_OF_INFLUENCE_CANTON_TG = 2;
   DOMAIN_OF_INFLUENCE_CANTON_ZH = 3;
   DOMAIN_OF_INFLUENCE_CANTON_GR = 4;
-}
-
-message DomainOfInfluenceCantonDefaults {
-  bool majority_election_invalid_votes = 1;
-  bool counting_machine_enabled = 2;
-  bool new_zh_features_enabled = 3;
-  bool majority_election_use_candidate_check_digit = 4;
-  bool proportional_election_use_candidate_check_digit = 5;
 }

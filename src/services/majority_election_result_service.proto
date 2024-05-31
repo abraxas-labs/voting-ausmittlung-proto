@@ -28,6 +28,7 @@ service MajorityElectionResultService {
   rpc ResetToSubmissionFinished(requests.MajorityElectionResultResetToSubmissionFinishedRequest) returns (google.protobuf.Empty);
   rpc Plausibilise(requests.MajorityElectionResultsPlausibiliseRequest) returns (google.protobuf.Empty);
   rpc ResetToAuditedTentatively(requests.MajorityElectionResultsResetToAuditedTentativelyRequest) returns (google.protobuf.Empty);
+  rpc GetPartialEndResult(requests.GetMajorityElectionPartialEndResultRequest) returns (models.MajorityElectionEndResult);
   rpc GetEndResult(requests.GetMajorityElectionEndResultRequest) returns (models.MajorityElectionEndResult);
   rpc GetEndResultAvailableLotDecisions(requests.GetMajorityElectionEndResultAvailableLotDecisionsRequest) returns (models.MajorityElectionEndResultAvailableLotDecisions);
   rpc UpdateEndResultLotDecisions(requests.UpdateMajorityElectionEndResultLotDecisionsRequest) returns (google.protobuf.Empty);
@@ -35,6 +36,8 @@ service MajorityElectionResultService {
   rpc FinalizeEndResult(requests.FinalizeMajorityElectionEndResultRequest) returns (google.protobuf.Empty);
   rpc RevertEndResultFinalization(requests.RevertMajorityElectionEndResultFinalizationRequest) returns (google.protobuf.Empty);
   rpc SubmissionFinishedAndAuditedTentatively(requests.MajorityElectionResultSubmissionFinishedAndAuditedTentativelyRequest) returns (google.protobuf.Empty);
+  rpc Publish(requests.MajorityElectionResultPublishRequest) returns (google.protobuf.Empty);
+  rpc Unpublish(requests.MajorityElectionResultUnpublishRequest) returns (google.protobuf.Empty);
 
   rpc ValidateEnterCountOfVoters(requests.ValidateEnterMajorityElectionCountOfVotersRequest) returns (models.ValidationSummary);
   rpc ValidateEnterCandidateResults(requests.ValidateEnterMajorityElectionCandidateResultsRequest) returns (models.ValidationSummary);

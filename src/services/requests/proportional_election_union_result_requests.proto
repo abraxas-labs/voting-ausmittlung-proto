@@ -1,0 +1,106 @@
+// (c) Copyright 2024 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.services.v1.requests;
+
+import "rules/rules.proto";
+
+message GetProportionalElectionUnionPartialEndResultRequest {
+  /*
+    validations: is-guid
+    description: Technische Identifikation der Geschäftsverbindung.
+  */
+  string proportional_election_union_id = 1 [(validation.v1.rules).string.guid = true];
+}
+
+message GetProportionalElectionUnionEndResultRequest {
+  /*
+    validations: is-guid
+    description: Technische Identifikation der Geschäftsverbindung.
+  */
+  string proportional_election_union_id = 1 [(validation.v1.rules).string.guid = true];
+}
+
+message GetProportionalElectionUnionDoubleProportionalResultRequest {
+  /*
+    validations: is-guid
+    description: Technische Identifikation der Geschäftsverbindung.
+  */
+  string proportional_election_union_id = 1 [(validation.v1.rules).string.guid = true];
+}
+
+message PrepareFinalizeProportionalElectionUnionEndResultRequest {
+  /*
+    validations: is-guid
+    description: Technische Identifikation der Geschäftsverbindung.
+  */
+  string proportional_election_union_id = 1 [(validation.v1.rules).string.guid = true];
+}
+
+message FinalizeProportionalElectionUnionEndResultRequest {
+  /*
+    validations: is-guid
+    description: Technische Identifikation der Geschäftsverbindung.
+  */
+  string proportional_election_union_id = 1 [(validation.v1.rules).string.guid = true];
+
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation der Zweifaktor-Transaktion (siehe: https://docs.nevis.net/apidoc/authcloud/#enroll-your-access-app)
+  */
+  string second_factor_transaction_id = 2 [(validation.v1.rules).string.guid = true];
+}
+
+message RevertProportionalElectionUnionEndResultFinalizationRequest {
+  /*
+    validations: is-guid
+    description: Technische Identifikation der Geschäftsverbindung.
+  */
+  string proportional_election_union_id = 1 [(validation.v1.rules).string.guid = true];
+}
+
+message GetProportionalElectionUnionDoubleProportionalResultSuperApportionmentAvailableLotDecisionsRequest {
+  /*
+    validations: is-guid
+    description: Technische Identifikation der Geschäftsverbindung.
+  */
+  string proportional_election_union_id = 1 [(validation.v1.rules).string.guid = true];
+}
+
+message UpdateProportionalElectionUnionDoubleProportionalResultSuperApportionmentLotDecisionRequest {
+  /*
+    validations: is-guid
+    description: Technische Identifikation der Geschäftsverbindung.
+  */
+  string proportional_election_union_id = 1 [(validation.v1.rules).string.guid = true];
+
+  /*
+    validations: typeof(int32),min-value(1),max-value(100)
+    description: Losnummer.
+  */
+  int32 number = 2 [(validation.v1.rules).integer = { min_value: 1, max_value: 100}];
+}
+
+message GetProportionalElectionUnionDoubleProportionalResultSubApportionmentAvailableLotDecisionsRequest {
+  /*
+    validations: is-guid
+    description: Technische Identifikation der Geschäftsverbindung.
+  */
+  string proportional_election_union_id = 1 [(validation.v1.rules).string.guid = true];
+}
+
+message UpdateProportionalElectionUnionDoubleProportionalResultSubApportionmentLotDecisionRequest {
+  /*
+    validations: is-guid
+    description: Technische Identifikation der Geschäftsverbindung.
+  */
+  string proportional_election_union_id = 1 [(validation.v1.rules).string.guid = true];
+
+  /*
+    validations: typeof(int32),min-value(1),max-value(100)
+    description: Losnummer.
+  */
+  int32 number = 2 [(validation.v1.rules).integer = { min_value: 1, max_value: 100}];
+}

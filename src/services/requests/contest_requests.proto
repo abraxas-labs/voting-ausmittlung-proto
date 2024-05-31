@@ -48,15 +48,29 @@ message ListContestSummariesRequest {
 }
 
 /*
-  description: Alle Geschäftsverbindungen für einen Urnengang abfragen.
+  description: Kantonale Einstellungen zu einem Urnengang oder Geschäft abfragen.
 */
-message ListPoliticalBusinessUnionsRequest {
-  /*
-    ech-name: contestIdentification
-    ech-length: [1,50]
-    ech-type:: xs:token
-    validations: is-guid
-    description: Eindeutige, technische Identifikation des Urnengangs.
-  */
-  string contest_id = 1 [(validation.v1.rules).string.guid = true];
+message GetCantonDefaultsRequest {
+  oneof id {
+    /*
+      ech-name: contestIdentification
+      ech-length: [1,50]
+      ech-type:: xs:token
+      validations: is-guid,allow-undefined
+      description: Eindeutige, technische Identifikation des Urnengangs.
+    */
+    string contest_id = 1 [(validation.v1.rules).string = { guid: true, allow_empty: true }];
+
+    /*
+      validations: is-guid,allow-undefined
+      description: Technische Identifikationen eines Geschäfts.
+    */
+    string political_business_id = 2 [(validation.v1.rules).string = { guid: true, allow_empty: true }];
+
+    /*
+      validations: is-guid,allow-undefined
+      description:  Technische Identifikationen eines Resultats.
+    */
+    string counting_circle_result_id = 3 [(validation.v1.rules).string = { guid: true, allow_empty: true }];
+  }
 }

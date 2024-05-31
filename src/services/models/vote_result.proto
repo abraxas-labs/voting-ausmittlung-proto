@@ -23,6 +23,7 @@ message VoteResult {
   repeated BallotResult results = 8;
   VoteResultEntryParams entry_params = 9;
   CountingCircle counting_circle = 10;
+  bool published = 11;
 }
 
 message BallotResult {

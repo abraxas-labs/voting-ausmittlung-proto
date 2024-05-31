@@ -1,0 +1,25 @@
+// (c) Copyright 2024 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.services.v1;
+
+import "google/protobuf/empty.proto";
+import "models/double_proportional_result.proto";
+import "models/proportional_election_union_end_result.proto";
+import "models/second_factor_transaction.proto";
+import "requests/proportional_election_union_result_requests.proto";
+
+service ProportionalElectionUnionResultService {
+  rpc GetPartialEndResult(requests.GetProportionalElectionUnionPartialEndResultRequest) returns (models.ProportionalElectionUnionEndResult);
+  rpc GetEndResult(requests.GetProportionalElectionUnionEndResultRequest) returns (models.ProportionalElectionUnionEndResult);
+  rpc GetDoubleProportionalResult(requests.GetProportionalElectionUnionDoubleProportionalResultRequest) returns (models.DoubleProportionalResult);
+  rpc PrepareFinalizeEndResult(requests.PrepareFinalizeProportionalElectionUnionEndResultRequest) returns (models.SecondFactorTransaction);
+  rpc FinalizeEndResult(requests.FinalizeProportionalElectionUnionEndResultRequest) returns (google.protobuf.Empty);
+  rpc RevertEndResultFinalization(requests.RevertProportionalElectionUnionEndResultFinalizationRequest) returns (google.protobuf.Empty);
+  rpc GetDoubleProportionalResultSuperApportionmentAvailableLotDecisions(requests.GetProportionalElectionUnionDoubleProportionalResultSuperApportionmentAvailableLotDecisionsRequest) returns (models.DoubleProportionalResultSuperApportionmentAvailableLotDecisions);
+  rpc UpdateDoubleProportionalResultSuperApportionmentLotDecision(requests.UpdateProportionalElectionUnionDoubleProportionalResultSuperApportionmentLotDecisionRequest) returns (google.protobuf.Empty);
+  rpc GetDoubleProportionalResultSubApportionmentAvailableLotDecisions(requests.GetProportionalElectionUnionDoubleProportionalResultSubApportionmentAvailableLotDecisionsRequest) returns (models.DoubleProportionalResultSubApportionmentAvailableLotDecisions);
+  rpc UpdateDoubleProportionalResultSubApportionmentLotDecision(requests.UpdateProportionalElectionUnionDoubleProportionalResultSubApportionmentLotDecisionRequest) returns (google.protobuf.Empty);
+}

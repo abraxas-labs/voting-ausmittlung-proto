@@ -94,3 +94,13 @@ message VoteResultResetted {
   data.EventInfo event_info = 1;
   string vote_result_id = 2;
 }
+
+message VoteResultPublished {
+  data.EventInfo event_info = 1;
+  string vote_result_id = 2;
+}
+
+message VoteResultUnpublished {
+  data.EventInfo event_info = 1;
+  string vote_result_id = 2;
+}

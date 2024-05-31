@@ -50,6 +50,7 @@ message MajorityElectionResult {
   int32 total_candidate_vote_count_incl_individual = 21;
   CountingCircle counting_circle = 22;
   bool has_unmapped_write_ins = 23;
+  bool published = 24;
 }
 
 message SecondaryMajorityElectionResult {

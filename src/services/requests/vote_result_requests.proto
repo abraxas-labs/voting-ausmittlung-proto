@@ -295,6 +295,20 @@ message VoteResultsResetToAuditedTentativelyRequest {
 }
 
 /*
+  description: Abfrage der teilweisen Abstimmungsresultate.
+*/
+message GetVotePartialEndResultRequest {
+  /*
+    ech-name: voteIdentification
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: is-guid
+    description: Eindeutige Identifikation der Abstimmung.
+  */
+  string vote_id = 1 [(validation.v1.rules).string.guid = true];
+}
+
+/*
   description: Abfrage der Abstimmungsresultate.
 */
 message GetVoteEndResultRequest {
@@ -379,4 +393,20 @@ message VoteResultSubmissionFinishedAndAuditedTentativelyRequest {
     description: Eindeutige Identifikation des Abstimmungsresultates.
   */
   string vote_result_id = 1 [(validation.v1.rules).string.guid = true];
+}
+
+message VoteResultPublishRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige Identifikation des Abstimmungsresultates.
+  */
+  repeated string vote_result_ids = 1 [(validation.v1.rules).string.guid = true];
+}
+
+message VoteResultUnpublishRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige Identifikation des Abstimmungsresultates.
+  */
+  repeated string vote_result_ids = 1 [(validation.v1.rules).string.guid = true];
 }

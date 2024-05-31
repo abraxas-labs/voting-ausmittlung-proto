@@ -1,0 +1,11 @@
+// (c) Copyright 2024 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.events.v1.data;
+
+message ProportionalElectionDoubleProportionalSuperApportionmentLotDecisionColumnEventData {
+  string list_id = 1;
+  int32 number_of_mandates = 2;
+}

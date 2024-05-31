@@ -27,6 +27,9 @@ message VoteEndResult {
   int32 total_count_of_counting_circles = 7;
   bool all_counting_circles_done = 8;
   bool finalized = 9;
+
+  /* Specifies whether this result only contains some of the counting circle results and not the "full" end result */
+  bool partial_result = 10;
 }
 
 message BallotEndResult {

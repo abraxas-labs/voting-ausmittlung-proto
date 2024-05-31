@@ -360,6 +360,17 @@ message MajorityElectionResultsResetToAuditedTentativelyRequest {
   repeated string election_result_ids = 1 [(validation.v1.rules).string.guid = true];
 }
 
+message GetMajorityElectionPartialEndResultRequest {
+  /*
+    ech-name: electionIdentification
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: is-guid
+    description: Eindeutige, technische Identifikation der Majorzwahl.
+  */
+  string majority_election_id = 1 [(validation.v1.rules).string.guid = true];
+}
+
 message GetMajorityElectionEndResultRequest {
   /*
     ech-name: electionIdentification
@@ -468,4 +479,20 @@ message MajorityElectionResultSubmissionFinishedAndAuditedTentativelyRequest {
     description: Eindeutige, technische Identifikation des Wahlergebnisses.
   */
   string election_result_id = 1 [(validation.v1.rules).string.guid = true];
+}
+
+message MajorityElectionResultPublishRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Wahlergebnisses.
+  */
+  repeated string election_result_ids = 1 [(validation.v1.rules).string.guid = true];
+}
+
+message MajorityElectionResultUnpublishRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Wahlergebnisses.
+  */
+  repeated string election_result_ids = 1 [(validation.v1.rules).string.guid = true];
 }

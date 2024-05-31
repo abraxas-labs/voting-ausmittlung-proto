@@ -2,12 +2,9 @@
 // For license information see LICENSE file
 
 syntax = "proto3";
+import "models/political_business.proto";
 
 package abraxas.voting.ausmittlung.services.v1.models;
-
-message PoliticalBusinessUnions {
-  repeated PoliticalBusinessUnion unions = 1;
-}
 
 message PoliticalBusinessUnion {
   string id = 1;
@@ -15,6 +12,7 @@ message PoliticalBusinessUnion {
   string description = 3;
   string secure_connect_id = 4;
   PoliticalBusinessUnionType type = 5;
+  repeated SimplePoliticalBusiness political_businesses = 6;
 }
 
 enum PoliticalBusinessUnionType {

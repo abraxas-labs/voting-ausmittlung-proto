@@ -27,12 +27,15 @@ service VoteResultService {
   rpc ResetToSubmissionFinished(requests.VoteResultResetToSubmissionFinishedRequest) returns (google.protobuf.Empty);
   rpc Plausibilise(requests.VoteResultsPlausibiliseRequest) returns (google.protobuf.Empty);
   rpc ResetToAuditedTentatively(requests.VoteResultsResetToAuditedTentativelyRequest) returns (google.protobuf.Empty);
+  rpc GetPartialEndResult(requests.GetVotePartialEndResultRequest) returns (models.VoteEndResult);
   rpc GetEndResult(requests.GetVoteEndResultRequest) returns (models.VoteEndResult);
   rpc GetBallotResult(requests.GetBallotResultRequest) returns (models.BallotResult);
   rpc PrepareFinalizeEndResult(requests.PrepareFinalizeVoteEndResultRequest) returns (models.SecondFactorTransaction);
   rpc FinalizeEndResult(requests.FinalizeVoteEndResultRequest) returns (google.protobuf.Empty);
   rpc RevertEndResultFinalization(requests.RevertVoteEndResultFinalizationRequest) returns (google.protobuf.Empty);
   rpc SubmissionFinishedAndAuditedTentatively(requests.VoteResultSubmissionFinishedAndAuditedTentativelyRequest) returns (google.protobuf.Empty);
+  rpc Publish(requests.VoteResultPublishRequest) returns (google.protobuf.Empty);
+  rpc Unpublish(requests.VoteResultUnpublishRequest) returns (google.protobuf.Empty);
 
   rpc ValidateEnterCountOfVoters(requests.ValidateEnterVoteResultCountOfVotersRequest) returns (models.ValidationSummary);
   rpc ValidateEnterResults(requests.ValidateEnterVoteResultsRequest) returns (models.ValidationSummary);

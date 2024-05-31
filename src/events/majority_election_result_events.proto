@@ -101,3 +101,13 @@ message MajorityElectionResultResetted {
   data.EventInfo event_info = 1;
   string election_result_id = 2;
 }
+
+message MajorityElectionResultPublished {
+  data.EventInfo event_info = 1;
+  string election_result_id = 2;
+}
+
+message MajorityElectionResultUnpublished {
+  data.EventInfo event_info = 1;
+  string election_result_id = 2;
+}

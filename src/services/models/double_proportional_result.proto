@@ -1,0 +1,114 @@
+// (c) Copyright 2024 by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.services.v1.models;
+
+import "models/proportional_election.proto";
+import "models/contest.proto";
+import "models/political_business_union.proto";
+import "models/proportional_election_union.proto";
+
+// A dp result is a election or election union result with a double proportional mandate algorithm.
+message DoubleProportionalResult {
+  Contest contest = 1;
+  PoliticalBusinessUnion proportional_election_union = 2;
+  ProportionalElection proportional_election = 3;
+  ProportionalElectionMandateAlgorithm mandate_algorithm = 4;
+  repeated DoubleProportionalResultRow rows = 5;
+  repeated DoubleProportionalResultColumn columns = 6;
+
+  int32 number_of_mandates = 7;
+  int32 vote_count = 8;
+  int32 cantonal_quorum = 9;
+  double voter_number = 10;
+  double election_key = 11;
+  int32 super_apportionment_number_of_mandates = 12;
+  int32 sub_apportionment_number_of_mandates = 13;
+  bool has_super_apportionment_required_lot_decision = 14;
+  bool has_sub_apportionment_required_lot_decision = 15;
+  DoubleProportionalResultApportionmentState super_apportionment_state = 16;
+  DoubleProportionalResultApportionmentState sub_apportionment_state = 17;
+}
+
+message DoubleProportionalResultRow {
+  ProportionalElection proportional_election = 1;
+  repeated DoubleProportionalResultCell cells = 2;
+
+  int32 vote_count = 3;
+  int32 quorum = 4;
+  int32 number_of_mandates = 5;
+  double divisor = 6;
+  int32 sub_apportionment_number_of_mandates = 7;
+}
+
+message DoubleProportionalResultColumn {
+  ProportionalElectionUnionList union_list = 1;
+  ProportionalElectionList list = 2;
+  repeated DoubleProportionalResultCell cells = 3;
+
+  int32 vote_count = 4;
+  bool cantonal_quorum_reached = 5;
+  bool any_required_quorum_reached = 6;
+  double voter_number = 7;
+  double super_apportionment_quotient = 8;
+  int32 super_apportionment_number_of_mandates = 9;
+  int32 sub_apportionment_number_of_mandates = 10;
+  double divisor = 11;
+  bool super_apportionment_lot_decision_required = 12;
+}
+
+message DoubleProportionalResultCell {
+  ProportionalElectionList list = 1;
+
+  int32 vote_count = 2;
+  bool proportional_election_quorum_reached = 3;
+  double voter_number = 4;
+  int32 sub_apportionment_number_of_mandates = 5;
+  bool sub_apportionment_lot_decision_required = 6;
+}
+
+enum DoubleProportionalResultApportionmentState {
+  DOUBLE_PROPORTIONAL_RESULT_APPORTIONMENT_STATE_UNSPECIFIED = 0;
+  DOUBLE_PROPORTIONAL_RESULT_APPORTIONMENT_STATE_INITIAL = 1;
+  DOUBLE_PROPORTIONAL_RESULT_APPORTIONMENT_STATE_ERROR = 2;
+  DOUBLE_PROPORTIONAL_RESULT_APPORTIONMENT_STATE_HAS_OPEN_LOT_DECISION = 3;
+  DOUBLE_PROPORTIONAL_RESULT_APPORTIONMENT_STATE_COMPLETED = 4;
+}
+
+message DoubleProportionalResultSuperApportionmentAvailableLotDecisions {
+  repeated DoubleProportionalResultSuperApportionmentLotDecision lot_decisions = 1;
+}
+
+message DoubleProportionalResultSuperApportionmentLotDecision {
+  int32 number = 1;
+  repeated DoubleProportionalResultSuperApportionmentLotDecisionColumn columns = 2;
+}
+
+message DoubleProportionalResultSuperApportionmentLotDecisionColumn {
+  ProportionalElectionUnionList union_list = 1;
+  ProportionalElectionList list = 2;
+  int32 number_of_mandates = 3;
+}
+
+message DoubleProportionalResultSubApportionmentAvailableLotDecisions {
+  repeated DoubleProportionalResultSubApportionmentLotDecision lot_decisions = 1;
+}
+
+message DoubleProportionalResultSubApportionmentLotDecision {
+  int32 number = 1;
+  repeated DoubleProportionalResultSubApportionmentLotDecisionColumn columns = 2;
+}
+
+message DoubleProportionalResultSubApportionmentLotDecisionColumn {
+  ProportionalElectionUnionList union_list = 1;
+  ProportionalElectionList list = 2;
+  repeated DoubleProportionalResultSubApportionmentLotDecisionCell cells = 3;
+}
+
+message DoubleProportionalResultSubApportionmentLotDecisionCell {
+  ProportionalElection election = 1;
+  ProportionalElectionList list = 2;
+  int32 number_of_mandates = 3;
+}
