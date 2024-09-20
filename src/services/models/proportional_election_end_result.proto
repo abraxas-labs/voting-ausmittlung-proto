@@ -1,4 +1,4 @@
-// (c) Copyright 2024 by Abraxas Informatik AG
+// (c) Copyright by Abraxas Informatik AG
 // For license information see LICENSE file
 
 syntax = "proto3";
@@ -33,9 +33,10 @@ message ProportionalElectionEndResult {
   repeated ProportionalElectionListEndResult list_end_results = 9;
   bool finalized = 10;
   bool manual_end_result_required = 11;
+  bool mandate_distribution_triggered = 12;
 
   /* Specifies whether this result only contains some of the counting circle results and not the "full" end result */
-  bool partial_result = 12;
+  bool partial_result = 13;
 }
 
 message ProportionalElectionListEndResult {

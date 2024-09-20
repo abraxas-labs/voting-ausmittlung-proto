@@ -1,4 +1,4 @@
-// (c) Copyright 2024 by Abraxas Informatik AG
+// (c) Copyright by Abraxas Informatik AG
 // For license information see LICENSE file
 
 syntax = "proto3";
@@ -126,6 +126,7 @@ message MajorityElection {
   shared.v1.MajorityElectionReviewProcedure review_procedure = 27;
   bool enforce_review_procedure_for_counting_circles = 28;
   bool enforce_candidate_check_digit_for_counting_circles = 29;
+  bool individual_candidates_disabled = 30;
 }
 
 message MajorityElectionCandidates {
@@ -228,6 +229,7 @@ message SecondaryMajorityElection {
 
   bool active = 7;
   string title = 8;
+  bool individual_candidates_disabled = 9;
 }
 
 message MajorityElectionBallotGroup {
@@ -280,7 +282,7 @@ message MajorityElectionBallotGroupEntry {
     MajorityElection election = 2;
     SecondaryMajorityElection secondary_election = 3;
   }
-  bool has_individual_candidate = 4;
+  int32 individual_candidates_vote_count = 4;
 }
 
 enum MajorityElectionMandateAlgorithm {

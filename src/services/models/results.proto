@@ -1,4 +1,4 @@
-// (c) Copyright 2024 by Abraxas Informatik AG
+// (c) Copyright by Abraxas Informatik AG
 // For license information see LICENSE file
 
 syntax = "proto3";
@@ -22,6 +22,7 @@ message ResultOverview {
   repeated ResultOverviewCountingCircleResults counting_circle_results = 3;
   bool current_tenant_is_contest_manager = 4;
   repeated PoliticalBusinessUnion political_business_unions = 5;
+  bool has_partial_results = 6;
 }
 
 message ResultOverviewCountingCircleResults {
@@ -39,6 +40,7 @@ message ResultOverviewCountingCircleResult {
   google.protobuf.Timestamp plausibilised_timestamp = 7;
   PoliticalBusinessNullableCountOfVoters count_of_voters = 8;
   bool published = 9;
+  google.protobuf.Timestamp ready_for_correction_timestamp = 10;
 }
 
 message ResultList {
@@ -68,6 +70,7 @@ message ResultListResult {
   bool has_comments = 5;
   google.protobuf.Timestamp audited_tentatively_timestamp = 6;
   google.protobuf.Timestamp plausibilised_timestamp = 7;
+  google.protobuf.Timestamp ready_for_correction_timestamp = 8;
 }
 
 message ResultImports {

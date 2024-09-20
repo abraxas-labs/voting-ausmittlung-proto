@@ -1,4 +1,4 @@
-// (c) Copyright 2024 by Abraxas Informatik AG
+// (c) Copyright by Abraxas Informatik AG
 // For license information see LICENSE file
 
 syntax = "proto3";
@@ -326,6 +326,28 @@ message UpdateProportionalElectionEndResultLotDecisionRequest {
   int32 rank = 2 [(validation.v1.rules).integer = { min_value: 1, max_value: 50}];
 }
 
+message StartProportionalElectionEndResultMandateDistributionRequest {
+  /*
+    ech-name: electionIdentification
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: is-guid
+    description: Eindeutige, technische Identifikation der Proporzwahl.
+  */
+  string proportional_election_id = 1 [(validation.v1.rules).string.guid = true];
+}
+
+message RevertProportionalElectionEndResultMandateDistributionRequest {
+  /*
+    ech-name: electionIdentification
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: is-guid
+    description: Eindeutige, technische Identifikation der Proporzwahl.
+  */
+  string proportional_election_id = 1 [(validation.v1.rules).string.guid = true];
+}
+
 message PrepareFinalizeProportionalElectionEndResultRequest {
   /*
     ech-name: electionIdentification
@@ -380,6 +402,14 @@ message EnterProportionalElectionManualCandidateEndResultRequest {
 }
 
 message ProportionalElectionResultSubmissionFinishedAndAuditedTentativelyRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Wahlergebnisses.
+  */
+  string election_result_id = 1 [(validation.v1.rules).string.guid = true];
+}
+
+message ProportionalElectionResultCorrectionFinishedAndAuditedTentativelyRequest {
   /*
     validations: is-guid
     description: Eindeutige, technische Identifikation des Wahlergebnisses.

@@ -1,4 +1,4 @@
-# ✨ Changelog (`v1.124.0`)
+# ✨ Changelog (`v1.132.0`)
 
 All notable changes to this project will be documented in this file.
 
@@ -8,11 +8,82 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Version Info
 
 ```text
-This version -------- v1.124.0
-Previous version ---- v1.111.0
+This version -------- v1.132.0
+Previous version ---- v1.124.0
 Initial version ----- v1.79.2
-Total commits ------- 16
+Total commits ------- 12
 ```
+
+## [v1.132.0] - 2024-09-03
+
+### 🆕 Added
+
+- add correction finished and audited tentatively endpoint
+
+## [v1.131.2] - 2024-09-02
+
+### 🔄 Changed
+
+- increase max. candidate position for proportional election result ballot from 50 to 100
+
+## [v1.131.1] - 2024-08-28
+
+🔄 Changed
+
+update bug bounty template reference
+patch ci-cd template version, align with new defaults
+
+## [v1.131.0] - 2024-08-28
+
+### 🆕 Added
+
+- optional individual candidates on majority elections
+
+## [v1.130.0] - 2024-08-20
+
+### 🆕 Added
+
+- add second factor transaction qr code
+
+## [v1.129.0] - 2024-08-14
+
+### 🆕 Added
+
+- add asynchronous bundle review exports
+
+## [v1.128.0] - 2024-08-08
+
+### :new: Added
+
+- added vote type plus ballot and political business sub types
+
+## [v1.127.0] - 2024-07-17
+
+### 🔄 Changed
+
+- canton settings with publish results before audited tentatively
+
+## [v1.126.0] - 2024-06-21
+
+### 🆕 Added
+
+- explicit election mandate distribution
+
+### 🔄 Changed
+
+- end result workflow
+
+## [v1.125.1] - 2024-06-19
+
+### 🆕 Added
+
+- add partial results to result overview
+
+## [v1.125.0] - 2024-06-07
+
+### 🆕 Added
+
+- add ready for correction timestamp
 
 ## [v1.124.0] - 2024-05-29
 
@@ -236,6 +307,74 @@ Total commits ------- 16
 
 - reset majority election write ins
 
+### ❌ Removed
+
+- remove internal description, invalid votes and individual empty ballots allowed from elections
+
+### 🆕 Added
+
+- Added political business export metadata for Seantis token
+
+### 🆕 Added
+
+- add domain of influence canton
+
+### 🆕 Added
+
+- Event signature public key metadata
+
+### 🔄 Changed
+
+- Changed event signature models
+
+### 🔄 Changed
+
+- contact person name min length to 1
+
+### 🆕 Added
+
+- add eVoting invalid and accounted ballots for count of voters
+
+### 🆕 Added
+
+- Reset counting circle results in testing phase
+
+### 🆕 Added
+
+- second factor transaction code
+
+### 🆕 Added
+
+- review procedure for vote, majority election and proportional election
+
+### 🔄 Changed
+
+- Proto validation files include in npm package fixed
+
+### 🔄 Changed
+
+- validation rule hardening
+
+### 🔄 Changed
+
+- match integer max value comment and validation
+
+### 🔄 Changed
+
+- define max. numeric limitations for business input validation
+
+### 🆕 Added
+
+- Added proto validators at the requests.
+
+### 🔒 Security
+
+- Define input validation rules for service request models.
+
+### 🔄 Changed
+
+- Export templates should include the political business union id
+
 ## [v1.95.0] - 2023-04-28
 
 ### 🔄 Changed
@@ -307,66 +446,6 @@ Total commits ------- 16
 ### 🆕 Added
 
 - Added political business export metadata for Seantis token
-
-### 🆕 Added
-
-- add domain of influence canton
-
-### 🆕 Added
-
-- Event signature public key metadata
-
-### 🔄 Changed
-
-- Changed event signature models
-
-### 🔄 Changed
-
-- contact person name min length to 1
-
-### 🆕 Added
-
-- add eVoting invalid and accounted ballots for count of voters
-
-### 🆕 Added
-
-- Reset counting circle results in testing phase
-
-### 🆕 Added
-
-- second factor transaction code
-
-### 🆕 Added
-
-- review procedure for vote, majority election and proportional election
-
-### 🔄 Changed
-
-- Proto validation files include in npm package fixed
-
-### 🔄 Changed
-
-- validation rule hardening
-
-### 🔄 Changed
-
-- match integer max value comment and validation
-
-### 🔄 Changed
-
-- define max. numeric limitations for business input validation
-
-### 🆕 Added
-
-- Added proto validators at the requests.
-
-### 🔒 Security
-
-- Define input validation rules for service request models.
-
-### 🔄 Changed
-
-- Export templates should include the political business union id
 
 ## [v1.85.1] - 2022-12-16
 

@@ -1,4 +1,4 @@
-// (c) Copyright 2024 by Abraxas Informatik AG
+// (c) Copyright by Abraxas Informatik AG
 // For license information see LICENSE file
 
 syntax = "proto3";
@@ -192,6 +192,8 @@ message ContestCantonDefaults {
   bool majority_election_use_candidate_check_digit = 6;
   bool proportional_election_use_candidate_check_digit = 7;
   bool publish_results_enabled = 8;
+  bool end_result_finalize_disabled = 9;
+  bool publish_results_before_audited_tentatively = 10;
 }
 
 message CountingCircleResultStateDescription {

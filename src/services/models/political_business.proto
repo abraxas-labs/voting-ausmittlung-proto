@@ -1,4 +1,4 @@
-// (c) Copyright 2024 by Abraxas Informatik AG
+// (c) Copyright by Abraxas Informatik AG
 // For license information see LICENSE file
 
 syntax = "proto3";
@@ -18,6 +18,7 @@ message SimplePoliticalBusiness {
   int32 count_of_secondary_businesses = 7;
   string political_business_number = 8;
   string short_description = 9;
+  PoliticalBusinessSubType business_sub_type = 10;
 }
 
 enum PoliticalBusinessType {
@@ -26,4 +27,11 @@ enum PoliticalBusinessType {
   POLITICAL_BUSINESS_TYPE_MAJORITY_ELECTION = 2;
   POLITICAL_BUSINESS_TYPE_PROPORTIONAL_ELECTION = 3;
   POLITICAL_BUSINESS_TYPE_SECONDARY_MAJORITY_ELECTION = 4;
+}
+
+// The political sub type describes special kinds of political businesses further.
+// If it is a "standard" kind of political business, then Unspecified value is set for the sub type. 
+enum PoliticalBusinessSubType {
+  POLITICAL_BUSINESS_SUB_TYPE_UNSPECIFIED = 0;
+  POLITICAL_BUSINESS_SUB_TYPE_VOTE_VARIANT_BALLOT = 1;
 }

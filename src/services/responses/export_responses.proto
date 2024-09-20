@@ -1,0 +1,10 @@
+// (c) Copyright by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.services.v1.responses;
+
+message StartBundleReviewExportResponse {
+  string protocol_export_id = 1;
+}

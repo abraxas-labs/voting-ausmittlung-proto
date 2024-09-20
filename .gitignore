@@ -1,0 +1,8 @@
+# ts
+node_modules/
+/build/typescript/grpc
+/build/typescript/bin
+
+# dotnet
+bin/
+obj/

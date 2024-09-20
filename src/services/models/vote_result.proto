@@ -1,4 +1,4 @@
-// (c) Copyright 2024 by Abraxas Informatik AG
+// (c) Copyright by Abraxas Informatik AG
 // For license information see LICENSE file
 
 syntax = "proto3";
@@ -24,6 +24,7 @@ message VoteResult {
   VoteResultEntryParams entry_params = 9;
   CountingCircle counting_circle = 10;
   bool published = 11;
+  google.protobuf.Timestamp ready_for_correction_timestamp = 12;
 }
 
 message BallotResult {

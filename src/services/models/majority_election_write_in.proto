@@ -1,4 +1,4 @@
-// (c) Copyright 2024 by Abraxas Informatik AG
+// (c) Copyright by Abraxas Informatik AG
 // For license information see LICENSE file
 
 syntax = "proto3";
@@ -20,7 +20,8 @@ message MajorityElectionContestWriteInMappings {
 message MajorityElectionWriteInMappings {
   SimplePoliticalBusiness election = 1;
   bool invalid_votes = 2;
-  repeated MajorityElectionWriteInMapping write_in_mappings = 3;
+  bool individual_votes = 3;
+  repeated MajorityElectionWriteInMapping write_in_mappings = 4;
 }
 
 message MajorityElectionWriteInMapping {

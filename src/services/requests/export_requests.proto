@@ -1,4 +1,4 @@
-// (c) Copyright 2024 by Abraxas Informatik AG
+// (c) Copyright by Abraxas Informatik AG
 // For license information see LICENSE file
 
 syntax = "proto3";
@@ -7,6 +7,7 @@ package abraxas.voting.ausmittlung.services.v1.requests;
 
 import "google/protobuf/wrappers.proto";
 import "rules/rules.proto";
+import "models/political_business.proto";
 
 /*
   description: Data Export Templates für ein spezifisches Geschäft und Auszählungskreis anfragen.
@@ -63,7 +64,7 @@ message StartProtocolExportsRequest {
     description: Eindeutige, technische Identifikation des Urnengangs.
   */
   string contest_id = 1 [(validation.v1.rules).string.guid = true];
-  
+
   string counting_circle_id = 2 [(validation.v1.rules).string = { guid: true, allow_empty: true}];
 
   repeated string export_template_ids = 3 [(validation.v1.rules).string.guid = true];
@@ -71,7 +72,7 @@ message StartProtocolExportsRequest {
 
 message GetProtocolExportStateChangesRequest {
   string contest_id = 1 [(validation.v1.rules).string.guid = true];
-  
+
   string counting_circle_id = 2 [(validation.v1.rules).string = { guid: true, allow_empty: true}];
 }
 
@@ -160,4 +161,17 @@ message UpdatePoliticalBusinessExportMetadataRequest {
     description: Token, welches für einige Export-Provider (z.B. Seantis) benötigt wird.
   */
   string token = 1 [(validation.v1.rules).string = { allow_empty: true, complex_sl_text: true, min_length: 1, max_length: 100 }];
+}
+
+/*
+  description: Einen asynchronen Bundkontrolle-Export starten.
+*/
+message StartBundleReviewExportRequest {
+  string political_business_result_bundle_id = 1 [(validation.v1.rules).string.guid = true];
+  models.PoliticalBusinessType political_business_type = 2 [(validation.v1.rules).enum.exact_enum = true];
+}
+
+message GetBundleReviewExportStateChangesRequest {
+  string political_business_result_id = 1 [(validation.v1.rules).string.guid = true];
+  models.PoliticalBusinessType political_business_type = 2 [(validation.v1.rules).enum.exact_enum = true];
 }

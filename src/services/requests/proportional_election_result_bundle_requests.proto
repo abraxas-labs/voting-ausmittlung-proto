@@ -1,4 +1,4 @@
-// (c) Copyright 2024 by Abraxas Informatik AG
+// (c) Copyright by Abraxas Informatik AG
 // For license information see LICENSE file
 
 syntax = "proto3";
@@ -148,10 +148,10 @@ message CreateUpdateProportionalElectionResultBallotCandidateRequest {
   string candidate_id = 1 [(validation.v1.rules).string.guid = true];
 
   /*
-    validations: typeof(int32),min-value(1),max-value(50)
+    validations: typeof(int32),min-value(1),max-value(100)
     description: Position auf Liste.
   */
-  int32 position = 2 [(validation.v1.rules).integer = { min_value: 1, max_value: 50}];
+  int32 position = 2 [(validation.v1.rules).integer = { min_value: 1, max_value: 100}];
 
   /*
     validations: type(bool)

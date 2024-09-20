@@ -1,0 +1,12 @@
+# dotnet
+bin/
+obj/
+
+# ts
+node_modules/
+/build/typescript/grpc
+/build/typescript/bin
+docs/
+
+# proto
+build/dotnet/proto

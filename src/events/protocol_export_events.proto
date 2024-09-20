@@ -1,4 +1,4 @@
-// (c) Copyright 2024 by Abraxas Informatik AG
+// (c) Copyright by Abraxas Informatik AG
 // For license information see LICENSE file
 
 syntax = "proto3";
@@ -24,6 +24,7 @@ message ProtocolExportStarted {
   string counting_circle_id = 10;
   shared.v1.DomainOfInfluenceType domain_of_influence_type = 11;
   string political_business_union_id = 12;
+  string political_business_result_bundle_id = 13;
 }
 
 message ProtocolExportCompleted {

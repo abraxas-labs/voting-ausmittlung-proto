@@ -1,4 +1,4 @@
-// (c) Copyright 2024 by Abraxas Informatik AG
+// (c) Copyright by Abraxas Informatik AG
 // For license information see LICENSE file
 
 syntax = "proto3";
@@ -8,6 +8,7 @@ package abraxas.voting.ausmittlung.services.v1;
 import "google/protobuf/empty.proto";
 import "models/export.proto";
 import "requests/export_requests.proto";
+import "responses/export_responses.proto";
 
 service ExportService {
   rpc ListDataExportTemplates(requests.ListDataExportTemplatesRequest) returns (models.DataExportTemplates);
@@ -18,4 +19,7 @@ service ExportService {
   rpc ListResultExportConfigurations(requests.ListResultExportConfigurationsRequest) returns (models.ResultExportConfigurations);
   rpc UpdateResultExportConfiguration(requests.UpdateResultExportConfigurationRequest) returns (google.protobuf.Empty);
   rpc TriggerResultExport(requests.TriggerResultExportRequest) returns (google.protobuf.Empty);
+
+  rpc StartBundleReviewExport(requests.StartBundleReviewExportRequest) returns (responses.StartBundleReviewExportResponse);
+  rpc GetBundleReviewExportStateChanges(requests.GetBundleReviewExportStateChangesRequest) returns (stream models.ProtocolExportStateChange);
 }

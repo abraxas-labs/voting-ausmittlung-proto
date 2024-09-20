@@ -1,4 +1,4 @@
-// (c) Copyright 2024 by Abraxas Informatik AG
+// (c) Copyright by Abraxas Informatik AG
 // For license information see LICENSE file
 
 syntax = "proto3";
@@ -14,6 +14,18 @@ message ProportionalElectionListEndResultLotDecisionsUpdated {
   string proportional_election_end_result_id = 3;
   string proportional_election_list_id = 4;
   repeated data.ProportionalElectionEndResultLotDecisionEventData lot_decisions = 5;
+}
+
+message ProportionalElectionEndResultMandateDistributionStarted {
+  data.EventInfo event_info = 1;
+  string proportional_election_end_result_id = 2;
+  string proportional_election_id = 3;
+}
+
+message ProportionalElectionEndResultMandateDistributionReverted {
+  data.EventInfo event_info = 1;
+  string proportional_election_end_result_id = 2;
+  string proportional_election_id = 3;
 }
 
 message ProportionalElectionEndResultFinalized {

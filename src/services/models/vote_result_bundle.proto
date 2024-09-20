@@ -1,4 +1,4 @@
-// (c) Copyright 2024 by Abraxas Informatik AG
+// (c) Copyright by Abraxas Informatik AG
 // For license information see LICENSE file
 
 syntax = "proto3";
@@ -6,6 +6,7 @@ syntax = "proto3";
 package abraxas.voting.ausmittlung.services.v1.models;
 
 import "models/ballot_bundle.proto";
+import "models/export.proto";
 import "models/user.proto";
 import "models/vote.proto";
 import "models/vote_result.proto";
@@ -25,6 +26,7 @@ message VoteResultBundle {
   User created_by = 5;
   User reviewed_by = 6;
   repeated int32 ballot_numbers_to_review = 7;
+  ProtocolExport protocol_export = 8;
 }
 
 message VoteResultBallot {

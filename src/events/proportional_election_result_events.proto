@@ -1,4 +1,4 @@
-// (c) Copyright 2024 by Abraxas Informatik AG
+// (c) Copyright by Abraxas Informatik AG
 // For license information see LICENSE file
 
 syntax = "proto3";
@@ -66,6 +66,10 @@ message ProportionalElectionResultFlaggedForCorrection {
 message ProportionalElectionResultAuditedTentatively {
   data.EventInfo event_info = 1;
   string election_result_id = 2;
+
+  // If set to true, it will not distribute the number of mandates on the end result implicitly,
+  // after all counting circles are audited tentatively.
+  bool implicit_mandate_distribution_disabled = 3;
 }
 
 message ProportionalElectionResultResettedToSubmissionFinished {

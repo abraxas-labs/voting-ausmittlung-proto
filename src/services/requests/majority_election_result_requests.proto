@@ -1,4 +1,4 @@
-// (c) Copyright 2024 by Abraxas Informatik AG
+// (c) Copyright by Abraxas Informatik AG
 // For license information see LICENSE file
 
 syntax = "proto3";
@@ -474,6 +474,14 @@ message ValidateEnterMajorityElectionCandidateResultsRequest {
 }
 
 message MajorityElectionResultSubmissionFinishedAndAuditedTentativelyRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Wahlergebnisses.
+  */
+  string election_result_id = 1 [(validation.v1.rules).string.guid = true];
+}
+
+message MajorityElectionResultCorrectionFinishedAndAuditedTentativelyRequest {
   /*
     validations: is-guid
     description: Eindeutige, technische Identifikation des Wahlergebnisses.
