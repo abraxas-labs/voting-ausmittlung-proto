@@ -7,9 +7,9 @@ package abraxas.voting.ausmittlung.services.v1.models;
 
 import "models/contest.proto";
 import "models/domain_of_influence.proto";
-import "models/swiss_abroad_voting_right.proto";
 import "shared/ballot_number_generation.proto";
 import "shared/proportional_election.proto";
+import "shared/voter_type.proto";
 
 message ProportionalElection {
   reserved 5;
@@ -45,7 +45,7 @@ message ProportionalElection {
   */
   bool automatic_empty_vote_counting = 12;
   bool enforce_empty_vote_counting_for_counting_circles = 13;
-  SwissAbroadVotingRight swiss_abroad_voting_right = 14;
+  repeated shared.v1.VoterType enabled_voter_types = 14;
   string domain_of_influence_id = 15;
   string contest_id = 16;
   bool active = 17;

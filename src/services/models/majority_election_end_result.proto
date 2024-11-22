@@ -128,22 +128,6 @@ enum MajorityElectionCandidateEndResultState {
   MAJORITY_ELECTION_CANDIDATE_END_RESULT_STATE_NOT_ELIGIBLE = 7;
 }
 
-message MajorityElectionEndResultLotDecision {
-  /*
-    ech-name: candidateIdentification
-    ech-length: 50
-    ech-type: xs:token
-    validations: is-guid
-    description: Eindeutige, technische Identifikation des Kandidaten.
-  */
-  string candidate_id = 1;
-
-  /*
-    description: Rang nach Losentscheid
-  */
-  int32 rank = 2;
-}
-
 message MajorityElectionEndResultAvailableLotDecisions {
   MajorityElection majority_election = 1;
   repeated MajorityElectionEndResultAvailableLotDecision lot_decisions = 2;

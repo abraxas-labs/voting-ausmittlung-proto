@@ -47,3 +47,10 @@ message ProportionalElectionManualListEndResultEntered {
   string proportional_election_list_id = 4;
   repeated data.ProportionalElectionManualCandidateEndResultEventData candidate_end_results = 5;
 }
+
+message ProportionalElectionListEndResultListLotDecisionsUpdated {
+  data.EventInfo event_info = 1;
+  string proportional_election_end_result_id = 2;
+  string proportional_election_id = 3;
+  repeated data.ProportionalElectionEndResultListLotDecisionEventData list_lot_decisions = 4;
+}

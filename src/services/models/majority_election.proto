@@ -7,9 +7,9 @@ package abraxas.voting.ausmittlung.services.v1.models;
 
 import "models/contest.proto";
 import "models/domain_of_influence.proto";
-import "models/swiss_abroad_voting_right.proto";
 import "shared/ballot_number_generation.proto";
 import "shared/majority_election.proto";
+import "shared/voter_type.proto";
 
 message MajorityElection {
   reserved 5, 8, 25;
@@ -87,7 +87,7 @@ message MajorityElection {
   */
   shared.v1.MajorityElectionResultEntry result_entry = 16;
   bool enforce_result_entry_for_counting_circles = 17;
-  SwissAbroadVotingRight swiss_abroad_voting_right = 18;
+  repeated shared.v1.VoterType enabled_voter_types = 18;
 
   /*
     ech-name: domainOfInfluenceIdentification

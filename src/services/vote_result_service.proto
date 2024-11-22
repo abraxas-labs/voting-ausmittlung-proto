@@ -37,6 +37,7 @@ service VoteResultService {
   rpc CorrectionFinishedAndAuditedTentatively(requests.VoteResultCorrectionFinishedAndAuditedTentativelyRequest) returns (google.protobuf.Empty);
   rpc Publish(requests.VoteResultPublishRequest) returns (google.protobuf.Empty);
   rpc Unpublish(requests.VoteResultUnpublishRequest) returns (google.protobuf.Empty);
+  rpc ResetToSubmissionFinishedAndFlagForCorrection(requests.VoteResultResetToSubmissionFinishedAndFlagForCorrectionRequest) returns (google.protobuf.Empty);
 
   rpc ValidateEnterCountOfVoters(requests.ValidateEnterVoteResultCountOfVotersRequest) returns (models.ValidationSummary);
   rpc ValidateEnterResults(requests.ValidateEnterVoteResultsRequest) returns (models.ValidationSummary);

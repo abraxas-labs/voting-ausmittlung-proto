@@ -5,7 +5,9 @@ syntax = "proto3";
 
 package abraxas.voting.ausmittlung.events.v1.data;
 
+import "google/protobuf/wrappers.proto";
+
 message MajorityElectionEndResultLotDecisionEventData {
   string candidate_id = 1;
-  int32 rank = 2;
+  google.protobuf.Int32Value rank = 2;
 }

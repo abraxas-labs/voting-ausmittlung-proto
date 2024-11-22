@@ -5,6 +5,7 @@ syntax = "proto3";
 
 package abraxas.voting.ausmittlung.services.v1.requests;
 
+import "google/protobuf/wrappers.proto";
 import "requests/count_of_voters_requests.proto";
 import "rules/rules.proto";
 import "shared/ballot_number_generation.proto";
@@ -323,7 +324,7 @@ message UpdateProportionalElectionEndResultLotDecisionRequest {
     validations: min-value(1),max-value(50)
     description: Rang nach Losentscheid
   */
-  int32 rank = 2 [(validation.v1.rules).integer = { min_value: 1, max_value: 50}];
+  google.protobuf.Int32Value rank = 2 [(validation.v1.rules).integer = { min_value: 1, max_value: 50}];
 }
 
 message StartProportionalElectionEndResultMandateDistributionRequest {
@@ -459,4 +460,52 @@ message ProportionalElectionResultUnpublishRequest {
     description: Eindeutige, technische Identifikation des Wahlergebnisses.
   */
   repeated string election_result_ids = 1 [(validation.v1.rules).string.guid = true];
+}
+
+message UpdateProportionalElectionEndResultListLotDecisionsRequest {
+  /*
+    ech-name: electionIdentification
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: is-guid
+    description: Eindeutige, technische Identifikation der Proporzwahl.
+  */
+  string proportional_election_id = 1 [(validation.v1.rules).string.guid = true];
+
+  /*
+    description: Losentscheide fällen.
+   */
+  repeated UpdateProportionalElectionEndResultListLotDecisionRequest list_lot_decisions = 2;
+}
+
+message UpdateProportionalElectionEndResultListLotDecisionRequest {
+  repeated UpdateProportionalElectionEndResultListLotDecisionEntryRequest entries = 1;
+}
+
+message UpdateProportionalElectionEndResultListLotDecisionEntryRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation der Proporzwahl-Liste.
+   */
+  string list_id = 1 [(validation.v1.rules).string = { guid: true, allow_empty: true }];
+
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation der Proporzwahl-Listenverbindung.
+   */
+  string list_union_id = 2 [(validation.v1.rules).string = { guid: true, allow_empty: true }];
+
+  /*
+    validations: is-type(bool)
+    description: 'True' für Listen, welche den Losentscheid gewonnen haben.
+  */
+  bool winning = 3;
+}
+
+message ProportionalElectionResultResetToSubmissionFinishedAndFlagForCorrectionRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Wahlergebnisses.
+  */
+  string election_result_id = 1 [(validation.v1.rules).string.guid = true];
 }

@@ -423,7 +423,7 @@ message UpdateMajorityElectionEndResultLotDecisionRequest {
     validations: min-value(1),max-value(100)
     description: Rang nach Losentscheid
   */
-  int32 rank = 2 [(validation.v1.rules).integer = { min_value: 1, max_value: 100}];
+  google.protobuf.Int32Value rank = 2 [(validation.v1.rules).integer = { min_value: 1, max_value: 100}];
 }
 
 message PrepareFinalizeMajorityElectionEndResultRequest {
@@ -503,4 +503,12 @@ message MajorityElectionResultUnpublishRequest {
     description: Eindeutige, technische Identifikation des Wahlergebnisses.
   */
   repeated string election_result_ids = 1 [(validation.v1.rules).string.guid = true];
+}
+
+message MajorityElectionResultResetToSubmissionFinishedAndFlagForCorrectionRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Wahlergebnisses.
+  */
+  string election_result_id = 1 [(validation.v1.rules).string.guid = true];
 }

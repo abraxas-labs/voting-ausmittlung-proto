@@ -7,9 +7,9 @@ package abraxas.voting.ausmittlung.services.v1.models;
 
 import "models/contest.proto";
 import "models/domain_of_influence.proto";
-import "models/swiss_abroad_voting_right.proto";
 import "shared/domain_of_influence.proto";
 import "shared/vote.proto";
+import "shared/voter_type.proto";
 
 message Vote {
   string id = 1;
@@ -17,7 +17,7 @@ message Vote {
   string official_description = 3;
   string short_description = 4;
   string internal_description = 5;
-  SwissAbroadVotingRight swiss_abroad_voting_right = 6;
+  repeated shared.v1.VoterType enabled_voter_types = 6;
   string domain_of_influence_id = 7;
   string contest_id = 8;
   bool active = 9;

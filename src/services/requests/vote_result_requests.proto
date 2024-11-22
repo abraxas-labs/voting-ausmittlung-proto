@@ -418,3 +418,11 @@ message VoteResultUnpublishRequest {
   */
   repeated string vote_result_ids = 1 [(validation.v1.rules).string.guid = true];
 }
+
+message VoteResultResetToSubmissionFinishedAndFlagForCorrectionRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige Identifikation des Abstimmungsresultates.
+  */
+  string vote_result_id = 1 [(validation.v1.rules).string.guid = true];
+}

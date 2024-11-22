@@ -14,6 +14,7 @@ import "models/count_of_voters.proto";
 import "models/political_business.proto";
 import "models/political_business_union.proto";
 import "models/user.proto";
+import "shared/voter_type.proto";
 import "models/voting_cards.proto";
 
 message ResultOverview {
@@ -50,7 +51,7 @@ message ResultList {
   repeated ResultListResult results = 4;
   bool current_tenant_is_responsible = 5;
   CountingCircleResultState state = 6;
-  bool swiss_abroad_have_voting_rights_on_any_business = 7;
+  repeated shared.v1.VoterType enabled_voter_types = 7;
 
   /*
     description: The contact person may be overwritten for a specific contest. Empty if the contact person is not overwritten.

@@ -6,10 +6,8 @@ syntax = "proto3";
 package abraxas.voting.ausmittlung.services.v1;
 
 import "google/protobuf/empty.proto";
-import "models/validation.proto";
 import "requests/contest_counting_circle_details_requests.proto";
 
 service ContestCountingCircleDetailsService {
   rpc UpdateDetails(requests.UpdateContestCountingCircleDetailsRequest) returns (google.protobuf.Empty);
-  rpc ValidateUpdateDetails(requests.ValidateUpdateContestCountingCircleDetailsRequest) returns (models.ValidationSummary);
 }

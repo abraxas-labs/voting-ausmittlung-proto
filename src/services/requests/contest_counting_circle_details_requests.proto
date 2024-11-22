@@ -36,11 +36,3 @@ message UpdateContestCountingCircleDetailsRequest {
   repeated UpdateVotingCardResultDetailRequest voting_cards = 4;
   shared.v1.CountingMachine counting_machine = 5 [(validation.v1.rules).enum = { exact_enum: true, allow_unspecified: true }];
 }
-
-/*
-  description: Validierung der Angaben von Stimmberechtigten und Stimmrechtsausweisen für den Auszählungskreis eines Urnenganges.
-*/
-message ValidateUpdateContestCountingCircleDetailsRequest {
-
-  UpdateContestCountingCircleDetailsRequest request = 1 [(validation.v1.rules).object.required = true];
-}

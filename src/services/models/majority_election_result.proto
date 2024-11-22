@@ -52,6 +52,7 @@ message MajorityElectionResult {
   bool has_unmapped_write_ins = 23;
   bool published = 24;
   google.protobuf.Timestamp ready_for_correction_timestamp = 25;
+  bool has_ballot_groups = 26;
 }
 
 message SecondaryMajorityElectionResult {

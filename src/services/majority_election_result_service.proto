@@ -39,6 +39,7 @@ service MajorityElectionResultService {
   rpc CorrectionFinishedAndAuditedTentatively(requests.MajorityElectionResultCorrectionFinishedAndAuditedTentativelyRequest) returns (google.protobuf.Empty);
   rpc Publish(requests.MajorityElectionResultPublishRequest) returns (google.protobuf.Empty);
   rpc Unpublish(requests.MajorityElectionResultUnpublishRequest) returns (google.protobuf.Empty);
+  rpc ResetToSubmissionFinishedAndFlagForCorrection(requests.MajorityElectionResultResetToSubmissionFinishedAndFlagForCorrectionRequest) returns (google.protobuf.Empty);
 
   rpc ValidateEnterCountOfVoters(requests.ValidateEnterMajorityElectionCountOfVotersRequest) returns (models.ValidationSummary);
   rpc ValidateEnterCandidateResults(requests.ValidateEnterMajorityElectionCandidateResultsRequest) returns (models.ValidationSummary);

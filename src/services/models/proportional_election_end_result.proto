@@ -37,6 +37,8 @@ message ProportionalElectionEndResult {
 
   /* Specifies whether this result only contains some of the counting circle results and not the "full" end result */
   bool partial_result = 13;
+
+  repeated ProportionalElectionEndResultListLotDecision list_lot_decisions = 14;
 }
 
 message ProportionalElectionListEndResult {
@@ -134,22 +136,6 @@ message ProportionalElectionCandidateEndResult {
   ProportionalElectionCandidateResultSubTotal conventional_sub_total = 9;
 }
 
-message ProportionalElectionEndResultLotDecision {
-  /*
-    ech-name: candidateIdentification
-    ech-length: 50
-    ech-type: xs:token
-    validations: is-guid
-    description: Eindeutige, technische Identifikation des Kandidaten.
-  */
-  string candidate_id = 1;
-
-  /*
-    description: Rang nach Losentscheid
-  */
-  int32 rank = 2;
-}
-
 message ProportionalElectionListEndResultAvailableLotDecisions {
   /*
     validations: is-guid
@@ -173,4 +159,15 @@ message ProportionalElectionEndResultAvailableLotDecision {
   bool lot_decision_required = 4;
   repeated int32 selectable_ranks = 5;
   int32 original_rank = 6;
+}
+
+message ProportionalElectionEndResultListLotDecision {
+  repeated ProportionalElectionEndResultListLotDecisionEntry entries = 1;
+}
+
+message ProportionalElectionEndResultListLotDecisionEntry {
+  string list_id = 1;
+  string list_union_id = 2;
+  string description = 3;
+  bool winning = 4;
 }

@@ -47,4 +47,6 @@ service ProportionalElectionResultService {
   rpc UpdateDoubleProportionalResultSuperApportionmentLotDecision(requests.UpdateProportionalElectionDoubleProportionalResultSuperApportionmentLotDecisionRequest) returns (google.protobuf.Empty);
   rpc Publish(requests.ProportionalElectionResultPublishRequest) returns (google.protobuf.Empty);
   rpc Unpublish(requests.ProportionalElectionResultUnpublishRequest) returns (google.protobuf.Empty);
+  rpc UpdateEndResultListLotDecisions(requests.UpdateProportionalElectionEndResultListLotDecisionsRequest) returns (google.protobuf.Empty);
+  rpc ResetToSubmissionFinishedAndFlagForCorrection(requests.ProportionalElectionResultResetToSubmissionFinishedAndFlagForCorrectionRequest) returns (google.protobuf.Empty);
 }

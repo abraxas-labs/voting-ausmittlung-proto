@@ -1,4 +1,4 @@
-# ✨ Changelog (`v1.132.0`)
+# ✨ Changelog (`v1.136.0`)
 
 All notable changes to this project will be documented in this file.
 
@@ -8,11 +8,59 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Version Info
 
 ```text
-This version -------- v1.132.0
-Previous version ---- v1.124.0
+This version -------- v1.136.0
+Previous version ---- v1.132.0
 Initial version ----- v1.79.2
-Total commits ------- 12
+Total commits ------- 9
 ```
+
+## [v1.136.0] - 2024-11-07
+
+### 🆕 Added
+
+- add reset to submission finished and flag for correction endpoints
+
+## [v1.135.0] - 2024-11-05
+
+### 🔄 Changed
+
+- optional rank in candidate lot decisions
+
+## [v1.134.0] - 2024-11-04
+
+### 🆕 Added
+
+- add proportional election end result list lot decisions
+
+## [v1.133.4] - 2024-10-14
+
+### 🆕 Added
+
+- add has ballot groups
+
+## [v1.133.3] - 2024-10-10
+
+### ❌ Removed
+
+- remove validate cc details endpoint
+
+## [v1.133.2] - 2024-10-04
+
+### 🔄 Changed
+
+- update input validation for person name properties from simple to complex single line text.
+
+## [v1.133.1] - 2024-10-03
+
+### ❌ Removed
+
+- remove zh feature flag
+
+## [v1.133.0] - 2024-09-24
+
+### 🔄 Changed
+
+- foreigner and minor voters
 
 ## [v1.132.0] - 2024-09-03
 
@@ -253,55 +301,29 @@ patch ci-cd template version, align with new defaults
 
 - add multiple ballot validation result
 
-## [v1.99.3] - 2023-08-22
-
 ### 🔄 Changed
 
 - revert deletion of ResultExportGenerated event
-
-## [v1.99.2] - 2023-07-26
 
 ### ❌ Removed
 
 - remove result export generated event
 
-## [v1.99.1] - 2023-07-11
-
 ### 🔄 Changed
 
 - allow empty for second factor transaction id
-
-## [v1.99.0] - 2023-06-28
 
 ### 🆕 Added
 
 - add result import changes
 
-## [v1.98.0] - 2023-06-19
-
 ### 🆕 Added
 
 - Multiple counting circle results submission finished
 
-## [v1.97.0] - 2023-05-31
-
-### 🔄 Changed
-
-- add latest execution timestamp to result export configuration
-
-## [v1.96.2] - 2023-05-31
-
-### 🔄 Changed
-
-- validate that majority elections have atleast one candidate
-
-## [v1.96.1] - 2023-05-26
-
 ### 🔄 Changed
 
 - Make certain contact person fields required
-
-## [v1.96.0] - 2023-05-16
 
 ### 🆕 Added
 
@@ -374,6 +396,60 @@ patch ci-cd template version, align with new defaults
 ### 🔄 Changed
 
 - Export templates should include the political business union id
+
+## [v1.99.3] - 2023-08-22
+
+### 🔄 Changed
+
+- revert deletion of ResultExportGenerated event
+
+## [v1.99.2] - 2023-07-26
+
+### ❌ Removed
+
+- remove result export generated event
+
+## [v1.99.1] - 2023-07-11
+
+### 🔄 Changed
+
+- allow empty for second factor transaction id
+
+## [v1.99.0] - 2023-06-28
+
+### 🆕 Added
+
+- add result import changes
+
+## [v1.98.0] - 2023-06-19
+
+### 🆕 Added
+
+- Multiple counting circle results submission finished
+
+## [v1.97.0] - 2023-05-31
+
+### 🔄 Changed
+
+- add latest execution timestamp to result export configuration
+
+## [v1.96.2] - 2023-05-31
+
+### 🔄 Changed
+
+- validate that majority elections have atleast one candidate
+
+## [v1.96.1] - 2023-05-26
+
+### 🔄 Changed
+
+- Make certain contact person fields required
+
+## [v1.96.0] - 2023-05-16
+
+### 🆕 Added
+
+- reset majority election write ins
 
 ## [v1.95.0] - 2023-04-28
 

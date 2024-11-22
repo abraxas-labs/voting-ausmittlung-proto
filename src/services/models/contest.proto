@@ -188,12 +188,11 @@ message ContestCantonDefaults {
   bool state_plausibilised_disabled = 2;
   bool majority_election_invalid_votes = 3;
   bool counting_machine_enabled = 4;
-  bool new_zh_features_enabled = 5;
-  bool majority_election_use_candidate_check_digit = 6;
-  bool proportional_election_use_candidate_check_digit = 7;
-  bool publish_results_enabled = 8;
-  bool end_result_finalize_disabled = 9;
-  bool publish_results_before_audited_tentatively = 10;
+  bool majority_election_use_candidate_check_digit = 5;
+  bool proportional_election_use_candidate_check_digit = 6;
+  bool publish_results_enabled = 7;
+  bool end_result_finalize_disabled = 8;
+  bool publish_results_before_audited_tentatively = 9;
 }
 
 message CountingCircleResultStateDescription {
