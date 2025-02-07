@@ -86,6 +86,7 @@ message SecondaryMajorityElectionEndResult {
   int32 invalid_vote_count = 7;
   int32 total_candidate_vote_count_excl_individual = 8;
   int32 total_candidate_vote_count_incl_individual = 9;
+  MajorityElectionEndResultCalculation calculation = 10;
 }
 
 message MajorityElectionCandidateEndResult {

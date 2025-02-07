@@ -1,4 +1,4 @@
-# ✨ Changelog (`v1.136.0`)
+# ✨ Changelog (`v1.138.0`)
 
 All notable changes to this project will be documented in this file.
 
@@ -8,11 +8,39 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Version Info
 
 ```text
-This version -------- v1.136.0
-Previous version ---- v1.132.0
+This version -------- v1.138.0
+Previous version ---- v1.136.0
 Initial version ----- v1.79.2
-Total commits ------- 9
+Total commits ------- 6
 ```
+
+## [v1.138.0] - 2024-12-03
+
+### 🆕 Added
+
+- add secondary majority election protocols
+
+## [v1.137.0] - 2024-11-27
+
+### 🆕 Added
+
+- secondary majority election candidate vote count validation
+
+### 🔄 Changed
+
+- fix(VOTING-5094): add secondary majority election calculation
+
+### 🆕 Added
+
+- secondary majority election result validations
+
+### 🔄 Changed
+
+- archived contest list with description and owner
+
+### 🆕 Added
+
+- publish results option on domain of influence
 
 ## [v1.136.0] - 2024-11-07
 
@@ -267,35 +295,21 @@ patch ci-cd template version, align with new defaults
 
 ## [v1.105.0] - 2024-01-29
 
-### 🔄 Changed
-
-- track evoting write-in ballots
-
-## [v1.104.0] - 2024-01-29
-
 ### 🆕 Added
 
 - add candidate check digit
-
-## [v1.103.0] - 2024-01-16
 
 ### 🆕 Added
 
 - add new zh features flag
 
-## [v1.102.0] - 2024-01-11
-
 ### :new: Added
 
 - added permission service
 
-## [v1.101.0] - 2023-12-20
-
 ### 🆕 Added
 
 - Add counting machine to counting circle details
-
-## [v1.100.0] - 2023-12-19
 
 ### 🆕 Added
 
@@ -396,6 +410,36 @@ patch ci-cd template version, align with new defaults
 ### 🔄 Changed
 
 - Export templates should include the political business union id
+
+## [v1.104.0] - 2024-01-29
+
+### 🆕 Added
+
+- add candidate check digit
+
+## [v1.103.0] - 2024-01-16
+
+### 🆕 Added
+
+- add new zh features flag
+
+## [v1.102.0] - 2024-01-11
+
+### :new: Added
+
+- added permission service
+
+## [v1.101.0] - 2023-12-20
+
+### 🆕 Added
+
+- Add counting machine to counting circle details
+
+## [v1.100.0] - 2023-12-19
+
+### 🆕 Added
+
+- add multiple ballot validation result
 
 ## [v1.99.3] - 2023-08-22
 

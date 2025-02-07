@@ -8,6 +8,7 @@ package abraxas.voting.ausmittlung.services.v1.models;
 import "google/protobuf/timestamp.proto";
 import "models/counting_circle.proto";
 import "shared/domain_of_influence.proto";
+import "models/domain_of_influence.proto";
 
 message Contest {
   /*
@@ -141,6 +142,7 @@ message ContestSummary {
   ContestState state = 11;
   bool e_voting_results_imported = 12;
   ContestCantonDefaults canton_defaults = 13;
+  DomainOfInfluence domain_of_influence = 14;
 }
 
 message ContestSummaryEntryDetails {
@@ -190,7 +192,7 @@ message ContestCantonDefaults {
   bool counting_machine_enabled = 4;
   bool majority_election_use_candidate_check_digit = 5;
   bool proportional_election_use_candidate_check_digit = 6;
-  bool publish_results_enabled = 7;
+  bool manual_publish_results_enabled = 7;
   bool end_result_finalize_disabled = 8;
   bool publish_results_before_audited_tentatively = 9;
 }
