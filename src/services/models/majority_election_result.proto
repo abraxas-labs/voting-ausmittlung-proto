@@ -30,53 +30,57 @@ message MajorityElectionResult {
   int32 conventional_count_of_ballot_group_votes = 13;
   int32 conventional_count_of_detailed_entered_ballots = 14;
   MajorityElectionResultSubTotal e_voting_sub_total = 15;
-  MajorityElectionResultNullableSubTotal conventional_sub_total = 16;
+  MajorityElectionResultSubTotal e_counting_sub_total = 16;
+  MajorityElectionResultNullableSubTotal conventional_sub_total = 17;
 
   /*
     description: Anzahl vereinzelter Nennungen eines Kandiaten (welcher sich nicht auf der Liste befindet).
   */
-  int32 individual_vote_count = 17;
+  int32 individual_vote_count = 18;
 
   /*
     description: Anzahl leere Zeilen
   */
-  int32 empty_vote_count = 18;
+  int32 empty_vote_count = 19;
 
   /*
     description: Anzahl ungültiger Abstimmungen.
   */
-  int32 invalid_vote_count = 19;
-  int32 total_candidate_vote_count_excl_individual = 20;
-  int32 total_candidate_vote_count_incl_individual = 21;
-  CountingCircle counting_circle = 22;
-  bool has_unmapped_write_ins = 23;
-  bool published = 24;
-  google.protobuf.Timestamp ready_for_correction_timestamp = 25;
-  bool has_ballot_groups = 26;
+  int32 invalid_vote_count = 20;
+  int32 total_candidate_vote_count_excl_individual = 21;
+  int32 total_candidate_vote_count_incl_individual = 22;
+  CountingCircle counting_circle = 23;
+  bool has_unmapped_e_voting_write_ins = 24;
+  bool has_unmapped_e_counting_write_ins = 25;
+  bool has_unmapped_write_ins = 26;
+  bool published = 27;
+  google.protobuf.Timestamp ready_for_correction_timestamp = 28;
+  bool has_ballot_groups = 29;
 }
 
 message SecondaryMajorityElectionResult {
   SecondaryMajorityElection secondary_majority_election = 1;
   repeated MajorityElectionCandidateResult candidate_results = 2;
   MajorityElectionResultSubTotal e_voting_sub_total = 3;
-  MajorityElectionResultNullableSubTotal conventional_sub_total = 4;
+  MajorityElectionResultSubTotal e_counting_sub_total = 4;
+  MajorityElectionResultNullableSubTotal conventional_sub_total = 5;
 
   /*
     description: Anzahl vereinzelter Nennungen eines Kandiaten (welcher sich nicht auf der Liste befindet).
   */
-  int32 individual_vote_count = 5;
+  int32 individual_vote_count = 6;
 
   /*
     description: Anzahl leere Zeilen
   */
-  int32 empty_vote_count = 6;
+  int32 empty_vote_count = 7;
 
   /*
     description: Anzahl ungültiger Abstimmungen.
   */
-  int32 invalid_vote_count = 7;
-  int32 total_candidate_vote_count_excl_individual = 8;
-  int32 total_candidate_vote_count_incl_individual = 9;
+  int32 invalid_vote_count = 8;
+  int32 total_candidate_vote_count_excl_individual = 9;
+  int32 total_candidate_vote_count_incl_individual = 10;
 }
 
 message MajorityElectionResultEntryParams {
@@ -140,6 +144,9 @@ message MajorityElectionCandidateResult {
   int32 e_voting_write_ins_vote_count = 2;
   int32 e_voting_excl_write_ins_vote_count = 3;
   int32 e_voting_incl_write_ins_vote_count = 4;
-  google.protobuf.Int32Value conventional_vote_count = 5;
-  int32 vote_count = 6;
+  int32 e_counting_write_ins_vote_count = 5;
+  int32 e_counting_excl_write_ins_vote_count = 6;
+  int32 e_counting_incl_write_ins_vote_count = 7;
+  google.protobuf.Int32Value conventional_vote_count = 8;
+  int32 vote_count = 9;
 }

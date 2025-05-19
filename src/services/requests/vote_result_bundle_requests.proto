@@ -205,11 +205,3 @@ message VoteResultBundleCorrectionFinishedRequest {
   */
   string bundle_id = 1 [(validation.v1.rules).string.guid = true];
 }
-
-message GetVoteResultBundleChangesRequest {
-  /*
-    validations: is-guid
-    description: Bund ist auf Wahlzettelresultat gespeichert.
-  */
-  string ballot_result_id = 1 [(validation.v1.rules).string.guid = true];
-}

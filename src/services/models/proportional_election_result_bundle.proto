@@ -7,6 +7,7 @@ package abraxas.voting.ausmittlung.services.v1.models;
 
 import "models/ballot_bundle.proto";
 import "models/export.proto";
+import "models/political_business_result_bundle.proto";
 import "models/proportional_election.proto";
 import "models/proportional_election_result.proto";
 import "models/user.proto";
@@ -26,6 +27,7 @@ message ProportionalElectionResultBundle {
   User reviewed_by = 7;
   repeated int32 ballot_numbers_to_review = 8;
   ProtocolExport protocol_export = 9;
+  repeated PoliticalBusinessResultBundleLog logs = 10;
 }
 
 message ProportionalElectionResultBallot {

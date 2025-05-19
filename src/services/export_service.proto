@@ -14,12 +14,10 @@ service ExportService {
   rpc ListDataExportTemplates(requests.ListDataExportTemplatesRequest) returns (models.DataExportTemplates);
   rpc ListProtocolExports(requests.ListProtocolExportsRequest) returns (models.ProtocolExports);
   rpc StartProtocolExports(requests.StartProtocolExportsRequest) returns (google.protobuf.Empty);
-  rpc GetProtocolExportStateChanges(requests.GetProtocolExportStateChangesRequest) returns (stream models.ProtocolExportStateChange);
 
   rpc ListResultExportConfigurations(requests.ListResultExportConfigurationsRequest) returns (models.ResultExportConfigurations);
   rpc UpdateResultExportConfiguration(requests.UpdateResultExportConfigurationRequest) returns (google.protobuf.Empty);
   rpc TriggerResultExport(requests.TriggerResultExportRequest) returns (google.protobuf.Empty);
 
   rpc StartBundleReviewExport(requests.StartBundleReviewExportRequest) returns (responses.StartBundleReviewExportResponse);
-  rpc GetBundleReviewExportStateChanges(requests.GetBundleReviewExportStateChangesRequest) returns (stream models.ProtocolExportStateChange);
 }

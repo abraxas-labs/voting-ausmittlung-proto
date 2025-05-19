@@ -52,59 +52,60 @@ message ProportionalElectionListEndResult {
   ProportionalElectionListUnion sub_list_union = 5;
   bool has_open_required_lot_decisions = 6;
   ProportionalElectionListResultSubTotal e_voting_sub_total = 7;
-  ProportionalElectionListResultSubTotal conventional_sub_total = 8;
+  ProportionalElectionListResultSubTotal e_counting_sub_total = 8;
+  ProportionalElectionListResultSubTotal conventional_sub_total = 9;
   /*
     description: count of unmodified lists that were handed in for this list
   */
-  int32 unmodified_lists_count = 9;
+  int32 unmodified_lists_count = 10;
   /*
     description: count of candidate votes gained from unmodified lists
   */
-  int32 unmodified_list_votes_count = 10;
+  int32 unmodified_list_votes_count = 11;
   /*
     description: count of votes gained from blank rows from unmodified lists
   */
-  int32 unmodified_list_blank_rows_count = 11;
+  int32 unmodified_list_blank_rows_count = 12;
   /*
     description: count of modified lists that were handed in for this list
   */
-  int32 modified_lists_count = 12;
+  int32 modified_lists_count = 13;
   /*
     description: count of candidate votes gained from modified lists
   */
-  int32 modified_list_votes_count = 13;
+  int32 modified_list_votes_count = 14;
   /*
     description: count of candidate votes gained from lists assigned to another list
   */
-  int32 list_votes_count_on_other_lists = 14;
+  int32 list_votes_count_on_other_lists = 15;
   /*
     description: count of votes gained from blank rows from modified lists
   */
-  int32 modified_list_blank_rows_count = 15;
+  int32 modified_list_blank_rows_count = 16;
   /*
     description: count of votes gained from unmodified lists and from blank rows on unmodified lists
   */
-  int32 unmodified_list_votes_count_incl_blank_rows = 16;
+  int32 unmodified_list_votes_count_incl_blank_rows = 17;
   /*
     description: count of votes gained from modified lists and from blank rows on modified lists
   */
-  int32 modified_list_votes_count_incl_blank_rows = 17;
+  int32 modified_list_votes_count_incl_blank_rows = 18;
   /*
     description: count of candidate votes gained from unmodifed and modified lists
   */
-  int32 list_votes_count = 18;
+  int32 list_votes_count = 19;
   /*
     description: count of lists (modified + unmodified)
   */
-  int32 list_count = 19;
+  int32 list_count = 20;
   /*
     description: count of votes gained from blank rows from unmodified and modified lists
   */
-  int32 blank_rows_count = 20;
+  int32 blank_rows_count = 21;
   /*
     description: sum of list votes count and blank rows count
   */
-  int32 total_vote_count = 21;
+  int32 total_vote_count = 22;
 }
 
 message ProportionalElectionCandidateEndResult {
@@ -133,7 +134,8 @@ message ProportionalElectionCandidateEndResult {
   bool lot_decision_required = 6;
   shared.v1.ProportionalElectionCandidateEndResultState state = 7;
   ProportionalElectionCandidateResultSubTotal e_voting_sub_total = 8;
-  ProportionalElectionCandidateResultSubTotal conventional_sub_total = 9;
+  ProportionalElectionCandidateResultSubTotal e_counting_sub_total = 9;
+  ProportionalElectionCandidateResultSubTotal conventional_sub_total = 10;
 }
 
 message ProportionalElectionListEndResultAvailableLotDecisions {

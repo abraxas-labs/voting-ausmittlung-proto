@@ -21,17 +21,20 @@ message MajorityElectionResultBundleCreated {
 
 message MajorityElectionResultBundleDeleted {
   data.EventInfo event_info = 1;
-  string bundle_id = 2;
+  string election_result_id = 2;
+  string bundle_id = 3;
 }
 
 message MajorityElectionResultBundleReviewSucceeded {
   data.EventInfo event_info = 1;
-  string bundle_id = 2;
+  string election_result_id = 2;
+  string bundle_id = 3;
 }
 
 message MajorityElectionResultBundleReviewRejected {
   data.EventInfo event_info = 1;
-  string bundle_id = 2;
+  string election_result_id = 2;
+  string bundle_id = 3;
 }
 
 message MajorityElectionResultBallotCreated {

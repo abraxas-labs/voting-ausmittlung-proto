@@ -8,8 +8,9 @@ package abraxas.voting.ausmittlung.services.v1.requests;
 import "models/political_business.proto";
 import "rules/rules.proto";
 import "shared/majority_election_write_in.proto";
+import "shared/import.proto";
 
-message ListResultImportsRequest {
+message ListEVotingResultImportsRequest {
   /*
     ech-name: contestIdentification
     ech-length: [1,50]
@@ -20,7 +21,7 @@ message ListResultImportsRequest {
   string contest_id = 1 [(validation.v1.rules).string.guid = true];
 }
 
-message DeleteResultImportDataRequest {
+message ListECountingResultImportsRequest {
   /*
     ech-name: contestIdentification
     ech-length: [1,50]
@@ -29,6 +30,46 @@ message DeleteResultImportDataRequest {
     description: Eindeutige, technische Identifikation des Urnengangs.
   */
   string contest_id = 1 [(validation.v1.rules).string.guid = true];
+
+  /*
+    ech-name: countingCircleId
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: is-guid
+    description: Eindeutige Identifikation des Auszählungskreises. Es handelt sich dabei um die lokale Identifikation des Quellregisters.
+  */
+  string counting_circle_id = 2 [(validation.v1.rules).string.guid = true];
+}
+
+message DeleteEVotingResultImportDataRequest {
+  /*
+    ech-name: contestIdentification
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Urnengangs.
+  */
+  string contest_id = 1 [(validation.v1.rules).string.guid = true];
+}
+
+message DeleteECountingResultImportDataRequest {
+  /*
+    ech-name: contestIdentification
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Urnengangs.
+  */
+  string contest_id = 1 [(validation.v1.rules).string.guid = true];
+
+  /*
+    ech-name: countingCircleId
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: is-guid
+    description: Eindeutige Identifikation des Auszählungskreises. Es handelt sich dabei um die lokale Identifikation des Quellregisters.
+  */
+  string counting_circle_id = 2 [(validation.v1.rules).string.guid = true];
 }
 
 message GetMajorityElectionWriteInMappingsRequest {
@@ -49,17 +90,16 @@ message GetMajorityElectionWriteInMappingsRequest {
     description: Eindeutige Identifikation des Auszählungskreises. Es handelt sich dabei um die lokale Identifikation des Quellregisters.
   */
   string counting_circle_id = 2 [(validation.v1.rules).string.guid = true];
+  string election_id = 3 [(validation.v1.rules).string = { guid: true, allow_empty: true }];
+  shared.v1.ResultImportType import_type = 4 [(validation.v1.rules).enum = { exact_enum: true, allow_unspecified: true }];
 }
 
 message ResetMajorityElectionWriteInMappingsRequest {
   /*
-    ech-name: contestIdentification
-    ech-length: [1,50]
-    ech-type:: xs:token
     validations: is-guid
-    description: Eindeutige, technische Identifikation des Urnengangs.
+    description: Eindeutige, technische Identifikation des Imports.
   */
-  string contest_id = 1 [(validation.v1.rules).string.guid = true];
+  string import_id = 1 [(validation.v1.rules).string.guid = true];
 
   /*
     ech-name: countingCircleId
@@ -140,45 +180,4 @@ message MapMajorityElectionWriteInRequest {
     description: Eindeutige, technische Identifikation des Kandidaten.
   */
   string candidate_id = 3 [(validation.v1.rules).string = { guid: true, allow_empty: true }];
-}
-
-message GetMajorityElectionWriteInMappingChangesRequest {
-  /*
-    ech-name: contestIdentification
-    ech-length: [1,50]
-    ech-type:: xs:token
-    validations: is-guid
-    description: Eindeutige, technische Identifikation des Urnengangs.
-  */
-  string contest_id = 1 [(validation.v1.rules).string.guid = true];
-
-  /*
-    ech-name: countingCircleId
-    ech-length: [1,50]
-    ech-type:: xs:token
-    validations: is-guid
-    description: Eindeutige Identifikation des Auszählungskreises. Es handelt sich dabei um die lokale Identifikation des Quellregisters.
-  */
-  string counting_circle_id = 2 [(validation.v1.rules).string.guid = true];
-}
-
-
-message GetResultImportChangesRequest {
-  /*
-    ech-name: contestIdentification
-    ech-length: [1,50]
-    ech-type:: xs:token
-    validations: is-guid
-    description: Eindeutige, technische Identifikation des Urnengangs.
-  */
-  string contest_id = 1 [(validation.v1.rules).string.guid = true];
-
-  /*
-    ech-name: countingCircleId
-    ech-length: [1,50]
-    ech-type:: xs:token
-    validations: is-guid
-    description: Eindeutige Identifikation des Auszählungskreises. Es handelt sich dabei um die lokale Identifikation des Quellregisters.
-  */
-  string counting_circle_id = 2 [(validation.v1.rules).string.guid = true];
 }

@@ -409,6 +409,22 @@ message UpdateMajorityElectionEndResultLotDecisionsRequest {
   repeated UpdateMajorityElectionEndResultLotDecisionRequest lot_decisions = 2;
 }
 
+message UpdateMajorityElectionEndResultSecondaryLotDecisionsRequest {
+  /*
+    ech-name: electionIdentification
+    ech-length: [1,50]
+    ech-type:: xs:token
+    validations: is-guid
+    description: Eindeutige, technische Identifikation der Majorzwahl.
+  */
+  string majority_election_id = 1 [(validation.v1.rules).string.guid = true];
+
+  /*
+    description: Losentscheide fällen.
+  */
+  repeated UpdateMajorityElectionEndResultLotDecisionRequest lot_decisions = 2;
+}
+
 message UpdateMajorityElectionEndResultLotDecisionRequest {
   /*
     ech-name: candidateIdentification

@@ -39,14 +39,6 @@ message ProtocolExport {
   google.protobuf.Timestamp started = 7;
 }
 
-message ProtocolExportStateChange {
-  string protocol_export_id = 1;
-  string export_template_id = 2;
-  ProtocolExportState new_state = 3;
-  string file_name = 6;
-  google.protobuf.Timestamp started = 7;
-}
-
 message ResultExportConfigurations {
   repeated ResultExportConfiguration configurations = 1;
 }

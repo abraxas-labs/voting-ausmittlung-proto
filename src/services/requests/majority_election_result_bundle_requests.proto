@@ -262,14 +262,3 @@ message MajorityElectionResultBundleCorrectionFinishedRequest {
   */
   string bundle_id = 1 [(validation.v1.rules).string.guid = true];
 }
-
-/*
-  description: Änderungen für Bund von Majorzwahlergebnis anfragen.
-*/
-message GetMajorityElectionResultBundleChangesRequest {
-  /*
-    validations: is-guid
-    description: Eindeutige, technische Identifikation des Wahlergebnisses.
-  */
-  string election_result_id = 1 [(validation.v1.rules).string.guid = true];
-}

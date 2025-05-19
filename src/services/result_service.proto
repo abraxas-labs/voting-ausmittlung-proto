@@ -16,7 +16,6 @@ service ResultService {
   rpc GetOverview(requests.GetResultOverviewRequest) returns (models.ResultOverview);
   rpc GetList(requests.GetResultListRequest) returns (models.ResultList);
   rpc GetResultComments(requests.GetResultCommentsRequest) returns (models.Comments);
-  rpc GetStateChanges(requests.GetResultStateChangesRequest) returns (stream models.ResultStateChange);
   rpc ResetCountingCircleResults(requests.ResetCountingCircleResultsRequest) returns (google.protobuf.Empty);
 
   rpc ValidateCountingCircleResults(requests.ValidateCountingCircleResultsRequest) returns (models.ValidationSummaries);

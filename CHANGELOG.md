@@ -1,4 +1,4 @@
-# ✨ Changelog (`v1.138.0`)
+# ✨ Changelog (`v1.144.0`)
 
 All notable changes to this project will be documented in this file.
 
@@ -8,11 +8,47 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Version Info
 
 ```text
-This version -------- v1.138.0
-Previous version ---- v1.136.0
+This version -------- v1.144.0
+Previous version ---- v1.138.0
 Initial version ----- v1.79.2
 Total commits ------- 6
 ```
+
+## [v1.144.0] - 2025-04-14
+
+### 🔄 Changed
+
+- secondary election candidate end result state dependent of primary election result
+
+## [v1.143.0] - 2025-03-25
+
+### 🆕 Added
+
+- add counting circle details and ballot results to result overview
+
+## [v1.142.0] - 2025-03-07
+
+### 🔄 Changed
+
+- generic event watcher
+
+## [v1.141.0] - 2025-03-05
+
+### 🆕 Added
+
+- support eCounting write-ins
+
+## [v1.140.0] - 2025-02-26
+
+### 🔄 Changed
+
+- ecounting import
+
+## [v1.139.0] - 2025-02-10
+
+### 🆕 Added
+
+- add political business result bundle logs
 
 ## [v1.138.0] - 2024-12-03
 
@@ -259,408 +295,179 @@ patch ci-cd template version, align with new defaults
 
 ## [v1.111.0] - 2024-02-28
 
-### :new: Added
+### 🔄 Changed
 
-- write in mapping changes
-
-## [v1.110.0] - 2024-02-27
-
-### :new: Added
-
-- added invalid ballot write in mapping target
-
-## [v1.109.0] - 2024-02-22
+- secondary election candidate end result state dependent of primary election result
 
 ### 🆕 Added
 
-- add submission finished and audited tentatively endpoint
-
-## [v1.108.0] - 2024-02-19
+- add counting circle details and ballot results to result overview
 
 ### 🆕 Added
 
-- Import ech-0110 count of voters informations
-
-## [v1.107.0] - 2024-02-06
+- support eCounting write-ins
 
 ### 🆕 Added
 
-- Double proportional election mandate algorithms
-
-## [v1.106.0] - 2024-01-30
+- add political business result bundle logs
 
 ### 🆕 Added
 
-- Counting circle electorates
-
-## [v1.105.0] - 2024-01-29
+- add secondary majority election protocols
 
 ### 🆕 Added
 
-- add candidate check digit
-
-### 🆕 Added
-
-- add new zh features flag
-
-### :new: Added
-
-- added permission service
-
-### 🆕 Added
-
-- Add counting machine to counting circle details
-
-### 🆕 Added
-
-- add multiple ballot validation result
+- secondary majority election candidate vote count validation
 
 ### 🔄 Changed
 
-- revert deletion of ResultExportGenerated event
+- fix(VOTING-5094): add secondary majority election calculation
+
+### 🆕 Added
+
+- secondary majority election result validations
+
+### 🔄 Changed
+
+- archived contest list with description and owner
+
+### 🆕 Added
+
+- publish results option on domain of influence
+
+### 🆕 Added
+
+- add reset to submission finished and flag for correction endpoints
+
+### 🔄 Changed
+
+- optional rank in candidate lot decisions
+
+### 🆕 Added
+
+- add proportional election end result list lot decisions
+
+### 🆕 Added
+
+- add has ballot groups
 
 ### ❌ Removed
 
-- remove result export generated event
+- remove validate cc details endpoint
 
 ### 🔄 Changed
 
-- allow empty for second factor transaction id
-
-### 🆕 Added
-
-- add result import changes
-
-### 🆕 Added
-
-- Multiple counting circle results submission finished
-
-### 🔄 Changed
-
-- Make certain contact person fields required
-
-### 🆕 Added
-
-- reset majority election write ins
+- update input validation for person name properties from simple to complex single line text.
 
 ### ❌ Removed
 
-- remove internal description, invalid votes and individual empty ballots allowed from elections
+- remove zh feature flag
 
 ### 🆕 Added
 
-- Added political business export metadata for Seantis token
-
-### 🆕 Added
-
-- add domain of influence canton
-
-### 🆕 Added
-
-- Event signature public key metadata
+- add correction finished and audited tentatively endpoint
 
 ### 🔄 Changed
 
-- Changed event signature models
+- increase max. candidate position for proportional election result ballot from 50 to 100
 
-### 🔄 Changed
+🔄 Changed
 
-- contact person name min length to 1
-
-### 🆕 Added
-
-- add eVoting invalid and accounted ballots for count of voters
+update bug bounty template reference
+patch ci-cd template version, align with new defaults
 
 ### 🆕 Added
 
-- Reset counting circle results in testing phase
+- optional individual candidates on majority elections
 
 ### 🆕 Added
 
-- second factor transaction code
+- add second factor transaction qr code
 
 ### 🆕 Added
 
-- review procedure for vote, majority election and proportional election
-
-### 🔄 Changed
-
-- Proto validation files include in npm package fixed
-
-### 🔄 Changed
-
-- validation rule hardening
-
-### 🔄 Changed
-
-- match integer max value comment and validation
-
-### 🔄 Changed
-
-- define max. numeric limitations for business input validation
-
-### 🆕 Added
-
-- Added proto validators at the requests.
-
-### 🔒 Security
-
-- Define input validation rules for service request models.
-
-### 🔄 Changed
-
-- Export templates should include the political business union id
-
-## [v1.104.0] - 2024-01-29
-
-### 🆕 Added
-
-- add candidate check digit
-
-## [v1.103.0] - 2024-01-16
-
-### 🆕 Added
-
-- add new zh features flag
-
-## [v1.102.0] - 2024-01-11
+- add asynchronous bundle review exports
 
 ### :new: Added
 
-- added permission service
-
-## [v1.101.0] - 2023-12-20
+- added vote type plus ballot and political business sub types
 
 ### 🆕 Added
 
-- Add counting machine to counting circle details
-
-## [v1.100.0] - 2023-12-19
-
-### 🆕 Added
-
-- add multiple ballot validation result
-
-## [v1.99.3] - 2023-08-22
+- explicit election mandate distribution
 
 ### 🔄 Changed
 
-- revert deletion of ResultExportGenerated event
+- end result workflow
 
-## [v1.99.2] - 2023-07-26
+### 🆕 Added
+
+- add partial results to result overview
+
+### 🆕 Added
+
+- add ready for correction timestamp
+
+### 🆕 Added
+
+- add published state to results
+
+### 🆕 Added
+
+- add ballot question type
+
+### 🆕 Added
+
+- double proportional sub apportionment lot decisions
+
+### 🆕 Added
+
+- set multiple bundles to review succeed
+
+### 🔄 Changed
+
+- move canton defaults from doi to contest
 
 ### ❌ Removed
 
-- remove result export generated event
-
-## [v1.99.1] - 2023-07-11
-
-### 🔄 Changed
-
-- allow empty for second factor transaction id
-
-## [v1.99.0] - 2023-06-28
+- remove result overview only owned option
 
 ### 🆕 Added
 
-- add result import changes
-
-## [v1.98.0] - 2023-06-19
+- non cantonal double proportional result
 
 ### 🆕 Added
 
-- Multiple counting circle results submission finished
-
-## [v1.97.0] - 2023-05-31
-
-### 🔄 Changed
-
-- add latest execution timestamp to result export configuration
-
-## [v1.96.2] - 2023-05-31
-
-### 🔄 Changed
-
-- validate that majority elections have atleast one candidate
-
-## [v1.96.1] - 2023-05-26
-
-### 🔄 Changed
-
-- Make certain contact person fields required
-
-## [v1.96.0] - 2023-05-16
+- add state plausibilised disabled canton setting
 
 ### 🆕 Added
 
-- reset majority election write ins
+- add counting circle result state descriptions
 
-## [v1.95.0] - 2023-04-28
+### :new: Added
 
-### 🔄 Changed
-
-- show imported counting circles
-
-## [v1.94.0] - 2023-04-12
-
-### 🔄 Changed
-
-- add counting circle votings cards imported event
-
-## [v1.93.0] - 2023-04-05
-
-### 🔄 Changed
-
-- add e-voting blank and invalid ballots for proportional elections and votes
-
-## [v1.92.0] - 2023-03-30
-
-### 🔄 Changed
-
-- add e-voting blank ballots
-
-## [v1.91.1] - 2023-03-28
-
-### 🔄 Changed
-
-- show correct count of voters information and voting cards on end results
-
-## [v1.91.0] - 2023-03-01
-
-### 🔄 Changed
-
-- protocol export state changes
-
-## [v1.90.0] - 2023-02-28
-
-### 🔄 Changed
-
-- add test counting circles to result import
-
-## [v1.89.0] - 2023-02-23
-
-### 🔄 Changed
-
-- add protocol exports
-
-## [v1.88.0] - 2023-01-30
-
-### 🔄 Changed
-
-- new export templates api
-
-## [v1.87.0] - 2023-01-17
-
-### 🔄 Changed
-
-- manual proportional election end result
-
-## [v1.86.1] - 2023-01-03
+- added partial results
 
 ### ❌ Removed
 
-- remove internal description, invalid votes and individual empty ballots allowed from elections
-
-## [v1.86.0] - 2022-12-22
+- remove unions from election end result
 
 ### 🆕 Added
 
-- Added political business export metadata for Seantis token
-
-## [v1.85.1] - 2022-12-16
+- Cantonal proportional election union results
 
 ### 🆕 Added
 
-- add domain of influence canton
-
-## [v1.85.0] - 2022-11-28
+- add political business unions to end results
 
 ### 🆕 Added
 
-- Event signature public key metadata
-
-### 🔄 Changed
-
-- Changed event signature models
-
-## [v1.84.2] - 2022-11-25
-
-### 🔄 Changed
-
-- contact person name min length to 1
-
-## [v1.84.1] - 2022-11-03
+- add political business unions to result overview
 
 ### 🆕 Added
 
-- add eVoting invalid and accounted ballots for count of voters
-
-## [v1.84.0] - 2022-10-26
+- add monitoring political business overview
 
 ### 🆕 Added
 
-- Reset counting circle results in testing phase
-
-## [v1.83.0] - 2022-09-27
-
-### 🆕 Added
-
-- second factor transaction code
-
-## [v1.82.0] - 2022-09-26
-
-### 🆕 Added
-
-- review procedure for vote, majority election and proportional election
-
-## [v1.81.4] - 2022-09-15
-
-### 🔄 Changed
-
-- Proto validation files include in npm package fixed
-
-## [v1.81.3] - 2022-09-07
-
-### 🔄 Changed
-
-- validation rule hardening
-
-## [v1.81.2] - 2022-08-29
-
-### 🔄 Changed
-
-- match integer max value comment and validation
-
-## [v1.81.1] - 2022-08-29
-
-### 🔄 Changed
-
-- define max. numeric limitations for business input validation
-
-## [v1.81.0] - 2022-08-26
-
-### 🆕 Added
-
-- Added proto validators at the requests.
-
-## [v1.80.0] - 2022-08-17
-
-### 🔒 Security
-
-- Define input validation rules for service request models.
-
-## [v1.79.4] - 2022-06-01
-
-### 🔄 Changed
-
-- Export templates should include the political business union id
-
-## [v1.79.3] - 2022-05-24
-
-### 🔄 Changed
-
-- add event docs
-
-## [v1.79.2] - 2022-05-02
-
-### 🎉 Initial release for Bug Bounty
+- add vote result algorithm popular and counting circle majority

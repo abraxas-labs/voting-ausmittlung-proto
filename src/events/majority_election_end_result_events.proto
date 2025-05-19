@@ -15,6 +15,13 @@ message MajorityElectionEndResultLotDecisionsUpdated {
   repeated data.MajorityElectionEndResultLotDecisionEventData lot_decisions = 4;
 }
 
+message MajorityElectionEndResultSecondaryLotDecisionsUpdated {
+  data.EventInfo event_info = 1;
+  string majority_election_id = 2;
+  string majority_election_end_result_id = 3;
+  repeated data.MajorityElectionEndResultLotDecisionEventData lot_decisions = 4;
+}
+
 message MajorityElectionEndResultFinalized {
   data.EventInfo event_info = 1;
   string majority_election_end_result_id = 2;

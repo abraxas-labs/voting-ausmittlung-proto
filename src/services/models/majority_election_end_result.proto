@@ -32,29 +32,30 @@ message MajorityElectionEndResult {
   repeated MajorityElectionCandidateEndResult candidate_end_results = 9;
   repeated SecondaryMajorityElectionEndResult secondary_majority_election_end_results = 10;
   MajorityElectionResultSubTotal e_voting_sub_total = 11;
-  MajorityElectionResultSubTotal conventional_sub_total = 12;
+  MajorityElectionResultSubTotal e_counting_sub_total = 12;
+  MajorityElectionResultSubTotal conventional_sub_total = 13;
 
   /*
     description: Anzahl vereinzelter Nennungen eines Kandiaten (welcher sich nicht auf der Liste befindet).
   */
-  int32 individual_vote_count = 13;
+  int32 individual_vote_count = 14;
 
   /*
     description: Anzahl leere Zeilen
   */
-  int32 empty_vote_count = 14;
+  int32 empty_vote_count = 15;
 
   /*
     description: Anzahl ungültiger Abstimmungen.
   */
-  int32 invalid_vote_count = 15;
-  int32 total_candidate_vote_count_excl_individual = 16;
-  int32 total_candidate_vote_count_incl_individual = 17;
-  bool finalized = 18;
-  MajorityElectionEndResultCalculation calculation = 19;
+  int32 invalid_vote_count = 16;
+  int32 total_candidate_vote_count_excl_individual = 17;
+  int32 total_candidate_vote_count_incl_individual = 18;
+  bool finalized = 19;
+  MajorityElectionEndResultCalculation calculation = 20;
 
   /* Specifies whether this result only contains some of the counting circle results and not the "full" end result */
-  bool partial_result = 20;
+  bool partial_result = 21;
 }
 
 message MajorityElectionEndResultCalculation {
@@ -68,25 +69,26 @@ message SecondaryMajorityElectionEndResult {
   SecondaryMajorityElection secondary_majority_election = 1;
   repeated MajorityElectionCandidateEndResult candidate_end_results = 2;
   MajorityElectionResultSubTotal e_voting_sub_total = 3;
-  MajorityElectionResultSubTotal conventional_sub_total = 4;
+  MajorityElectionResultSubTotal e_counting_sub_total = 4;
+  MajorityElectionResultSubTotal conventional_sub_total = 5;
 
   /*
     description: Anzahl vereinzelter Nennungen eines Kandiaten (welcher sich nicht auf der Liste befindet).
   */
-  int32 individual_vote_count = 5;
+  int32 individual_vote_count = 6;
 
   /*
     description: Anzahl leere Zeilen
   */
-  int32 empty_vote_count = 6;
+  int32 empty_vote_count = 7;
 
   /*
     description: Anzahl ungültiger Abstimmungen.
   */
-  int32 invalid_vote_count = 7;
-  int32 total_candidate_vote_count_excl_individual = 8;
-  int32 total_candidate_vote_count_incl_individual = 9;
-  MajorityElectionEndResultCalculation calculation = 10;
+  int32 invalid_vote_count = 8;
+  int32 total_candidate_vote_count_excl_individual = 9;
+  int32 total_candidate_vote_count_incl_individual = 10;
+  MajorityElectionEndResultCalculation calculation = 11;
 }
 
 message MajorityElectionCandidateEndResult {
@@ -97,36 +99,57 @@ message MajorityElectionCandidateEndResult {
   */
   int32 vote_count = 2;
   int32 e_voting_vote_count = 3;
-  int32 conventional_vote_count = 4;
+  int32 e_counting_vote_count = 4;
+  int32 conventional_vote_count = 5;
 
   /*
     description: Rang nach Losentscheid
   */
-  int32 rank = 5;
+  int32 rank = 6;
   /*
     description: when a lot decision is made
   */
-  bool lot_decision = 6;
+  bool lot_decision = 7;
   /*
     description: when there are multiple candidate end results with the same vote count
   */
-  bool lot_decision_enabled = 7;
+  bool lot_decision_enabled = 8;
   /*
     description: when a lot decision must be done, ex: rank <= number of mandates
   */
-  bool lot_decision_required = 8;
-  MajorityElectionCandidateEndResultState state = 9;
+  bool lot_decision_required = 9;
+  MajorityElectionCandidateEndResultState state = 10;
 }
 
 enum MajorityElectionCandidateEndResultState {
   MAJORITY_ELECTION_CANDIDATE_END_RESULT_STATE_UNSPECIFIED = 0;
+
+  // Pendent
   MAJORITY_ELECTION_CANDIDATE_END_RESULT_STATE_PENDING = 1;
+
+  // Absolutes Mehr erreicht und gewählt
   MAJORITY_ELECTION_CANDIDATE_END_RESULT_STATE_ABSOLUTE_MAJORITY_AND_ELECTED = 2;
+
+  // Absolutes Mehr erreicht / als überzählig ausgeschieden.
   MAJORITY_ELECTION_CANDIDATE_END_RESULT_STATE_ABSOLUTE_MAJORITY_AND_NOT_ELECTED = 3;
+
+  // Absolutes Mehr verpasst / nicht gewählt.
   MAJORITY_ELECTION_CANDIDATE_END_RESULT_STATE_NO_ABSOLUTE_MAJORITY_AND_NOT_ELECTED_BUT_RANK_OK = 4;
+
+  // Gewählt.
   MAJORITY_ELECTION_CANDIDATE_END_RESULT_STATE_ELECTED = 5;
+
+  // Nicht gewählt.
   MAJORITY_ELECTION_CANDIDATE_END_RESULT_STATE_NOT_ELECTED = 6;
+
+  // Nicht wählbar (Vereinzelte).
   MAJORITY_ELECTION_CANDIDATE_END_RESULT_STATE_NOT_ELIGIBLE = 7;
+
+  // Hauptwahl verpasst / nicht wählbar.
+  MAJORITY_ELECTION_CANDIDATE_END_RESULT_STATE_NOT_ELECTED_IN_PRIMARY_ELECTION_NOT_ELIGIBLE = 8;
+
+  // Hauptwahl überzählig / nicht wählbar.
+  MAJORITY_ELECTION_CANDIDATE_END_RESULT_STATE_ABSOLUTE_MAJORITY_AND_NOT_ELECTED_IN_PRIMARY_ELECTION_NOT_ELIGIBLE = 9;
 }
 
 message MajorityElectionEndResultAvailableLotDecisions {

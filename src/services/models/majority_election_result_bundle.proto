@@ -8,6 +8,7 @@ package abraxas.voting.ausmittlung.services.v1.models;
 import "models/ballot_bundle.proto";
 import "models/export.proto";
 import "models/majority_election_result.proto";
+import "models/political_business_result_bundle.proto";
 import "models/user.proto";
 
 message MajorityElectionResultBundles {
@@ -31,6 +32,7 @@ message MajorityElectionResultBundle {
   */
   repeated int32 ballot_numbers_to_review = 7;
   ProtocolExport protocol_export = 8;
+  repeated PoliticalBusinessResultBundleLog logs = 9;
 }
 
 message MajorityElectionResultBallot {

@@ -14,6 +14,7 @@ import "models/count_of_voters.proto";
 import "models/political_business.proto";
 import "models/political_business_union.proto";
 import "models/user.proto";
+import "models/vote_result.proto";
 import "shared/voter_type.proto";
 import "models/voting_cards.proto";
 
@@ -27,7 +28,7 @@ message ResultOverview {
 }
 
 message ResultOverviewCountingCircleResults {
-  CountingCircle counting_circle = 1;
+  ResultOverviewCountingCircleWithDetails counting_circle = 1;
   repeated ResultOverviewCountingCircleResult results = 2;
 }
 
@@ -42,6 +43,12 @@ message ResultOverviewCountingCircleResult {
   PoliticalBusinessNullableCountOfVoters count_of_voters = 8;
   bool published = 9;
   google.protobuf.Timestamp ready_for_correction_timestamp = 10;
+  repeated BallotResult ballot_results = 11;
+}
+
+message ResultOverviewCountingCircleWithDetails {
+  CountingCircle counting_circle = 1;
+  ContestCountingCircleDetails details = 2;
 }
 
 message ResultList {
@@ -59,8 +66,10 @@ message ResultList {
   string contest_counting_circle_contact_person_id = 8;
   bool must_update_contact_persons = 9;
   bool has_unmapped_e_voting_write_ins = 10;
-  repeated VotingCardChannel enabled_voting_card_channels = 11;
-  ContestCountingCircleElectorateSummary electorate_summary = 12;
+  bool has_unmapped_e_counting_write_ins = 11;
+  bool has_unmapped_write_ins = 12;
+  repeated VotingCardChannel enabled_voting_card_channels = 13;
+  ContestCountingCircleElectorateSummary electorate_summary = 14;
 }
 
 message ResultListResult {
@@ -108,13 +117,4 @@ message ResultImportIgnoredCountingCircle {
   // which VOTING Ausmittlung needs to ignore during the import process.
   // If the ignored counting circle is not a "test counting circle", something went wrong.
   bool is_test_counting_circle = 3;
-}
-
-message ResultStateChange {
-  string id = 1;
-  CountingCircleResultState new_state = 2;
-}
-
-message ResultImportChange {
-  bool has_write_ins = 1;
 }

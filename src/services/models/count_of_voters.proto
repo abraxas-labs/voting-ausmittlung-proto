@@ -53,72 +53,9 @@ message PoliticalBusinessNullableCountOfVoters {
     description: Stimmbeteiligung: total_received_ballots (Alle eingegangenen Stimmzettel) / total_count_of_voters (Anz. Stimmberechtigter)
   */
   double voter_participation = 1;
-
-  /*
-    ech-name: countOfReceivedBallotsTotal
-    ech-length:
-    ech-type:
-    description: Anzahl eingegangene Wahlzettel Total (zwingend). Channel Papier, Urne, Brief.
-    appendix: Anz. erhaltener Stimm-/Wahlzettel via konventionell
-  */
-  google.protobuf.Int32Value conventional_received_ballots = 2;
-
-   /*
-    ech-name: countOfUnaccountedInvalidBallots
-    ech-length:
-    ech-type:
-    description: Anzahl ausser Betracht fallende ungültige Wahlzettel (zwingend). Channel Papier, Urne, Brief.
-    appendix: Anz. invalider Stimm-/Wahlzettel via konventionell
-  */
-  google.protobuf.Int32Value conventional_invalid_ballots = 3;
-
-  /*
-    ech-name: countOfUnaccountedBlankBallots
-    ech-length:
-    ech-type:
-    description: Anzahl ausser Betracht fallende leere Wahlzettel (zwingend). Channel Papier, Urne, Brief.
-    appendix: Anz. leerer Stimm-/Wahlzettel via konventionell
-  */
-  google.protobuf.Int32Value conventional_blank_ballots = 4;
-
-  /*
-    ech-name: countOfAccountedBallots
-    ech-length:
-    ech-type:
-    description: Anzahl in Betracht fallende Wahlzettel (zwingend). Channel Papier, Urne, Brief.
-    appendix: Anz. in betracht fallender Stimm-/Wahlzettel via konventionell
-  */
-  google.protobuf.Int32Value conventional_accounted_ballots = 5;
-
-  /*
-    description: Anzahl eingegangene Wahlzettel Total (zwingend). Channel E-Voting.
-    appendix: Anz. erhaltener Stimm-/Wahlzettel via E-Voting
-  */
-  int32 e_voting_received_ballots = 6;
-
-  /*
-    ech-name: countOfUnaccountedInvalidBallots
-    ech-length:
-    ech-type:
-    description: Anzahl ausser Betracht fallende ungültige Wahlzettel (zwingend). Channel E-Voting.
-    appendix: Anz. invalider Stimm-/Wahlzettel via E-Voting
-  */
-  int32 e_voting_invalid_ballots = 7;
-
-  /*
-    description: Anzahl ausser Betracht fallende leere Wahlzettel. Channel E-Voting.
-    appendix: Anz. leerer Stimm-/Wahlzettel via E-Voting
-  */
-  int32 e_voting_blank_ballots = 8;
-
-  /*
-    ech-name: countOfAccountedBallots
-    ech-length:
-    ech-type:
-    description: Anzahl in Betracht fallende Wahlzettel (zwingend). Channel E-Voting.
-    appendix: Anz. in Betracht fallender Stimm-/Wahlzettel via E-Voting
-  */
-  int32 e_voting_accounted_ballots = 9;
+  PoliticalBusinessNullableCountOfVotersSubTotal conventional_sub_total = 2;
+  PoliticalBusinessCountOfVotersSubTotal e_voting_sub_total = 3;
+  PoliticalBusinessCountOfVotersSubTotal e_counting_sub_total = 4;
 
   /*
     ech-name: countOfReceivedBallotsTotal
@@ -127,7 +64,7 @@ message PoliticalBusinessNullableCountOfVoters {
     description: Anzahl eingegangene Wahlzettel Total (zwingend). Channel ALLE
     appendix: Total erhaltener Stimm-/Wahlzettel
   */
-  int32 total_received_ballots = 10;
+  int32 total_received_ballots = 5;
 
   /*
     ech-name: countOfAccountedBallots
@@ -136,7 +73,7 @@ message PoliticalBusinessNullableCountOfVoters {
     description: Anzahl in Betracht fallende Wahlzettel (zwingend). Channel ALLE
     appendix: Total in betracht fallender Stimm-/Wahlzettel
   */
-  int32 total_accounted_ballots = 11;
+  int32 total_accounted_ballots = 6;
 
   /*
     ech-name: countOfUnaccountedBlankBallots
@@ -145,7 +82,7 @@ message PoliticalBusinessNullableCountOfVoters {
     description: Anzahl ausser Betracht fallende leere/ungültige Wahlzettel (zwingend). Channel ALLE.
     appendix: Total ausser betracht fallender Stimm-/Wahlzettel
   */
-  int32 total_unaccounted_ballots = 12;
+  int32 total_unaccounted_ballots = 7;
 
   /*
     ech-name: CountOfUnaccountedInvalidBallots
@@ -154,13 +91,13 @@ message PoliticalBusinessNullableCountOfVoters {
     description:  Anzahl ausser Betracht fallende ungültige Wahlzettel (zwingend). Channel ALLE
     appendix: Total invalider Stimm-/Wahlzettel
   */
-  int32 total_invalid_ballots = 13;
+  int32 total_invalid_ballots = 8;
 
   /*
     description:  Anzahl ausser Betracht fallende leere Wahlzettel (zwingend). Channel ALLE
     appendix: Total leere Stimm-/Wahlzettel
   */
-  int32 total_blank_ballots = 14;
+  int32 total_blank_ballots = 9;
 }
 
 message PoliticalBusinessCountOfVoters {
@@ -169,65 +106,9 @@ message PoliticalBusinessCountOfVoters {
   */
   double voter_participation = 1;
 
-  /*
-    ech-name: countOfReceivedBallotsTotal
-    ech-length:
-    ech-type:
-    description: Anzahl eingegangene Wahlzettel Total (zwingend). Channel Papier, Urne, Brief.
-    appendix: Anz. erhaltener Stimm-/Wahlzettel via konventionell
-  */
-  int32 conventional_received_ballots = 2;
-
-  /*
-    ech-name: countOfUnaccountedInvalidBallots
-    ech-length:
-    ech-type:
-    description: Anzahl ausser Betracht fallende ungültige Wahlzettel (zwingend). Channel Papier, Urne, Brief.
-    appendix: Anz. invalider Stimm-/Wahlzettel via konventionell
-  */
-  int32 conventional_invalid_ballots = 3;
-
-  /*
-    ech-name: countOfUnaccountedBlankBallots
-    ech-length:
-    ech-type:
-    description: Anzahl ausser Betracht fallende leere Wahlzettel (zwingend). Channel Papier, Urne, Brief.
-    appendix: Anz. leerer Stimm-/Wahlzettel via konventionell
-  */
-  int32 conventional_blank_ballots = 4;
-
-  /*
-    ech-name: countOfAccountedBallots
-    ech-length:
-    ech-type:
-    description: Anzahl in Betracht fallende Wahlzettel (zwingend). Channel Papier, Urne, Brief.
-    appendix: Anz. in betracht fallender Stimm-/Wahlzettel via konventionell
-  */
-  int32 conventional_accounted_ballots = 5;
-  
-  /*
-    description: Anzahl eingegangene Wahlzettel Total (zwingend). Channel E-Voting.
-    appendix: Anz. erhaltener Stimm-/Wahlzettel via E-Voting
-  */
-  int32 e_voting_received_ballots = 6;
-
-  /*
-    description: Anzahl ausser Betracht fallende ungültige Wahlzettel (zwingend). Channel E-Voting.
-    appendix: Anz. invalider Stimm-/Wahlzettel via E-Voting
-  */
-  int32 e_voting_invalid_ballots = 7;
-
-  /*
-    description: Anzahl ausser Betracht fallende leere Wahlzettel. Channel E-Voting.
-    appendix: Anz. leerer Stimm-/Wahlzettel via E-Voting
-  */
-  int32 e_voting_blank_ballots = 8;
-
-  /*
-    description: Anzahl in Betracht fallende Wahlzettel (zwingend). Channel E-Voting.
-    appendix: Anz. in Betracht fallender Stimm-/Wahlzettel via E-Voting
-  */
-  int32 e_voting_accounted_ballots = 9;
+  PoliticalBusinessCountOfVotersSubTotal conventional_sub_total = 2;
+  PoliticalBusinessCountOfVotersSubTotal e_voting_sub_total = 3;
+  PoliticalBusinessCountOfVotersSubTotal e_counting_sub_total = 4;
 
   /*
     ech-name: countOfReceivedBallotsTotal
@@ -236,7 +117,7 @@ message PoliticalBusinessCountOfVoters {
     description: Anzahl eingegangene Wahlzettel Total (zwingend). Channel ALLE
     appendix: Total erhaltener Stimm-/Wahlzettel
   */
-  int32 total_received_ballots = 10;
+  int32 total_received_ballots = 5;
 
   /*
     ech-name: countOfAccountedBallots
@@ -245,7 +126,7 @@ message PoliticalBusinessCountOfVoters {
     description: Anzahl in Betracht fallende Wahlzettel (zwingend). Channel ALLE
     appendix: Total in betracht fallender Stimm-/Wahlzettel
   */
-  int32 total_accounted_ballots = 11;
+  int32 total_accounted_ballots = 6;
 
   /*
     ech-name: countOfUnaccountedBlankBallots
@@ -254,7 +135,7 @@ message PoliticalBusinessCountOfVoters {
     description: Anzahl ausser Betracht fallende leere Wahlzettel (zwingend). Channel ALLE.
     appendix: Total ausser betracht fallender Stimm-/Wahlzettel
   */
-  int32 total_unaccounted_ballots = 12;
+  int32 total_unaccounted_ballots = 7;
 
   /*
    ech-name: CountOfUnaccountedInvalidBallots
@@ -263,11 +144,88 @@ message PoliticalBusinessCountOfVoters {
    description:  Anzahl ausser Betracht fallende ungültige Wahlzettel (zwingend). Channel ALLE
    appendix: Total invalider Stimm-/Wahlzettel
  */
-  int32 total_invalid_ballots = 13;
+  int32 total_invalid_ballots = 8;
 
   /*
     description:  Anzahl ausser Betracht fallende leere Wahlzettel (zwingend). Channel ALLE
     appendix: Total leere Stimm-/Wahlzettel
   */
-  int32 total_blank_ballots = 14;
+  int32 total_blank_ballots = 9;
+}
+
+
+message PoliticalBusinessNullableCountOfVotersSubTotal {
+  /*
+    ech-name: countOfReceivedBallotsTotal
+    ech-length:
+    ech-type:
+    description: Anzahl eingegangene Wahlzettel Total.
+    appendix: Anz. erhaltener Stimm-/Wahlzettel
+  */
+  google.protobuf.Int32Value received_ballots = 1;
+
+  /*
+    ech-name: countOfUnaccountedInvalidBallots
+    ech-length:
+    ech-type:
+    description: Anzahl ausser Betracht fallende ungültige Wahlzettel.
+    appendix: Anz. invalider Stimm-/Wahlzettel
+  */
+  google.protobuf.Int32Value invalid_ballots = 2;
+
+  /*
+    ech-name: countOfUnaccountedBlankBallots
+    ech-length:
+    ech-type:
+    description: Anzahl ausser Betracht fallende leere Wahlzettel.
+    appendix: Anz. leerer Stimm-/Wahlzettel.
+  */
+  google.protobuf.Int32Value blank_ballots = 3;
+
+  /*
+    ech-name: countOfAccountedBallots
+    ech-length:
+    ech-type:
+    description: Anzahl in Betracht fallende Wahlzettel.
+    appendix: Anz. in betracht fallender Stimm-/Wahlzettel.
+  */
+  google.protobuf.Int32Value accounted_ballots = 4;
+}
+
+message PoliticalBusinessCountOfVotersSubTotal {
+  /*
+    ech-name: countOfReceivedBallotsTotal
+    ech-length:
+    ech-type:
+    description: Anzahl eingegangene Wahlzettel Total (zwingend).
+    appendix: Anz. erhaltener Stimm-/Wahlzettel
+  */
+  int32 received_ballots = 1;
+
+  /*
+    ech-name: countOfUnaccountedInvalidBallots
+    ech-length:
+    ech-type:
+    description: Anzahl ausser Betracht fallende ungültige Wahlzettel (zwingend).
+    appendix: Anz. invalider Stimm-/Wahlzettel
+  */
+  int32 invalid_ballots = 2;
+
+  /*
+    ech-name: countOfUnaccountedBlankBallots
+    ech-length:
+    ech-type:
+    description: Anzahl ausser Betracht fallende leere Wahlzettel (zwingend).
+    appendix: Anz. leerer Stimm-/Wahlzettel.
+  */
+  int32 blank_ballots = 3;
+
+  /*
+    ech-name: countOfAccountedBallots
+    ech-length:
+    ech-type:
+    description: Anzahl in Betracht fallende Wahlzettel (zwingend).
+    appendix: Anz. in betracht fallender Stimm-/Wahlzettel.
+  */
+  int32 accounted_ballots = 4;
 }

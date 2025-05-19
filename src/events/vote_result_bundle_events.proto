@@ -20,56 +20,64 @@ message VoteResultBundleCreated {
 
 message VoteResultBundleDeleted {
   data.EventInfo event_info = 1;
-  string bundle_id = 2;
+  string vote_result_id = 2;
+  string bundle_id = 3;
 }
 
 message VoteResultBundleReviewSucceeded {
   data.EventInfo event_info = 1;
-  string bundle_id = 2;
+  string vote_result_id = 2;
+  string bundle_id = 3;
 }
 
 message VoteResultBundleReviewRejected {
   data.EventInfo event_info = 1;
-  string bundle_id = 2;
+  string vote_result_id = 2;
+  string bundle_id = 3;
 }
 
 message VoteResultBallotCreated {
   data.EventInfo event_info = 1;
   string bundle_id = 2;
-  string ballot_result_id = 3;
-  int32 ballot_number = 4;
-  repeated data.VoteResultBallotUpdatedQuestionAnswerEventData question_answers = 5;
-  repeated data.VoteResultBallotUpdatedTieBreakQuestionAnswerEventData tie_break_question_answers = 6;
+  string vote_result_id = 3;
+  string ballot_result_id = 4;
+  int32 ballot_number = 5;
+  repeated data.VoteResultBallotUpdatedQuestionAnswerEventData question_answers = 6;
+  repeated data.VoteResultBallotUpdatedTieBreakQuestionAnswerEventData tie_break_question_answers = 7;
 }
 
 message VoteResultBallotUpdated {
   data.EventInfo event_info = 1;
   string bundle_id = 2;
-  string ballot_result_id = 3;
-  int32 ballot_number = 4;
-  repeated data.VoteResultBallotUpdatedQuestionAnswerEventData question_answers = 5;
-  repeated data.VoteResultBallotUpdatedTieBreakQuestionAnswerEventData tie_break_question_answers = 6;
+  string vote_result_id = 3;
+  string ballot_result_id = 4;
+  int32 ballot_number = 5;
+  repeated data.VoteResultBallotUpdatedQuestionAnswerEventData question_answers = 6;
+  repeated data.VoteResultBallotUpdatedTieBreakQuestionAnswerEventData tie_break_question_answers = 7;
 }
 
 message VoteResultBallotDeleted {
   data.EventInfo event_info = 1;
   string bundle_id = 2;
-  string ballot_result_id = 3;
-  int32 ballot_number = 4;
+  string vote_result_id = 3;
+  string ballot_result_id = 4;
+  int32 ballot_number = 5;
 }
 
 message VoteResultBundleSubmissionFinished {
   data.EventInfo event_info = 1;
   string bundle_id = 2;
-  string ballot_result_id = 3;
-  repeated int32 sample_ballot_numbers = 4;
+  string vote_result_id = 3;
+  string ballot_result_id = 4;
+  repeated int32 sample_ballot_numbers = 5;
 }
 
 message VoteResultBundleCorrectionFinished {
   data.EventInfo event_info = 1;
   string bundle_id = 2;
-  string ballot_result_id = 3;
-  repeated int32 sample_ballot_numbers = 4;
+  string vote_result_id = 3;
+  string ballot_result_id = 4;
+  repeated int32 sample_ballot_numbers = 5;
 }
 
 message VoteResultBundleNumberEntered {

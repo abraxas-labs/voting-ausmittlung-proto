@@ -30,5 +30,7 @@ message ContestCountingCircleDetails {
   CountOfVotersInformation count_of_voters_information = 3;
   repeated VotingCardResultDetail voting_cards = 4;
   bool e_voting = 5;
-  shared.v1.CountingMachine counting_machine = 6;
+  bool e_counting = 6;
+  bool e_counting_results_imported = 7;
+  shared.v1.CountingMachine counting_machine = 8;
 }

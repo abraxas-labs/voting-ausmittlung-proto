@@ -7,21 +7,19 @@ package abraxas.voting.ausmittlung.services.v1.models;
 
 import "models/political_business.proto";
 import "shared/majority_election_write_in.proto";
+import "shared/import.proto";
 
 message MajorityElectionContestWriteInMappings {
-  /*
-    validations: is-guid
-    description: Eindeutige, technische Identifikation des Imports.
-  */
-  string import_id = 1;
-  repeated MajorityElectionWriteInMappings election_write_in_mappings = 2;
+  repeated MajorityElectionWriteInMappings write_in_mappings = 1;
 }
 
 message MajorityElectionWriteInMappings {
-  SimplePoliticalBusiness election = 1;
-  bool invalid_votes = 2;
-  bool individual_votes = 3;
-  repeated MajorityElectionWriteInMapping write_in_mappings = 4;
+  string import_id = 1;
+  shared.v1.ResultImportType import_type = 2;
+  SimplePoliticalBusiness election = 3;
+  bool invalid_votes = 4;
+  bool individual_votes = 5;
+  repeated MajorityElectionWriteInMapping write_in_mappings = 6;
 }
 
 message MajorityElectionWriteInMapping {
@@ -42,15 +40,4 @@ message MajorityElectionWriteInMapping {
     description: Eindeutige, technische Identifikation des Kandidaten.
   */
   string candidate_id = 5;
-}
-
-message MajorityElectionWriteInMappingsChange {
-  string result_id = 1;
-  bool is_reset = 2;
-
-  /* Count of duplicates candidates on the same ballot, which were then mapped to empty/invalid positions */
-  int32 duplicated_candidates = 3;
-
-  /* Count of ballots that were mapped to invalid, since the ballot was empty after write ins mapping */
-  int32 invalid_due_to_empty_ballot = 4;
 }

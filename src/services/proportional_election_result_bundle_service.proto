@@ -23,5 +23,4 @@ service ProportionalElectionResultBundleService {
   rpc BundleCorrectionFinished(requests.ProportionalElectionResultBundleCorrectionFinishedRequest) returns (google.protobuf.Empty);
   rpc RejectBundleReview(requests.RejectProportionalElectionBundleReviewRequest) returns (google.protobuf.Empty);
   rpc SucceedBundleReview(requests.SucceedProportionalElectionBundleReviewRequest) returns (google.protobuf.Empty);
-  rpc GetBundleChanges(requests.GetProportionalElectionResultBundleChangesRequest) returns (stream models.ProportionalElectionResultBundle);
 }

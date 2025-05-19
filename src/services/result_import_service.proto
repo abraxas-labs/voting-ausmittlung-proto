@@ -11,13 +11,13 @@ import "models/results.proto";
 import "requests/result_import_requests.proto";
 
 service ResultImportService {
-  rpc ListImports(requests.ListResultImportsRequest) returns (models.ResultImports);
-  rpc DeleteImportData(requests.DeleteResultImportDataRequest) returns (google.protobuf.Empty);
+  rpc ListEVotingImports(requests.ListEVotingResultImportsRequest) returns (models.ResultImports);
+  rpc DeleteEVotingImportData(requests.DeleteEVotingResultImportDataRequest) returns (google.protobuf.Empty);
+
+  rpc ListECountingImports(requests.ListECountingResultImportsRequest) returns (models.ResultImports);
+  rpc DeleteECountingImportData(requests.DeleteECountingResultImportDataRequest) returns (google.protobuf.Empty);
 
   rpc GetMajorityElectionWriteInMappings(requests.GetMajorityElectionWriteInMappingsRequest) returns (models.MajorityElectionContestWriteInMappings);
   rpc MapMajorityElectionWriteIns(requests.MapMajorityElectionWriteInsRequest) returns (google.protobuf.Empty);
   rpc ResetMajorityElectionWriteIns(requests.ResetMajorityElectionWriteInMappingsRequest) returns (google.protobuf.Empty);
-  rpc GetMajorityElectionWriteInMappingChanges(requests.GetMajorityElectionWriteInMappingChangesRequest) returns (stream models.MajorityElectionWriteInMappingsChange);
-
-  rpc GetImportChanges(requests.GetResultImportChangesRequest) returns (stream models.ResultImportChange);
 }

@@ -34,6 +34,8 @@ message CountingCircle {
   ContactPerson contact_person_during_event = 5;
   bool contact_person_same_during_event_as_after = 6;
   ContactPerson contact_person_after_event = 7;
+
+  bool e_counting = 8;
 }
 
 message Authority {

@@ -42,27 +42,29 @@ message BallotEndResult {
 message BallotQuestionEndResult {
   BallotQuestion question = 1;
   BallotQuestionResultSubTotal e_voting_sub_total = 2;
-  BallotQuestionResultSubTotal conventional_sub_total = 3;
-  int32 total_count_of_answer_yes = 4;
-  int32 total_count_of_answer_no = 5;
-  int32 total_count_of_answer_unspecified = 6;
-  int32 count_of_counting_circle_yes = 7;
-  int32 count_of_counting_circle_no = 8;
-  bool has_counting_circle_majority = 9;
-  bool has_counting_circle_unanimity = 10;
-  bool accepted = 11;
+  BallotQuestionResultSubTotal e_counting_sub_total = 3;
+  BallotQuestionResultSubTotal conventional_sub_total = 4;
+  int32 total_count_of_answer_yes = 5;
+  int32 total_count_of_answer_no = 6;
+  int32 total_count_of_answer_unspecified = 7;
+  int32 count_of_counting_circle_yes = 9;
+  int32 count_of_counting_circle_no = 10;
+  bool has_counting_circle_majority = 11;
+  bool has_counting_circle_unanimity = 12;
+  bool accepted = 13;
 }
 
 message TieBreakQuestionEndResult {
   TieBreakQuestion question = 1;
   TieBreakQuestionResultSubTotal e_voting_sub_total = 2;
-  TieBreakQuestionResultSubTotal conventional_sub_total = 3;
-  int32 total_count_of_answer_q1 = 4;
-  int32 total_count_of_answer_q2 = 5;
-  int32 total_count_of_answer_unspecified = 6;
-  int32 count_of_counting_circle_q1 = 7;
-  int32 count_of_counting_circle_q2 = 8;
-  bool has_counting_circle_q1_majority = 9;
-  bool has_counting_circle_q2_majority = 10;
-  bool q1_accepted = 11;
+  TieBreakQuestionResultSubTotal e_counting_sub_total = 3;
+  TieBreakQuestionResultSubTotal conventional_sub_total = 4;
+  int32 total_count_of_answer_q1 = 5;
+  int32 total_count_of_answer_q2 = 6;
+  int32 total_count_of_answer_unspecified = 7;
+  int32 count_of_counting_circle_q1 = 8;
+  int32 count_of_counting_circle_q2 = 9;
+  bool has_counting_circle_q1_majority = 10;
+  bool has_counting_circle_q2_majority = 11;
+  bool q1_accepted = 12;
 }

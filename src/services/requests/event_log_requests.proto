@@ -1,0 +1,34 @@
+// (c) Copyright by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.services.v1.requests;
+
+import "rules/rules.proto";
+
+/*
+  description: Events beobachten
+*/
+message WatchEventsRequest {
+  string contest_id = 1 [(validation.v1.rules).string.guid = true];
+  string counting_circle_id = 2 [(validation.v1.rules).string = { guid: true, allow_empty: true}];
+
+  /* 
+   * Filters are applied with an OR conjunction.
+   * The idea is that a client can have one open connection,
+   * but watch for as many views as needed.
+   */
+  repeated WatchEventsRequestFilter filters = 3;
+}
+
+message WatchEventsRequestFilter {
+  /* an identifier provided by the client to match returned events to a filter */
+  string id = 1;
+  /* the type of events, e.g. ['abraxas.voting.ausmittlung.events.v1.MajorityElectionResultSubmissionStarted'], required */
+  repeated string types = 2;
+  /* political business id to filter events for, optional */
+  string political_business_id = 3 [(validation.v1.rules).string = { guid: true, allow_empty: true}];
+  /* political business result id to filter events for, optional */
+  string political_business_result_id = 4 [(validation.v1.rules).string = { guid: true, allow_empty: true}];
+}

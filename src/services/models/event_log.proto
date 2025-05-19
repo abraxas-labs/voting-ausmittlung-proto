@@ -1,0 +1,64 @@
+// (c) Copyright by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.services.v1.models;
+
+import "models/political_business_result_bundle.proto";
+import "google/protobuf/timestamp.proto";
+import "shared/import.proto";
+import "models/export.proto";
+
+message Event {
+  /* a unique client provided identifier of the filter, this event matched */
+  string filter_id = 1;
+  /* the type of event e.g. abraxas.voting.basis.events.v1.ContestCreated */
+  string type = 2;
+  /* the timestamp of the event */
+  google.protobuf.Timestamp timestamp = 3;
+  /* the id of the aggregate the event was appended to */
+  string aggregate_id = 4;
+  /* the id of the related contest of this event or empty string if not related to a contest or if the data was not available in the event */
+  string contest_id = 5;
+  /* the id of the related political business of this event or empty string if not related to a political business or if the data was not available in the event */
+  string political_business_id = 6;
+  /* the id of the related political business bundle of this event or empty string if not related to a political business or if the data was not available in the event */
+  string political_business_bundle_id = 7;
+  /* the id of the targeted entity by this event, e.g. the id of the proportional election list for a ProportionalElectionListCreated event */
+  string entity_id = 8;
+  /* details of the event */
+  EventDetails data = 9;
+}
+  
+message EventDetails {
+  oneof data {
+    PoliticalBusinessResultBundleLog bundle_log = 1;
+    ResultImportCountingCircleCompletedEventDetails counting_circle_import_completed = 2;
+    WriteInsMappedEventDetails write_ins_mapped = 3;
+    ProtocolExportStateChangeEventDetails protocol_export_state_change = 4;
+  }
+}
+
+message ResultImportCountingCircleCompletedEventDetails {
+  shared.v1.ResultImportType import_type = 1;
+  bool has_write_ins = 2;
+}
+
+message WriteInsMappedEventDetails {
+  shared.v1.ResultImportType import_type = 1;
+  string result_id = 2;
+
+  /* Count of duplicates candidates on the same ballot, which were then mapped to empty/invalid positions */
+  int32 duplicated_candidates = 3;
+
+  /* Count of ballots that were mapped to invalid, since the ballot was empty after write ins mapping */
+  int32 invalid_due_to_empty_ballot = 4;
+}
+
+message ProtocolExportStateChangeEventDetails {
+  string export_template_id = 1;
+  string protocol_export_id = 2;
+  string file_name = 3;
+  ProtocolExportState new_state = 4;
+}

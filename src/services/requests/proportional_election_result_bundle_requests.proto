@@ -192,11 +192,3 @@ message ProportionalElectionResultBundleCorrectionFinishedRequest {
   */
   string bundle_id = 1 [(validation.v1.rules).string.guid = true];
 }
-
-message GetProportionalElectionResultBundleChangesRequest {
-  /*
-    validations: is-guid
-    description: Eindeutige, technische Identifikation des Wahlergebnisses.
-  */
-  string election_result_id = 1 [(validation.v1.rules).string.guid = true];
-}

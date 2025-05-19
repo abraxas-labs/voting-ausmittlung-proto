@@ -1,0 +1,13 @@
+// (c) Copyright by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.services.v1;
+
+import "models/event_log.proto";
+import "requests/event_log_requests.proto";
+
+service EventLogService {
+    rpc Watch(requests.WatchEventsRequest) returns (stream models.Event);
+}

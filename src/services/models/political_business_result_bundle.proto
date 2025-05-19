@@ -1,0 +1,16 @@
+// (c) Copyright by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.services.v1.models;
+
+import "models/ballot_bundle.proto";
+import "models/user.proto";
+import "google/protobuf/timestamp.proto";
+
+message PoliticalBusinessResultBundleLog {
+  User user = 1;
+  google.protobuf.Timestamp timestamp = 2;
+  BallotBundleState state = 3;
+}

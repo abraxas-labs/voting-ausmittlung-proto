@@ -20,17 +20,20 @@ message ProportionalElectionResultBundleCreated {
 
 message ProportionalElectionResultBundleDeleted {
   data.EventInfo event_info = 1;
-  string bundle_id = 2;
+  string election_result_id = 2;
+  string bundle_id = 3;
 }
 
 message ProportionalElectionResultBundleReviewSucceeded {
   data.EventInfo event_info = 1;
-  string bundle_id = 2;
+  string election_result_id = 2;
+  string bundle_id = 3;
 }
 
 message ProportionalElectionResultBundleReviewRejected {
   data.EventInfo event_info = 1;
-  string bundle_id = 2;
+  string election_result_id = 2;
+  string bundle_id = 3;
 }
 
 message ProportionalElectionResultBallotCreated {

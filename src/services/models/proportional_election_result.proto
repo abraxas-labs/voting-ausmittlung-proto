@@ -25,38 +25,39 @@ message ProportionalElectionResult {
   bool all_bundles_reviewed_or_deleted = 9;
   CountingCircle counting_circle = 10;
   ProportionalElectionResultSubTotal e_voting_sub_total = 11;
-  ProportionalElectionResultSubTotal conventional_sub_total = 12;
+  ProportionalElectionResultSubTotal e_counting_sub_total = 12;
+  ProportionalElectionResultSubTotal conventional_sub_total = 13;
 
   /*
     description: total count of unmodified lists with a party
   */
-  int32 total_count_of_unmodified_lists = 13;
+  int32 total_count_of_unmodified_lists = 14;
   /*
     description: total count of modified lists with a party
   */
-  int32 total_count_of_modified_lists = 14;
+  int32 total_count_of_modified_lists = 15;
   /*
     description: count of lists without a source list / party
   */
-  int32 total_count_of_lists_without_party = 15;
+  int32 total_count_of_lists_without_party = 16;
   /*
     description: count of ballots (=total count of modified lists with and without party)
   */
-  int32 total_count_of_ballots = 16;
+  int32 total_count_of_ballots = 17;
   /*
     description: count of votes gained from blank rows on lists/ballots without a source list / party
   */
-  int32 total_count_of_blank_rows_on_lists_without_party = 17;
+  int32 total_count_of_blank_rows_on_lists_without_party = 18;
   /*
     description: total count of lists with a party (modified + unmodified)
   */
-  int32 total_count_of_lists_with_party = 18;
+  int32 total_count_of_lists_with_party = 19;
   /*
     description: total count of lists (with and without party)
   */
-  int32 total_count_of_lists = 19;
-  bool published = 20;
-  google.protobuf.Timestamp ready_for_correction_timestamp = 21;
+  int32 total_count_of_lists = 20;
+  bool published = 21;
+  google.protobuf.Timestamp ready_for_correction_timestamp = 22;
 }
 
 message ProportionalElectionResultEntryParams {
@@ -110,7 +111,8 @@ message ProportionalElectionUnmodifiedListResult {
   ProportionalElectionList list = 1;
   int32 conventional_vote_count = 2;
   int32 e_voting_vote_count = 3;
-  int32 total_vote_count = 4;
+  int32 e_counting_vote_count = 4;
+  int32 total_vote_count = 5;
 }
 
 message ProportionalElectionListResults {
@@ -123,84 +125,86 @@ message ProportionalElectionListResult {
   ProportionalElectionList list = 3;
   repeated ProportionalElectionCandidateResult candidate_results = 4;
   ProportionalElectionListResultSubTotal e_voting_sub_total = 5;
-  ProportionalElectionListResultSubTotal conventional_sub_total = 6;
+  ProportionalElectionListResultSubTotal e_counting_sub_total = 6;
+  ProportionalElectionListResultSubTotal conventional_sub_total = 7;
   /*
     description: The count of unmodified lists that were handed in for this list
   */
-  int32 unmodified_lists_count = 7;
+  int32 unmodified_lists_count = 8;
   /*
     description: The count of candidate votes gained from unmodified lists
   */
-  int32 unmodified_list_votes_count = 8;
+  int32 unmodified_list_votes_count = 9;
   /*
     description: The count of votes gained from blank rows from unmodified lists
   */
-  int32 unmodified_list_blank_rows_count = 9;
+  int32 unmodified_list_blank_rows_count = 10;
   /*
     description: The count of modified lists that were handed in for this list
   */
-  int32 modified_lists_count = 10;
+  int32 modified_lists_count = 11;
   /*
     description: The count of candidate votes gained from modified lists
   */
-  int32 modified_list_votes_count = 11;
+  int32 modified_list_votes_count = 12;
   /*
     description: The count of votes gained from blank rows from modified lists
   */
-  int32 modified_list_blank_rows_count = 12;
+  int32 modified_list_blank_rows_count = 13;
   /*
     description: The count of votes gained from "other" lists (panaschieren)
   */
-  int32 list_votes_count_on_other_lists = 13;
+  int32 list_votes_count_on_other_lists = 14;
   /*
     description: The count of votes gained from unmodified lists and from blank rows on unmodified lists
   */
-  int32 unmodified_list_votes_count_incl_blank_rows = 14;
+  int32 unmodified_list_votes_count_incl_blank_rows = 15;
   /*
     description: The count of votes gained from modified lists and from blank rows on modified lists
   */
-  int32 modified_list_votes_count_incl_blank_rows = 15;
+  int32 modified_list_votes_count_incl_blank_rows = 16;
   /*
     description: The count of candidate votes gained from unmodifed and modified lists
   */
-  int32 list_votes_count = 16;
+  int32 list_votes_count = 17;
   /*
     description: The count of lists (modified + unmodified)
   */
-  int32 list_count = 17;
+  int32 list_count = 18;
   /*
     description: The count of votes gained from blank rows from unmodified and modified lists
   */
-  int32 blank_rows_count = 18;
+  int32 blank_rows_count = 19;
   /*
     description: The sum list votes count and blank rows count
   */
-  int32 total_vote_count = 19;
+  int32 total_vote_count = 20;
 }
 
 message ProportionalElectionCandidateResult {
   string id = 1;
   ProportionalElectionCandidate candidate = 2;
   ProportionalElectionCandidateResultSubTotal e_voting_sub_total = 3;
-  ProportionalElectionCandidateResultSubTotal conventional_sub_total = 4;
+  ProportionalElectionCandidateResultSubTotal e_counting_sub_total = 4;
+  ProportionalElectionCandidateResultSubTotal conventional_sub_total = 5;
   /*
     description: The count of votes gained from unmodified lists
   */
-  int32 unmodified_list_votes_count = 5;
+  int32 unmodified_list_votes_count = 6;
   /*
     description: The count of candidate votes gained from modified lists
   */
-  int32 modified_list_votes_count = 6;
+  int32 modified_list_votes_count = 7;
   /*
     description: The count of candidate votes gained from "other" lists (panaschieren)
   */
-  int32 count_of_votes_on_other_lists = 7;
+  int32 count_of_votes_on_other_lists = 8;
   /*
     description: The count of votes gained from accumulating this candidate (kumulieren)
   */
-  int32 count_of_votes_from_accumulations = 8;
+  int32 count_of_votes_from_accumulations = 9;
   /*
     description: Total count of votes (unmodified list votes + modified list votes)
   */
-  int32 vote_count = 9;
+  int32 vote_count = 10;
 }

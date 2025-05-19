@@ -41,20 +41,22 @@ message BallotQuestionResult {
   string id = 1;
   BallotQuestion question = 2;
   BallotQuestionResultSubTotal e_voting_sub_total = 3;
-  BallotQuestionResultNullableSubTotal conventional_sub_total = 4;
-  int32 total_count_of_answer_yes = 5;
-  int32 total_count_of_answer_no = 6;
-  int32 total_count_of_answer_unspecified = 7;
+  BallotQuestionResultSubTotal e_counting_sub_total = 4;
+  BallotQuestionResultNullableSubTotal conventional_sub_total = 5;
+  int32 total_count_of_answer_yes = 6;
+  int32 total_count_of_answer_no = 7;
+  int32 total_count_of_answer_unspecified = 8;
 }
 
 message TieBreakQuestionResult {
   string id = 1;
   TieBreakQuestion question = 2;
   TieBreakQuestionResultSubTotal e_voting_sub_total = 3;
-  TieBreakQuestionResultNullableSubTotal conventional_sub_total = 4;
-  int32 total_count_of_answer_q1 = 5;
-  int32 total_count_of_answer_q2 = 6;
-  int32 total_count_of_answer_unspecified = 7;
+  TieBreakQuestionResultSubTotal e_counting_sub_total = 4;
+  TieBreakQuestionResultNullableSubTotal conventional_sub_total = 5;
+  int32 total_count_of_answer_q1 = 6;
+  int32 total_count_of_answer_q2 = 7;
+  int32 total_count_of_answer_unspecified = 8;
 }
 
 message VoteResultEntryParams {

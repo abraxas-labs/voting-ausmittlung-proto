@@ -46,17 +46,6 @@ message GetResultCommentsRequest {
   string result_id = 1 [(validation.v1.rules).string.guid = true];
 }
 
-message GetResultStateChangesRequest {
-  /*
-    ech-name: contestIdentification
-    ech-length: [1,50]
-    ech-type:: xs:token
-    validations: is-guid
-    description: Eindeutige, technische Identifikation des Urnengangs.
-  */
-  string contest_id = 1 [(validation.v1.rules).string.guid = true];
-}
-
 message ResetCountingCircleResultsRequest {
   /*
     ech-name: contestIdentification

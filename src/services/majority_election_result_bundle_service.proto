@@ -23,5 +23,4 @@ service MajorityElectionResultBundleService {
   rpc BundleCorrectionFinished(requests.MajorityElectionResultBundleCorrectionFinishedRequest) returns (google.protobuf.Empty);
   rpc RejectBundleReview(requests.RejectMajorityElectionBundleReviewRequest) returns (google.protobuf.Empty);
   rpc SucceedBundleReview(requests.SucceedMajorityElectionBundleReviewRequest) returns (google.protobuf.Empty);
-  rpc GetBundleChanges(requests.GetMajorityElectionResultBundleChangesRequest) returns (stream models.MajorityElectionResultBundle);
 }

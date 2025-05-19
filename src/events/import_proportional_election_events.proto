@@ -8,6 +8,7 @@ package abraxas.voting.ausmittlung.events.v1;
 import "data/event_info.proto";
 import "data/import_proportional_election_event_data.proto";
 import "data/import_counting_circle_result_count_of_voters_information_event_data.proto";
+import "shared/import.proto";  
 
 message ProportionalElectionResultImported {
   data.EventInfo event_info = 1;
@@ -15,19 +16,20 @@ message ProportionalElectionResultImported {
   string contest_id = 3;
   string proportional_election_id = 4;
   string counting_circle_id = 5;
-  repeated data.ProportionalElectionCandidateResultImportEventData candidate_results = 6;
-  repeated data.ProportionalElectionListResultImportEventData list_results = 7;
-  int32 count_of_unmodified_lists = 8;
-  int32 count_of_modified_lists = 9;
-  int32 count_of_lists_without_party = 10;
-  int32 count_of_blank_rows_on_lists_without_party = 11;
-  int32 count_of_voters = 12;
+  shared.v1.ResultImportType import_type = 6;
+  repeated data.ProportionalElectionCandidateResultImportEventData candidate_results = 7;
+  repeated data.ProportionalElectionListResultImportEventData list_results = 8;
+  int32 count_of_unmodified_lists = 9;
+  int32 count_of_modified_lists = 10;
+  int32 count_of_lists_without_party = 11;
+  int32 count_of_blank_rows_on_lists_without_party = 12;
+  int32 count_of_voters = 13;
 
   /* Ballots which are blank, meaning no list and no candidates specified */
-  int32 blank_ballot_count = 13;
+  int32 blank_ballot_count = 14;
 
   /* Ballots which are invalid, for example ballots with a list, but no candidates */
-  int32 invalid_ballot_count = 14;
+  int32 invalid_ballot_count = 15;
 
-  data.CountingCircleResultCountOfVotersInformationImportEventData count_of_voters_information = 15;
+  data.CountingCircleResultCountOfVotersInformationImportEventData count_of_voters_information = 16;
 }

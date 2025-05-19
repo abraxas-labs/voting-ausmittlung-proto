@@ -77,6 +77,8 @@ message Contest {
   bool e_voting_results_imported = 11;
 
   ContestCantonDefaults canton_defaults = 12;
+
+  bool e_counting_results_imported = 13;
 }
 
 message ContestSummaries {
@@ -143,6 +145,7 @@ message ContestSummary {
   bool e_voting_results_imported = 12;
   ContestCantonDefaults canton_defaults = 13;
   DomainOfInfluence domain_of_influence = 14;
+  bool e_counting_results_imported = 15;
 }
 
 message ContestSummaryEntryDetails {

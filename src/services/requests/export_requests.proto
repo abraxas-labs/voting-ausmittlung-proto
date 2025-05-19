@@ -70,12 +70,6 @@ message StartProtocolExportsRequest {
   repeated string export_template_ids = 3 [(validation.v1.rules).string.guid = true];
 }
 
-message GetProtocolExportStateChangesRequest {
-  string contest_id = 1 [(validation.v1.rules).string.guid = true];
-
-  string counting_circle_id = 2 [(validation.v1.rules).string = { guid: true, allow_empty: true}];
-}
-
 /*
   description: Konfigurationen für manuelle und automatisierte Exports anfragen.
 */
@@ -168,10 +162,5 @@ message UpdatePoliticalBusinessExportMetadataRequest {
 */
 message StartBundleReviewExportRequest {
   string political_business_result_bundle_id = 1 [(validation.v1.rules).string.guid = true];
-  models.PoliticalBusinessType political_business_type = 2 [(validation.v1.rules).enum.exact_enum = true];
-}
-
-message GetBundleReviewExportStateChangesRequest {
-  string political_business_result_id = 1 [(validation.v1.rules).string.guid = true];
   models.PoliticalBusinessType political_business_type = 2 [(validation.v1.rules).enum.exact_enum = true];
 }

@@ -7,11 +7,19 @@ package abraxas.voting.ausmittlung.events.v1;
 
 import "data/event_info.proto";
 import "data/import_event_data.proto";
+import "shared/import.proto";
 
 message ResultImportCreated {
   data.EventInfo event_info = 1;
-  string import_id = 2;
-  string contest_id = 3;
+  /**
+   * The id of the import aggregate.
+   * (of the contest or the counting circle in the contest).
+   */
+  string id = 2;
+  string import_id = 3;
+  string contest_id = 4;
+  string counting_circle_id = 5;
+  shared.v1.ResultImportType import_type = 6;
 }
 
 message ResultImportStarted {
@@ -19,8 +27,19 @@ message ResultImportStarted {
   string import_id = 2;
   string file_name = 3;
   string contest_id = 4;
-  string ech_message_id = 5;
-  repeated data.ImportIgnoredCountingCircleEventData ignored_counting_circles = 6;
+  string counting_circle_id = 5;
+  string ech_message_id = 6;
+  repeated data.ImportIgnoredCountingCircleEventData ignored_counting_circles = 7;
+  shared.v1.ResultImportType import_type = 8;
+}
+
+message ResultImportCountingCircleCompleted {
+  data.EventInfo event_info = 1;
+  string import_id = 2;
+  string contest_id = 3;
+  string counting_circle_id = 4;
+  shared.v1.ResultImportType import_type = 5;
+  bool has_write_ins = 6;
 }
 
 message ResultImportCompleted {
@@ -28,16 +47,20 @@ message ResultImportCompleted {
   string import_id = 2;
   string file_name = 3;
   string contest_id = 4;
-  repeated string imported_proportional_election_ids = 5;
-  repeated string imported_majority_election_ids = 6;
-  repeated string imported_secondary_majority_election_ids = 7;
-  repeated string imported_vote_ids = 8;
+  string counting_circle_id = 5;
+  shared.v1.ResultImportType import_type = 6;
+  repeated string imported_proportional_election_ids = 7;
+  repeated string imported_majority_election_ids = 8;
+  repeated string imported_secondary_majority_election_ids = 9;
+  repeated string imported_vote_ids = 10;
 }
 
 message ResultImportDataDeleted {
   data.EventInfo event_info = 1;
   string import_id = 2;
   string contest_id = 3;
+  string counting_circle_id = 4;
+  shared.v1.ResultImportType import_type = 5;
 }
 
 // Import wurde durch neuen Import ersetzt.
@@ -45,5 +68,7 @@ message ResultImportSucceeded {
   data.EventInfo event_info = 1;
   string import_id = 2;
   string contest_id = 3;
-  string successor_import_id = 4;
+  string counting_circle_id = 5;
+  string successor_import_id = 6;
+  shared.v1.ResultImportType import_type = 7;
 }
