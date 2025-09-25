@@ -489,7 +489,29 @@ message ValidateEnterMajorityElectionCandidateResultsRequest {
   EnterMajorityElectionCandidateResultsRequest request = 1 [(validation.v1.rules).object.required = true];
 }
 
+message MajorityElectionResultPrepareSubmissionFinishedAndAuditedTentativelyRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Wahlergebnisses.
+  */
+  string election_result_id = 1 [(validation.v1.rules).string.guid = true];
+}
+
 message MajorityElectionResultSubmissionFinishedAndAuditedTentativelyRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Wahlergebnisses.
+  */
+  string election_result_id = 1 [(validation.v1.rules).string.guid = true];
+
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation der Zweifaktor-Transaktion (siehe: https://docs.nevis.net/apidoc/authcloud/#enroll-your-access-app)
+  */
+  string second_factor_transaction_id = 2 [(validation.v1.rules).string.guid = true];
+}
+
+message MajorityElectionResultPrepareCorrectionFinishedAndAuditedTentativelyRequest {
   /*
     validations: is-guid
     description: Eindeutige, technische Identifikation des Wahlergebnisses.
@@ -503,6 +525,12 @@ message MajorityElectionResultCorrectionFinishedAndAuditedTentativelyRequest {
     description: Eindeutige, technische Identifikation des Wahlergebnisses.
   */
   string election_result_id = 1 [(validation.v1.rules).string.guid = true];
+
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation der Zweifaktor-Transaktion (siehe: https://docs.nevis.net/apidoc/authcloud/#enroll-your-access-app)
+  */
+  string second_factor_transaction_id = 2 [(validation.v1.rules).string.guid = true];
 }
 
 message MajorityElectionResultPublishRequest {

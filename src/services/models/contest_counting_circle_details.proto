@@ -27,7 +27,7 @@ message ContestCountingCircleDetails {
   */
   string counting_circle_id = 2;
 
-  CountOfVotersInformation count_of_voters_information = 3;
+  repeated CountOfVotersInformationSubTotal count_of_voters_information_sub_totals = 3;
   repeated VotingCardResultDetail voting_cards = 4;
   bool e_voting = 5;
   bool e_counting = 6;

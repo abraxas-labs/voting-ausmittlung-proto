@@ -402,7 +402,29 @@ message EnterProportionalElectionManualCandidateEndResultRequest {
   shared.v1.ProportionalElectionCandidateEndResultState state = 2 [(validation.v1.rules).enum.exact_enum = true];
 }
 
+message ProportionalElectionResultPrepareSubmissionFinishedAndAuditedTentativelyRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Wahlergebnisses.
+  */
+  string election_result_id = 1 [(validation.v1.rules).string.guid = true];
+}
+
 message ProportionalElectionResultSubmissionFinishedAndAuditedTentativelyRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Wahlergebnisses.
+  */
+  string election_result_id = 1 [(validation.v1.rules).string.guid = true];
+
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation der Zweifaktor-Transaktion (siehe: https://docs.nevis.net/apidoc/authcloud/#enroll-your-access-app)
+  */
+  string second_factor_transaction_id = 2 [(validation.v1.rules).string.guid = true];
+}
+
+message ProportionalElectionResultPrepareCorrectionFinishedAndAuditedTentativelyRequest {
   /*
     validations: is-guid
     description: Eindeutige, technische Identifikation des Wahlergebnisses.
@@ -416,6 +438,12 @@ message ProportionalElectionResultCorrectionFinishedAndAuditedTentativelyRequest
     description: Eindeutige, technische Identifikation des Wahlergebnisses.
   */
   string election_result_id = 1 [(validation.v1.rules).string.guid = true];
+
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation der Zweifaktor-Transaktion (siehe: https://docs.nevis.net/apidoc/authcloud/#enroll-your-access-app)
+  */
+  string second_factor_transaction_id = 2 [(validation.v1.rules).string.guid = true];
 }
 
 message GetProportionalElectionDoubleProportionalResultSuperApportionmentAvailableLotDecisionsRequest {

@@ -36,7 +36,9 @@ service MajorityElectionResultService {
   rpc PrepareFinalizeEndResult(requests.PrepareFinalizeMajorityElectionEndResultRequest) returns (models.SecondFactorTransaction);
   rpc FinalizeEndResult(requests.FinalizeMajorityElectionEndResultRequest) returns (google.protobuf.Empty);
   rpc RevertEndResultFinalization(requests.RevertMajorityElectionEndResultFinalizationRequest) returns (google.protobuf.Empty);
+  rpc PrepareSubmissionFinishedAndAuditedTentatively(requests.MajorityElectionResultPrepareSubmissionFinishedAndAuditedTentativelyRequest) returns (models.SecondFactorTransaction);
   rpc SubmissionFinishedAndAuditedTentatively(requests.MajorityElectionResultSubmissionFinishedAndAuditedTentativelyRequest) returns (google.protobuf.Empty);
+  rpc PrepareCorrectionFinishedAndAuditedTentatively(requests.MajorityElectionResultPrepareCorrectionFinishedAndAuditedTentativelyRequest) returns (models.SecondFactorTransaction);
   rpc CorrectionFinishedAndAuditedTentatively(requests.MajorityElectionResultCorrectionFinishedAndAuditedTentativelyRequest) returns (google.protobuf.Empty);
   rpc Publish(requests.MajorityElectionResultPublishRequest) returns (google.protobuf.Empty);
   rpc Unpublish(requests.MajorityElectionResultUnpublishRequest) returns (google.protobuf.Empty);

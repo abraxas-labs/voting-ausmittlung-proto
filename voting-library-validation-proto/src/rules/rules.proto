@@ -1,4 +1,4 @@
-// (c) Copyright 2022 by Abraxas Informatik AG
+// (c) Copyright by Abraxas Informatik AG
 // For license information see LICENSE file
 
 syntax = "proto3";
@@ -8,6 +8,7 @@ package abraxas.voting.validation.v1;
 import "google/protobuf/descriptor.proto";
 import "rules/string_rules.proto";
 import "rules/integer_rules.proto";
+import "rules/integer64_rules.proto";
 import "rules/double_rules.proto";
 import "rules/map_rules.proto";
 import "rules/enum_rules.proto";
@@ -35,14 +36,19 @@ message Rules {
   optional IntegerRules integer = 4;
 
   /*
+    Integer64 / Long Regeln.
+  */
+  optional Integer64Rules integer64 = 5;
+
+  /*
     Double Regeln.
   */
-  optional DoubleRules double = 5;
+  optional DoubleRules double = 6;
 
   /*
     Map Regeln.
   */
-  optional MapRules map = 6;
+  optional MapRules map = 7;
 }
 
 extend google.protobuf.FieldOptions {

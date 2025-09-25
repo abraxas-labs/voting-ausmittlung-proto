@@ -20,11 +20,12 @@ message ProtocolExportStarted {
   // The fields below are just informative, to keep it in line with the ExportGenerated event
   string request_id = 7; // A random ID which correlates all exports of the same user request.
   string export_key = 8; // The key of the export template
-  string political_business_id = 9;
-  string counting_circle_id = 10;
-  shared.v1.DomainOfInfluenceType domain_of_influence_type = 11;
-  string political_business_union_id = 12;
-  string political_business_result_bundle_id = 13;
+  string political_business_id = 9; // This is only filled if the protocol is created for a specific political business
+  repeated string political_business_ids = 10; // The list of all political businesses contained in the protocol
+  string counting_circle_id = 11;
+  shared.v1.DomainOfInfluenceType domain_of_influence_type = 12;
+  string political_business_union_id = 13;
+  string political_business_result_bundle_id = 14;
 }
 
 message ProtocolExportCompleted {

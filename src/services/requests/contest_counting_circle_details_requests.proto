@@ -32,7 +32,7 @@ message UpdateContestCountingCircleDetailsRequest {
   */
   string counting_circle_id = 2 [(validation.v1.rules).string.guid = true];
 
-  repeated UpdateCountOfVotersInformationSubTotalRequest count_of_voters = 3;
+  repeated UpdateCountOfVotersInformationSubTotalRequest count_of_voters_information_sub_totals = 3;
   repeated UpdateVotingCardResultDetailRequest voting_cards = 4;
   shared.v1.CountingMachine counting_machine = 5 [(validation.v1.rules).enum = { exact_enum: true, allow_unspecified: true }];
 }

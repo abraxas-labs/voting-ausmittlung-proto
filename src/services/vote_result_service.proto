@@ -33,7 +33,9 @@ service VoteResultService {
   rpc PrepareFinalizeEndResult(requests.PrepareFinalizeVoteEndResultRequest) returns (models.SecondFactorTransaction);
   rpc FinalizeEndResult(requests.FinalizeVoteEndResultRequest) returns (google.protobuf.Empty);
   rpc RevertEndResultFinalization(requests.RevertVoteEndResultFinalizationRequest) returns (google.protobuf.Empty);
+  rpc PrepareSubmissionFinishedAndAuditedTentatively(requests.VoteResultPrepareSubmissionFinishedAndAuditedTentativelyRequest) returns (models.SecondFactorTransaction);
   rpc SubmissionFinishedAndAuditedTentatively(requests.VoteResultSubmissionFinishedAndAuditedTentativelyRequest) returns (google.protobuf.Empty);
+  rpc PrepareCorrectionFinishedAndAuditedTentatively(requests.VoteResultPrepareCorrectionFinishedAndAuditedTentativelyRequest) returns (models.SecondFactorTransaction);
   rpc CorrectionFinishedAndAuditedTentatively(requests.VoteResultCorrectionFinishedAndAuditedTentativelyRequest) returns (google.protobuf.Empty);
   rpc Publish(requests.VoteResultPublishRequest) returns (google.protobuf.Empty);
   rpc Unpublish(requests.VoteResultUnpublishRequest) returns (google.protobuf.Empty);

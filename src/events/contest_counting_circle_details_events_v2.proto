@@ -1,0 +1,32 @@
+// (c) Copyright by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.events.v2;
+
+import "data/count_of_voters_event_data.proto";
+import "data/count_of_voters_event_data_v2.proto";
+import "data/event_info.proto";
+import "data/voting_card_event_data.proto";
+import "shared/counting_machine.proto";
+
+message ContestCountingCircleDetailsCreated {
+  v1.data.EventInfo event_info = 1;
+  string id = 2;
+  string contest_id = 3;
+  string counting_circle_id = 4;
+  repeated v2.data.CountOfVotersInformationSubTotalEventData count_of_voters_information_sub_totals = 5;
+  repeated v1.data.VotingCardResultDetailEventData voting_cards = 6;
+  shared.v1.CountingMachine counting_machine = 7;
+}
+
+message ContestCountingCircleDetailsUpdated {
+  v1.data.EventInfo event_info = 1;
+  string id = 2;
+  string contest_id = 3;
+  string counting_circle_id = 4;
+  repeated v2.data.CountOfVotersInformationSubTotalEventData count_of_voters_information_sub_totals = 5;
+  repeated v1.data.VotingCardResultDetailEventData voting_cards = 6;
+  shared.v1.CountingMachine counting_machine = 7;
+}

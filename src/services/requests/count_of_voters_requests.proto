@@ -7,6 +7,7 @@ package abraxas.voting.ausmittlung.services.v1.requests;
 
 import "google/protobuf/wrappers.proto";
 import "rules/rules.proto";
+import "shared/domain_of_influence.proto";
 import "shared/sex.proto";
 import "shared/voter_type.proto";
 
@@ -64,4 +65,6 @@ message UpdateCountOfVotersInformationSubTotalRequest {
     description: Anzahl stimmberechtigter Wähler.
   */
   google.protobuf.Int32Value count_of_voters = 3 [(validation.v1.rules).integer = { min_value: 0, max_value: 1000000}];
+
+  shared.v1.DomainOfInfluenceType domain_of_influence_type = 4 [(validation.v1.rules).enum.exact_enum = true];
 }

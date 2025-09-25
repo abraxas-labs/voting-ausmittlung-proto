@@ -1,18 +1,18 @@
-// (c) Copyright by Abraxas Informatik AG
+// (c) Copyright 2022 by Abraxas Informatik AG
 // For license information see LICENSE file
 
 syntax = "proto3";
 
 package abraxas.voting.validation.v1;
 
-message DoubleRules {
+message Integer64Rules {
   /*
     Der minimale Wert der erlaubt ist.
   */
-  optional double min_value = 1;
+  optional int64 min_value = 1;
 
   /*
     Der maximale Wert der erlaubt ist.
   */
-  optional double max_value = 2;
+  optional int64 max_value = 2;
 }

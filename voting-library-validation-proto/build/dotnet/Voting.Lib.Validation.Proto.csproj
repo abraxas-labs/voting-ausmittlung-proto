@@ -12,6 +12,7 @@
     <TargetFramework>netstandard2.1</TargetFramework>
     <OutputType>Library</OutputType>
     <OutputPath>bin\$(BaseOutputPath)\$(Configuration)\</OutputPath>
+    <Deterministic>true</Deterministic>
   </PropertyGroup>
 
   <ItemGroup>
@@ -29,6 +30,37 @@
 
   <Target Name="CopyFiles">
     <Copy SourceFiles="@(VotingLibProtoFiles)" DestinationFolder="$(MSBuildProjectDirectory)/proto/%(RecursiveDir)"  />
+  </Target>
+
+  <Target Name="GenerateFileHashes" AfterTargets="PostBuildEvent" Condition="'$(Configuration)' == 'Release'">
+    <PropertyGroup>
+        <HashOutPath>$(OutDir)\$(ProjectName).sha256</HashOutPath>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <FilesToHash Include="$(OutDir)$(TargetFileName)"/>
+    </ItemGroup>
+
+    <GetFileHash Files="@(FilesToHash)" Algorithm="SHA256">
+        <Output TaskParameter="Items"
+                ItemName="OutFilesWithHashes"/>
+    </GetFileHash>
+
+    <ItemGroup>
+        <OutFilesWithHashes>
+            <RelativeOutPath>$([System.IO.Path]::GetRelativePath($(OutDir), '%(Identity)'))</RelativeOutPath>
+        </OutFilesWithHashes>
+    </ItemGroup>
+
+    <WriteLinesToFile File="$(HashOutPath)" Lines="@(OutFilesWithHashes->'%(FileHash) %(RelativeOutPath)')" Overwrite="true"/>
+    <Message Importance="High" Text="@(OutFilesWithHashes->'%(RelativeOutPath) SHA256: %(FileHash)')"/>
+
+    <ItemGroup>
+        <Content Include="$(HashOutPath)">
+            <Pack>true</Pack>
+            <PackagePath>lib\$(TargetFramework)</PackagePath>
+        </Content>
+    </ItemGroup>
   </Target>
 
   <ItemGroup>

@@ -387,7 +387,29 @@ message ValidateEnterVoteResultCorrectionRequest {
   EnterVoteResultCorrectionRequest request = 1 [(validation.v1.rules).object.required = true];
 }
 
+message VoteResultPrepareSubmissionFinishedAndAuditedTentativelyRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige Identifikation des Abstimmungsresultates.
+  */
+  string vote_result_id = 1 [(validation.v1.rules).string.guid = true];
+}
+
 message VoteResultSubmissionFinishedAndAuditedTentativelyRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige Identifikation des Abstimmungsresultates.
+  */
+  string vote_result_id = 1 [(validation.v1.rules).string.guid = true];
+
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation der Zweifaktor-Transaktion (siehe: https://docs.nevis.net/apidoc/authcloud/#enroll-your-access-app)
+  */
+  string second_factor_transaction_id = 2 [(validation.v1.rules).string.guid = true];
+}
+
+message VoteResultPrepareCorrectionFinishedAndAuditedTentativelyRequest {
   /*
     validations: is-guid
     description: Eindeutige Identifikation des Abstimmungsresultates.
@@ -401,6 +423,12 @@ message VoteResultCorrectionFinishedAndAuditedTentativelyRequest {
     description: Eindeutige Identifikation des Abstimmungsresultates.
   */
   string vote_result_id = 1 [(validation.v1.rules).string.guid = true];
+
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation der Zweifaktor-Transaktion (siehe: https://docs.nevis.net/apidoc/authcloud/#enroll-your-access-app)
+  */
+  string second_factor_transaction_id = 2 [(validation.v1.rules).string.guid = true];
 }
 
 message VoteResultPublishRequest {

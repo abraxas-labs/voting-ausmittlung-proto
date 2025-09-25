@@ -1,4 +1,4 @@
-# ✨ Changelog (`v1.144.0`)
+# ✨ Changelog (`v1.147.0`)
 
 All notable changes to this project will be documented in this file.
 
@@ -8,11 +8,47 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Version Info
 
 ```text
-This version -------- v1.144.0
-Previous version ---- v1.138.0
+This version -------- v1.147.0
+Previous version ---- v1.144.0
 Initial version ----- v1.79.2
-Total commits ------- 6
+Total commits ------- 7
 ```
+
+## [v1.147.0] - 2025-09-03
+
+### 🆕 Added
+
+- add 2FA to submission finished and audited tentatively methods
+
+## [v1.146.1] - 2025-08-29
+
+### 🔄 Changed
+
+- revert always require second factor
+
+## [v1.146.0] - 2025-08-19
+
+### 🔄 Changed
+
+- always require second factor
+
+## [v1.145.1] - 2025-07-01
+
+### 🔄 Changed
+
+- trigger release
+
+## [v1.145.0] - 2025-05-26
+
+### 🔄 Changed
+
+- count of voters sub total with domain of influence type
+
+## [v1.144.1] - 2025-05-23
+
+### 🆕 Added
+
+- add political business ids to ProtocolExportStarted event
 
 ## [v1.144.0] - 2025-04-14
 
@@ -253,47 +289,21 @@ patch ci-cd template version, align with new defaults
 
 ## [v1.117.0] - 2024-04-11
 
-### :new: Added
+### 🆕 Added
 
-- added partial results
+- add 2FA to submission finished and audited tentatively methods
 
-## [v1.116.1] - 2024-04-08
+### 🔄 Changed
 
-### ❌ Removed
+- revert always require second factor
 
-- remove unions from election end result
+### 🔄 Changed
 
-## [v1.116.0] - 2024-03-27
+- always require second factor
 
 ### 🆕 Added
 
-- Cantonal proportional election union results
-
-## [v1.115.0] - 2024-03-26
-
-### 🆕 Added
-
-- add political business unions to end results
-
-## [v1.114.0] - 2024-03-25
-
-### 🆕 Added
-
-- add political business unions to result overview
-
-## [v1.113.0] - 2024-03-12
-
-### 🆕 Added
-
-- add monitoring political business overview
-
-## [v1.112.0] - 2024-03-11
-
-### 🆕 Added
-
-- add vote result algorithm popular and counting circle majority
-
-## [v1.111.0] - 2024-02-28
+- add political business ids to ProtocolExportStarted event
 
 ### 🔄 Changed
 
@@ -443,31 +453,3 @@ patch ci-cd template version, align with new defaults
 ### 🆕 Added
 
 - add counting circle result state descriptions
-
-### :new: Added
-
-- added partial results
-
-### ❌ Removed
-
-- remove unions from election end result
-
-### 🆕 Added
-
-- Cantonal proportional election union results
-
-### 🆕 Added
-
-- add political business unions to end results
-
-### 🆕 Added
-
-- add political business unions to result overview
-
-### 🆕 Added
-
-- add monitoring political business overview
-
-### 🆕 Added
-
-- add vote result algorithm popular and counting circle majority
