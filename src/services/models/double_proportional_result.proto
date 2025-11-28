@@ -54,9 +54,10 @@ message DoubleProportionalResultColumn {
   double voter_number = 7;
   double super_apportionment_quotient = 8;
   int32 super_apportionment_number_of_mandates = 9;
-  int32 sub_apportionment_number_of_mandates = 10;
-  double divisor = 11;
-  bool super_apportionment_lot_decision_required = 12;
+  int32 super_apportionment_number_of_mandates_excl_lot_decision = 10;
+  int32 sub_apportionment_number_of_mandates = 11;
+  double divisor = 12;
+  bool super_apportionment_lot_decision_required = 13;
 }
 
 message DoubleProportionalResultCell {
@@ -66,7 +67,8 @@ message DoubleProportionalResultCell {
   bool proportional_election_quorum_reached = 3;
   double voter_number = 4;
   int32 sub_apportionment_number_of_mandates = 5;
-  bool sub_apportionment_lot_decision_required = 6;
+  int32 sub_apportionment_number_of_mandates_excl_lot_decision = 6;
+  bool sub_apportionment_lot_decision_required = 7;
 }
 
 enum DoubleProportionalResultApportionmentState {

@@ -186,6 +186,7 @@ message MajorityElectionCandidate {
   int32 position = 8;
   string description = 9;
   int32 check_digit = 10;
+  bool count_to_individual = 11;
 }
 
 message SecondaryMajorityElection {

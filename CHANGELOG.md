@@ -1,4 +1,4 @@
-# ✨ Changelog (`v1.147.0`)
+# ✨ Changelog (`v1.148.1`)
 
 All notable changes to this project will be documented in this file.
 
@@ -8,11 +8,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Version Info
 
 ```text
-This version -------- v1.147.0
-Previous version ---- v1.144.0
+This version -------- v1.148.1
+Previous version ---- v1.147.0
 Initial version ----- v1.79.2
-Total commits ------- 7
+Total commits ------- 3
 ```
+
+## [v1.148.1] - 2025-10-16
+
+### 🔄 Changed
+
+- add double proportional number of mandates excl lot decision
+
+## [v1.148.0] - 2025-10-13
+
+### 🆕 Added
+
+- add majority election candidate reporting type
+
+## [v1.147.1] - 2025-09-11
+
+### 🔄 Changed
+
+- enable optional fields in update counting circle details
 
 ## [v1.147.0] - 2025-09-03
 
@@ -273,21 +291,11 @@ patch ci-cd template version, align with new defaults
 
 ### 🆕 Added
 
-- non cantonal double proportional result
+- add majority election candidate reporting type
 
-## [v1.119.0] - 2024-04-19
+### 🔄 Changed
 
-### 🆕 Added
-
-- add state plausibilised disabled canton setting
-
-## [v1.118.0] - 2024-04-18
-
-### 🆕 Added
-
-- add counting circle result state descriptions
-
-## [v1.117.0] - 2024-04-11
+- enable optional fields in update counting circle details
 
 ### 🆕 Added
 
@@ -441,15 +449,3 @@ patch ci-cd template version, align with new defaults
 ### ❌ Removed
 
 - remove result overview only owned option
-
-### 🆕 Added
-
-- non cantonal double proportional result
-
-### 🆕 Added
-
-- add state plausibilised disabled canton setting
-
-### 🆕 Added
-
-- add counting circle result state descriptions
