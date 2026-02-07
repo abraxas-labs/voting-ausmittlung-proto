@@ -5,6 +5,7 @@ syntax = "proto3";
 
 package abraxas.voting.ausmittlung.events.v1;
 
+import "google/protobuf/wrappers.proto";
 import "data/event_info.proto";
 import "data/vote_result_bundle_event_data.proto";
 import "data/vote_result_event_data.proto";
@@ -42,8 +43,10 @@ message VoteResultBallotCreated {
   string vote_result_id = 3;
   string ballot_result_id = 4;
   int32 ballot_number = 5;
-  repeated data.VoteResultBallotUpdatedQuestionAnswerEventData question_answers = 6;
-  repeated data.VoteResultBallotUpdatedTieBreakQuestionAnswerEventData tie_break_question_answers = 7;
+  /* 0-based index of the ballot inside the bundle */
+  google.protobuf.Int32Value index = 6; 
+  repeated data.VoteResultBallotUpdatedQuestionAnswerEventData question_answers = 7;
+  repeated data.VoteResultBallotUpdatedTieBreakQuestionAnswerEventData tie_break_question_answers = 8;
 }
 
 message VoteResultBallotUpdated {
@@ -73,6 +76,14 @@ message VoteResultBundleSubmissionFinished {
 }
 
 message VoteResultBundleCorrectionFinished {
+  data.EventInfo event_info = 1;
+  string bundle_id = 2;
+  string vote_result_id = 3;
+  string ballot_result_id = 4;
+  repeated int32 sample_ballot_numbers = 5;
+}
+
+message VoteResultBundleResetToSubmissionFinished {
   data.EventInfo event_info = 1;
   string bundle_id = 2;
   string vote_result_id = 3;

@@ -26,15 +26,20 @@ message VoteResultBundle {
   int32 count_of_ballots = 4;
   User created_by = 5;
   User reviewed_by = 6;
-  repeated int32 ballot_numbers_to_review = 7;
-  ProtocolExport protocol_export = 8;
-  repeated PoliticalBusinessResultBundleLog logs = 9;
+  repeated int32 ballot_numbers = 7;
+  repeated int32 ballot_numbers_to_review = 8;
+  ProtocolExport protocol_export = 9;
+  repeated PoliticalBusinessResultBundleLog logs = 10;
+
+  /* Ballots that were modified after the bundle was first put into the ready for review state */
+  int32 count_of_modified_ballots = 11;
 }
 
 message VoteResultBallot {
   int32 number = 1;
   repeated VoteResultBallotQuestionAnswer question_answers = 2;
   repeated VoteResultBallotTieBreakQuestionAnswer tie_break_question_answers = 3;
+  repeated PoliticalBusinessResultBallotLog logs = 4;
 }
 
 message VoteResultBallotQuestionAnswer {

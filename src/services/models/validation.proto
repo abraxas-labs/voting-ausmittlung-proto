@@ -35,9 +35,10 @@ message ValidationResult {
     ValidationComparisonCountOfVotersData comparison_count_of_voters_data = 9;
     ValidationComparisonVotingChannelsData comparison_voting_channels_data = 10;
     ValidationComparisonValidVotingCardsWithAccountedBallotsData comparison_valid_voting_cards_with_accounted_ballots_data = 11;
+    ValidationProportionalElectionNumberOfMandatesTimesAccountedBallotsEqualCandVotesPlusBlankRowsData proportional_election_number_of_mandates_times_accounted_ballots_equal_cand_votes_plus_blank_rows_data = 12;
   }
-  shared.v1.ValidationGroup validation_group = 12;
-  string group_value = 13;
+  shared.v1.ValidationGroup validation_group = 13;
+  string group_value = 14;
 }
 
 message ValidationPoliticalBusinessData {
@@ -66,6 +67,18 @@ message ValidationMajorityElectionNumberOfMandatesTimesAccountedBallotsEqualCand
   int32 total_accounted_ballots = 5;
   int32 sum_vote_count = 6;
   int32 number_of_mandates_times_accounted_ballots = 7;
+}
+
+message ValidationProportionalElectionNumberOfMandatesTimesAccountedBallotsEqualCandVotesPlusBlankRowsData {
+  /*
+    description: Anzahl leere Zeilen
+  */
+  int32 blank_rows_count = 1;
+  int32 candidate_votes = 2;
+  int32 number_of_mandates = 3;
+  int32 total_accounted_ballots = 4;
+  int32 sum_vote_count = 5;
+  int32 number_of_mandates_times_accounted_ballots = 6;
 }
 
 message ValidationProportionalElectionAccountedBallotsEqualModifiedPlusUnmodifiedListsData {

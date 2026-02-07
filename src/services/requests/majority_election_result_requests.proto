@@ -94,28 +94,34 @@ message DefineMajorityElectionResultEntryParamsRequest {
   bool automatic_ballot_bundle_number_generation = 3;
 
   /*
+    validations: is-type(bool)
+    description: 'True' für die automatische Vergabe von Wahlzetteln, sonst 'False' für die manuelle Vergabe.
+  */
+  bool automatic_ballot_number_generation = 4;
+
+  /*
     validations: exact-enum
     description: Art der Vergabe von Wahlzettelnummern.
   */
-  shared.v1.BallotNumberGeneration ballot_number_generation = 4 [(validation.v1.rules).enum.exact_enum = true];
+  shared.v1.BallotNumberGeneration ballot_number_generation = 5 [(validation.v1.rules).enum.exact_enum = true];
 
   /*
     validations: is-type(bool)
     description: 'True' für die automatische Erfassung leerer Zeilen, sonst 'False' für die manuelle Erfassung.
   */
-  bool automatic_empty_vote_counting = 5;
+  bool automatic_empty_vote_counting = 6;
 
   /*
     validations: exact-enum
     description: Überprüfungsmethode der Bundkontrolle.
   */
-  shared.v1.MajorityElectionReviewProcedure review_procedure = 6 [(validation.v1.rules).enum.exact_enum = true];
+  shared.v1.MajorityElectionReviewProcedure review_procedure = 7 [(validation.v1.rules).enum.exact_enum = true];
 
   /*
     validations: is-type(bool)
     description: 'True' für die Verwendung der Prüfziffer bei der Erfassung von Kandidaten, sonst 'False' für keine Prüfziffer.
   */
-  bool candidate_check_digit = 7;
+  bool candidate_check_digit = 8;
 }
 
 message EnterMajorityElectionCountOfVotersRequest {

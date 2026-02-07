@@ -101,8 +101,11 @@ message ResultImport {
   // Counting circles that were imported.
   repeated CountingCircle imported_counting_circles = 7;
 
+  // Counting circles that were imported, but had no results.
+  repeated CountingCircle empty_counting_circles = 8;
+
   // Counting circles that were not imported, but were included in the original import file.
-  repeated ResultImportIgnoredCountingCircle ignored_counting_circles = 8;
+  repeated ResultImportIgnoredCountingCircle ignored_counting_circles = 9;
 }
 
 // Describes counting circles that were ignored during a result import.

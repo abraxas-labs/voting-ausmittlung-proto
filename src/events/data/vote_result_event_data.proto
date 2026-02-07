@@ -37,5 +37,6 @@ message VoteTieBreakQuestionResultsEventData {
 message VoteResultEntryParamsEventData {
   int32 ballot_bundle_sample_size_percent = 1;
   bool automatic_ballot_bundle_number_generation = 2;
-  shared.v1.VoteReviewProcedure review_procedure = 3;
+  google.protobuf.BoolValue automatic_ballot_number_generation = 3;
+  shared.v1.VoteReviewProcedure review_procedure = 4;
 }

@@ -32,8 +32,9 @@ message MajorityElectionResultEntryParamsEventData {
   int32 ballot_bundle_size = 1;
   int32 ballot_bundle_sample_size = 2;
   bool automatic_ballot_bundle_number_generation = 3;
-  shared.v1.BallotNumberGeneration ballot_number_generation = 4;
-  bool automatic_empty_vote_counting = 5;
-  shared.v1.MajorityElectionReviewProcedure review_procedure = 6;
-  bool candidate_check_digit = 7;
+  google.protobuf.BoolValue automatic_ballot_number_generation = 4;
+  shared.v1.BallotNumberGeneration ballot_number_generation = 5;
+  bool automatic_empty_vote_counting = 6;
+  shared.v1.MajorityElectionReviewProcedure review_procedure = 7;
+  bool candidate_check_digit = 8;
 }

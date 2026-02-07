@@ -111,30 +111,36 @@ message CreateMajorityElectionResultBallotRequest {
   string bundle_id = 1 [(validation.v1.rules).string.guid = true];
 
   /*
+    validations: typeof(int32),min-value(1),max-value(1000000)
+    description: Eindeutige, technische Identifikation des Wahlzettels. Nicht benötigt, falls automatische Generierung ausgewählt.
+  */
+  google.protobuf.Int32Value ballot_number = 2 [(validation.v1.rules).integer = { min_value: 1, max_value: 1000000}];
+
+  /*
     validations: typeof(int32),min-value(0),max-value(1000000),allow-undefined
     description: Anzahl leere Zeilen
   */
-  google.protobuf.Int32Value empty_vote_count = 2 [(validation.v1.rules).integer = { min_value: 0, max_value: 1000000}];
+  google.protobuf.Int32Value empty_vote_count = 3 [(validation.v1.rules).integer = { min_value: 0, max_value: 1000000}];
 
   /*
     validations: typeof(int32),min-value(0),max-value(1000000)
     description: Anzahl vereinzelter Nennungen eines Kandiaten (welcher sich nicht auf der Liste befindet).
   */
-  int32 individual_vote_count = 3 [(validation.v1.rules).integer = { min_value: 0, max_value: 1000000}];
+  int32 individual_vote_count = 4 [(validation.v1.rules).integer = { min_value: 0, max_value: 1000000}];
 
   /*
     validations: is-guid
     description: Selektierte Kandidaten.
   */
-  repeated string selected_candidate_ids = 4 [(validation.v1.rules).string.guid = true];
+  repeated string selected_candidate_ids = 5 [(validation.v1.rules).string.guid = true];
 
-  repeated CreateUpdateSecondaryMajorityElectionResultBallotRequest secondary_majority_election_results = 5;
+  repeated CreateUpdateSecondaryMajorityElectionResultBallotRequest secondary_majority_election_results = 6;
 
   /*
     validations: typeof(int32),min-value(0),max-value(1000000)
     description: Anzahl ungültiger Abstimmungen.
   */
-  int32 invalid_vote_count = 6 [(validation.v1.rules).integer = { min_value: 0, max_value: 1000000}];
+  int32 invalid_vote_count = 7 [(validation.v1.rules).integer = { min_value: 0, max_value: 1000000}];
 }
 
 /*
@@ -256,6 +262,14 @@ message MajorityElectionResultBundleSubmissionFinishedRequest {
   description: Korrektur von Bund für Majorzwahlergebnis einreichen.
 */
 message MajorityElectionResultBundleCorrectionFinishedRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Bundes.
+  */
+  string bundle_id = 1 [(validation.v1.rules).string.guid = true];
+}
+
+message MajorityElectionResultBundleResetToSubmissionFinishedRequest {
   /*
     validations: is-guid
     description: Eindeutige, technische Identifikation des Bundes.

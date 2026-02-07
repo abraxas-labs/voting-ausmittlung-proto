@@ -23,4 +23,5 @@ service VoteResultBundleService {
   rpc BundleCorrectionFinished(requests.VoteResultBundleCorrectionFinishedRequest) returns (google.protobuf.Empty);
   rpc RejectBundleReview(requests.RejectVoteBundleReviewRequest) returns (google.protobuf.Empty);
   rpc SucceedBundleReview(requests.SucceedVoteBundleReviewRequest) returns (google.protobuf.Empty);
+  rpc BundleResetToSubmissionFinished(requests.VoteResultBundleResetToSubmissionFinishedRequest) returns (google.protobuf.Empty);
 }

@@ -25,9 +25,13 @@ message ProportionalElectionResultBundle {
   ProportionalElectionList list = 5;
   User created_by = 6;
   User reviewed_by = 7;
-  repeated int32 ballot_numbers_to_review = 8;
-  ProtocolExport protocol_export = 9;
-  repeated PoliticalBusinessResultBundleLog logs = 10;
+  repeated int32 ballot_numbers = 8;
+  repeated int32 ballot_numbers_to_review = 9;
+  ProtocolExport protocol_export = 10;
+  repeated PoliticalBusinessResultBundleLog logs = 11;
+
+  /* Ballots that were modified after the bundle was first put into the ready for review state */
+  int32 count_of_modified_ballots = 12;
 }
 
 message ProportionalElectionResultBallot {
@@ -38,6 +42,7 @@ message ProportionalElectionResultBallot {
   */
   int32 empty_vote_count = 2;
   repeated ProportionalElectionBallotCandidate candidates = 3;
+  repeated PoliticalBusinessResultBallotLog logs = 4;
 }
 
 message ProportionalElectionBallotCandidate {

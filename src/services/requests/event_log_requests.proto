@@ -14,7 +14,7 @@ message WatchEventsRequest {
   string contest_id = 1 [(validation.v1.rules).string.guid = true];
   string counting_circle_id = 2 [(validation.v1.rules).string = { guid: true, allow_empty: true}];
 
-  /* 
+  /*
    * Filters are applied with an OR conjunction.
    * The idea is that a client can have one open connection,
    * but watch for as many views as needed.
@@ -31,4 +31,6 @@ message WatchEventsRequestFilter {
   string political_business_id = 3 [(validation.v1.rules).string = { guid: true, allow_empty: true}];
   /* political business result id to filter events for, optional */
   string political_business_result_id = 4 [(validation.v1.rules).string = { guid: true, allow_empty: true}];
+  /* political business union id to filter events for, optional */
+  string political_business_union_id = 5 [(validation.v1.rules).string = { guid: true, allow_empty: true}];
 }

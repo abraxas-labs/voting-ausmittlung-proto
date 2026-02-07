@@ -1,0 +1,15 @@
+// (c) Copyright by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.services.v1.models;
+
+
+enum ElectionLotDecisionState {
+  ELECTION_LOT_DECISION_STATE_UNSPECIFIED = 0;
+  ELECTION_LOT_DECISION_STATE_NONE = 1;
+  ELECTION_LOT_DECISION_STATE_OPEN_AND_REQUIRED = 2;
+  ELECTION_LOT_DECISION_STATE_OPEN_AND_OPTIONAL = 3;
+  ELECTION_LOT_DECISION_STATE_DONE = 4;
+}

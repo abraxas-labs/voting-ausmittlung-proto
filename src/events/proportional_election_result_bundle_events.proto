@@ -5,6 +5,7 @@ syntax = "proto3";
 
 package abraxas.voting.ausmittlung.events.v1;
 
+import "google/protobuf/wrappers.proto";
 import "data/event_info.proto";
 import "data/proportional_election_result_bundle_event_data.proto";
 import "data/proportional_election_result_event_data.proto";
@@ -41,8 +42,10 @@ message ProportionalElectionResultBallotCreated {
   string bundle_id = 2;
   string election_result_id = 3;
   int32 ballot_number = 4;
-  int32 empty_vote_count = 5;
-  repeated data.ProportionalElectionResultBallotUpdatedCandidateEventData candidates = 6;
+  /* 0-based index of the ballot inside the bundle */
+  google.protobuf.Int32Value index = 5; 
+  int32 empty_vote_count = 6;
+  repeated data.ProportionalElectionResultBallotUpdatedCandidateEventData candidates = 7;
 }
 
 message ProportionalElectionResultBallotUpdated {
@@ -69,6 +72,13 @@ message ProportionalElectionResultBundleSubmissionFinished {
 }
 
 message ProportionalElectionResultBundleCorrectionFinished {
+  data.EventInfo event_info = 1;
+  string bundle_id = 2;
+  string election_result_id = 3;
+  repeated int32 sample_ballot_numbers = 4;
+}
+
+message ProportionalElectionResultBundleResetToSubmissionFinished {
   data.EventInfo event_info = 1;
   string bundle_id = 2;
   string election_result_id = 3;

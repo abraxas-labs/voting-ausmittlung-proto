@@ -29,8 +29,9 @@ message ResultImportStarted {
   string contest_id = 4;
   string counting_circle_id = 5;
   string ech_message_id = 6;
-  repeated data.ImportIgnoredCountingCircleEventData ignored_counting_circles = 7;
-  shared.v1.ResultImportType import_type = 8;
+  repeated string empty_counting_circle_ids = 7;
+  repeated data.ImportIgnoredCountingCircleEventData ignored_counting_circles = 8;
+  shared.v1.ResultImportType import_type = 9;
 }
 
 message ResultImportCountingCircleCompleted {

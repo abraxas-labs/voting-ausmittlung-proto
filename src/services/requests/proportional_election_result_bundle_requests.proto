@@ -96,16 +96,22 @@ message CreateProportionalElectionResultBallotRequest {
   string bundle_id = 1 [(validation.v1.rules).string.guid = true];
 
   /*
+    validations: typeof(int32),min-value(1),max-value(1000000)
+    description: Eindeutige, technische Identifikation des Wahlzettels. Nicht benötigt, falls automatische Generierung ausgewählt.
+  */
+  google.protobuf.Int32Value ballot_number = 2 [(validation.v1.rules).integer = { min_value: 1, max_value: 1000000}];
+
+  /*
     validations: typeof(int32),min-value(0),max-value(1000000),allow-undefined
     description: Anzahl leere Zeilen
   */
-  google.protobuf.Int32Value empty_vote_count = 2 [(validation.v1.rules).integer = { min_value: 0, max_value: 1000000}];
+  google.protobuf.Int32Value empty_vote_count = 3 [(validation.v1.rules).integer = { min_value: 0, max_value: 1000000}];
 
   /*
     validations: allow-undefined
     description: Akutalisierte Proporzwahlkandidaten aus veränderter Liste.
   */
-  repeated CreateUpdateProportionalElectionResultBallotCandidateRequest candidates = 3;
+  repeated CreateUpdateProportionalElectionResultBallotCandidateRequest candidates = 4;
 }
 
 message UpdateProportionalElectionResultBallotRequest {
@@ -186,6 +192,14 @@ message ProportionalElectionResultBundleSubmissionFinishedRequest {
 }
 
 message ProportionalElectionResultBundleCorrectionFinishedRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Bundes.
+  */
+  string bundle_id = 1 [(validation.v1.rules).string.guid = true];
+}
+
+message ProportionalElectionResultBundleResetToSubmissionFinishedRequest {
   /*
     validations: is-guid
     description: Eindeutige, technische Identifikation des Bundes.

@@ -39,20 +39,26 @@ message Vote {
   bool automatic_ballot_bundle_number_generation = 15;
 
   /*
+    validations: is-type(bool)
+    description: 'True' für die automatische Vergabe von Stimmzettelnummern, sonst 'False' für die manuelle Vergabe.
+  */
+  bool automatic_ballot_number_generation = 16;
+
+  /*
     validations: exact-enum
     description: Erfassungsmethode der Ergebnisse.
   */
-  shared.v1.VoteResultEntry result_entry = 16;
-  bool enforce_result_entry_for_counting_circles = 17;
+  shared.v1.VoteResultEntry result_entry = 17;
+  bool enforce_result_entry_for_counting_circles = 18;
 
   /*
     validations: exact-enum
     description: Überprüfungsmethode der Bundkontrolle.
   */
-  shared.v1.VoteReviewProcedure review_procedure = 18;
-  bool enforce_review_procedure_for_counting_circles = 19;
+  shared.v1.VoteReviewProcedure review_procedure = 19;
+  bool enforce_review_procedure_for_counting_circles = 20;
 
-  VoteType type = 20;
+  VoteType type = 21;
 }
 
 message Ballot {

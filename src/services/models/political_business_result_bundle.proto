@@ -14,3 +14,8 @@ message PoliticalBusinessResultBundleLog {
   google.protobuf.Timestamp timestamp = 2;
   BallotBundleState state = 3;
 }
+
+message PoliticalBusinessResultBallotLog {
+  User user = 1;
+  google.protobuf.Timestamp timestamp = 2;
+}

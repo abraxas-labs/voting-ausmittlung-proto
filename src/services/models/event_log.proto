@@ -25,12 +25,14 @@ message Event {
   string political_business_id = 6;
   /* the id of the related political business bundle of this event or empty string if not related to a political business or if the data was not available in the event */
   string political_business_bundle_id = 7;
+  /* the id of the related political business union of this event or empty string if not related to a political business union or if the data was not available in the event */
+  string political_business_union_id = 8;
   /* the id of the targeted entity by this event, e.g. the id of the proportional election list for a ProportionalElectionListCreated event */
-  string entity_id = 8;
+  string entity_id = 9;
   /* details of the event */
-  EventDetails data = 9;
+  EventDetails data = 10;
 }
-  
+
 message EventDetails {
   oneof data {
     PoliticalBusinessResultBundleLog bundle_log = 1;

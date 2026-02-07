@@ -8,6 +8,7 @@ package abraxas.voting.ausmittlung.services.v1.models;
 import "google/protobuf/wrappers.proto";
 import "models/contest.proto";
 import "models/count_of_voters.proto";
+import "models/election_lot_decision.proto";
 import "models/proportional_election.proto";
 import "models/proportional_election_result_sub_total.proto";
 import "models/voting_cards.proto";
@@ -50,7 +51,7 @@ message ProportionalElectionListEndResult {
   repeated ProportionalElectionCandidateEndResult candidate_end_results = 3;
   ProportionalElectionListUnion list_union = 4;
   ProportionalElectionListUnion sub_list_union = 5;
-  bool has_open_required_lot_decisions = 6;
+  ElectionLotDecisionState lot_decision_state = 6;
   ProportionalElectionListResultSubTotal e_voting_sub_total = 7;
   ProportionalElectionListResultSubTotal e_counting_sub_total = 8;
   ProportionalElectionListResultSubTotal conventional_sub_total = 9;

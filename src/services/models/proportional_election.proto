@@ -34,37 +34,43 @@ message ProportionalElection {
   bool automatic_ballot_bundle_number_generation = 10;
 
   /*
+    validations: is-type(bool)
+    description: 'True' für die automatische Vergabe von Wahlzettelnummern, sonst 'False' für die manuelle Vergabe.
+  */
+  bool automatic_ballot_number_generation = 11;
+
+  /*
     validations: exact-enum
     description: Art der Vergabe von Wahlzettelnummern.
   */
-  shared.v1.BallotNumberGeneration ballot_number_generation = 11;
+  shared.v1.BallotNumberGeneration ballot_number_generation = 12;
 
   /*
     validations: is-type(bool)
     description: 'True' für die automatische Erfassung leerer Zeilen, sonst 'False' für die manuelle Erfassung.
   */
-  bool automatic_empty_vote_counting = 12;
-  bool enforce_empty_vote_counting_for_counting_circles = 13;
-  repeated shared.v1.VoterType enabled_voter_types = 14;
-  string domain_of_influence_id = 15;
-  string contest_id = 16;
-  bool active = 17;
+  bool automatic_empty_vote_counting = 13;
+  bool enforce_empty_vote_counting_for_counting_circles = 14;
+  repeated shared.v1.VoterType enabled_voter_types = 15;
+  string domain_of_influence_id = 16;
+  string contest_id = 17;
+  bool active = 18;
 
   /*
     description: Stichprobengrösse für die Auszählung der Wahlzettel.
   */
-  int32 ballot_bundle_sample_size = 18;
-  string title = 19;
-  DomainOfInfluence domain_of_influence = 20;
-  Contest contest = 21;
+  int32 ballot_bundle_sample_size = 19;
+  string title = 20;
+  DomainOfInfluence domain_of_influence = 21;
+  Contest contest = 22;
 
   /*
     validations: exact-enum
     description: Überprüfungsmethode der Bundkontrolle.
   */
-  shared.v1.ProportionalElectionReviewProcedure review_procedure = 22;
-  bool enforce_review_procedure_for_counting_circles = 23;
-  bool enforce_candidate_check_digit_for_counting_circles = 24;
+  shared.v1.ProportionalElectionReviewProcedure review_procedure = 23;
+  bool enforce_review_procedure_for_counting_circles = 24;
+  bool enforce_candidate_check_digit_for_counting_circles = 25;
 }
 
 enum ProportionalElectionMandateAlgorithm {

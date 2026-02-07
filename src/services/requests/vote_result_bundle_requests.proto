@@ -100,15 +100,21 @@ message CreateVoteResultBallotRequest {
   string bundle_id = 1 [(validation.v1.rules).string.guid = true];
 
   /*
+    validations: typeof(int32),min-value(1),max-value(1000000)
+    description: Eindeutige, technische Identifikation des Stimmzettels. Nicht benötigt, falls automatische Generierung ausgewählt.
+  */
+  google.protobuf.Int32Value ballot_number = 2 [(validation.v1.rules).integer = { min_value: 1, max_value: 1000000}];
+
+  /*
     description: Resultate der Fragen eines Stimmzettels.
   */
-  repeated CreateUpdateVoteResultBallotQuestionAnswerRequest question_answers = 2;
+  repeated CreateUpdateVoteResultBallotQuestionAnswerRequest question_answers = 3;
 
   /*
     validations: allow-undefined
     description: Resultate der Stichfragen eines Stimmzettels.
   */
-  repeated CreateUpdateVoteResultBallotTieBreakQuestionAnswerRequest tie_break_question_answers = 3;
+  repeated CreateUpdateVoteResultBallotTieBreakQuestionAnswerRequest tie_break_question_answers = 4;
 }
 
 message UpdateVoteResultBallotRequest {
@@ -199,6 +205,14 @@ message VoteResultBundleSubmissionFinishedRequest {
 }
 
 message VoteResultBundleCorrectionFinishedRequest {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation des Bundes.
+  */
+  string bundle_id = 1 [(validation.v1.rules).string.guid = true];
+}
+
+message VoteResultBundleResetToSubmissionFinishedRequest {
   /*
     validations: is-guid
     description: Eindeutige, technische Identifikation des Bundes.

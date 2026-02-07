@@ -69,25 +69,31 @@ message MajorityElection {
   bool automatic_ballot_bundle_number_generation = 12;
 
   /*
+    validations: is-type(bool)
+    description: 'True' für die automatische Vergabe von Wahlzettelnummern, sonst 'False' für die manuelle Vergabe.
+  */
+  bool automatic_ballot_number_generation = 13;
+
+  /*
     validations: exact-enum
     description: Art der Vergabe von Wahlzettelnummern.
   */
-  shared.v1.BallotNumberGeneration ballot_number_generation = 13;
+  shared.v1.BallotNumberGeneration ballot_number_generation = 14;
 
   /*
     validations: is-type(bool)
     description: 'True' für die automatische Erfassung leerer Zeilen, sonst 'False' für die manuelle Erfassung.
   */
-  bool automatic_empty_vote_counting = 14;
-  bool enforce_empty_vote_counting_for_counting_circles = 15;
+  bool automatic_empty_vote_counting = 15;
+  bool enforce_empty_vote_counting_for_counting_circles = 16;
 
   /*
     validations: exact-enum
     description: Erfassungsmethode der Ergebnisse.
   */
-  shared.v1.MajorityElectionResultEntry result_entry = 16;
-  bool enforce_result_entry_for_counting_circles = 17;
-  repeated shared.v1.VoterType enabled_voter_types = 18;
+  shared.v1.MajorityElectionResultEntry result_entry = 17;
+  bool enforce_result_entry_for_counting_circles = 18;
+  repeated shared.v1.VoterType enabled_voter_types = 19;
 
   /*
     ech-name: domainOfInfluenceIdentification
@@ -95,7 +101,7 @@ message MajorityElection {
     ech-type:
     description:
   */
-  string domain_of_influence_id = 19;
+  string domain_of_influence_id = 20;
 
   /*
     ech-name: contestIdentification
@@ -104,12 +110,12 @@ message MajorityElection {
     validations: is-guid
     description: Eindeutige, technische Identifikation des Urnengangs.
   */
-  string contest_id = 20;
+  string contest_id = 21;
 
-  bool active = 21;
-  string title = 22;
-  int32 count_of_secondary_elections = 23;
-  DomainOfInfluence domain_of_influence = 24;
+  bool active = 22;
+  string title = 23;
+  int32 count_of_secondary_elections = 24;
+  DomainOfInfluence domain_of_influence = 26;
 
   /*
     ech-name: contestIdentification
@@ -117,16 +123,16 @@ message MajorityElection {
     ech-type: string
     description: Eindeutige, technische Identifikation des Urnengangs.
   */
-  Contest contest = 26;
+  Contest contest = 27;
 
   /*
     validations: exact-enum
     description: Überprüfungsmethode der Bundkontrolle.
   */
-  shared.v1.MajorityElectionReviewProcedure review_procedure = 27;
-  bool enforce_review_procedure_for_counting_circles = 28;
-  bool enforce_candidate_check_digit_for_counting_circles = 29;
-  bool individual_candidates_disabled = 30;
+  shared.v1.MajorityElectionReviewProcedure review_procedure = 28;
+  bool enforce_review_procedure_for_counting_circles = 29;
+  bool enforce_candidate_check_digit_for_counting_circles = 30;
+  bool individual_candidates_disabled = 31;
 }
 
 message MajorityElectionCandidates {
