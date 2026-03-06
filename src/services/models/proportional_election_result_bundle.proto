@@ -32,6 +32,10 @@ message ProportionalElectionResultBundle {
 
   /* Ballots that were modified after the bundle was first put into the ready for review state */
   int32 count_of_modified_ballots = 12;
+
+  /* Ballots that were modified during the current (ongoing) review */
+  repeated int32 ballot_numbers_modified_during_review = 13;
+  repeated string ballot_modification_user_ids = 14;
 }
 
 message ProportionalElectionResultBallot {
