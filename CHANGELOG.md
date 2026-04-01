@@ -1,4 +1,4 @@
-# ✨ Changelog (`v1.151.1`)
+# ✨ Changelog (`v1.152.0`)
 
 All notable changes to this project will be documented in this file.
 
@@ -8,11 +8,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Version Info
 
 ```text
-This version -------- v1.151.1
-Previous version ---- v1.150.1
+This version -------- v1.152.0
+Previous version ---- v1.151.1
 Initial version ----- v1.79.2
-Total commits ------- 2
+Total commits ------- 1
 ```
+
+## [v1.152.0] - 2026-03-19
+
+### 🔄 Changed
+
+- e-counting import flow without deleting previous imports
 
 ## [v1.151.1] - 2026-02-16
 

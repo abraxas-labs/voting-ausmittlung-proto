@@ -52,7 +52,7 @@ message DeleteEVotingResultImportDataRequest {
   string contest_id = 1 [(validation.v1.rules).string.guid = true];
 }
 
-message DeleteECountingResultImportDataRequest {
+message DeleteECountingResultPoliticalBusinessImportDataRequest {
   /*
     ech-name: contestIdentification
     ech-length: [1,50]
@@ -70,6 +70,8 @@ message DeleteECountingResultImportDataRequest {
     description: Eindeutige Identifikation des Auszählungskreises. Es handelt sich dabei um die lokale Identifikation des Quellregisters.
   */
   string counting_circle_id = 2 [(validation.v1.rules).string.guid = true];
+
+  string political_business_id = 3 [(validation.v1.rules).string.guid = true];
 }
 
 message GetMajorityElectionWriteInMappingsRequest {

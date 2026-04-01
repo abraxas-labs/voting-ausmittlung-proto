@@ -32,6 +32,7 @@ message ResultImportStarted {
   repeated string empty_counting_circle_ids = 7;
   repeated data.ImportIgnoredCountingCircleEventData ignored_counting_circles = 8;
   shared.v1.ResultImportType import_type = 9;
+  repeated string ignored_political_businesses = 10;
 }
 
 message ResultImportCountingCircleCompleted {
@@ -62,6 +63,15 @@ message ResultImportDataDeleted {
   string contest_id = 3;
   string counting_circle_id = 4;
   shared.v1.ResultImportType import_type = 5;
+}
+
+message ResultImportPoliticalBusinessDataDeleted {
+  data.EventInfo event_info = 1;
+  string import_id = 2;
+  string contest_id = 3;
+  string counting_circle_id = 4;
+  string political_business_id = 5;
+  shared.v1.ResultImportType import_type = 6;
 }
 
 // Import wurde durch neuen Import ersetzt.

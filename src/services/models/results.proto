@@ -81,6 +81,7 @@ message ResultListResult {
   google.protobuf.Timestamp audited_tentatively_timestamp = 6;
   google.protobuf.Timestamp plausibilised_timestamp = 7;
   google.protobuf.Timestamp ready_for_correction_timestamp = 8;
+  bool e_counting_imported = 9;
 }
 
 message ResultImports {
@@ -106,6 +107,10 @@ message ResultImport {
 
   // Counting circles that were not imported, but were included in the original import file.
   repeated ResultImportIgnoredCountingCircle ignored_counting_circles = 9;
+
+  repeated SimplePoliticalBusiness imported_political_businesses = 10;
+
+  repeated SimplePoliticalBusiness ignored_political_businesses = 11;
 }
 
 // Describes counting circles that were ignored during a result import.

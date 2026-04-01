@@ -15,7 +15,7 @@ service ResultImportService {
   rpc DeleteEVotingImportData(requests.DeleteEVotingResultImportDataRequest) returns (google.protobuf.Empty);
 
   rpc ListECountingImports(requests.ListECountingResultImportsRequest) returns (models.ResultImports);
-  rpc DeleteECountingImportData(requests.DeleteECountingResultImportDataRequest) returns (google.protobuf.Empty);
+  rpc DeleteECountingPoliticalBusinessImportData(requests.DeleteECountingResultPoliticalBusinessImportDataRequest) returns (google.protobuf.Empty);
 
   rpc GetMajorityElectionWriteInMappings(requests.GetMajorityElectionWriteInMappingsRequest) returns (models.MajorityElectionContestWriteInMappings);
   rpc MapMajorityElectionWriteIns(requests.MapMajorityElectionWriteInsRequest) returns (google.protobuf.Empty);
