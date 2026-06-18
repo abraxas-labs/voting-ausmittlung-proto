@@ -1,4 +1,4 @@
-# ✨ Changelog (`v1.152.0`)
+# ✨ Changelog (`v1.153.0`)
 
 All notable changes to this project will be documented in this file.
 
@@ -8,11 +8,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Version Info
 
 ```text
-This version -------- v1.152.0
-Previous version ---- v1.151.1
+This version -------- v1.153.0
+Previous version ---- v1.152.0
 Initial version ----- v1.79.2
-Total commits ------- 1
+Total commits ------- 2
 ```
+
+## [v1.153.0] - 2026-06-16
+
+### 🆕 Added
+
+- feat(VOTING-6923): mfa with otp
+
+## [v1.152.1] - 2026-04-27
+
+### 🆕 Added
+
+- add node and dotnet image tags for ci-pipeline
 
 ## [v1.152.0] - 2026-03-19
 

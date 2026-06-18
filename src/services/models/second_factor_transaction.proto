@@ -5,8 +5,19 @@ syntax = "proto3";
 
 package abraxas.voting.ausmittlung.services.v1.models;
 
+enum SecondFactorTransactionProvider {
+  SECOND_FACTOR_TRANSACTION_PROVIDER_UNSPECIFIED = 0;
+  SECOND_FACTOR_TRANSACTION_PROVIDER_NEVIS = 1;
+  SECOND_FACTOR_TRANSACTION_PROVIDER_OTP = 2;
+}
+
 message SecondFactorTransaction {
   string id = 1;
-  string code = 2;
-  string qr_code = 3;
+  repeated SecondFactorTransactionProvider available_providers = 2;
+  SecondFactorTransactionNevisInfo nevis = 3;
+}
+
+message SecondFactorTransactionNevisInfo {
+  string correlation_code = 1;
+  string qr_code = 2;
 }

@@ -6,6 +6,7 @@ syntax = "proto3";
 package abraxas.voting.ausmittlung.services.v1.requests;
 
 import "rules/rules.proto";
+import "requests/second_factor_authorization.proto";
 
 message GetResultOverviewRequest {
   /*
@@ -143,8 +144,7 @@ message CountingCircleResultsSubmissionFinishedRequest {
   repeated string counting_circle_result_ids = 3 [(validation.v1.rules).string.guid = true];
 
   /*
-    validations: is-guid
-    description: Eindeutige, technische Identifikation der Zweifaktor-Transaktion (siehe: https://docs.nevis.net/apidoc/authcloud/#enroll-your-access-app)
+    description: Zweifaktor-Authentifizierungs-Daten.
   */
-  string second_factor_transaction_id = 4 [(validation.v1.rules).string = { guid: true, allow_empty: true}];
+  SecondFactorAuthorization second_factor_authorization = 4;
 }

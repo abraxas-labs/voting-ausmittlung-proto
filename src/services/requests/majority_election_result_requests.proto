@@ -8,6 +8,7 @@ package abraxas.voting.ausmittlung.services.v1.requests;
 import "google/protobuf/wrappers.proto";
 import "requests/count_of_voters_requests.proto";
 import "rules/rules.proto";
+import "requests/second_factor_authorization.proto";
 import "shared/ballot_number_generation.proto";
 import "shared/majority_election.proto";
 
@@ -286,10 +287,9 @@ message MajorityElectionResultSubmissionFinishedRequest {
   string election_result_id = 1 [(validation.v1.rules).string.guid = true];
 
   /*
-    validations: is-guid
-    description: Eindeutige, technische Identifikation der Zweifaktor-Transaktion (siehe: https://docs.nevis.net/apidoc/authcloud/#enroll-your-access-app)
+    description: Zweifaktor-Authentifizierungs-Daten.
   */
-  string second_factor_transaction_id = 2 [(validation.v1.rules).string = { guid: true, allow_empty: true}];
+  SecondFactorAuthorization second_factor_authorization = 2;
 }
 
 message MajorityElectionResultPrepareCorrectionFinishedRequest {
@@ -314,10 +314,9 @@ message MajorityElectionResultCorrectionFinishedRequest {
   string comment = 2 [(validation.v1.rules).string = { max_length: 500, complex_ml_text: true, allow_empty: true }];
 
   /*
-    validations: is-guid
-    description: Eindeutige, technische Identifikation der Zweifaktor-Transaktion (siehe: https://docs.nevis.net/apidoc/authcloud/#enroll-your-access-app)
+    description: Zweifaktor-Authentifizierungs-Daten.
   */
-  string second_factor_transaction_id = 3 [(validation.v1.rules).string = { guid: true, allow_empty: true}];
+  SecondFactorAuthorization second_factor_authorization = 3;
 }
 
 message MajorityElectionResultFlagForCorrectionRequest {
@@ -470,10 +469,9 @@ message FinalizeMajorityElectionEndResultRequest {
   string majority_election_id = 1 [(validation.v1.rules).string.guid = true];
 
   /*
-    validations: is-guid
-    description: Eindeutige, technische Identifikation der Zweifaktor-Transaktion (siehe: https://docs.nevis.net/apidoc/authcloud/#enroll-your-access-app)
+    description: Zweifaktor-Authentifizierungs-Daten.
   */
-  string second_factor_transaction_id = 2 [(validation.v1.rules).string.guid = true];
+  SecondFactorAuthorization second_factor_authorization = 2;
 }
 
 message RevertMajorityElectionEndResultFinalizationRequest {
@@ -511,10 +509,9 @@ message MajorityElectionResultSubmissionFinishedAndAuditedTentativelyRequest {
   string election_result_id = 1 [(validation.v1.rules).string.guid = true];
 
   /*
-    validations: is-guid
-    description: Eindeutige, technische Identifikation der Zweifaktor-Transaktion (siehe: https://docs.nevis.net/apidoc/authcloud/#enroll-your-access-app)
+    description: Zweifaktor-Authentifizierungs-Daten.
   */
-  string second_factor_transaction_id = 2 [(validation.v1.rules).string.guid = true];
+  SecondFactorAuthorization second_factor_authorization = 2;
 }
 
 message MajorityElectionResultPrepareCorrectionFinishedAndAuditedTentativelyRequest {
@@ -533,10 +530,9 @@ message MajorityElectionResultCorrectionFinishedAndAuditedTentativelyRequest {
   string election_result_id = 1 [(validation.v1.rules).string.guid = true];
 
   /*
-    validations: is-guid
-    description: Eindeutige, technische Identifikation der Zweifaktor-Transaktion (siehe: https://docs.nevis.net/apidoc/authcloud/#enroll-your-access-app)
+    description: Zweifaktor-Authentifizierungs-Daten.
   */
-  string second_factor_transaction_id = 2 [(validation.v1.rules).string.guid = true];
+  SecondFactorAuthorization second_factor_authorization = 2;
 }
 
 message MajorityElectionResultPublishRequest {

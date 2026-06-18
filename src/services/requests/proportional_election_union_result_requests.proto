@@ -6,6 +6,7 @@ syntax = "proto3";
 package abraxas.voting.ausmittlung.services.v1.requests;
 
 import "rules/rules.proto";
+import "requests/second_factor_authorization.proto";
 
 message GetProportionalElectionUnionPartialEndResultRequest {
   /*
@@ -47,10 +48,9 @@ message FinalizeProportionalElectionUnionEndResultRequest {
   string proportional_election_union_id = 1 [(validation.v1.rules).string.guid = true];
 
   /*
-    validations: is-guid
-    description: Eindeutige, technische Identifikation der Zweifaktor-Transaktion (siehe: https://docs.nevis.net/apidoc/authcloud/#enroll-your-access-app)
+    description: Zweifaktor-Authentifizierungs-Daten.
   */
-  string second_factor_transaction_id = 2 [(validation.v1.rules).string.guid = true];
+  SecondFactorAuthorization second_factor_authorization = 2;
 }
 
 message RevertProportionalElectionUnionEndResultFinalizationRequest {

@@ -1,0 +1,22 @@
+// (c) Copyright by Abraxas Informatik AG
+// For license information see LICENSE file
+
+syntax = "proto3";
+
+package abraxas.voting.ausmittlung.services.v1.requests;
+
+import "rules/rules.proto";
+
+message SecondFactorAuthorization {
+  /*
+    validations: is-guid
+    description: Eindeutige, technische Identifikation der Zweifaktor-Transaktion (siehe: https://docs.nevis.net/apidoc/authcloud/#enroll-your-access-app)
+  */
+  string second_factor_transaction_id = 1 [(validation.v1.rules).string.guid = true];
+
+  /*
+    validations: length(6),allow-undefined
+    description: Sechsstelliger OTP-Code für die Zweifaktor-Authentifizierung via TOTP.
+  */
+  string otp_code = 2 [(validation.v1.rules).string = { min_length: 6, max_length: 6, allow_empty: true }];
+}
